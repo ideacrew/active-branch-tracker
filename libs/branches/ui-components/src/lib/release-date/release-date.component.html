@@ -1,0 +1,14 @@
+<span
+  *ngIf="editingReleaseDate === false; else editDate"
+  (click)="editingReleaseDate = true"
+>
+  {{ releaseDate ? (releaseDate | date) : 'No release date' }}
+</span>
+
+<ng-template #editDate>
+  <input
+    #releaseInput
+    type="date"
+    (change)="emitReleaseDate(releaseInput.value)"
+  />
+</ng-template>

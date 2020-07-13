@@ -1,0 +1,7 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "jest"]
+  },
+  "include": ["**/*.ts", "../../util/src/lib/models/index.ts", "../../util/src/lib/models/branchInfoVM.interface.ts"]
+}

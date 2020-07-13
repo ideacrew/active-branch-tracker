@@ -1,0 +1,45 @@
+{
+  "npmScope": "idc",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "projects": {
+    "dashboard": {
+      "tags": []
+    },
+    "dashboard-e2e": {
+      "tags": [],
+      "implicitDependencies": ["dashboard"]
+    },
+    "branches-data-access": {
+      "tags": ["scope:dashboard", "type:data-access"]
+    },
+    "branches-feature": {
+      "tags": ["scope:dashboard", "type:feature"]
+    },
+    "branches-ui-components": {
+      "tags": ["scope:dashboard", "type:ui"]
+    },
+    "display-config": {
+      "tags": ["scope:dashboard", "type:util"]
+    },
+    "util": {
+      "tags": []
+    }
+  }
+}

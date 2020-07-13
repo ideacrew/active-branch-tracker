@@ -1,0 +1,37 @@
+on:
+  push:
+    branches:
+      - master
+name: Deploy
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Use Node.js v10
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: npm-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node10-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node10-
+      - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Build Application
+        run: npm run build
+      - name: Deploy
+        run: npm run deploy:dashboard -- --token ${{ secrets.FIREBASE_TOKEN }}
+      - name: print log
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: firebase-log
+          path: /home/runner/.npm/_logs

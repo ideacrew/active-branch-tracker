@@ -1,0 +1,127 @@
+<div
+  class="branch"
+  [ngClass]="[branch.checkSuiteStatus, viewType ? viewType : 'expanded']"
+  [class.tracked]="branch.tracked"
+  [class.has-pr]="branch.pullRequestNumber"
+>
+  <!-- Container Heading -->
+  <div class="container-heading">
+    <div class="heading-left">
+      <ng-container *ngIf="branch.defaultBranch === false"
+        ><button
+          *ngIf="branch.tracked === false; else untrack"
+          class="light-bulb-button"
+          (click)="trackBranch.emit(branch)"
+        >
+          <svg class="svg-icon light-bulb" width="1rem" height="2rem">
+            <use href="assets/icons.svg#light-bulb"></use>
+          </svg></button
+      ></ng-container>
+      <div class="repo-info">
+        <h2 class="repo-name">
+          <a
+            href="//github.com/{{ branch.organizationName }}/{{
+              branch.repositoryName
+            }}"
+            >{{ branch.organizationName }}/{{ branch.repositoryName }}</a
+          >
+        </h2>
+        <div class="branch-name">
+          <svg class="svg-icon branch-icon" width="1rem" height="1rem">
+            <use href="assets/icons.svg#branch"></use>
+          </svg>
+          <a class="no-wrap" href="{{ branch.branchLink }}">{{
+            branch.branchName
+          }}</a>
+        </div>
+        <idc-release-date
+          *ngIf="branch.tracked"
+          class="release-date"
+          [releaseDate]="branch.releaseDate"
+          (newReleaseDate)="changeReleaseDate($event)"
+        ></idc-release-date>
+      </div>
+    </div>
+    <svg
+      class="svg-icon"
+      [ngClass]="branch.checkSuiteStatus"
+      width="2rem"
+      height="2rem"
+    >
+      <use
+        *ngIf="branch.checkSuiteStatus === CheckSuiteConclusion.Failure"
+        href="assets/icons.svg#x"
+      ></use>
+      <use
+        *ngIf="branch.checkSuiteStatus === CheckSuiteConclusion.Success"
+        href="assets/icons.svg#check"
+      ></use>
+    </svg>
+  </div>
+
+  <!-- Container Content -->
+  <div class="card-content">
+    <div class="left-column">
+      <div class="last-updated">
+        <svg
+          *ngIf="branch.checkSuiteStatus === CheckSuiteConclusion.Success"
+          class="svg-icon"
+          width="1rem"
+          height="1rem"
+        >
+          <use href="assets/icons.svg#clock"></use>
+        </svg>
+        <span class="no-wrap"
+          ><ng-container *ngIf="branch.updated_at; else createdAt">
+            {{ branch.updated_at | date: 'MMM d, h:mm a' }}
+          </ng-container>
+          <ng-template #createdAt>
+            {{ branch.created_at | date: 'MMM d, h:mm a' }}
+          </ng-template></span
+        >
+      </div>
+
+      <div *ngIf="branch.head_sha" class="latest-sha">
+        <svg class="svg-icon" width="1rem" height="1rem">
+          <use href="assets/icons.svg#git-commit"></use>
+        </svg>
+        <a href="{{ branch.commitLink }}">{{ branch.head_sha | slice: 0:7 }}</a>
+      </div>
+
+      <div class="pull-request">
+        <svg class="svg-icon" width="1rem" height="1rem">
+          <use href="assets/icons.svg#pull-request"></use>
+        </svg>
+        <a href="{{ branch.pullRequestLink }}">{{
+          branch.pullRequestNumber
+        }}</a>
+      </div>
+
+      <div class="committer">
+        <svg class="svg-icon" width="1rem" height="1rem">
+          <use href="assets/icons.svg#person"></use>
+        </svg>
+        <ng-container *ngIf="branch.head_commit; else sender">
+          <span class="no-wrap">{{ branch.head_commit.author.name }}</span>
+        </ng-container>
+        <ng-template #sender>
+          {{ branch.createdBy }}
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <span *ngIf="branch.checkSuiteRuns > 0" class="failure-percentage">{{
+        branch.failurePercentage
+      }}</span>
+    </div>
+  </div>
+</div>
+
+<ng-template #untrack>
+  <button class="light-bulb-button" (click)="untrackBranch.emit(branch)">
+    <svg class="svg-icon light-bulb" width="1rem" height="2rem">
+      <use href="assets/icons.svg#light-bulb"></use>
+    </svg>
+  </button>
+</ng-template>

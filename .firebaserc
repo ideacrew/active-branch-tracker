@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "active-branches-report": {
+      "hosting": {
+        "dashboard": [
+          "active-branches-report"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "active-branches-report"
+  }
+}

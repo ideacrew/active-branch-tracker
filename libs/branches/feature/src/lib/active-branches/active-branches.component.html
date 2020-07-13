@@ -1,0 +1,83 @@
+<ng-container *ngIf="activeBranchesVm$ | async as vm">
+  <!-- DEFAULT BRANCHES -->
+  <div class="branch-container-heading">
+    <h2 class="branch-type-heading">Default Branches</h2>
+  </div>
+  <div class="branches-list">
+    <idc-branch-container
+      *ngFor="let branch of vm.defaultBranches; trackBy: trackByBranchName"
+      [branch]="branch"
+    ></idc-branch-container>
+  </div>
+
+  <!-- TRACKED BRANCHES -->
+  <div class="branch-container-heading">
+    <h2 class="branch-type-heading">Tracked Branches</h2>
+    <button
+      *ngIf="vm.config.trackedBranches === DisplayType.Collapsed"
+      type="button"
+      class="unfold-view"
+      (click)="
+        configService.setConfig({ trackedBranches: DisplayType.Expanded })
+      "
+    >
+      <svg height="1.5rem" width="1.5rem" class="svg-icon expand">
+        <use href="assets/icons.svg#expand"></use>
+      </svg>
+    </button>
+    <button
+      *ngIf="vm.config.trackedBranches === DisplayType.Expanded"
+      type="button"
+      class="fold-view"
+      (click)="
+        configService.setConfig({ trackedBranches: DisplayType.Collapsed })
+      "
+    >
+      <svg height="1.5rem" width="1.5rem" class="svg-icon collapse">
+        <use href="assets/icons.svg#collapse"></use>
+      </svg>
+    </button>
+  </div>
+  <div class="branches-list">
+    <idc-branch-container
+      *ngFor="let branch of vm.trackedBranches; trackBy: trackByBranchName"
+      [viewType]="vm.config.trackedBranches"
+      [branch]="branch"
+      (untrackBranch)="branchListService.untrackBranch($event)"
+      (newReleaseDate)="branchListService.addReleaseDate($event)"
+    ></idc-branch-container>
+  </div>
+
+  <!-- OTHER BRANCHES -->
+  <div class="branch-container-heading">
+    <h2 class="branch-type-heading other-branches">Other Branches</h2>
+    <button
+      *ngIf="vm.config.otherBranches === DisplayType.Collapsed"
+      type="button"
+      class="unfold-view"
+      (click)="configService.setConfig({ otherBranches: DisplayType.Expanded })"
+    >
+      <svg height="1.5rem" width="1.5rem" class="svg-icon expand">
+        <use href="assets/icons.svg#expand"></use>
+      </svg>
+    </button>
+    <button
+      *ngIf="vm.config.otherBranches === DisplayType.Expanded"
+      type="button"
+      class="fold-view"
+      (click)="configService.setConfig({ otherBranches: 'collapsed' })"
+    >
+      <svg height="1.5rem" width="1.5rem" class="svg-icon collapse">
+        <use href="assets/icons.svg#collapse"></use>
+      </svg>
+    </button>
+  </div>
+  <div class="branches-list">
+    <idc-branch-container
+      *ngFor="let branch of vm.otherBranches; trackBy: trackByBranchName"
+      [viewType]="vm.config.otherBranches"
+      [branch]="branch"
+      (trackBranch)="branchListService.trackBranch($event)"
+    ></idc-branch-container>
+  </div>
+</ng-container>

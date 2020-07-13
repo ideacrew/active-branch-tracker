@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  padding: 1rem;
+}
+
+pre {
+  color: white;
+}
+
+.branches-list {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+
+  > * {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.branch-container-heading {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid hsl(120, 10%, 45%);
+  display: flex;
+  align-items: center;
+}
+
+.branch-type-heading {
+  color: hsl(120, 13%, 48%);
+}
+
+.other-branches {
+  display: inline-block;
+}
+
+.fold-view,
+.unfold-view {
+  margin-left: 1rem;
+  border: 0;
+  --icon-fill: hsl(120, 13%, 48%);
+
+  &:hover {
+    --icon-fill: hsl(120, 12%, 69%);
+  }
+}
+
+.expand,
+.collapse {
+  fill: var(--icon-fill);
+}
