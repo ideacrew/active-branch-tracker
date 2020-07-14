@@ -95,20 +95,3 @@ export const oldBranchesNotification = functions.pubsub
       return null;
     }
   });
-
-export const addTimestampToAllBranches = functions.https.onRequest(
-  async (request, response) => {
-    const allBranches = await admin.firestore().collection('branches').get();
-
-    allBranches.forEach(async branch => {
-      const { updated_at } = branch.data() as BranchInfo;
-      const branchUpdated = new Date(updated_at || 'January 1, 1970').getTime();
-
-      await branch.ref.update({
-        updatedAt: branchUpdated,
-      });
-    });
-
-    response.status(200).send('Thanks');
-  }
-);
