@@ -96,54 +96,6 @@ export const oldBranchesNotification = functions.pubsub
     }
   });
 
-export const getOldBranches = functions.https.onRequest(
-  async (request, response) => {
-    const today = new Date().getTime();
-
-    const oneDayInMs = 1000 * 60 * 60 * 24;
-    const tenDaysInMs = 10 * oneDayInMs;
-    const tenDaysAgo = today - tenDaysInMs;
-
-    const allBranches = await admin
-      .firestore()
-      .collection('branches')
-      .where('timestamp', '<', tenDaysAgo)
-      .get();
-
-    const oldBranches: BranchInfo[] = [];
-
-    allBranches.forEach(async branch => {
-      const branchInfo = branch.data() as BranchInfo;
-
-      oldBranches.push(branchInfo);
-    });
-
-    const branchList: string = oldBranches.reduce((list, branch) => {
-      return (
-        list +
-        `<div>${branch.branchName} last updated ${new Date(
-          branch.timestamp
-        ).toLocaleDateString()} by ${branch.head_commit?.author.name}</div>`
-      );
-    }, '');
-
-    sgMail.setApiKey(functions.config().sendgrid.key);
-    const msg = {
-      to: functions.config().sendgrid.email,
-      cc: 'mark.goho@ideacrew.com',
-      from: 'active-branch-tracker@no-reply.com',
-      subject: 'Stale Branch Report',
-      html: branchList,
-    };
-    try {
-      await sgMail.send(msg);
-      response.status(200).send(branchList);
-    } catch (error) {
-      response.status(500).send(error);
-    }
-  }
-);
-
 export const addTimestampToAllBranches = functions.https.onRequest(
   async (request, response) => {
     const allBranches = await admin.firestore().collection('branches').get();
