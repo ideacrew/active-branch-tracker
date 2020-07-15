@@ -18,7 +18,7 @@ export class BranchListService {
   private rawBranchData$: Observable<DocumentChangeAction<BranchInfo>[]>;
   branchInfo$: Observable<BranchInfo[]>;
 
-  scream = new Audio('/assets/willhelm.wav');
+  scream = new Audio('/assets/HarshaYellr.wav');
 
   constructor(private afs: AngularFirestore) {
     this.rawBranchData$ = this.afs
