@@ -19,9 +19,9 @@ jobs:
         id: npm-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node10-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node10x-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node10-
+            ${{ runner.os }}-node10x-
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
