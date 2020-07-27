@@ -37,7 +37,7 @@ export interface PullRequest {
   diff_url: string;
   patch_url: string;
   issue_url: string;
-  number: 8; // PR number for link
+  number: string; // PR number for link
   state: 'open' | 'closed' | 'all'; // critical property
   locked: boolean;
   title: string;
@@ -104,15 +104,15 @@ export interface PullRequest {
   merged: boolean; // critical property
   mergeable: any;
   rebaseable: any;
-  mergeable_state: 'unknown';
+  mergeable_state: string;
   merged_by: GithubUser;
-  comments: 0;
-  review_comments: 0;
+  comments: number;
+  review_comments: number;
   maintainer_can_modify: boolean;
-  commits: 4;
-  additions: 0;
-  deletions: 0;
-  changed_files: 0;
+  commits: number;
+  additions: number;
+  deletions: number;
+  changed_files: number;
 }
 
 export async function handlePullRequestEvent(

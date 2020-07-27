@@ -1,16 +1,15 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import * as sgMail from '@sendgrid/mail';
 
 import { CheckSuitePayload, handleCheckSuiteEvent } from './checkSuite';
 import { CreateEventPayload, handleCreateEvent } from './createEvent';
 import { DeleteEventPayload, handleDeleteEvent } from './deleteEvent';
 import { handleCheckRunEvent, CheckRunPayload } from './checkRun';
-import { BranchInfo } from './branchInfo';
 import {
   handlePullRequestEvent,
   PullRequestEventPayload,
 } from './pullRequestEvent';
+import { staleBranches, getStaleBranchesFromDB } from './staleBranches';
 
 admin.initializeApp();
 
@@ -48,50 +47,12 @@ export const webhook = functions.https.onRequest(async (request, response) => {
 export const oldBranchesNotification = functions.pubsub
   .schedule('45 9 * * 1')
   .timeZone('America/New_York')
-  .onRun(async context => {
-    const today = new Date().getTime();
+  .onRun(staleBranches);
 
-    const oneDayInMs = 1000 * 60 * 60 * 24;
-    const tenDaysInMs = 10 * oneDayInMs;
-    const tenDaysAgo = today - tenDaysInMs;
+export const staleBranchOnDemand = functions.https.onRequest(
+  async (request, response) => {
+    const oldBranches = await getStaleBranchesFromDB();
 
-    const allBranches = await admin
-      .firestore()
-      .collection('branches')
-      .where('timestamp', '<', tenDaysAgo)
-      .get();
-
-    const oldBranches: BranchInfo[] = [];
-
-    allBranches.forEach(async branch => {
-      const branchInfo = branch.data() as BranchInfo;
-
-      oldBranches.push(branchInfo);
-    });
-
-    const branchList: string = oldBranches.reduce((list, branch) => {
-      return (
-        list +
-        `<div>${branch.branchName} last updated ${new Date(
-          branch.timestamp
-        ).toLocaleDateString()} by ${branch.head_commit?.author.name}</div>`
-      );
-    }, '');
-
-    sgMail.setApiKey(functions.config().sendgrid.key);
-    // console.log('Sending to email', functions.config().sendgrid.email);
-
-    const msg = {
-      to: 'lead_devs@ideacrew.com',
-      cc: 'mark.goho@ideacrew.com',
-      from: 'active-branch-tracker@no-reply.com',
-      subject: `Stale Branch Report for week ending ${new Date().toLocaleDateString()}`,
-      html: branchList,
-    };
-    try {
-      await sgMail.send(msg);
-      return null;
-    } catch (error) {
-      return null;
-    }
-  });
+    response.status(200).send(oldBranches);
+  }
+);
