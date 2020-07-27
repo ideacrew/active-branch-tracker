@@ -34,9 +34,7 @@
             class="no-wrap"
             target="_blank"
             rel="noopener"
-            href="//github.com/{{ branch.organizationName }}/{{
-              branch.repositoryName
-            }}/branches/all?query={{ branch.branchName | branchLink }}"
+            href="{{ branch | branchLink }}"
             >{{ branch.branchName }}</a
           >
         </div>
