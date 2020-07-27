@@ -12,12 +12,6 @@ export class IsOldPipe implements PipeTransform {
     const tenDaysInMs = 10 * oneDayInMs;
     const tenDaysAgo = today - tenDaysInMs;
 
-    if (branch.defaultBranch) {
-      return false;
-    } else if (branch.tracked) {
-      return branch.timestamp < tenDaysAgo;
-    }
-
-    return false;
+    return branch.defaultBranch ? false : branch.timestamp < tenDaysAgo;
   }
 }
