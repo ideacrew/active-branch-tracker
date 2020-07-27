@@ -30,9 +30,15 @@
           <svg class="svg-icon branch-icon" width="1rem" height="1rem">
             <use href="assets/icons.svg#branch"></use>
           </svg>
-          <a class="no-wrap" href="{{ branch.branchLink }}">{{
-            branch.branchName
-          }}</a>
+          <a
+            class="no-wrap"
+            target="_blank"
+            rel="noopener"
+            href="//github.com/{{ branch.organizationName }}/{{
+              branch.repositoryName
+            }}/branches/all?query={{ branch.branchName | branchLink }}"
+            >{{ branch.branchName }}</a
+          >
         </div>
         <idc-release-date
           *ngIf="branch.tracked"
