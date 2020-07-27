@@ -3,6 +3,7 @@
   [ngClass]="[branch.checkSuiteStatus, viewType ? viewType : 'expanded']"
   [class.tracked]="branch.tracked"
   [class.has-pr]="branch.pullRequestNumber"
+  [class.is-old]="branch | isOld"
 >
   <!-- Container Heading -->
   <div class="container-heading">

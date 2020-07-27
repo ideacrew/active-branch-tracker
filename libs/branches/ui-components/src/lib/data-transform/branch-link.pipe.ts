@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { BranchInfo } from '@idc/branches/data-access';
+import { BranchInfoVM } from '@idc/util';
 
 @Pipe({
   name: 'branchLink',
 })
 export class BranchLinkPipe implements PipeTransform {
-  transform(branch: BranchInfo): string {
+  transform(branch: BranchInfoVM): string {
     const query = encodeURI(branch.branchName);
 
     return `//github.com/${branch.organizationName}/${branch.repositoryName}/branches/all?query=${query}`;
