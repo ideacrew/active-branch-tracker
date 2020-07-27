@@ -15,10 +15,10 @@ import { CheckSuiteConclusion } from './checkSuiteConclusion';
   providedIn: 'root',
 })
 export class BranchListService {
-  private rawBranchData$: Observable<DocumentChangeAction<BranchInfo>[]>;
   branchInfo$: Observable<BranchInfo[]>;
+  scream: HTMLAudioElement = new Audio('/assets/HarshaYellr.wav');
 
-  scream = new Audio('/assets/HarshaYellr.wav');
+  private rawBranchData$: Observable<DocumentChangeAction<BranchInfo>[]>;
 
   constructor(private afs: AngularFirestore) {
     this.rawBranchData$ = this.afs
@@ -44,8 +44,10 @@ export class BranchListService {
 
           if (newFailure === true) {
             try {
-              await this.scream.play();
-            } catch (e) {}
+              await this.playSound();
+            } catch (e) {
+              console.error('Could not play sound');
+            }
           }
         })
       );
@@ -78,5 +80,9 @@ export class BranchListService {
     return this.afs
       .collection<BranchInfo>('branches')
       .doc<BranchInfo>(`${organizationName}-${repositoryName}-${branchName}`);
+  }
+
+  async playSound(): Promise<void> {
+    await this.scream.play();
   }
 }

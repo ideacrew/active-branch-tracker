@@ -25,6 +25,7 @@
     "import-blacklist": [true, "rxjs/Rx"],
     "interface-over-type-literal": true,
     "max-classes-per-file": false,
+    "max-file-line-count": [true, 400],
     "member-access": false,
     "no-any": true,
     "no-arg": true,
@@ -101,10 +102,15 @@
       true,
       {
         "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
+          "public-static-field",
+          "public-instance-field",
+          "private-static-field",
+          "private-instance-field",
+          "public-constructor",
+          "private-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
         ]
       }
     ],
