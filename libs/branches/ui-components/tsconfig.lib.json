@@ -13,5 +13,10 @@
     "strictMetadataEmit": true,
     "enableResourceInlining": true
   },
-  "exclude": ["src/test-setup.ts", "**/*.spec.ts"]
+  "exclude": ["src/test-setup.ts", "**/*.spec.ts"],
+  "include": [
+    "**\\*.ts",
+    "..\\..\\util\\src\\lib\\models\\index.ts",
+    "..\\..\\util\\src\\lib\\models\\branchInfoVM.interface.ts"
+  ]
 }
