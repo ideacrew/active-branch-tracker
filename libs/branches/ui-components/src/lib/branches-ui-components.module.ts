@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { UtilModule } from '@idc/util';
+
 import { BranchContainerComponent } from './branch-container/branch-container.component';
 import { ReleaseDateComponent } from './release-date/release-date.component';
-import { DataTransformModule } from './data-transform/data-transform.module';
 
 @NgModule({
-  imports: [CommonModule, DataTransformModule],
+  imports: [CommonModule, UtilModule],
   declarations: [BranchContainerComponent, ReleaseDateComponent],
   exports: [BranchContainerComponent, ReleaseDateComponent],
 })

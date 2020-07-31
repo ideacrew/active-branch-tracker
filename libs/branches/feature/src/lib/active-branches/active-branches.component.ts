@@ -13,24 +13,16 @@ import {
   DisplayType,
 } from '@idc/display-config';
 
-import {
-  getPullRequestLink,
-  getFailurePercentage,
-  getBranchLink,
-  getCommitLink,
-  BranchInfoVM,
-} from '@idc/util';
-
 export interface SeparateBranchInfo {
-  defaultBranches: BranchInfoVM[];
-  otherBranches: BranchInfoVM[];
-  trackedBranches: BranchInfoVM[];
+  defaultBranches: BranchInfo[];
+  otherBranches: BranchInfo[];
+  trackedBranches: BranchInfo[];
 }
 
 export interface ActiveBranchesVM {
-  defaultBranches: BranchInfoVM[];
-  otherBranches: BranchInfoVM[];
-  trackedBranches: BranchInfoVM[];
+  defaultBranches: BranchInfo[];
+  otherBranches: BranchInfo[];
+  trackedBranches: BranchInfo[];
   config: DisplayConfig;
 }
 
@@ -53,7 +45,7 @@ export class ActiveBranchesComponent implements OnInit {
 
   constructor(
     public branchListService: BranchListService,
-    public configService: DisplayConfigService
+    public configService: DisplayConfigService,
   ) {}
 
   ngOnInit(): void {
@@ -61,19 +53,17 @@ export class ActiveBranchesComponent implements OnInit {
       map(branchInfo => {
         const defaultBranches = branchInfo
           .filter(branch => branch.defaultBranch === true)
-          .map(addVMDetails)
           .sort(sortByTime);
 
         const otherBranches = branchInfo
           .filter(
-            branch => branch.defaultBranch === false && branch.tracked === false
+            branch =>
+              branch.defaultBranch === false && branch.tracked === false,
           )
-          .map(addVMDetails)
           .sort(sortByTime);
 
         const trackedBranches = branchInfo
           .filter(branch => branch.tracked === true)
-          .map(addVMDetails)
           .sort(sortByTime);
 
         return {
@@ -81,7 +71,7 @@ export class ActiveBranchesComponent implements OnInit {
           otherBranches,
           trackedBranches,
         };
-      })
+      }),
     );
 
     this.activeBranchesVm$ = combineLatest([
@@ -93,23 +83,13 @@ export class ActiveBranchesComponent implements OnInit {
           ...branchInfo,
           config,
         };
-      })
+      }),
     );
   }
 
   trackByBranchName(index: number, branch: BranchInfo): string {
     return `${branch.organizationName}${branch.repositoryName}${branch.branchName}`;
   }
-}
-
-function addVMDetails(branch: BranchInfo): BranchInfoVM {
-  return {
-    ...branch,
-    branchLink: getBranchLink(branch),
-    commitLink: getCommitLink(branch),
-    pullRequestLink: getPullRequestLink(branch),
-    failurePercentage: getFailurePercentage(branch),
-  };
 }
 
 function sortByTime(branchA: BranchInfo, branchB: BranchInfo): number {

@@ -9,8 +9,8 @@ import {
 import {
   CheckSuiteConclusion,
   ReleaseDateInfo,
+  BranchInfo,
 } from '@idc/branches/data-access';
-import { BranchInfoVM } from '@idc/util';
 
 @Component({
   selector: 'idc-branch-container',
@@ -21,11 +21,11 @@ import { BranchInfoVM } from '@idc/util';
 export class BranchContainerComponent {
   CheckSuiteConclusion = CheckSuiteConclusion;
 
-  @Input() branch: BranchInfoVM;
+  @Input() branch: BranchInfo;
   @Input() viewType: 'expanded' | 'collapsed' = 'expanded';
 
-  @Output() readonly trackBranch = new EventEmitter<BranchInfoVM>();
-  @Output() readonly untrackBranch = new EventEmitter<BranchInfoVM>();
+  @Output() readonly trackBranch = new EventEmitter<BranchInfo>();
+  @Output() readonly untrackBranch = new EventEmitter<BranchInfo>();
   @Output() readonly newReleaseDate = new EventEmitter<ReleaseDateInfo>();
 
   changeReleaseDate(event: string): void {

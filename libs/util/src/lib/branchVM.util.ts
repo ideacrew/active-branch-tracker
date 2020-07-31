@@ -1,18 +1,5 @@
 import { BranchInfo } from '@idc/branches/data-access';
 
-export function getBranchLink(branch: BranchInfo): string {
-  const {
-    repositoryName,
-    organizationName,
-    branchName: headBranch,
-    defaultBranch,
-  } = branch;
-
-  const needsTree = defaultBranch ? `` : `tree/`;
-
-  return `//github.com/${organizationName}/${repositoryName}/${needsTree}${headBranch}`;
-}
-
 export function getCommitLink(branch: BranchInfo): string {
   const { repositoryName, organizationName, head_sha } = branch;
 

@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { BranchInfoVM } from '@idc/util';
+import { BranchInfo } from '@idc/branches/data-access';
 
 @Pipe({
   name: 'isOld',
 })
 export class IsOldPipe implements PipeTransform {
-  transform(branch: BranchInfoVM, ...args: unknown[]): boolean {
+  transform(branch: BranchInfo, ...args: unknown[]): boolean {
     const today = new Date().getTime();
 
     const oneDayInMs = 1000 * 60 * 60 * 24;
