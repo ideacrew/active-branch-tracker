@@ -22,7 +22,10 @@
         "libs/branches/ui-components/src/index.ts"
       ],
       "@idc/display-config": ["libs/display-config/src/index.ts"],
-      "@idc/util": ["libs/util/src/index.ts"]
+      "@idc/util": ["libs/util/src/index.ts"],
+      "@idc/environments/data-access": [
+        "libs/environments/data-access/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

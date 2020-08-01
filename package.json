@@ -44,7 +44,11 @@
     "@nrwl/angular": "10.0.7",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.5",
-    "zone.js": "^0.10.2"
+    "zone.js": "^0.10.2",
+    "@ngrx/store": "9.1.0",
+    "@ngrx/effects": "9.1.0",
+    "@ngrx/entity": "9.1.0",
+    "@ngrx/router-store": "9.1.0"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.1000.0",
@@ -74,6 +78,8 @@
     "ts-jest": "25.2.1",
     "ts-node": "~7.0.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.9.7"
+    "typescript": "~3.9.7",
+    "@ngrx/schematics": "9.1.0",
+    "@ngrx/store-devtools": "9.1.0"
   }
 }

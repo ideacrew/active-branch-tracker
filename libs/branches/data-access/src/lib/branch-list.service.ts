@@ -7,9 +7,7 @@ import {
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { BranchInfo } from './branchInfo';
-import { ReleaseDateInfo } from './branchReleaseInfo';
-import { CheckSuiteConclusion } from './checkSuiteConclusion';
+import { BranchInfo, CheckSuiteConclusion, ReleaseDateInfo } from '@idc/util';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +25,7 @@ export class BranchListService {
       .pipe(
         tap(async docChange => {
           const modified = docChange.filter(
-            change => change.type === 'modified'
+            change => change.type === 'modified',
           );
           let newFailure = false;
 
@@ -49,11 +47,11 @@ export class BranchListService {
               console.error('Could not play sound');
             }
           }
-        })
+        }),
       );
 
     this.branchInfo$ = this.rawBranchData$.pipe(
-      map(docChange => docChange.map(change => change.payload.doc.data()))
+      map(docChange => docChange.map(change => change.payload.doc.data())),
     );
   }
 

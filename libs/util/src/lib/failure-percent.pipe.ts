@@ -1,7 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { BranchInfo } from '@idc/branches/data-access';
-
+import { BranchInfo } from './models';
 import { getFailurePercentage } from './branchVM.util';
 
 @Pipe({

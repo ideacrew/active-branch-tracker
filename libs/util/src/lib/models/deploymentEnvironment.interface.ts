@@ -1,4 +1,4 @@
-export interface BranchDeployment {
+export interface DeploymentEnvironment {
   branch: string;
   env: string;
   app: string;
@@ -7,4 +7,3 @@ export interface BranchDeployment {
   org: string;
   repo: string;
 }
-

@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { BranchInfo } from '@idc/branches/data-access';
+
+import { BranchInfo } from './models';
 
 @Pipe({
   name: 'isOld',
