@@ -1,3 +1,9 @@
+export interface BranchDeploymentResponse {
+  deployment: {
+    payload: BranchDeployment;
+  };
+}
+
 export interface BranchDeployment {
   branch: string;
   env: string;
@@ -7,4 +13,3 @@ export interface BranchDeployment {
   org: string;
   repo: string;
 }
-

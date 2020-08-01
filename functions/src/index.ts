@@ -11,7 +11,11 @@ import {
 } from './pullRequestEvent';
 import { staleBranches, getStaleBranchesFromDB } from './staleBranches';
 import { BrakemanOutput, handleBrakemanOutput } from './brakeman';
-import { handleBranchDeployment, BranchDeployment } from './branch-deployment';
+import {
+  handleBranchDeployment,
+  BranchDeployment,
+  BranchDeploymentResponse,
+} from './branch-deployment';
 
 admin.initializeApp();
 
@@ -61,7 +65,10 @@ export const staleBranchOnDemand = functions.https.onRequest(
 
 export const branchDeployment = functions.https.onRequest(
   async (request, response) => {
-    await handleBranchDeployment(request.body as BranchDeployment);
+    const deployment: BranchDeployment = (request.body as BranchDeploymentResponse)
+      .deployment.payload;
+
+    await handleBranchDeployment(deployment);
     response.status(200).send();
   },
 );

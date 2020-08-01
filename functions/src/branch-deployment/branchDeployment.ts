@@ -23,10 +23,15 @@ async function updateBranchWithEnvironmentInfo(
 ): Promise<void> {
   const fsBranchRef = getBranchRef(branchRef);
 
-  try {
-    await fsBranchRef.set({ environment: environmentName }, { merge: true });
-  } catch (e) {
-    console.error(e);
+  const branch = await fsBranchRef.get();
+  if (branch.exists) {
+    try {
+      await fsBranchRef.set({ environment: environmentName }, { merge: true });
+    } catch (e) {
+      console.error(e);
+    }
+  } else {
+    return Promise.resolve();
   }
 }
 
