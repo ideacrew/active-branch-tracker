@@ -9,9 +9,7 @@ import { map, tap } from 'rxjs/operators';
 
 import { BranchInfo, CheckSuiteConclusion, ReleaseDateInfo } from '@idc/util';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class BranchListService {
   branchInfo$: Observable<BranchInfo[]>;
   scream: HTMLAudioElement = new Audio('/assets/HarshaYellr.wav');

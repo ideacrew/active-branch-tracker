@@ -4,6 +4,8 @@ import { fetch } from '@nrwl/angular';
 
 import * as fromEnvironments from './environments.reducer';
 import * as EnvironmentsActions from './environments.actions';
+import { EnvironmentsService } from '../environments.service';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class EnvironmentsEffects {
@@ -12,10 +14,13 @@ export class EnvironmentsEffects {
       ofType(EnvironmentsActions.loadEnvironments),
       fetch({
         run: action => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return EnvironmentsActions.loadEnvironmentsSuccess({
-            environments: [],
-          });
+          return this.environmentsService
+            .queryEnvironments()
+            .pipe(
+              map(environments =>
+                EnvironmentsActions.loadEnvironmentsSuccess({ environments }),
+              ),
+            );
         },
 
         onError: (action, error) => {
@@ -26,5 +31,8 @@ export class EnvironmentsEffects {
     ),
   );
 
-  constructor(private actions$: Actions) {}
+  constructor(
+    private actions$: Actions,
+    private environmentsService: EnvironmentsService,
+  ) {}
 }

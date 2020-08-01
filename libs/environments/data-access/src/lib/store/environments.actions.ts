@@ -12,5 +12,5 @@ export const loadEnvironmentsSuccess = createAction(
 
 export const loadEnvironmentsFailure = createAction(
   '[Environments] Load Environments Failure',
-  props<{ error: any }>(),
+  props<{ error: string }>(),
 );

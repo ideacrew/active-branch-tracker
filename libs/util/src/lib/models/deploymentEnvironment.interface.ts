@@ -1,4 +1,6 @@
-export interface DeploymentEnvironment {
+import { EnvironmentStatus } from './environmentStatus.enum';
+
+export interface BranchDeployment {
   branch: string;
   env: string;
   app: string;
@@ -6,4 +8,11 @@ export interface DeploymentEnvironment {
   commit_sha: string;
   org: string;
   repo: string;
+}
+
+export interface DeploymentEnvironment {
+  name: string;
+  owner: string;
+  status: EnvironmentStatus;
+  latestDeployment: BranchDeployment;
 }
