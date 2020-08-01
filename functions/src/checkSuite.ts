@@ -4,6 +4,7 @@ import { WebhookPayload } from './webhookPayload';
 import { BranchInfo } from './branchInfo';
 import { CheckConclusion } from './checkConclusion';
 import { createSafeBranchName } from './safeBranchName';
+import { getBranchRef } from './util/branchRef';
 
 export enum CheckSuiteActionType {
   Completed = 'completed',
@@ -68,7 +69,7 @@ export interface CheckSuite {
 }
 
 export async function handleCheckSuiteEvent(
-  payload: CheckSuitePayload
+  payload: CheckSuitePayload,
 ): Promise<any> {
   const { check_suite, repository, organization } = payload;
 
@@ -96,10 +97,11 @@ export async function handleCheckSuiteEvent(
     console.error('Could not set payload to ref', payload);
   }
 
-  const branchRef = admin
-    .firestore()
-    .collection(`branches`)
-    .doc(`${organizationName}-${repositoryName}-${safeBranchName}`);
+  const branchRef = getBranchRef({
+    organizationName,
+    repositoryName,
+    branchName,
+  });
 
   const existingStatus = await branchRef.get();
 
@@ -107,6 +109,7 @@ export async function handleCheckSuiteEvent(
   let checkSuiteFailures = 0;
   let tracked: boolean = false;
 
+  
   if (existingStatus.exists) {
     const existingStatusDoc = existingStatus.data() as BranchInfo;
     checkSuiteRuns = existingStatusDoc.checkSuiteRuns;

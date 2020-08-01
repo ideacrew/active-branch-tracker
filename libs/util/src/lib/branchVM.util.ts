@@ -1,4 +1,4 @@
-import { BranchInfo } from '@idc/branches/data-access';
+import { BranchInfo } from './models';
 
 export function getCommitLink(branch: BranchInfo): string {
   const { repositoryName, organizationName, head_sha } = branch;
@@ -16,6 +16,6 @@ export function getFailurePercentage(branch: BranchInfo): number {
   const { checkSuiteRuns, checkSuiteFailures } = branch;
 
   return Math.round(
-    ((checkSuiteRuns - checkSuiteFailures) / checkSuiteRuns) * 100
+    ((checkSuiteRuns - checkSuiteFailures) / checkSuiteRuns) * 100,
   );
 }

@@ -283,6 +283,73 @@
           "style": "scss"
         }
       }
+    },
+    "environments-data-access": {
+      "projectType": "library",
+      "root": "libs/environments/data-access",
+      "sourceRoot": "libs/environments/data-access/src",
+      "prefix": "idc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/environments/data-access/tsconfig.lib.json",
+              "libs/environments/data-access/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/environments/data-access/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/environments/data-access/jest.config.js",
+            "tsConfig": "libs/environments/data-access/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/environments/data-access/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "environments-feature": {
+      "projectType": "library",
+      "root": "libs/environments/feature",
+      "sourceRoot": "libs/environments/feature/src",
+      "prefix": "idc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/environments/feature/tsconfig.lib.json",
+              "libs/environments/feature/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/environments/feature/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/environments/feature/jest.config.js",
+            "tsConfig": "libs/environments/feature/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/environments/feature/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

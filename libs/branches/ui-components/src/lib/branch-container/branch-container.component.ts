@@ -6,11 +6,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-import {
-  CheckSuiteConclusion,
-  ReleaseDateInfo,
-  BranchInfo,
-} from '@idc/branches/data-access';
+import { CheckSuiteConclusion, ReleaseDateInfo, BranchInfo } from '@idc/util';
 
 @Component({
   selector: 'idc-branch-container',

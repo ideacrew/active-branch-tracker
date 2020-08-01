@@ -4,4 +4,7 @@ export interface BranchDeployment {
   app: string;
   user_name: string;
   commit_sha: string;
+  org: string;
+  repo: string;
 }
+

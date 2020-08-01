@@ -2,11 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import {
-  BranchInfo,
-  BranchListService,
-  CheckSuiteConclusion,
-} from '@idc/branches/data-access';
+import { BranchInfo, CheckSuiteConclusion } from '@idc/util';
+import { BranchListService } from '@idc/branches/data-access';
 import {
   DisplayConfigService,
   DisplayConfig,
