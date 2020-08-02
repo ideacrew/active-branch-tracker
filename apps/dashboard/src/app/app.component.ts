@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
+import { AppFacade, AppActions, SidebarState } from '@idc/user-interface';
+
 import { ServiceWorkerUpdateService } from './service-worker-update.service';
 
 @Component({
@@ -9,5 +11,17 @@ import { ServiceWorkerUpdateService } from './service-worker-update.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  constructor(private swUpdate: ServiceWorkerUpdateService) {}
+  SidebarState = SidebarState;
+  constructor(
+    public swUpdate: ServiceWorkerUpdateService,
+    public appFacade: AppFacade,
+  ) {}
+
+  collapseSidebar(): void {
+    this.appFacade.dispatch(AppActions.collapseSidebar());
+  }
+
+  expandSidebar(): void {
+    this.appFacade.dispatch(AppActions.expandSidebar());
+  }
 }

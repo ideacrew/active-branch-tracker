@@ -26,7 +26,8 @@
       "@idc/environments/data-access": [
         "libs/environments/data-access/src/index.ts"
       ],
-      "@idc/environments/feature": ["libs/environments/feature/src/index.ts"]
+      "@idc/environments/feature": ["libs/environments/feature/src/index.ts"],
+      "@idc/user-interface": ["libs/user-interface/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
