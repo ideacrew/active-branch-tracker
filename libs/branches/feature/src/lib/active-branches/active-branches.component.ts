@@ -1,9 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { BranchInfo, CheckSuiteConclusion } from '@idc/util';
-import { BranchListService } from '@idc/branches/data-access';
+import {
+  BranchesFacade,
+  BranchesEntity,
+  BranchesActions,
+} from '@idc/branches/data-access';
 import {
   DisplayConfigService,
   DisplayConfig,
@@ -11,15 +15,13 @@ import {
 } from '@idc/display-config';
 
 export interface SeparateBranchInfo {
-  defaultBranches: BranchInfo[];
-  otherBranches: BranchInfo[];
-  trackedBranches: BranchInfo[];
+  defaultBranches: BranchesEntity[];
+  deployedBranches: BranchesEntity[];
+  trackedBranches: BranchesEntity[];
+  untrackedBranches: BranchesEntity[];
 }
 
-export interface ActiveBranchesVM {
-  defaultBranches: BranchInfo[];
-  otherBranches: BranchInfo[];
-  trackedBranches: BranchInfo[];
+export interface ActiveBranchesVM extends SeparateBranchInfo {
   config: DisplayConfig;
 }
 
@@ -29,72 +31,65 @@ export interface ActiveBranchesVM {
   styleUrls: ['./active-branches.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActiveBranchesComponent implements OnInit {
+export class ActiveBranchesComponent {
   CheckSuiteConclusion = CheckSuiteConclusion;
   DisplayType = DisplayType;
-  branchInfo$: Observable<SeparateBranchInfo>;
-  activeBranchesVm$: Observable<ActiveBranchesVM>;
 
   // time$: Observable<Date> = timer(0, 60000).pipe(
   //   map(tick => new Date()),
   //   shareReplay(1)
   // );
 
+  branches$: Observable<SeparateBranchInfo> = combineLatest([
+    this.branchesFacade.defaultBranches$,
+    this.branchesFacade.deployedBranches$,
+    this.branchesFacade.trackedBranches$,
+    this.branchesFacade.untrackedBranches$,
+  ]).pipe(
+    map(
+      ([
+        defaultBranches,
+        deployedBranches,
+        trackedBranches,
+        untrackedBranches,
+      ]) => {
+        const separateBranchInfo: SeparateBranchInfo = {
+          defaultBranches,
+          deployedBranches,
+          trackedBranches,
+          untrackedBranches,
+        };
+        return separateBranchInfo;
+      },
+    ),
+  );
+
+  activeBranchesVm$: Observable<ActiveBranchesVM> = combineLatest([
+    this.branches$,
+    this.configService.config$,
+  ]).pipe(
+    map(([branchInfo, config]: [SeparateBranchInfo, DisplayConfig]) => {
+      return {
+        ...branchInfo,
+        config,
+      };
+    }),
+  );
+
   constructor(
-    public branchListService: BranchListService,
+    public branchesFacade: BranchesFacade,
     public configService: DisplayConfigService,
   ) {}
-
-  ngOnInit(): void {
-    this.branchInfo$ = this.branchListService.branchInfo$.pipe(
-      map(branchInfo => {
-        const defaultBranches = branchInfo
-          .filter(branch => branch.defaultBranch === true)
-          .sort(sortByTime);
-
-        const otherBranches = branchInfo
-          .filter(
-            branch =>
-              branch.defaultBranch === false && branch.tracked === false,
-          )
-          .sort(sortByTime);
-
-        const trackedBranches = branchInfo
-          .filter(branch => branch.tracked === true)
-          .sort(sortByTime);
-
-        return {
-          defaultBranches,
-          otherBranches,
-          trackedBranches,
-        };
-      }),
-    );
-
-    this.activeBranchesVm$ = combineLatest([
-      this.branchInfo$,
-      this.configService.config$,
-    ]).pipe(
-      map(([branchInfo, config]: [SeparateBranchInfo, DisplayConfig]) => {
-        return {
-          ...branchInfo,
-          config,
-        };
-      }),
-    );
-  }
 
   trackByBranchName(index: number, branch: BranchInfo): string {
     return `${branch.organizationName}${branch.repositoryName}${branch.branchName}`;
   }
-}
 
-function sortByTime(branchA: BranchInfo, branchB: BranchInfo): number {
-  const { updated_at: updatedA, created_at: createdA } = branchA;
-  const { updated_at: updatedB, created_at: createdB } = branchB;
+  trackBranch(branch: BranchesEntity): void {
+    this.branchesFacade.dispatch(BranchesActions.trackBranch({ branch }));
+  }
 
-  return new Date(updatedA || createdA).getTime() >
-    new Date(updatedB || createdB).getTime()
-    ? -1
-    : 1;
+  untrackBranch(branch: BranchesEntity): void {
+    this.branchesFacade.dispatch(BranchesActions.untrackBranch({ branch }));
+  }
 }

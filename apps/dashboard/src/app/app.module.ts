@@ -29,7 +29,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
       enabled: environment.production,
     }),
     RouterModule.forRoot([
-      { path: '', redirectTo: 'environments', pathMatch: 'full' },
+      { path: '', redirectTo: 'branches', pathMatch: 'full' },
       {
         path: 'branches',
         loadChildren: () =>

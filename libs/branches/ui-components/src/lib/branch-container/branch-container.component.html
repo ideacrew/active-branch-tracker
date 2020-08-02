@@ -4,11 +4,12 @@
   [class.tracked]="branch.tracked"
   [class.has-pr]="branch.pullRequestNumber"
   [class.is-old]="branch | isOld"
+  [class.deployed]="branch.environment"
 >
   <!-- Container Heading -->
   <div class="container-heading">
     <div class="heading-left">
-      <ng-container *ngIf="branch.defaultBranch === false"
+      <ng-container *ngIf="!branch.defaultBranch && !branch.environment"
         ><button
           *ngIf="branch.tracked === false; else untrack"
           class="light-bulb-button"
@@ -62,6 +63,7 @@
         href="assets/icons.svg#check"
       ></use>
     </svg>
+    <div class="environment">{{ branch.environment }}</div>
   </div>
 
   <!-- Container Content -->

@@ -4,6 +4,7 @@ export enum DisplayType {
 }
 
 export interface DisplayConfig {
+  deployedBranches: DisplayType;
   trackedBranches: DisplayType;
-  otherBranches: DisplayType;
+  untrackedBranches: DisplayType;
 }

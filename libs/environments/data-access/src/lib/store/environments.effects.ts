@@ -13,16 +13,14 @@ export class EnvironmentsEffects {
     this.actions$.pipe(
       ofType(EnvironmentsActions.loadEnvironments),
       fetch({
-        run: action => {
-          return this.environmentsService
+        run: action =>
+          this.environmentsService
             .queryEnvironments()
             .pipe(
               map(environments =>
                 EnvironmentsActions.loadEnvironmentsSuccess({ environments }),
               ),
-            );
-        },
-
+            ),
         onError: (action, error) => {
           console.error('Error', error);
           return EnvironmentsActions.loadEnvironmentsFailure({ error });
