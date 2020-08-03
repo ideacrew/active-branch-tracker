@@ -66,7 +66,10 @@ export const staleBranchOnDemand = functions.https.onRequest(
 export const branchDeployment = functions.https.onRequest(
   async (request, response) => {
     const deployment: BranchDeployment = (request.body as BranchDeploymentResponse)
-      .deployment.payload;
+      .deployment;
+
+    console.log({ 'request.body': request.body });
+    console.log({ 'request.body.deployment': request.body.deployment });
 
     await handleBranchDeployment(deployment);
     response.status(200).send();

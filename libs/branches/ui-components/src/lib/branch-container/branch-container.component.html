@@ -41,7 +41,7 @@
           >
         </div>
         <idc-branch-status
-          *ngIf="!branch.defaultBranch && branch.tracked"
+          *ngIf="!branch.defaultBranch"
           [currentStatus]="branch.status"
           (newStatus)="changeBranchStatus($event)"
         ></idc-branch-status>

@@ -18,11 +18,6 @@ export class ActiveBranchesComponent {
   CheckSuiteConclusion = CheckSuiteConclusion;
   DisplayType = DisplayType;
 
-  // time$: Observable<Date> = timer(0, 60000).pipe(
-  //   map(tick => new Date()),
-  //   shareReplay(1)
-  // );
-
   constructor(
     public branchesFacade: BranchesFacade,
     public configService: DisplayConfigService,

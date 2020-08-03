@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 
 import { Repository, Organization, Sender } from './webhookPayload';
-import { BranchInfo } from './branchInfo';
+import { BranchInfo, BranchStatus } from './branchInfo';
 import { CheckConclusion } from './checkConclusion';
 import { createSafeBranchName } from './safeBranchName';
 
@@ -17,7 +17,7 @@ export interface CreateEventPayload {
 }
 
 export async function handleCreateEvent(
-  payload: CreateEventPayload
+  payload: CreateEventPayload,
 ): Promise<any> {
   const { ref: branchName, repository, organization, sender } = payload;
 
@@ -44,6 +44,7 @@ export async function handleCreateEvent(
     createdBy,
     tracked: false,
     timestamp: new Date().getTime(),
+    status: BranchStatus.Development,
   };
 
   try {
