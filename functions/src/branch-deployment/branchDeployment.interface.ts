@@ -1,5 +1,5 @@
 export interface BranchDeploymentResponse {
-  deployment: BranchDeployment;
+  payload: BranchDeployment;
 }
 
 export interface BranchDeployment {

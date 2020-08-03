@@ -8,6 +8,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
+import { DisplayConfigModule } from '@idc/display-config';
+
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { RootEffects } from './store/root.effects';
@@ -63,6 +65,7 @@ import { RootEffects } from './store/root.effects';
     EffectsModule.forRoot([RootEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
+    DisplayConfigModule,
   ],
   bootstrap: [AppComponent],
 })

@@ -5,18 +5,33 @@ import {
   ofType,
   ROOT_EFFECTS_INIT,
 } from '@ngrx/effects';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+
+import {
+  LocalStorageService,
+  DisplayConfig,
+  DisplayConfigActions,
+} from '@idc/display-config';
 
 @Injectable()
 export class RootEffects {
-  loadLocalStorage$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ROOT_EFFECTS_INIT),
-        tap(v => console.log('ROOT_EFECTS_INIT')),
-      ),
-    { dispatch: false },
+  loadLocalStorage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ROOT_EFFECTS_INIT),
+      map(() => {
+        const displayConfig: DisplayConfig = this.localStorageService.getSavedState(
+          'config',
+        );
+
+        return DisplayConfigActions.loadDisplayConfigSuccess({
+          displayConfig,
+        });
+      }),
+    ),
   );
 
-  constructor(private actions$: Actions) {}
+  constructor(
+    private actions$: Actions,
+    private localStorageService: LocalStorageService,
+  ) {}
 }

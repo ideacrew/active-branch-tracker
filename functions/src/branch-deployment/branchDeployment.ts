@@ -3,8 +3,6 @@ import { BranchDeployment } from './branchDeployment.interface';
 import { getBranchRef, BranchRef } from '../util/branchRef';
 
 export async function handleBranchDeployment(deployment: BranchDeployment) {
-  console.log({ deployment });
-
   const { branch, env, org, repo } = deployment;
 
   const branchRef = {

@@ -7,6 +7,8 @@ import {
   HostListener,
 } from '@angular/core';
 import { BranchStatus } from '@idc/util';
+import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'idc-branch-status',
@@ -16,7 +18,8 @@ import { BranchStatus } from '@idc/util';
 })
 export class BranchStatusComponent {
   BranchStatus = BranchStatus;
-  editing = false;
+  editing = new BehaviorSubject<boolean>(false);
+  editing$ = this.editing.asObservable();
   statusNames: BranchStatus[] = [
     BranchStatus.Development,
     BranchStatus.Review,
@@ -28,15 +31,21 @@ export class BranchStatusComponent {
 
   @HostListener('mouseenter')
   onEnter(): void {
-    this.editing = true;
+    if (this.editing.value === false) {
+      setTimeout(() => {
+        console.log('Setting editing to true');
+        this.editing.next(true);
+      }, 250);
+    }
   }
 
   @HostListener('mouseleave')
   onLeave(): void {
-    this.editing = false;
+    this.editing.next(false);
   }
 
   changeStatus(status: BranchStatus): void {
+    this.editing.next(false);
     this.newStatus.emit(status);
   }
 }

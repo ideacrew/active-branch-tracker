@@ -1,12 +1,19 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { combineLatest } from 'rxjs';
 
-import { BranchInfo, CheckSuiteConclusion, BranchStatus } from '@idc/util';
+import { BranchInfo, CheckSuiteConclusion } from '@idc/util';
 import {
   BranchesFacade,
   BranchesEntity,
   BranchesActions,
 } from '@idc/branches/data-access';
-import { DisplayConfigService, DisplayType } from '@idc/display-config';
+import { DisplayType, DisplayConfigFacade } from '@idc/display-config';
+import { map } from 'rxjs/operators';
+
+interface BranchVM {
+  branches: BranchesEntity[];
+  display: DisplayType;
+}
 
 @Component({
   selector: 'idc-active-branches',
@@ -18,9 +25,24 @@ export class ActiveBranchesComponent {
   CheckSuiteConclusion = CheckSuiteConclusion;
   DisplayType = DisplayType;
 
+  deployedBranchesVM$ = combineLatest([
+    this.branchesFacade.deployedBranches$,
+    this.configFacade.deployedBranchesDisplay$,
+  ]).pipe(map(([branches, display]) => ({ branches, display })));
+
+  trackedBranchesVM$ = combineLatest([
+    this.branchesFacade.trackedBranches$,
+    this.configFacade.trackedBranchesDisplay$,
+  ]).pipe(map(([branches, display]) => ({ branches, display })));
+
+  untrackedBranchesVM$ = combineLatest([
+    this.branchesFacade.untrackedBranches$,
+    this.configFacade.untrackedBranchesDisplay$,
+  ]).pipe(map(([branches, display]) => ({ branches, display })));
+
   constructor(
     public branchesFacade: BranchesFacade,
-    public configService: DisplayConfigService,
+    public configFacade: DisplayConfigFacade,
   ) {}
 
   trackByBranchName(index: number, branch: BranchInfo): string {

@@ -1,6 +1,6 @@
 <select
   (change)="changeStatus($event.target.value)"
-  *ngIf="editing; else valueOnly"
+  *ngIf="editing$ | async; else valueOnly"
   name="status"
   id="status"
 >

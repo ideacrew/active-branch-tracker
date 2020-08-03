@@ -20,6 +20,10 @@
     padding: 0;
     --card-text-color: hsl(120, 13%, 48%);
     --card-color: hsl(120, 79%, 2%);
+
+    idc-branch-status {
+      display: none;
+    }
   }
 
   &.neutral,
