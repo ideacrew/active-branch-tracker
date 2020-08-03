@@ -1,7 +1,3 @@
-export interface BranchDeploymentResponse {
-  payload: BranchDeployment;
-}
-
 export interface BranchDeployment {
   branch: string;
   env: string;
