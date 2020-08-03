@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { BranchInfo, CheckSuiteConclusion } from '@idc/util';
+import { BranchInfo, CheckSuiteConclusion, BranchStatus } from '@idc/util';
 import {
   BranchesFacade,
   BranchesEntity,
@@ -38,5 +38,13 @@ export class ActiveBranchesComponent {
 
   untrackBranch(branch: BranchesEntity): void {
     this.branchesFacade.dispatch(BranchesActions.untrackBranch({ branch }));
+  }
+
+  setBranchStatus({ branchId, status }): void {
+    console.log('Setting branch status to', branchId, status);
+
+    this.branchesFacade.dispatch(
+      BranchesActions.setBranchStatus({ branchId, status }),
+    );
   }
 }

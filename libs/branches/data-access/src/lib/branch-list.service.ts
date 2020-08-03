@@ -7,7 +7,12 @@ import {
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { BranchInfo, CheckSuiteConclusion, ReleaseDateInfo } from '@idc/util';
+import {
+  BranchInfo,
+  CheckSuiteConclusion,
+  ReleaseDateInfo,
+  BranchStatus,
+} from '@idc/util';
 import { BranchesEntity } from './store/branches.models';
 
 @Injectable()
@@ -15,8 +20,7 @@ export class BranchListService {
   branchInfo$: Observable<BranchInfo[]>;
   scream: HTMLAudioElement = new Audio('/assets/HarshaYellr.wav');
 
-  constructor(private afs: AngularFirestore) {
-  }
+  constructor(private afs: AngularFirestore) {}
 
   queryBranches(): Observable<BranchesEntity[]> {
     return this.afs
@@ -64,6 +68,14 @@ export class BranchListService {
 
   async untrackBranch(branch: BranchInfo): Promise<void> {
     await this.getBranchRef(branch).update({ tracked: false });
+  }
+
+  async setBranchStatus(branchId: string, status: BranchStatus): Promise<void> {
+    await this.getSimpleRef(branchId).update({ status });
+  }
+
+  getSimpleRef(branchId: string): AngularFirestoreDocument<BranchInfo> {
+    return this.afs.collection<BranchInfo>('branches').doc(branchId);
   }
 
   getBranchRef(branch: BranchInfo): AngularFirestoreDocument<BranchInfo> {

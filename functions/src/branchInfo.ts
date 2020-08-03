@@ -31,4 +31,11 @@ export interface BranchInfo {
   releaseDate?: number;
   pullRequestNumber?: number;
   environment?: string;
+  status: BranchStatus;
+}
+
+export enum BranchStatus {
+  Development = 'Development',
+  Review = 'Stakeholder Review',
+  Ready = 'Ready for Production',
 }

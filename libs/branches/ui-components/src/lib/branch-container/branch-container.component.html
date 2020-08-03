@@ -40,12 +40,11 @@
             >{{ branch.branchName }}</a
           >
         </div>
-        <idc-release-date
-          *ngIf="branch.tracked"
-          class="release-date"
-          [releaseDate]="branch.releaseDate"
-          (newReleaseDate)="changeReleaseDate($event)"
-        ></idc-release-date>
+        <idc-branch-status
+          *ngIf="!branch.defaultBranch && branch.tracked"
+          [currentStatus]="branch.status"
+          (newStatus)="changeBranchStatus($event)"
+        ></idc-branch-status>
       </div>
     </div>
     <svg

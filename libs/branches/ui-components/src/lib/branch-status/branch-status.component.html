@@ -1,0 +1,19 @@
+<select
+  (change)="changeStatus($event.target.value)"
+  *ngIf="editing; else valueOnly"
+  name="status"
+  id="status"
+>
+  <option
+    *ngFor="let status of statusNames"
+    [value]="status"
+    [selected]="status === currentStatus"
+    >{{ status }}</option
+  >
+</select>
+
+<ng-template #valueOnly
+  ><span class="current-status">
+    {{ currentStatus ? currentStatus : 'Select a status' }}
+  </span>
+</ng-template>

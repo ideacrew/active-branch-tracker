@@ -5,7 +5,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { CheckSuiteConclusion, ReleaseDateInfo } from '@idc/util';
+import { CheckSuiteConclusion, ReleaseDateInfo, BranchStatus } from '@idc/util';
 
 import { BranchesEntity } from '@idc/branches/data-access';
 
@@ -24,6 +24,10 @@ export class BranchContainerComponent {
   @Output() readonly trackBranch = new EventEmitter<BranchesEntity>();
   @Output() readonly untrackBranch = new EventEmitter<BranchesEntity>();
   @Output() readonly newReleaseDate = new EventEmitter<ReleaseDateInfo>();
+  @Output() readonly changeStatus = new EventEmitter<{
+    branchId: string | number;
+    status: BranchStatus;
+  }>();
 
   changeReleaseDate(event: string): void {
     const info: ReleaseDateInfo = {
@@ -31,5 +35,9 @@ export class BranchContainerComponent {
       releaseDate: new Date(event),
     };
     this.newReleaseDate.emit(info);
+  }
+
+  changeBranchStatus(status: BranchStatus): void {
+    this.changeStatus.emit({ branchId: this.branch.id, status });
   }
 }

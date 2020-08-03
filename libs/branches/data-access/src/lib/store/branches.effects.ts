@@ -49,6 +49,16 @@ export class BranchesEffects {
     ),
   );
 
+  setStatus$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BranchesActions.setBranchStatus),
+      exhaustMap(async ({ branchId, status }) =>
+        this.branchListService.setBranchStatus(branchId, status),
+      ),
+      map(() => BranchesActions.setBranchStatusSuccess()),
+    ),
+  );
+
   constructor(
     private actions$: Actions,
     private branchListService: BranchListService,
