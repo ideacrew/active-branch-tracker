@@ -8,10 +8,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
-import { UserInterfaceModule } from '@idc/user-interface';
-
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import { RootEffects } from './store/root.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -61,10 +60,9 @@ import { environment } from '../environments/environment';
         },
       },
     ),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([RootEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
-    UserInterfaceModule,
   ],
   bootstrap: [AppComponent],
 })
