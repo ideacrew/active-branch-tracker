@@ -1,11 +1,13 @@
-<ng-container *ngIf="activeBranchesVm$ | async as vm">
+<ng-container *ngIf="configService.config$ | async as config">
   <!-- DEFAULT BRANCHES -->
   <div class="branch-container-heading">
     <h2 class="branch-type-heading">Default Branches</h2>
   </div>
   <div class="branches-list">
     <idc-branch-container
-      *ngFor="let branch of vm.defaultBranches; trackBy: trackByBranchName"
+      *ngFor="
+        let branch of branchesFacade.defaultBranches$ | async;
+      "
       [branch]="branch"
     ></idc-branch-container>
   </div>
@@ -14,7 +16,7 @@
   <div class="branch-container-heading">
     <h2 class="branch-type-heading">Deployed Branches</h2>
     <button
-      *ngIf="vm.config.deployedBranches === DisplayType.Collapsed"
+      *ngIf="config.deployedBranches === DisplayType.Collapsed"
       type="button"
       class="unfold-view"
       (click)="
@@ -26,7 +28,7 @@
       </svg>
     </button>
     <button
-      *ngIf="vm.config.deployedBranches === DisplayType.Expanded"
+      *ngIf="config.deployedBranches === DisplayType.Expanded"
       type="button"
       class="fold-view"
       (click)="
@@ -40,8 +42,11 @@
   </div>
   <div class="branches-list">
     <idc-branch-container
-      *ngFor="let branch of vm.deployedBranches; trackBy: trackByBranchName"
-      [viewType]="vm.config.deployedBranches"
+      *ngFor="
+        let branch of branchesFacade.deployedBranches$ | async;
+        trackBy: trackByBranchName
+      "
+      [viewType]="config.deployedBranches"
       [branch]="branch"
     ></idc-branch-container>
   </div>
@@ -50,7 +55,7 @@
   <div class="branch-container-heading">
     <h2 class="branch-type-heading">Tracked Branches</h2>
     <button
-      *ngIf="vm.config.trackedBranches === DisplayType.Collapsed"
+      *ngIf="config.trackedBranches === DisplayType.Collapsed"
       type="button"
       class="unfold-view"
       (click)="
@@ -62,7 +67,7 @@
       </svg>
     </button>
     <button
-      *ngIf="vm.config.trackedBranches === DisplayType.Expanded"
+      *ngIf="config.trackedBranches === DisplayType.Expanded"
       type="button"
       class="fold-view"
       (click)="
@@ -76,8 +81,11 @@
   </div>
   <div class="branches-list">
     <idc-branch-container
-      *ngFor="let branch of vm.trackedBranches; trackBy: trackByBranchName"
-      [viewType]="vm.config.trackedBranches"
+      *ngFor="
+        let branch of branchesFacade.trackedBranches$ | async;
+        trackBy: trackByBranchName
+      "
+      [viewType]="config.trackedBranches"
       [branch]="branch"
       (untrackBranch)="untrackBranch($event)"
     ></idc-branch-container>
@@ -87,7 +95,7 @@
   <div class="branch-container-heading">
     <h2 class="branch-type-heading other-branches">Other Branches</h2>
     <button
-      *ngIf="vm.config.untrackedBranches === DisplayType.Collapsed"
+      *ngIf="config.untrackedBranches === DisplayType.Collapsed"
       type="button"
       class="unfold-view"
       (click)="
@@ -99,7 +107,7 @@
       </svg>
     </button>
     <button
-      *ngIf="vm.config.untrackedBranches === DisplayType.Expanded"
+      *ngIf="config.untrackedBranches === DisplayType.Expanded"
       type="button"
       class="fold-view"
       (click)="
@@ -113,8 +121,11 @@
   </div>
   <div class="branches-list">
     <idc-branch-container
-      *ngFor="let branch of vm.untrackedBranches; trackBy: trackByBranchName"
-      [viewType]="vm.config.untrackedBranches"
+      *ngFor="
+        let branch of branchesFacade.untrackedBranches$ | async;
+        trackBy: trackByBranchName
+      "
+      [viewType]="config.untrackedBranches"
       [branch]="branch"
       (trackBranch)="trackBranch($event)"
     ></idc-branch-container>

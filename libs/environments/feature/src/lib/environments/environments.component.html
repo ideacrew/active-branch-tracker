@@ -1,1 +1,7 @@
-<p>environments works!</p>
+<div class="environment" *ngFor="let environment of environmentsFacade.allEnvironments$ | async">
+  <h2>{{ environment.name }}</h2>
+  <pre
+    >{{ environment | json }}
+</pre
+  >
+</div>

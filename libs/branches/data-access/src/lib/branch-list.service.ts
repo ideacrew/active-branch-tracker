@@ -15,43 +15,7 @@ export class BranchListService {
   branchInfo$: Observable<BranchInfo[]>;
   scream: HTMLAudioElement = new Audio('/assets/HarshaYellr.wav');
 
-  private rawBranchData$: Observable<DocumentChangeAction<BranchInfo>[]>;
-
   constructor(private afs: AngularFirestore) {
-    this.rawBranchData$ = this.afs
-      .collection<BranchInfo>('branches')
-      .snapshotChanges()
-      .pipe(
-        tap(async docChange => {
-          const modified = docChange.filter(
-            change => change.type === 'modified',
-          );
-          let newFailure = false;
-
-          for (const branch of modified) {
-            const { checkSuiteStatus, tracked } = branch.payload.doc.data();
-            if (
-              checkSuiteStatus === CheckSuiteConclusion.Failure &&
-              tracked === true
-            ) {
-              newFailure = true;
-              console.log({ newFailure: branch.payload.doc.data() });
-            }
-          }
-
-          if (newFailure === true) {
-            try {
-              await this.playSound();
-            } catch (e) {
-              console.error('Could not play sound');
-            }
-          }
-        }),
-      );
-
-    this.branchInfo$ = this.rawBranchData$.pipe(
-      map(docChange => docChange.map(change => change.payload.doc.data())),
-    );
   }
 
   queryBranches(): Observable<BranchesEntity[]> {

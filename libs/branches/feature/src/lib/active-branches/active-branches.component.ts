@@ -1,6 +1,4 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { BranchInfo, CheckSuiteConclusion } from '@idc/util';
 import {
@@ -8,22 +6,7 @@ import {
   BranchesEntity,
   BranchesActions,
 } from '@idc/branches/data-access';
-import {
-  DisplayConfigService,
-  DisplayConfig,
-  DisplayType,
-} from '@idc/display-config';
-
-export interface SeparateBranchInfo {
-  defaultBranches: BranchesEntity[];
-  deployedBranches: BranchesEntity[];
-  trackedBranches: BranchesEntity[];
-  untrackedBranches: BranchesEntity[];
-}
-
-export interface ActiveBranchesVM extends SeparateBranchInfo {
-  config: DisplayConfig;
-}
+import { DisplayConfigService, DisplayType } from '@idc/display-config';
 
 @Component({
   selector: 'idc-active-branches',
@@ -39,42 +22,6 @@ export class ActiveBranchesComponent {
   //   map(tick => new Date()),
   //   shareReplay(1)
   // );
-
-  branches$: Observable<SeparateBranchInfo> = combineLatest([
-    this.branchesFacade.defaultBranches$,
-    this.branchesFacade.deployedBranches$,
-    this.branchesFacade.trackedBranches$,
-    this.branchesFacade.untrackedBranches$,
-  ]).pipe(
-    map(
-      ([
-        defaultBranches,
-        deployedBranches,
-        trackedBranches,
-        untrackedBranches,
-      ]) => {
-        const separateBranchInfo: SeparateBranchInfo = {
-          defaultBranches,
-          deployedBranches,
-          trackedBranches,
-          untrackedBranches,
-        };
-        return separateBranchInfo;
-      },
-    ),
-  );
-
-  activeBranchesVm$: Observable<ActiveBranchesVM> = combineLatest([
-    this.branches$,
-    this.configService.config$,
-  ]).pipe(
-    map(([branchInfo, config]: [SeparateBranchInfo, DisplayConfig]) => {
-      return {
-        ...branchInfo,
-        config,
-      };
-    }),
-  );
 
   constructor(
     public branchesFacade: BranchesFacade,

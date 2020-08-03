@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.environment {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: hsl(120, 13%, 48%);
+  color: hsl(120, 79%, 2%);
+}

@@ -18,7 +18,6 @@ export class EnvironmentsFacade {
   );
 
   constructor(private store: Store<fromEnvironments.EnvironmentsPartialState>) {
-    console.log('Hello from environments facade');
     this.dispatch(loadEnvironments());
   }
 
