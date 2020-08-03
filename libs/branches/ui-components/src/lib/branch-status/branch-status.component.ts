@@ -25,21 +25,26 @@ export class BranchStatusComponent {
     BranchStatus.Accepted,
   ];
 
+  mouseInHost = false;
+
   @Input() currentStatus: BranchStatus;
   @Output() readonly newStatus = new EventEmitter<BranchStatus>();
 
   @HostListener('mouseenter')
   onEnter(): void {
+    this.mouseInHost = true;
     if (this.editing.value === false) {
       setTimeout(() => {
-        console.log('Setting editing to true');
-        this.editing.next(true);
-      }, 750);
+        if (this.mouseInHost) {
+          this.editing.next(true);
+        }
+      }, 350);
     }
   }
 
   @HostListener('mouseleave')
   onLeave(): void {
+    this.mouseInHost = false;
     this.editing.next(false);
   }
 
