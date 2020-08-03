@@ -1,11 +1,5 @@
-<div
-  class="application-container"
-  *ngIf="appFacade.sidebarState$ | async as sidebarState"
-  [class.collapsed-sidebar]="sidebarState === SidebarState.Collapsed"
->
-  <div
-    class="sidebar"
-  >
+<div class="application-container collapsed-sidebar">
+  <div class="sidebar collapsed">
     <!-- <div class="sidebar" [class.collapsed]="uiFacade.sidebarCollapsed$ | async"> -->
     <ul>
       <li class="nav-link">
