@@ -4,6 +4,7 @@
   name="status"
   id="status"
 >
+  <option *ngIf="currentStatus === undefined" selected>Select a status</option>
   <option
     *ngFor="let status of statusNames"
     [value]="status"

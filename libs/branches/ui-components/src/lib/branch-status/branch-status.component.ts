@@ -20,7 +20,7 @@ export class BranchStatusComponent {
   statusNames: BranchStatus[] = [
     BranchStatus.Development,
     BranchStatus.Review,
-    BranchStatus.Ready,
+    BranchStatus.Accepted,
   ];
 
   @Input() currentStatus: BranchStatus;

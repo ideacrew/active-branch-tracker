@@ -37,5 +37,5 @@ export interface BranchInfo {
 export enum BranchStatus {
   Development = 'Development',
   Review = 'Stakeholder Review',
-  Ready = 'Ready for Production',
+  Accepted = 'Accepted Pending Release',
 }
