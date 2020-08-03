@@ -34,7 +34,7 @@ export class BranchStatusComponent {
       setTimeout(() => {
         console.log('Setting editing to true');
         this.editing.next(true);
-      }, 250);
+      }, 750);
     }
   }
 
