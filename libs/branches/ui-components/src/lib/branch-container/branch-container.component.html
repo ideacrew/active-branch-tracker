@@ -1,10 +1,13 @@
 <div
   class="branch"
-  [ngClass]="[branch.checkSuiteStatus, viewType ? viewType : 'expanded']"
-  [class.tracked]="branch.tracked"
-  [class.has-pr]="branch.pullRequestNumber"
-  [class.is-old]="branch | isOld"
-  [class.deployed]="branch.environment"
+  [ngClass]="{
+    viewType: viewType ? viewType : 'expanded',
+    tracked: branch.tracked,
+    'has-pr': branch.pullRequestNumber,
+    'is-old': branch | isOld,
+    deployed: branch.environment
+  }"
+  [ngClass]="branch.checkSuiteStatus"
 >
   <!-- Container Heading -->
   <div class="container-heading">
