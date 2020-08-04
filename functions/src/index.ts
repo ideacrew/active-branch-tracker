@@ -11,6 +11,8 @@ import {
 import { staleBranches, getStaleBranchesFromDB } from './staleBranches';
 import { BrakemanOutput, handleBrakemanOutput } from './brakeman';
 import { handleBranchDeployment, BranchDeployment } from './branch-deployment';
+import { DeploymentEnvironment } from './deployment-environment';
+import { getBranchRef } from './util/branchRef';
 
 admin.initializeApp();
 
@@ -73,3 +75,43 @@ export const brakeManOutput = functions.https.onRequest(
     response.status(200).send();
   },
 );
+
+export const watchEnvironments = functions.firestore
+  .document('environments/{environmentId}')
+  .onUpdate(async (change, context) => {
+    const {
+      org: oldOrg,
+      repo: oldRepo,
+      branch: oldBranch,
+      commit_sha: oldSha,
+    } = (change.before.data() as DeploymentEnvironment).latestDeployment;
+
+    const {
+      branch: newBranch,
+      commit_sha: newSha,
+    } = (change.after.data() as DeploymentEnvironment).latestDeployment;
+
+    // Check to see if the newest deployment is for the same branch
+    if (oldBranch === newBranch && oldSha !== newSha) {
+      console.log(
+        'Environment has been updated with a new sha of the same branch',
+      );
+      return Promise.resolve();
+    }
+
+    if (oldBranch !== newBranch) {
+      console.log('Environment has been updated with a new branch');
+      const branchRef = getBranchRef({
+        organizationName: oldOrg,
+        repositoryName: oldRepo,
+        branchName: oldBranch,
+      });
+
+      try {
+        await branchRef.set({ environment: undefined });
+      } catch (e) {
+        console.error('Tried to update branch', { error: e });
+        return Promise.resolve();
+      }
+    }
+  });
