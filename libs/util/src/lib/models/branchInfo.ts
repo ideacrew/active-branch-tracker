@@ -38,4 +38,5 @@ export enum BranchStatus {
   Development = 'Development',
   Review = 'Stakeholder Review',
   Accepted = 'Accepted Pending Release',
+  OnHold = 'On Hold',
 }

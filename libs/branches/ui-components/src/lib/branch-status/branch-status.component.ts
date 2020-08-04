@@ -16,40 +16,21 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BranchStatusComponent {
+  editing = false;
+
   BranchStatus = BranchStatus;
-  editing = new BehaviorSubject<boolean>(false);
-  editing$ = this.editing.asObservable();
   statusNames: BranchStatus[] = [
     BranchStatus.Development,
     BranchStatus.Review,
     BranchStatus.Accepted,
+    BranchStatus.OnHold,
   ];
-
-  mouseInHost = false;
 
   @Input() currentStatus: BranchStatus;
   @Output() readonly newStatus = new EventEmitter<BranchStatus>();
 
-  @HostListener('mouseenter')
-  onEnter(): void {
-    this.mouseInHost = true;
-    if (this.editing.value === false) {
-      setTimeout(() => {
-        if (this.mouseInHost) {
-          this.editing.next(true);
-        }
-      }, 350);
-    }
-  }
-
-  @HostListener('mouseleave')
-  onLeave(): void {
-    this.mouseInHost = false;
-    this.editing.next(false);
-  }
-
   changeStatus(status: BranchStatus): void {
-    this.editing.next(false);
+    this.editing = false;
     this.newStatus.emit(status);
   }
 }

@@ -4,10 +4,24 @@
   height: 22px;
 }
 
+.editing-container {
+  display: flex;
+}
+
+button {
+  background: none;
+  color: hsl(0, 11%, 55%);
+  margin-left: 0.25rem;
+  padding: 0.25rem 0.5rem;
+}
+
 span {
+  user-select: none;
+  max-width: 18ch;
   display: block;
 }
 
 select {
+  max-width: 20ch;
   font-family: 'Open Sans';
 }
