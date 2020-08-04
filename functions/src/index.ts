@@ -13,6 +13,7 @@ import { BrakemanOutput, handleBrakemanOutput } from './brakeman';
 import { handleBranchDeployment, BranchDeployment } from './branch-deployment';
 import { DeploymentEnvironment } from './deployment-environment';
 import { getBranchRef } from './util/branchRef';
+import { BranchInfo } from './branchInfo';
 
 admin.initializeApp();
 
@@ -99,6 +100,8 @@ export const watchEnvironments = functions.firestore
       return Promise.resolve();
     }
 
+    // If the branches are different, find the old branch
+    // and remove its environment property
     if (oldBranch !== newBranch) {
       console.log('Environment has been updated with a new branch');
       const branchRef = getBranchRef({
@@ -108,7 +111,12 @@ export const watchEnvironments = functions.firestore
       });
 
       try {
-        await branchRef.set({ environment: undefined });
+        const branch = await branchRef.get();
+        if (branch.exists) {
+          const { environment, ...branchData } = branch.data() as BranchInfo;
+
+          await branchRef.set(branchData);
+        }
       } catch (e) {
         console.error('Tried to update branch', { error: e });
         return Promise.resolve();
