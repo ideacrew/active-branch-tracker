@@ -4,7 +4,7 @@ import * as functions from 'firebase-functions';
 import { BranchInfo } from './branchInfo';
 
 export async function staleBranches(
-  context: functions.EventContext
+  context: functions.EventContext,
 ): Promise<void> {
   // can only use forEach to loop
   const oldBranches = await getStaleBranchesFromDB();
@@ -35,7 +35,7 @@ export async function getStaleBranchesFromDB(): Promise<BranchInfo[]> {
   const oldBranches: BranchInfo[] = [];
 
   allBranches.forEach(async branch =>
-    oldBranches.push(branch.data() as BranchInfo)
+    oldBranches.push(branch.data() as BranchInfo),
   );
 
   return oldBranches;
@@ -45,7 +45,7 @@ function generateBranchList(list: string, branch: BranchInfo): string {
   return (
     list +
     `<div>${branch.branchName} last updated ${new Date(
-      branch.timestamp
+      branch.timestamp,
     ).toLocaleDateString()} by ${branch.head_commit?.author.name}</div>`
   );
 }

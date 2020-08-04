@@ -8,6 +8,7 @@ import {
 import { CheckSuiteConclusion, ReleaseDateInfo, BranchStatus } from '@idc/util';
 
 import { BranchesEntity } from '@idc/branches/data-access';
+import { DisplayType } from '@idc/display-config';
 
 @Component({
   selector: 'idc-branch-container',
@@ -17,6 +18,7 @@ import { BranchesEntity } from '@idc/branches/data-access';
 })
 export class BranchContainerComponent {
   CheckSuiteConclusion = CheckSuiteConclusion;
+  DisplayType = DisplayType;
 
   @Input() branch: BranchesEntity;
   @Input() viewType: 'expanded' | 'collapsed' = 'expanded';

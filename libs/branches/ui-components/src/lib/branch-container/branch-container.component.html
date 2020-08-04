@@ -1,13 +1,15 @@
 <div
   class="branch"
   [ngClass]="{
-    viewType: viewType ? viewType : 'expanded',
+    expanded: viewType === DisplayType.Expanded,
+    collapsed: viewType === DisplayType.Collapsed,
     tracked: branch.tracked,
     'has-pr': branch.pullRequestNumber,
     'is-old': branch | isOld,
-    deployed: branch.environment
+    deployed: branch.environment,
+    success: branch.checkSuiteStatus === CheckSuiteConclusion.Success,
+    failure: branch.checkSuiteStatus === CheckSuiteConclusion.Failure
   }"
-  [ngClass]="branch.checkSuiteStatus"
 >
   <!-- Container Heading -->
   <div class="container-heading">
