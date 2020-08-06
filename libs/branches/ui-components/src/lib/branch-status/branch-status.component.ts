@@ -4,10 +4,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  HostListener,
 } from '@angular/core';
 import { BranchStatus } from '@idc/util';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'idc-branch-status',
