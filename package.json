@@ -56,6 +56,8 @@
     "@angular/cli": "~10.0.5",
     "@angular/compiler-cli": "^10.0.8",
     "@angular/language-service": "^10.0.8",
+    "@ngrx/schematics": "9.2.0",
+    "@ngrx/store-devtools": "9.2.0",
     "@nrwl/cypress": "10.0.8",
     "@nrwl/jest": "10.0.8",
     "@nrwl/workspace": "10.0.8",
@@ -74,12 +76,10 @@
     "jest": "25.2.3",
     "jest-preset-angular": "8.1.2",
     "prettier": "^2.0.5",
-    "rxjs-tslint-rules": "^4.33.3",
+    "rxjs-tslint-rules": "^4.34.0",
     "ts-jest": "25.2.1",
     "ts-node": "~7.0.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.9.7",
-    "@ngrx/schematics": "9.2.0",
-    "@ngrx/store-devtools": "9.2.0"
+    "typescript": "~3.9.7"
   }
 }
