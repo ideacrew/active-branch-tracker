@@ -6,6 +6,24 @@ import {
   branchesAdapter,
 } from './branches.reducer';
 
+import * as fromRouter from '@ngrx/router-store';
+import { BranchesEntity } from './branches.models';
+import { searchBranches } from './util/searchBranches';
+
+interface RouterState {
+  router: fromRouter.RouterReducerState;
+}
+
+const selectRouter = createFeatureSelector<
+  RouterState & BranchesPartialState,
+  fromRouter.RouterReducerState
+>('router');
+
+const { selectRouteParam } = fromRouter.getSelectors(selectRouter);
+
+const getOrgName = selectRouteParam('orgName');
+const getRepoName = selectRouteParam('repoName');
+
 // Lookup the 'Branches' feature state managed by NgRx
 export const getBranchesState = createFeatureSelector<
   BranchesPartialState,
@@ -44,12 +62,26 @@ export const getSelected = createSelector(
   (entities, selectedId) => selectedId && entities[selectedId],
 );
 
-export const getDefaultBranches = createSelector(getAllBranches, branches =>
-  branches?.filter(branchInfo => branchInfo.defaultBranch),
+export const getBranchQuery = createSelector(
+  getBranchesState,
+  (state: State) => state?.query,
 );
 
-export const getFeatureBranches = createSelector(getAllBranches, branches =>
-  branches?.filter(branchInfo => branchInfo.defaultBranch === false),
+export const getFilteredBranches = createSelector(
+  getBranchQuery,
+  getAllBranches,
+  (rawQuery, branches) => searchBranches({ branches, rawQuery }),
+);
+
+export const getDefaultBranches = createSelector(
+  getFilteredBranches,
+  branches => branches?.filter(branchInfo => branchInfo.defaultBranch),
+);
+
+export const getFeatureBranches = createSelector(
+  getFilteredBranches,
+  branches =>
+    branches?.filter(branchInfo => branchInfo.defaultBranch === false),
 );
 
 export const getDeployedBranches = createSelector(
@@ -68,4 +100,18 @@ export const getUntrackedBranches = createSelector(
     branches?.filter(
       branchInfo => branchInfo.tracked === false && !branchInfo.environment,
     ),
+);
+
+export const branchesByOrganization = createSelector(
+  getOrgName,
+  getAllBranches,
+  (orgName: string, branches: BranchesEntity[]): BranchesEntity[] =>
+    branches.filter(branch => branch.organizationName === orgName),
+);
+
+export const branchesByRepository = createSelector(
+  getRepoName,
+  getAllBranches,
+  (repoName: string, branches: BranchesEntity[]): BranchesEntity[] =>
+    branches.filter(branch => branch.repositoryName === repoName),
 );

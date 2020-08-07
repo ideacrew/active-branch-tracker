@@ -26,6 +26,11 @@ pre {
   align-items: center;
 }
 
+.branch-container-heading.with-search {
+  display: flex;
+  justify-content: space-between;
+}
+
 .branch-type-heading {
   color: hsl(120, 13%, 48%);
 }
@@ -48,4 +53,28 @@ pre {
 .expand,
 .collapse {
   fill: var(--icon-fill);
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+
+  svg {
+    fill: hsla(120, 12%, 69%, 0.5);
+  }
+}
+
+.search-input {
+  margin-left: 0.5rem;
+  height: 2rem;
+  background-color: transparent;
+  border: 2px solid hsl(120, 13%, 48%);
+  border-radius: 4px;
+  background-color: hsla(120, 12%, 69%, 0.5);
+  padding: 0 0.25rem;
+  // box-shadow: 0 0 0 3px hsla(59, 93%, 45%, 0.8);
+
+  &:focus {
+    background-color: hsl(120, 12%, 69%);
+  }
 }

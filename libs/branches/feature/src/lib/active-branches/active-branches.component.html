@@ -1,6 +1,12 @@
 <!-- DEFAULT BRANCHES -->
-<div class="branch-container-heading">
+<div class="branch-container-heading with-search">
   <h2 class="branch-type-heading">Default Branches</h2>
+  <div class="search-container">
+    <svg height="1.5rem" width="1.5rem" class="svg-icon expand">
+      <use href="assets/icons.svg#search"></use>
+    </svg>
+    <input class="search-input" type="text" [formControl]="searchQuery" />
+  </div>
 </div>
 <div class="branches-list">
   <idc-branch-container

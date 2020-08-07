@@ -25,6 +25,10 @@ export class BranchesFacade {
     select(BranchesSelectors.getUntrackedBranches),
   );
 
+  filteredBranches$ = this.store.pipe(
+    select(BranchesSelectors.getFilteredBranches),
+  );
+
   constructor(private store: Store<fromBranches.BranchesPartialState>) {
     this.dispatch(loadBranches());
   }

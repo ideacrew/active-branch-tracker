@@ -1,5 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs';
+import { map, debounceTime, tap, distinctUntilChanged } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 
 import { BranchInfo, CheckSuiteConclusion } from '@idc/util';
 import {
@@ -8,7 +10,6 @@ import {
   BranchesActions,
 } from '@idc/branches/data-access';
 import { DisplayType, DisplayConfigFacade } from '@idc/display-config';
-import { map } from 'rxjs/operators';
 
 interface BranchVM {
   branches: BranchesEntity[];
@@ -21,9 +22,10 @@ interface BranchVM {
   styleUrls: ['./active-branches.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActiveBranchesComponent {
+export class ActiveBranchesComponent implements OnInit {
   CheckSuiteConclusion = CheckSuiteConclusion;
   DisplayType = DisplayType;
+  searchQuery = new FormControl('');
 
   deployedBranchesVM$ = combineLatest([
     this.branchesFacade.deployedBranches$,
@@ -45,6 +47,20 @@ export class ActiveBranchesComponent {
     public configFacade: DisplayConfigFacade,
   ) {}
 
+  ngOnInit(): void {
+    this.searchQuery.valueChanges
+      .pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        tap(query =>
+          this.branchesFacade.dispatch(
+            BranchesActions.queryBranches({ query }),
+          ),
+        ),
+      )
+      .subscribe();
+  }
+
   trackByBranchName(index: number, branch: BranchInfo): string {
     return `${branch.organizationName}${branch.repositoryName}${branch.branchName}`;
   }
@@ -58,8 +74,6 @@ export class ActiveBranchesComponent {
   }
 
   setBranchStatus({ branchId, status }): void {
-    console.log('Setting branch status to', branchId, status);
-
     this.branchesFacade.dispatch(
       BranchesActions.setBranchStatus({ branchId, status }),
     );

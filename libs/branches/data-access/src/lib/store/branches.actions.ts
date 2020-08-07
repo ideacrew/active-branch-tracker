@@ -42,3 +42,8 @@ export const setBranchStatus = createAction(
 export const setBranchStatusSuccess = createAction(
   '[Branches] Set Branch Status Success',
 );
+
+export const queryBranches = createAction(
+  '[Branches] Query Branches',
+  props<{ query: string }>(),
+);

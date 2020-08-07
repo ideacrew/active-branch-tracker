@@ -10,6 +10,7 @@ export interface State extends EntityState<BranchesEntity> {
   selectedId?: string | number; // which Branches record has been selected
   loaded: boolean; // has the Branches list been loaded
   error?: string | null; // last known error (if any)
+  query?: string;
 }
 
 export interface BranchesPartialState {
@@ -40,6 +41,10 @@ const branchesReducer = createReducer(
   on(BranchesActions.loadBranchesFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(BranchesActions.queryBranches, (state, { query }) => ({
+    ...state,
+    query,
   })),
 );
 
