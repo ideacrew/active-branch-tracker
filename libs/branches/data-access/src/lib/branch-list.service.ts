@@ -7,18 +7,13 @@ import {
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import {
-  BranchInfo,
-  CheckSuiteConclusion,
-  ReleaseDateInfo,
-  BranchStatus,
-} from '@idc/util';
+import { BranchInfo, CheckSuiteConclusion, BranchStatus } from '@idc/util';
 import { BranchesEntity } from './store/branches.models';
 
 @Injectable()
 export class BranchListService {
   branchInfo$: Observable<BranchInfo[]>;
-  scream: HTMLAudioElement = new Audio('/assets/HarshaYellr.wav');
+  scream: HTMLAudioElement = new Audio('/assets/Anderson.wav');
 
   constructor(private afs: AngularFirestore) {}
 
@@ -46,6 +41,7 @@ export class BranchListService {
 
           if (newFailure === true) {
             try {
+              console.log('Playing sound');
               await this.playSound();
             } catch (e) {
               console.error('Could not play sound');
