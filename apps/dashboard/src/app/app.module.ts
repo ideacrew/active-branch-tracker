@@ -7,6 +7,10 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
+import {
+  AngularFirestoreModule,
+  SETTINGS as FIRESTORE_SETTINGS,
+} from '@angular/fire/firestore';
 
 import { DisplayConfigModule } from '@idc/display-config';
 
@@ -68,7 +72,17 @@ import { RootEffects } from './store/root.effects';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
     DisplayConfigModule,
+    AngularFirestoreModule,
   ],
   bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: FIRESTORE_SETTINGS,
+      useFactory: () =>
+        environment.shouldUseEmulator()
+          ? { host: 'localhost:8080', ssl: false }
+          : {},
+    },
+  ],
 })
 export class AppModule {}

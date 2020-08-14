@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -12,7 +11,6 @@ import { BranchesFacade } from './store/branches.facade';
 @NgModule({
   imports: [
     CommonModule,
-    AngularFirestoreModule,
     StoreModule.forFeature(
       fromBranches.BRANCHES_FEATURE_KEY,
       fromBranches.reducer,

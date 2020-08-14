@@ -46,6 +46,9 @@
     },
     "environments-feature": {
       "tags": []
+    },
+    "testing": {
+      "tags": []
     }
   },
   "affected": {

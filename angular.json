@@ -61,6 +61,14 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "apps/dashboard/ngsw-config.json"
+            },
+            "emulator": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/dashboard/src/environments/environment.ts",
+                  "with": "apps/dashboard/src/environments/environment.emulator.ts"
+                }
+              ]
             }
           }
         },
@@ -72,6 +80,9 @@
           "configurations": {
             "production": {
               "browserTarget": "dashboard:build:production"
+            },
+            "emulator": {
+              "browserTarget": "dashboard:build:emulator"
             }
           }
         },
@@ -119,6 +130,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "dashboard:serve:production"
+            },
+            "emulator": {
+              "devServerTarget": "dashboard:serve:emulator"
             }
           }
         },
@@ -350,6 +364,38 @@
           "style": "scss"
         }
       }
+    },
+    "testing": {
+      "projectType": "library",
+      "root": "libs/testing",
+      "sourceRoot": "libs/testing/src",
+      "prefix": "idc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/testing/tsconfig.lib.json",
+              "libs/testing/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/testing/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/testing/jest.config.js",
+            "tsConfig": "libs/testing/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/testing/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
@@ -362,7 +408,8 @@
       "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "strict": true
     }
   },
   "defaultProject": "dashboard"
