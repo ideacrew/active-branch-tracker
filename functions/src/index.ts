@@ -63,6 +63,7 @@ export const staleBranchOnDemand = functions.https.onRequest(
 
 export const branchDeployment = functions.https.onRequest(
   async (request, response) => {
+    // Needs to be parsed because of how it's being sent
     const deployment: BranchDeployment = JSON.parse(request.body.payload);
 
     await handleBranchDeployment(deployment);

@@ -89,7 +89,7 @@ jobs:
       - name: Run end to end tests
         run: npm run e2e
   build:
-    name: Build
+    name: build and deploy
     needs: [lint, test, e2e]
     runs-on: ubuntu-latest
     steps:
