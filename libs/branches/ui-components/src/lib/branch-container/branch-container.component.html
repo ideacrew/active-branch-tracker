@@ -122,14 +122,19 @@
     </div>
 
     <div class="right-column">
-      <span
+      <a
         *ngIf="branch.checkSuiteRuns > 0"
-        attr.title="Failures: {{ branch.checkSuiteFailures }} / Runs: {{
-          branch.checkSuiteRuns
-        }}"
+        href="{{ branch | actionsLink }}"
         class="failure-percentage"
-        >{{ branch | failurePercent }}</span
+        target="__blank"
       >
+        <span
+          attr.title="Failures: {{ branch.checkSuiteFailures }} / Runs: {{
+            branch.checkSuiteRuns
+          }}"
+          >{{ branch | failurePercent }}</span
+        >
+      </a>
     </div>
   </div>
 </div>

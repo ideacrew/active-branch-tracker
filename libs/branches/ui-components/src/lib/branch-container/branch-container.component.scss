@@ -64,12 +64,20 @@
   }
 
   &.deployed {
+    .environment {
+      display: block;
+    }
+
     .container-heading {
       svg {
         display: none;
       }
     }
   }
+}
+
+.environment {
+  display: none;
 }
 
 .has-pr {
@@ -221,8 +229,12 @@ a {
   }
 }
 
-.branch .failure-percentage {
+.failure-percentage {
   color: hsl(120, 9%, 42%);
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .branch.failure .failure-percentage {

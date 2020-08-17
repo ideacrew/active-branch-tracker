@@ -19,3 +19,9 @@ export function getFailurePercentage(branch: BranchInfo): number {
     ((checkSuiteRuns - checkSuiteFailures) / checkSuiteRuns) * 100,
   );
 }
+
+export function getActionsLink(branch: BranchInfo): string {
+  const { repositoryName, organizationName, branchName } = branch;
+
+  return `https://github.com/${organizationName}/${repositoryName}/actions?query=branch%3A${branchName}`;
+}
