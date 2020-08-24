@@ -1,7 +1,37 @@
-<div class="environment" *ngFor="let environment of environmentsFacade.allEnvironments$ | async">
-  <h2>{{ environment.name }}</h2>
-  <pre
-    >{{ environment | json }}
-</pre
+<h2 class="org-name">DCHBX</h2>
+<div class="environment-list">
+  <div
+    class="environment"
+    *ngFor="let environment of environmentsFacade.dchbxEnvironments$ | async"
   >
+    <h3 class="environment-name">
+      {{ environment.name }} ({{ environment.owner }})
+    </h3>
+    <div>
+      <span class="branch-name"
+        >{{ environment.latestDeployment.branch }}</span
+      >
+    </div>
+  </div>
+</div>
+
+<h2 class="org-name">Mass</h2>
+<div class="environment-list">
+  <div
+    class="environment"
+    *ngFor="let environment of environmentsFacade.maEnvironments$ | async"
+  >
+    <h3 class="environment-name">
+      {{ environment.name }} ({{ environment.owner }})
+    </h3>
+    <div>
+      <span class="branch-name"
+        >{{ environment.latestDeployment.branch }}</span
+      >
+    </div>
+    <!-- <pre
+      >{{ environment | json }}
+  </pre
+    > -->
+  </div>
 </div>

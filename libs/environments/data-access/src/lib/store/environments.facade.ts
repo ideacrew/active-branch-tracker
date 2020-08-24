@@ -17,6 +17,13 @@ export class EnvironmentsFacade {
     select(EnvironmentsSelectors.getSelected),
   );
 
+  dchbxEnvironments$ = this.store.pipe(
+    select(EnvironmentsSelectors.dchbxEnvironments),
+  );
+  maEnvironments$ = this.store.pipe(
+    select(EnvironmentsSelectors.maEnvironments),
+  );
+
   constructor(private store: Store<fromEnvironments.EnvironmentsPartialState>) {
     this.dispatch(loadEnvironments());
   }

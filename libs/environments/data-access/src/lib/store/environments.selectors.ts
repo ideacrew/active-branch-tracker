@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import {
   ENVIRONMENTS_FEATURE_KEY,
   State,
@@ -43,4 +44,18 @@ export const getSelected = createSelector(
   getEnvironmentsEntities,
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId],
+);
+
+export const dchbxEnvironments = createSelector(
+  getAllEnvironments,
+  environments =>
+    environments?.filter(
+      environment => environment.latestDeployment.org === 'dchbx',
+    ),
+);
+
+export const maEnvironments = createSelector(getAllEnvironments, environments =>
+  environments?.filter(
+    environment => environment.latestDeployment.org === 'health-connector',
+  ),
 );
