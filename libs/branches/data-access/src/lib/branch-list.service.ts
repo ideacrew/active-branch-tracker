@@ -13,7 +13,7 @@ import { BranchesEntity } from './store/branches.models';
 @Injectable()
 export class BranchListService {
   branchInfo$: Observable<BranchInfo[]>;
-  scream: HTMLAudioElement = new Audio('/assets/Anderson.wav');
+  scream: HTMLAudioElement = new Audio('/assets/trombone.mp3');
 
   constructor(private afs: AngularFirestore) {}
 
