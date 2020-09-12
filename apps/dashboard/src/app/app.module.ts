@@ -13,6 +13,7 @@ import {
 } from '@angular/fire/firestore';
 
 import { DisplayConfigModule } from '@idc/display-config';
+import { AuthModule, LoginComponent } from '@idc/auth';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -36,20 +37,27 @@ import { RootEffects } from './store/root.effects';
       enabled: environment.production,
     }),
     RouterModule.forRoot([
-    { path: '', redirectTo: 'branches', pathMatch: 'full' },
-    {
+      { path: '', redirectTo: 'branches', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
+      {
         path: 'branches',
-        loadChildren: () => import('@idc/branches/feature').then(m => m.BranchesFeatureModule),
-    },
-    {
+        loadChildren: () =>
+          import('@idc/branches/feature').then(m => m.BranchesFeatureModule),
+      },
+
+      {
         path: 'branches/:branchId',
-        loadChildren: () => import('@idc/branches/feature').then(m => m.BranchDetailModule),
-    },
-    {
+        loadChildren: () =>
+          import('@idc/branches/feature').then(m => m.BranchDetailModule),
+      },
+      {
         path: 'environments',
-        loadChildren: () => import('@idc/environments/feature').then(module => module.EnvironmentsFeatureModule),
-    },
-], { relativeLinkResolution: 'legacy' }),
+        loadChildren: () =>
+          import('@idc/environments/feature').then(
+            module => module.EnvironmentsFeatureModule,
+          ),
+      },
+    ]),
     StoreModule.forRoot(
       {
         router: routerReducer,
@@ -67,6 +75,7 @@ import { RootEffects } from './store/root.effects';
     StoreRouterConnectingModule.forRoot(),
     DisplayConfigModule,
     AngularFirestoreModule,
+    AuthModule,
   ],
   bootstrap: [AppComponent],
   providers: [

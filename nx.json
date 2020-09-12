@@ -49,6 +49,9 @@
     },
     "testing": {
       "tags": []
+    },
+    "auth": {
+      "tags": []
     }
   },
   "affected": {

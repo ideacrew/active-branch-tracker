@@ -59,3 +59,20 @@ export const maEnvironments = createSelector(getAllEnvironments, environments =>
     environment => environment.latestDeployment.org === 'health-connector',
   ),
 );
+
+export const orgs = createSelector(getAllEnvironments, environments => {
+  const uniqueOrgs = [
+    ...new Set(environments.map(env => env.latestDeployment.org)),
+  ];
+
+  const orgsWithEnvironment = uniqueOrgs.map(orgName => {
+    return {
+      name: orgName,
+      environments: environments.filter(
+        env => env.latestDeployment.org === orgName,
+      ),
+    };
+  });
+
+  return orgsWithEnvironment;
+});
