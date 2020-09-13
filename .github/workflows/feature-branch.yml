@@ -90,8 +90,7 @@ jobs:
       - name: Run end to end tests
         run: npm run e2e
   build:
-    name: build and deploy
-    needs: [lint, test, e2e]
+    name: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -113,11 +112,3 @@ jobs:
         run: npm ci
       - name: Build Application
         run: npm run build
-      - name: Deploy
-        run: npx firebase hosting:channel:deploy $GITHUB_REF_NAME_SLUG --token ${{ secrets.FIREBASE_TOKEN }}
-      - name: print log
-        uses: actions/upload-artifact@v1
-        if: failure()
-        with:
-          name: firebase-log
-          path: /home/runner/.npm/_logs
