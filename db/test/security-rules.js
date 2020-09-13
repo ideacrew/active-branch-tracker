@@ -1,4 +1,4 @@
-const firebase = require('@firebase/testing');
+const firebase = require('@firebase/rules-unit-testing');
 const projectId = 'active-branches-report';
 const port = require('../../firebase.json').emulators.firestore.port || 8080;
 const coverageUrl = `http://localhost:${port}/emulator/v1/projects/${projectId}:ruleCoverage.html`;
