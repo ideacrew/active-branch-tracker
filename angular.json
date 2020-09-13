@@ -327,10 +327,8 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/environments/data-access/jest.config.js",
-            "passWithNoTests": true,
-            "setupFile": "libs/environments/data-access/src/test-setup.ts"
-          },
-          "outputs": ["coverage/libs/environments/data-access"]
+            "passWithNoTests": true
+          }
         }
       },
       "schematics": {
@@ -359,10 +357,8 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/environments/feature/jest.config.js",
-            "passWithNoTests": true,
-            "setupFile": "libs/environments/feature/src/test-setup.ts"
-          },
-          "outputs": ["coverage/libs/environments/feature"]
+            "passWithNoTests": true
+          }
         }
       },
       "schematics": {
@@ -391,10 +387,8 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/testing/jest.config.js",
-            "passWithNoTests": true,
-            "setupFile": "libs/testing/src/test-setup.ts"
-          },
-          "outputs": ["coverage/libs/testing"]
+            "passWithNoTests": true
+          }
         }
       },
       "schematics": {
@@ -435,9 +429,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/auth/jest.config.js",
-            "tsConfig": "libs/auth/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/auth/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
