@@ -1,10 +1,10 @@
-name: test and deploy
+name: feature branch
 
 on:
   push:
     branches:
       - '*'
-      - !master
+      - '!master'
 
 jobs:
   lint:
