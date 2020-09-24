@@ -9,11 +9,12 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(public afAuth: AngularFireAuth) {}
 
-  login(): void {
-    this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+  async login(): Promise<void> {
+    await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
   }
-  logout(): void {
-    this.afAuth.signOut();
+
+  async logout(): Promise<void> {
+    await this.afAuth.signOut();
   }
 
   get user$(): Observable<User | null> {

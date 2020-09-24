@@ -1,5 +1,5 @@
 const faker = require('faker/locale/en_US');
-const firebase = require('@firebase/testing');
+const firebase = require('@firebase/rules-unit-testing');
 const { randomRepo } = require('./util');
 const { orgs, repos } = require('./branches');
 

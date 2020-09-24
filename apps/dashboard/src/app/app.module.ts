@@ -13,7 +13,7 @@ import {
 } from '@angular/fire/firestore';
 
 import { DisplayConfigModule } from '@idc/display-config';
-import { AuthModule, LoginComponent } from '@idc/auth';
+import { AuthModule, LoginComponent, UserComponent } from '@idc/auth';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -39,6 +39,7 @@ import { RootEffects } from './store/root.effects';
     RouterModule.forRoot([
       { path: '', redirectTo: 'branches', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
+      { path: 'user', component: UserComponent },
       {
         path: 'branches',
         loadChildren: () =>

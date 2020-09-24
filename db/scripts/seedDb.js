@@ -1,4 +1,4 @@
-const firebase = require('@firebase/testing');
+const firebase = require('@firebase/rules-unit-testing');
 const { seedBranches } = require('./branches');
 const { seedEnvironments } = require('./environments');
 const projectId = 'active-branches-report';
