@@ -25,9 +25,9 @@ export interface BranchInfo {
     tree_id?: string;
     message?: string;
   };
-  head_sha: string;
+  head_sha?: string;
   created_at?: string;
-  updated_at: string;
+  updated_at?: string;
   checkSuiteStatus?: CheckConclusion;
   createdBy?: string;
   releaseDate?: number;

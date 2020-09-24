@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth, User } from 'firebase/app';
 import { Observable } from 'rxjs';
@@ -7,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(public afAuth: AngularFireAuth) {}
+  constructor(public afAuth: AngularFireAuth, private router: Router) {}
 
   async login(): Promise<void> {
     await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
@@ -15,6 +16,7 @@ export class AuthService {
 
   async logout(): Promise<void> {
     await this.afAuth.signOut();
+    this.router.navigate(['/login']);
   }
 
   get user$(): Observable<User | null> {

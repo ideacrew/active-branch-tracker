@@ -6,7 +6,7 @@
     "ng": "nx",
     "nx": "nx",
     "start:live": "ng serve",
-    "start": "ng serve --configuration=emulator",
+    "start": "concurrently \"ng serve --configuration=emulator\" \"cd functions && npm run watch\"",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",

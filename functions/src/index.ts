@@ -124,3 +124,18 @@ export const watchEnvironments = functions.firestore
       }
     }
   });
+
+export const createUserRecord = functions.auth
+  .user()
+  .onCreate(async (user: admin.auth.UserRecord) => {
+    const { uid, email, displayName } = user;
+
+    const newUser = {
+      email,
+      displayName,
+    };
+
+    const newUserRef = admin.firestore().doc(`users/${uid}`);
+
+    await newUserRef.set(newUser);
+  });

@@ -54,7 +54,7 @@ jobs:
         run: npm run test
   build:
     name: build and deploy
-    needs: [lint, test, e2e]
+    needs: [lint, test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code

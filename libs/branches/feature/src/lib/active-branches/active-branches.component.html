@@ -79,6 +79,7 @@
       *ngFor="let branch of vm.branches; trackBy: trackByBranchName"
       [viewType]="vm.display"
       [branch]="branch"
+      [loggedIn]="loggedIn$ | async"
       (untrackBranch)="untrackBranch($event)"
       (changeStatus)="setBranchStatus($event)"
     ></idc-branch-container>

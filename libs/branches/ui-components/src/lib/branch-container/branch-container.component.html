@@ -14,7 +14,8 @@
   <!-- Container Heading -->
   <div class="container-heading">
     <div class="heading-left">
-      <ng-container *ngIf="!branch.defaultBranch && !branch.environment"
+      <ng-container
+        *ngIf="!branch.defaultBranch && !branch.environment && loggedIn"
         ><button
           *ngIf="branch.tracked === false; else untrack"
           class="light-bulb-button"

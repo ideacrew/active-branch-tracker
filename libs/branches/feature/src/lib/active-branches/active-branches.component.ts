@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map, debounceTime, tap, distinctUntilChanged } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 
@@ -10,11 +10,7 @@ import {
   BranchesActions,
 } from '@idc/branches/data-access';
 import { DisplayType, DisplayConfigFacade } from '@idc/display-config';
-
-interface BranchVM {
-  branches: BranchesEntity[];
-  display: DisplayType;
-}
+import { AuthService } from '@idc/auth';
 
 @Component({
   selector: 'idc-active-branches',
@@ -42,9 +38,12 @@ export class ActiveBranchesComponent implements OnInit {
     this.configFacade.untrackedBranchesDisplay$,
   ]).pipe(map(([branches, display]) => ({ branches, display })));
 
+  loggedIn$: Observable<boolean> = this.auth.user$.pipe(map(user => !!user));
+
   constructor(
     public branchesFacade: BranchesFacade,
     public configFacade: DisplayConfigFacade,
+    private auth: AuthService,
   ) {}
 
   ngOnInit(): void {
