@@ -4,8 +4,9 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { BranchesUiComponentsModule } from '@idc/branches/ui-components';
-import { ActiveBranchesComponent } from './active-branches/active-branches.component';
 import { BranchesDataAccessModule } from '@idc/branches/data-access';
+
+import { ActiveBranchesComponent } from './active-branches/active-branches.component';
 
 @NgModule({
   imports: [
