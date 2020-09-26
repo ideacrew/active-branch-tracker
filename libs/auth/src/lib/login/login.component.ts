@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AuthService } from '../auth.service';
+import { UserFacade } from '../store/user.facade';
+import * as UserActions from '../store/user.actions';
 
 @Component({
   selector: 'idc-login',
@@ -9,14 +9,14 @@ import { AuthService } from '../auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
-  constructor(public auth: AuthService) {}
+  constructor(public userFacade: UserFacade) {}
 
   ngOnInit(): void {}
 
   login(): void {
-    this.auth.login();
+    this.userFacade.dispatch(UserActions.login());
   }
   logout(): void {
-    this.auth.logout();
+    this.userFacade.dispatch(UserActions.logout());
   }
 }
