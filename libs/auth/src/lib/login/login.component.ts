@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { UserFacade } from '../store/user.facade';
-import * as UserActions from '../store/user.actions';
+import { AuthFacade } from '../store/auth.facade';
+import * as AuthActions from '../store/auth.actions';
 
 @Component({
   selector: 'idc-login',
@@ -9,14 +9,14 @@ import * as UserActions from '../store/user.actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
-  constructor(public userFacade: UserFacade) {}
+  constructor(public authFacade: AuthFacade) {}
 
   ngOnInit(): void {}
 
   login(): void {
-    this.userFacade.dispatch(UserActions.login());
+    this.authFacade.dispatch(AuthActions.login());
   }
   logout(): void {
-    this.userFacade.dispatch(UserActions.logout());
+    this.authFacade.dispatch(AuthActions.logout());
   }
 }

@@ -1,6 +1,0 @@
-<ng-container *ngIf="auth.user$ | async as user">
-  <h1>{{ user!.displayName }}</h1>
-  <h2>{{ user!.email }}</h2>
-
-  <button class="logout-button" (click)="auth.logout()">Sign Out</button>
-</ng-container>

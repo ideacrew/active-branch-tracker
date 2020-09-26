@@ -1,42 +1,45 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
-import { filter, map, switchMap } from 'rxjs/operators';
-import * as UserActions from './user.actions';
+import { catchError, filter, map, switchMap, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { of } from 'rxjs';
+
+import * as AuthActions from './auth.actions';
 import { AuthService } from '../auth.service';
-import { auth } from 'firebase';
 
 @Injectable()
-export class UserEffects {
+export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActions.login),
+      ofType(AuthActions.login),
       switchMap(() => this.authService.login()),
-      map((user: auth.UserCredential) => {
-        console.log({ user });
-        return UserActions.loginSuccess();
-      }),
+      tap(credential => console.log('User Credential', credential)),
+      map(() => AuthActions.loginSuccess()),
+      catchError((error: string) => of(AuthActions.loginFailure())),
     ),
   );
 
   logout$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActions.logout),
+      ofType(AuthActions.logout),
       switchMap(() => this.authService.logout()),
-      map(() => UserActions.logoutSuccess()),
+      map(() => AuthActions.logoutSuccess()),
     ),
   );
 
   authState$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UserActions.loginSuccess),
-      switchMap(() =>
-        this.authService.afAuth.user.pipe(
-          map(user =>
-            UserActions.loadUser({ userAuth: user as firebase.User }),
-          ),
-        ),
-      ),
+    this.authService.user$.pipe(
+      filter(user => !!user),
+      map(user => {
+        const firebaseUser = user as firebase.User;
+
+        return {
+          uid: firebaseUser.uid,
+          displayName: firebaseUser.displayName,
+          email: firebaseUser.email,
+        };
+      }),
+      map(userDetails => AuthActions.setCurrentUser({ userDetails })),
     ),
   );
 
@@ -70,5 +73,9 @@ export class UserEffects {
   //   ),
   // );
 
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private router: Router,
+    private authService: AuthService,
+  ) {}
 }

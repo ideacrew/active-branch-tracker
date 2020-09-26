@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 
 import { select, Store, Action } from '@ngrx/store';
 
-import * as fromUser from './user.reducer';
-import * as UserSelectors from './user.selectors';
+import * as fromUser from './auth.reducer';
+import * as AuthSelectors from './auth.selectors';
 
 @Injectable({ providedIn: 'root' })
-export class UserFacade {
-  auth$ = this.store.pipe(select(UserSelectors.getAuth));
-  user$ = this.store.pipe(select(UserSelectors.getUser));
+export class AuthFacade {
+  firebaseUID$ = this.store.pipe(select(AuthSelectors.getUID));
 
   constructor(private store: Store<fromUser.UserPartialState>) {}
 
