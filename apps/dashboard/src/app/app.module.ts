@@ -14,6 +14,7 @@ import {
 
 import { DisplayConfigModule } from '@idc/display-config';
 import { AuthModule, LoginComponent } from '@idc/auth';
+import { UserDataAccessModule } from '@idc/user/data-access';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -76,6 +77,7 @@ import { RootEffects } from './store/root.effects';
     DisplayConfigModule,
     AngularFirestoreModule,
     AuthModule,
+    UserDataAccessModule,
   ],
   bootstrap: [AppComponent],
   providers: [

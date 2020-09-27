@@ -4,25 +4,35 @@ import { fetch } from '@nrwl/angular';
 
 import * as fromUser from './user.reducer';
 import * as UserActions from './user.actions';
+import { setCurrentUser } from '@idc/auth';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { UserService } from '../user.service';
+import { of } from 'rxjs';
+import { UserEntity } from './user.models';
 
 @Injectable()
 export class UserEffects {
-  loadUser$ = createEffect(() =>
+  currentAuth$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActions.loadUser),
-      fetch({
-        run: action => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return UserActions.loadUserSuccess({ user: [] });
-        },
-
-        onError: (action, error) => {
-          console.error('Error', error);
-          return UserActions.loadUserFailure({ error });
-        },
-      }),
+      ofType(setCurrentUser),
+      map(({ userDetails }) => UserActions.loadUser({ uid: userDetails.uid })),
     ),
   );
 
-  constructor(private actions$: Actions) {}
+  loadUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.loadUser),
+      switchMap(({ uid }) =>
+        this.userService.getUserRef(uid).pipe(
+          map((user: UserEntity | undefined) => {
+            console.log({ user });
+            return UserActions.loadUserSuccess({ user });
+          }),
+          catchError(() => of(UserActions.loadUserFailure())),
+        ),
+      ),
+    ),
+  );
+
+  constructor(private actions$: Actions, private userService: UserService) {}
 }

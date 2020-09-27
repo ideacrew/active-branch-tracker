@@ -18,16 +18,3 @@ export const setCurrentUser = createAction(
     };
   }>(),
 );
-
-// export const loadUser = createAction(
-//   '[User] Load User from DB',
-//   props<{ userAuth: firebase.User }>(),
-// );
-// export const loadUserSuccess = createAction(
-//   '[User] Load User Success',
-//   props<{ user: UserEntity | undefined }>(),
-// );
-// export const loadUserFailure = createAction(
-//   '[User] Load User Failure',
-//   props<{ error: string }>(),
-// );
