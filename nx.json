@@ -58,6 +58,9 @@
     },
     "user-feature": {
       "tags": []
+    },
+    "google-analytics": {
+      "tags": []
     }
   },
   "affected": {
