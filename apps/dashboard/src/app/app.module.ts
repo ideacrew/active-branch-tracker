@@ -58,6 +58,11 @@ import { RootEffects } from './store/root.effects';
             module => module.EnvironmentsFeatureModule,
           ),
       },
+      {
+        path: 'user-feature',
+        loadChildren: () =>
+          import('@idc/user/feature').then(module => module.UserFeatureModule),
+      },
     ]),
     StoreModule.forRoot(
       {

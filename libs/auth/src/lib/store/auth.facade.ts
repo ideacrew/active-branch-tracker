@@ -8,6 +8,7 @@ import * as AuthSelectors from './auth.selectors';
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
   firebaseUID$ = this.store.pipe(select(AuthSelectors.getUID));
+  loggedIn$ = this.store.pipe(select(AuthSelectors.getLoggedIn));
 
   constructor(private store: Store<fromUser.UserPartialState>) {}
 

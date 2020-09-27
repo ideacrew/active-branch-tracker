@@ -55,6 +55,9 @@
     },
     "user-data-access": {
       "tags": []
+    },
+    "user-feature": {
+      "tags": []
     }
   },
   "affected": {

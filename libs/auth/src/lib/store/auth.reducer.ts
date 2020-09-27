@@ -6,8 +6,8 @@ export const AUTH_FEATURE_KEY = 'auth';
 
 export interface AuthState {
   uid: string | undefined;
-  displayName: string | null;
-  email: string | null;
+  displayName?: string | null;
+  email?: string | null;
   error: string | undefined;
 }
 
@@ -17,8 +17,6 @@ export interface UserPartialState {
 
 export const initialState: AuthState = {
   uid: undefined,
-  displayName: null,
-  email: null,
   error: undefined,
 };
 

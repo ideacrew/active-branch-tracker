@@ -29,7 +29,8 @@
       "@idc/environments/feature": ["libs/environments/feature/src/index.ts"],
       "@idc/testing": ["libs/testing/src/index.ts"],
       "@idc/auth": ["libs/auth/src/index.ts"],
-      "@idc/user/data-access": ["libs/user/data-access/src/index.ts"]
+      "@idc/user/data-access": ["libs/user/data-access/src/index.ts"],
+      "@idc/user/feature": ["libs/user/feature/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
