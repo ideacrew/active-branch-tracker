@@ -14,6 +14,7 @@ import { handleBranchDeployment, BranchDeployment } from './branch-deployment';
 import { DeploymentEnvironment } from './deployment-environment';
 import { getBranchRef } from './util/branchRef';
 import { BranchInfo } from './branchInfo';
+import { createNewUser } from './new-user/new-user';
 
 admin.initializeApp();
 
@@ -125,17 +126,4 @@ export const watchEnvironments = functions.firestore
     }
   });
 
-export const createUserRecord = functions.auth
-  .user()
-  .onCreate(async (user: admin.auth.UserRecord) => {
-    const { uid, email, displayName } = user;
-
-    const newUser = {
-      email,
-      displayName,
-    };
-
-    const newUserRef = admin.firestore().doc(`users/${uid}`);
-
-    await newUserRef.set(newUser);
-  });
+export const createUserRecord = functions.auth.user().onCreate(createNewUser);

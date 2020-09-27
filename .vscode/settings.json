@@ -1,11 +1,13 @@
 {
   "files.autoSave": "afterDelay",
   "cSpell.words": [
+    "Artboard",
     "Chainable",
     "RGHM",
     "Unprovisioned",
     "cyclomatic",
     "firestore",
+    "googleg",
     "octicon",
     "pubsub",
     "repos",

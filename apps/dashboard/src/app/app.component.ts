@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { AuthService } from '@idc/auth';
+import { UserFacade } from '@idc/user/data-access';
 
 import { ServiceWorkerUpdateService } from './service-worker-update.service';
 
@@ -11,11 +11,8 @@ import { ServiceWorkerUpdateService } from './service-worker-update.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  user$ = this.authService.user$;
-
-
   constructor(
     public swUpdate: ServiceWorkerUpdateService,
-    private authService: AuthService,
+    public userFacade: UserFacade,
   ) {}
 }

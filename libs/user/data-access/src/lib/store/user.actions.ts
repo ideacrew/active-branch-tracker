@@ -12,3 +12,5 @@ export const loadUserSuccess = createAction(
 );
 
 export const loadUserFailure = createAction('[User] Load User Failure');
+
+export const clearCurrentUser = createAction('[User] Clear Current User');

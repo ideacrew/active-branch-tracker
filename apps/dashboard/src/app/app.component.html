@@ -19,7 +19,7 @@
     <a
       routerLink="/user"
       class="avatar"
-      *ngIf="user$ | async as user; else notLoggedIn"
+      *ngIf="userFacade.user$ | async as user; else notLoggedIn"
     >
       <span>{{ user.displayName }}</span>
       <img

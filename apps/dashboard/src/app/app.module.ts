@@ -59,7 +59,7 @@ import { RootEffects } from './store/root.effects';
           ),
       },
       {
-        path: 'user-feature',
+        path: 'user',
         loadChildren: () =>
           import('@idc/user/feature').then(module => module.UserFeatureModule),
       },

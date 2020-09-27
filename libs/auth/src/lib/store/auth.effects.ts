@@ -13,10 +13,19 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.login),
       switchMap(() => this.authService.login()),
-      tap(credential => console.log('User Credential', credential)),
+      // tap(credential => console.log('User Credential', credential)),
       map(() => AuthActions.loginSuccess()),
       catchError((error: string) => of(AuthActions.loginFailure())),
     ),
+  );
+
+  loginSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.loginSuccess),
+        tap(() => this.router.navigate(['/user'])),
+      ),
+    { dispatch: false },
   );
 
   logout$ = createEffect(() =>
@@ -25,6 +34,17 @@ export class AuthEffects {
       switchMap(() => this.authService.logout()),
       map(() => AuthActions.logoutSuccess()),
     ),
+  );
+
+  logoutSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.logoutSuccess),
+        tap(() => this.router.navigate(['/login'])),
+      ),
+    {
+      dispatch: false,
+    },
   );
 
   authState$ = createEffect(() =>
@@ -42,36 +62,6 @@ export class AuthEffects {
       map(userDetails => AuthActions.setCurrentUser({ userDetails })),
     ),
   );
-
-  // loadUser$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(UserActions.loginSuccess),
-  //     switchMap(() =>
-  //       this.authService.user$.pipe(
-  //         filter<firebase.User | null>(user => user !== null),
-  //         map(user => {
-  //           const forSureUser = user as firebase.User;
-  //           return UserActions.loadUser({ userAuth: forSureUser });
-  //         }),
-  //       ),
-  //     ),
-  //   ),
-  // );
-
-  // loadUserEntity$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(UserActions.loadUser),
-  //     switchMap(({ userAuth }) =>
-  //       this.authService
-  //         .getUserRef(userAuth)
-  //         .pipe(
-  //           map(userEntity =>
-  //             UserActions.loadUserSuccess({ user: userEntity }),
-  //           ),
-  //         ),
-  //     ),
-  //   ),
-  // );
 
   constructor(
     private actions$: Actions,

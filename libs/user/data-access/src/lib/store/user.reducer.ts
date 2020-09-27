@@ -1,5 +1,4 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as UserActions from './user.actions';
 import { UserEntity } from './user.models';
@@ -7,7 +6,7 @@ import { UserEntity } from './user.models';
 export const USER_FEATURE_KEY = 'user';
 
 export interface UserState {
-  user: UserEntity | undefined;
+  firestoreUser: UserEntity | undefined;
   loaded: boolean; // has the User list been loaded
   error?: string | null; // last known error (if any)
 }
@@ -17,14 +16,19 @@ export interface UserPartialState {
 }
 
 export const initialState: UserState = {
-  user: undefined,
+  firestoreUser: undefined,
   loaded: false,
 };
 
 const userReducer = createReducer(
   initialState,
   on(UserActions.loadUser, state => ({ ...state, loaded: false, error: null })),
-  on(UserActions.loadUserSuccess, (state, { user }) => ({ ...state, user })),
+  on(UserActions.loadUserSuccess, (state, { user }) => ({
+    ...state,
+    firestoreUser: user,
+    loaded: true,
+  })),
+  on(UserActions.clearCurrentUser, state => initialState),
   // on(UserActions.loadUserFailure, (state, { error }) => ({ ...state, error })),
 );
 

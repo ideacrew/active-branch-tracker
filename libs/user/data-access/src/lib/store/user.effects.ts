@@ -4,7 +4,7 @@ import { fetch } from '@nrwl/angular';
 
 import * as fromUser from './user.reducer';
 import * as UserActions from './user.actions';
-import { setCurrentUser } from '@idc/auth';
+import { logoutSuccess, setCurrentUser } from '@idc/auth';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { UserService } from '../user.service';
 import { of } from 'rxjs';
@@ -33,6 +33,11 @@ export class UserEffects {
       ),
     ),
   );
+
+  logoutUser$ = createEffect(() => this.actions$.pipe(
+    ofType(logoutSuccess),
+    map(() => UserActions.clearCurrentUser())
+  ));
 
   constructor(private actions$: Actions, private userService: UserService) {}
 }
