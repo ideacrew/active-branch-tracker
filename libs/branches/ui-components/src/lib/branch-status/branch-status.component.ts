@@ -25,7 +25,14 @@ export class BranchStatusComponent {
   ];
 
   @Input() currentStatus: BranchStatus;
+  @Input() loggedIn: boolean;
   @Output() readonly newStatus = new EventEmitter<BranchStatus>();
+
+  editStatus(): void {
+    if (this.loggedIn) {
+      this.editing = true;
+    }
+  }
 
   changeStatus(status: BranchStatus): void {
     this.editing = false;

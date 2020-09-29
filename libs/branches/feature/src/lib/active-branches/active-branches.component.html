@@ -42,6 +42,7 @@
   </div>
   <div class="branches-list">
     <idc-branch-container
+      [loggedIn]="loggedIn$ | async"
       *ngFor="let branch of vm.branches; trackBy: trackByBranchName"
       [viewType]="vm.display"
       [branch]="branch"

@@ -60,7 +60,7 @@
 
   &.is-old {
     outline: 0;
-    box-shadow: 0 0 0 3px hsla(59, 93%, 45%, 0.8);
+    border: 3px solid hsla(59, 93%, 45%, 0.8);
   }
 
   &.deployed {

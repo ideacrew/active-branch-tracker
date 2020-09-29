@@ -9,14 +9,13 @@ pre {
 
 .branches-list {
   display: flex;
+  gap: 0.75rem;
   align-items: stretch;
   flex-wrap: wrap;
-  margin-top: 1rem;
+  margin: 1rem 0;
+  content-visibility: auto;
 
-  > * {
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-  }
+
 }
 
 .branch-container-heading {

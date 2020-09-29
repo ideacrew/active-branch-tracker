@@ -47,6 +47,7 @@
           >
         </div>
         <idc-branch-status
+          [loggedIn]="loggedIn"
           *ngIf="!branch.defaultBranch"
           [currentStatus]="branch.status"
           (newStatus)="changeBranchStatus($event)"
