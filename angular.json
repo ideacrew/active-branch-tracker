@@ -407,7 +407,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/auth/tsconfig.lib.json",
-            "project": "libs/auth/ng-package.json"
+            "project": "libs/auth/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           },
           "configurations": {
             "production": {
@@ -449,7 +450,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/user/data-access/tsconfig.lib.json",
-            "project": "libs/user/data-access/ng-package.json"
+            "project": "libs/user/data-access/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           },
           "configurations": {
             "production": {
@@ -521,7 +523,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/google-analytics/tsconfig.lib.json",
-            "project": "libs/google-analytics/ng-package.json"
+            "project": "libs/google-analytics/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           },
           "configurations": {
             "production": {
