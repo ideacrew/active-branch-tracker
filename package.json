@@ -59,7 +59,7 @@
     "@angular/cli": "~10.1.4",
     "@angular/compiler-cli": "^10.1.4",
     "@angular/language-service": "^10.1.4",
-    "@firebase/rules-unit-testing": "^1.0.4",
+    "@firebase/rules-unit-testing": "^1.0.6",
     "@ngrx/schematics": "10.0.0",
     "@ngrx/store-devtools": "10.0.0",
     "@nrwl/cli": "10.3.0",
