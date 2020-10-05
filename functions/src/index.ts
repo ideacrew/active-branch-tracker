@@ -15,6 +15,7 @@ import { DeploymentEnvironment } from './deployment-environment';
 import { getBranchRef } from './util/branchRef';
 import { BranchInfo } from './branchInfo';
 import { createNewUser } from './new-user/new-user';
+import { enableAdminForUser } from './grant-admin';
 
 admin.initializeApp();
 
@@ -127,3 +128,5 @@ export const watchEnvironments = functions.firestore
   });
 
 export const createUserRecord = functions.auth.user().onCreate(createNewUser);
+
+export const grantAdmin = functions.https.onCall(enableAdminForUser);

@@ -7,6 +7,7 @@
 </button>
 
 <ng-template #loggedOut>
+  <h1>Log in to SonOfYellr</h1>
   <button class="google-button" (click)="login()">
     <svg width="46px" height="46px" viewBox="0 0 46 46">
       <defs>
@@ -148,4 +149,36 @@
       </g></svg
     ><span>Sign In with Google</span>
   </button>
+  <h2>Why do I need to log in?</h2>
+  <p>
+    This site is public. While nearly all of our work is open source, some is
+    not. Additionally, some features such as tracking branches and editing the
+    current state of work are not protected actions, meaning anyone can do them.
+  </p>
+  <p>
+    In order to protect ourselves from potential abuse, as well as getting us
+    set up for future, more-secure scenarios, we're adding in user
+    authentication.
+  </p>
+  <h2>What happens if I don't log in?</h2>
+  <p>
+    Users that are not logged in will lose the ability to manipulate data, e.g.
+    track and untrack branches, change work status, and update environment
+    information.
+  </p>
+  <p>
+    In a future version, users that are not authenticated may not be able to see
+    any IdeaCrew information. There will be plenty of notice when that happens.
+  </p>
+  <h2>What information of mine will be stored?</h2>
+  <p>
+    We will store your name and email address, but nothing beyond that. If you
+    have a profile image, that will display as well, but that comes directly
+    from the user metadata that Google provides. It will not be stored anywhere.
+  </p>
+  <p>
+    Additional application settings will be stored, but this will not include
+    any personal information. Think filtered views and which orgs and
+    repositories you see.
+  </p>
 </ng-template>

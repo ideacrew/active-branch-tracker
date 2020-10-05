@@ -1,11 +1,7 @@
 :host {
   --google-blue: #4285f4;
-  height: 100vh;
-  color: hsl(0, 0%, 90%);
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: block;
 }
 
 .auth-heading {
@@ -28,12 +24,25 @@ button {
 }
 
 .logout-button {
-  color: inherit;
   padding: 0.5rem 1rem;
   border: 1px solid currentColor;
-  margin: 1rem auto 0;
 }
 
 span {
+  color: #fff;
   margin-left: 0.25rem;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  margin-top: 1.5rem;
+}
+
+p {
+  max-width: 60ch;
+  margin: 0.5rem 0;
+  line-height: 1.25;
 }

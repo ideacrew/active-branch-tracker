@@ -1,5 +1,6 @@
 <ng-container *ngIf="userFacade.user$ | async as user">
   <h1>{{ user!.displayName }}</h1>
+  <h2>{{ user!.email }}</h2>
 
   <button class="logout-button" (click)="logout()">Sign Out</button>
 </ng-container>
