@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "nx",
     "nx": "nx",
+    "seed:db": "cross-env FIRESTORE_EMULATOR_HOST=localhost:8080 node db/scripts/seedDb",
     "start:live": "ng serve",
     "start": "concurrently \"ng serve --configuration=emulator\" \"cd functions && npm run watch\"",
     "test": "ng test",
@@ -71,6 +72,7 @@
     "@types/node": "~8.9.4",
     "codelyzer": "^6.0.1",
     "concurrently": "^5.3.0",
+    "cross-env": "^7.0.2",
     "cypress": "^5.1.0",
     "dotenv": "6.2.0",
     "eslint": "6.8.0",
