@@ -115,6 +115,7 @@
   <div class="branches-list">
     <idc-branch-container
       *ngFor="let branch of vm.branches; trackBy: trackByBranchName"
+      [loggedIn]="loggedIn$ | async"
       [viewType]="vm.display"
       [branch]="branch"
       (trackBranch)="trackBranch($event)"
