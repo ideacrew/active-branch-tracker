@@ -36,26 +36,20 @@ import { RootEffects } from './store/root.effects';
       enabled: environment.production,
     }),
     RouterModule.forRoot([
-      { path: '', redirectTo: 'branches', pathMatch: 'full' },
-      {
+    { path: '', redirectTo: 'branches', pathMatch: 'full' },
+    {
         path: 'branches',
-        loadChildren: () =>
-          import('@idc/branches/feature').then(m => m.BranchesFeatureModule),
-      },
-
-      {
+        loadChildren: () => import('@idc/branches/feature').then(m => m.BranchesFeatureModule),
+    },
+    {
         path: 'branches/:branchId',
-        loadChildren: () =>
-          import('@idc/branches/feature').then(m => m.BranchDetailModule),
-      },
-      {
+        loadChildren: () => import('@idc/branches/feature').then(m => m.BranchDetailModule),
+    },
+    {
         path: 'environments',
-        loadChildren: () =>
-          import('@idc/environments/feature').then(
-            module => module.EnvironmentsFeatureModule,
-          ),
-      },
-    ]),
+        loadChildren: () => import('@idc/environments/feature').then(module => module.EnvironmentsFeatureModule),
+    },
+], { relativeLinkResolution: 'legacy' }),
     StoreModule.forRoot(
       {
         router: routerReducer,
