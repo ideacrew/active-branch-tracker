@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { select, Store, Action } from '@ngrx/store';
-import { Observable, OperatorFunction, pipe, UnaryFunction } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { UserEntity } from './user.models';
 
 import * as fromUser from './user.reducer';

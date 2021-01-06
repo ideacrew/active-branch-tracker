@@ -24,20 +24,21 @@ export class UserEffects {
       ofType(UserActions.loadUser),
       switchMap(({ uid }) =>
         this.userService.getUserRef(uid).pipe(
-          map((user: UserEntity | undefined) => {
-            console.log({ user });
-            return UserActions.loadUserSuccess({ user });
-          }),
+          map((user: UserEntity | undefined) =>
+            UserActions.loadUserSuccess({ user }),
+          ),
           catchError(() => of(UserActions.loadUserFailure())),
         ),
       ),
     ),
   );
 
-  logoutUser$ = createEffect(() => this.actions$.pipe(
-    ofType(logoutSuccess),
-    map(() => UserActions.clearCurrentUser())
-  ));
+  logoutUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(logoutSuccess),
+      map(() => UserActions.clearCurrentUser()),
+    ),
+  );
 
   constructor(private actions$: Actions, private userService: UserService) {}
 }
