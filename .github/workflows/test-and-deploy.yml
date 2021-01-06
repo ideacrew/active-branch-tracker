@@ -12,18 +12,18 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Use Node.js v10
+      - name: Use Node.js v12
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: '12.x'
       - name: Cache node modules
         uses: actions/cache@v1
         id: npm-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node10x-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node12x-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node10x-
+            ${{ runner.os }}-node12x-
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
@@ -35,18 +35,18 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Use Node.js v10
+      - name: Use Node.js v12
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: '12.x'
       - name: Cache node modules
         uses: actions/cache@v1
         id: npm-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node10x-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node12x-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node10x-
+            ${{ runner.os }}-node12x-
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
@@ -69,9 +69,9 @@ jobs:
         id: npm-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node10x-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node12x-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node10x-
+            ${{ runner.os }}-node12x-
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
@@ -95,18 +95,18 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Use Node.js v10
+      - name: Use Node.js v12
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: '12.x'
       - name: Cache node modules
         uses: actions/cache@v1
         id: npm-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node10x-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node12x-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node10x-
+            ${{ runner.os }}-node12x-
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
