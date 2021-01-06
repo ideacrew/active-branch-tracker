@@ -37,33 +37,37 @@ import { RootEffects } from './store/root.effects';
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
-    RouterModule.forRoot([
-      { path: '', redirectTo: 'branches', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-      {
-        path: 'branches',
-        loadChildren: () =>
-          import('@idc/branches/feature').then(m => m.BranchesFeatureModule),
-      },
-
-      {
-        path: 'branches/:branchId',
-        loadChildren: () =>
-          import('@idc/branches/feature').then(m => m.BranchDetailModule),
-      },
-      {
-        path: 'environments',
-        loadChildren: () =>
-          import('@idc/environments/feature').then(
-            module => module.EnvironmentsFeatureModule,
-          ),
-      },
-      {
-        path: 'user',
-        loadChildren: () =>
-          import('@idc/user/feature').then(module => module.UserFeatureModule),
-      },
-    ]),
+    RouterModule.forRoot(
+      [
+        { path: '', redirectTo: 'branches', pathMatch: 'full' },
+        { path: 'login', component: LoginComponent },
+        {
+          path: 'branches',
+          loadChildren: () =>
+            import('@idc/branches/feature').then(m => m.BranchesFeatureModule),
+        },
+        {
+          path: 'branches/:branchId',
+          loadChildren: () =>
+            import('@idc/branches/feature').then(m => m.BranchDetailModule),
+        },
+        {
+          path: 'environments',
+          loadChildren: () =>
+            import('@idc/environments/feature').then(
+              module => module.EnvironmentsFeatureModule,
+            ),
+        },
+        {
+          path: 'user',
+          loadChildren: () =>
+            import('@idc/user/feature').then(
+              module => module.UserFeatureModule,
+            ),
+        },
+      ],
+      { relativeLinkResolution: 'legacy' },
+    ),
     StoreModule.forRoot(
       {
         router: routerReducer,
