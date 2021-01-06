@@ -52,42 +52,6 @@ jobs:
         run: npm ci
       - name: Test Application
         run: npm run test
-  e2e:
-    name: e2e
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
-      - name: Use Node.js 10
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10'
-      - name: Cache node modules
-        uses: actions/cache@v1
-        id: npm-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node12x-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node12x-
-      - name: Install dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: Cache Cypress
-        id: cypress-cache
-        uses: actions/cache@v1
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-cache-v1-${{ runner.os }}-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            cypress-cache-v1-${{ runner.os }}
-      - name: Install Cypress
-        if: steps.cypress-cache.outputs.cache-hit != 'true'
-        run: npm i cypress@latest --save-dev
-      - name: Run end to end tests
-        run: npm run e2e
   build:
     name: build and deploy
     needs: [lint, test, e2e]
