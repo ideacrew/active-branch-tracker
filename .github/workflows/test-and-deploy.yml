@@ -1,7 +1,12 @@
-name: test and deploy
+name: test and deploy front end
 
 on:
   push:
+    paths:
+      - 'apps'
+      - 'libs'
+      - 'firebase.json'
+      - 'package.json'
     branches:
       - master
 
@@ -17,7 +22,7 @@ jobs:
         with:
           node-version: '12.x'
       - name: Cache node modules
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: npm-cache
         with:
           path: node_modules
@@ -40,7 +45,7 @@ jobs:
         with:
           node-version: '12.x'
       - name: Cache node modules
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: npm-cache
         with:
           path: node_modules
@@ -64,7 +69,7 @@ jobs:
         with:
           node-version: '12.x'
       - name: Cache node modules
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: npm-cache
         with:
           path: node_modules
