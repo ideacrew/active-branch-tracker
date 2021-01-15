@@ -3,7 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { catchError, filter, map, switchMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import firebase from 'firebase/app';
+import * as firebase from 'firebase/app';
 
 import * as AuthActions from './auth.actions';
 import { AuthService } from '../auth.service';

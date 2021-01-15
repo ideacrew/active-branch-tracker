@@ -11,7 +11,7 @@ async function seedDb() {
   await firebase.clearFirestoreData({ projectId });
 
   await seedBranches(projectId);
-  await seedEnvironments(projectId);
+  // await seedEnvironments(projectId);
 
   // Need to explicitly exit or Node will just run forever
   process.exit();

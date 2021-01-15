@@ -4,6 +4,11 @@
 name: Deploy to Firebase Hosting on PR
 on:
   pull_request:
+    paths:
+      - 'apps'
+      - 'libs'
+      - 'firebase.json'
+      - 'package.json'
 
 jobs:
   build_and_preview:
