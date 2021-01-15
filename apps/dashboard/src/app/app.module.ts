@@ -9,9 +9,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import {
   AngularFirestoreModule,
-  SETTINGS as FIRESTORE_SETTINGS,
+  USE_EMULATOR as USE_FIRESTORE_EMULATOR,
+  // SETTINGS as FIRESTORE_SETTINGS,
 } from '@angular/fire/firestore';
-
+import {
+  AngularFireAuthModule,
+  USE_EMULATOR as USE_AUTH_EMULATOR,
+} from '@angular/fire/auth';
 import { DisplayConfigModule } from '@idc/display-config';
 import { AuthModule, LoginComponent } from '@idc/auth';
 import { UserDataAccessModule } from '@idc/user/data-access';
@@ -34,6 +38,7 @@ import { RootEffects } from './store/root.effects';
       appId: '1:633810997367:web:931c5bc156a5e71d097672',
       measurementId: 'G-WV4T2RGHM3',
     }),
+    AngularFireAuthModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
@@ -91,12 +96,17 @@ import { RootEffects } from './store/root.effects';
   bootstrap: [AppComponent],
   providers: [
     {
-      provide: FIRESTORE_SETTINGS,
-      useFactory: () =>
-        environment.shouldUseEmulator()
-          ? { host: 'localhost:8080', ssl: false }
-          : {},
+      provide: USE_FIRESTORE_EMULATOR,
+      useValue: environment.useEmulators ? ['localhost', 8080] : undefined,
     },
+    {
+      provide: USE_AUTH_EMULATOR,
+      useValue: environment.useEmulators ? ['localhost', 9099] : undefined,
+    },
+    // {
+    //   provide: USE_FUNCTIONS_EMULATOR,
+    //   useValue: environment.useEmulators ? ['localhost', 5001] : undefined,
+    // },
   ],
 })
 export class AppModule {}
