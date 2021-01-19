@@ -11,9 +11,7 @@ import {
   AngularFirestoreModule,
   // SETTINGS as FIRESTORE_SETTINGS,
 } from '@angular/fire/firestore';
-import {
-  AngularFireAuthModule,
-} from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import {
   ORIGIN as FUNCTIONS_ORIGIN,
   NEW_ORIGIN_BEHAVIOR,
@@ -33,7 +31,9 @@ import './firebase-init';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase, 'myapp'),
+    environment.useEmulators
+      ? AngularFireModule.initializeApp(environment.firebase, 'myapp')
+      : AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
