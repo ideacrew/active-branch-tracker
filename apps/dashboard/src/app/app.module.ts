@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire';
 import { RouterModule } from '@angular/router';
@@ -16,6 +16,12 @@ import {
   AngularFireAuthModule,
   USE_EMULATOR as USE_AUTH_EMULATOR,
 } from '@angular/fire/auth';
+import {
+  USE_EMULATOR as USE_FUNCTIONS_EMULATOR,
+  ORIGIN as FUNCTIONS_ORIGIN,
+  NEW_ORIGIN_BEHAVIOR,
+} from '@angular/fire/functions';
+
 import { DisplayConfigModule } from '@idc/display-config';
 import { AuthModule, LoginComponent } from '@idc/auth';
 import { UserDataAccessModule } from '@idc/user/data-access';
@@ -103,10 +109,15 @@ import { RootEffects } from './store/root.effects';
       provide: USE_AUTH_EMULATOR,
       useValue: environment.useEmulators ? ['localhost', 9099] : undefined,
     },
-    // {
-    //   provide: USE_FUNCTIONS_EMULATOR,
-    //   useValue: environment.useEmulators ? ['localhost', 5001] : undefined,
-    // },
+    {
+      provide: USE_FUNCTIONS_EMULATOR,
+      useValue: environment.useEmulators ? ['localhost', 5001] : undefined,
+    },
+    { provide: NEW_ORIGIN_BEHAVIOR, useValue: true },
+    {
+      provide: FUNCTIONS_ORIGIN,
+      useFactory: () => (isDevMode() ? undefined : location.origin),
+    },
   ],
 })
 export class AppModule {}
