@@ -66,6 +66,10 @@
                 {
                   "replace": "apps/dashboard/src/environments/environment.ts",
                   "with": "apps/dashboard/src/environments/environment.emulator.ts"
+                },
+                {
+                  "replace": "apps/dashboard/src/app/firebase-init.ts",
+                  "with": "apps/dashboard/src/app/firebase-init.emulators.ts"
                 }
               ]
             }

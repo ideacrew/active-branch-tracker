@@ -1,23 +1,44 @@
 import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
 
 export async function createNewUser(
-  user: admin.auth.UserRecord,
+  user: functions.auth.UserRecord,
+  _context: functions.EventContext,
 ): Promise<void> {
-  const { uid, email, displayName } = user;
-
-  const newUser = {
-    email,
-    displayName,
-    admin: false,
-  };
-
-  const newUserRef = admin.firestore().doc(`users/${uid}`);
-
   // Set custom claims
-  await admin.auth().setCustomUserClaims(uid, {
-    admin: false,
-  });
+  await setCustomClaims(user);
 
   // Set user document
-  await newUserRef.set(newUser);
+  await addNewUserToDatabase(user);
 }
+
+const admins = ['mark.goho@ideacrew.com', 'angus.irvine@ideacrew.com'];
+
+const setCustomClaims = async (user: functions.auth.UserRecord) => {
+  const isAdmin = admins.includes(user.email!);
+  console.log(
+    isAdmin ? 'User should be an admin' : 'User should NOT be an admin',
+  );
+  try {
+    await admin.auth().setCustomUserClaims(user.uid, {
+      admin: isAdmin,
+    });
+  } catch (e) {
+    console.error('Not able to assign custom claims', e);
+  }
+};
+
+const addNewUserToDatabase = async (user: functions.auth.UserRecord) => {
+  const isAdmin = admins.includes(user.email!);
+
+  const newUserRef = admin.firestore().doc(`users/${user.uid}`);
+  try {
+    await newUserRef.set({
+      email: user.email,
+      displayName: user.displayName,
+      admin: isAdmin,
+    });
+  } catch (e) {
+    console.error('Unable to add new user to database', e);
+  }
+};

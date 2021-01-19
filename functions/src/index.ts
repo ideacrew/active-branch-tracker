@@ -14,7 +14,6 @@ import { handleBranchDeployment, BranchDeployment } from './branch-deployment';
 import { DeploymentEnvironment } from './deployment-environment';
 import { getBranchRef } from './util/branchRef';
 import { BranchInfo } from './branchInfo';
-import { createNewUser } from './new-user/new-user';
 import { enableAdminForUser } from './grant-admin';
 
 admin.initializeApp();
@@ -127,6 +126,10 @@ export const watchEnvironments = functions.firestore
     }
   });
 
-export const createUserRecord = functions.auth.user().onCreate(createNewUser);
+export const createUserRecord = functions.auth
+  .user()
+  .onCreate(async (user, context) => {
+    await (await import('./new-user/new-user')).createNewUser(user, context);
+  });
 
 export const grantAdmin = functions.https.onCall(enableAdminForUser);
