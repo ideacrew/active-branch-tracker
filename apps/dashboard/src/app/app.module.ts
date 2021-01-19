@@ -7,10 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
-import {
-  AngularFirestoreModule,
-  // SETTINGS as FIRESTORE_SETTINGS,
-} from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {
   ORIGIN as FUNCTIONS_ORIGIN,
@@ -25,6 +22,7 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { RootEffects } from './store/root.effects';
 
+// Needed while https://github.com/firebase/firebase-js-sdk/issues/4110 is still a bug
 import './firebase-init';
 
 @NgModule({

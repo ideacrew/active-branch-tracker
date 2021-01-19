@@ -33,6 +33,7 @@
     "deploy:functions": "firebase deploy --only functions",
     "deploy:dashboard": "firebase deploy --only hosting",
     "test:rules": "mocha db/test --exit",
+    "test:rules:watch": "mocha db/test --watch",
     "workspace-generator": "nx workspace-generator"
   },
   "private": true,

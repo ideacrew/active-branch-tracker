@@ -50,16 +50,20 @@ export class AuthEffects {
 
   authState$ = createEffect(() =>
     this.authService.user$.pipe(
-      tap(user => console.log(user)),
+      tap(user => console.log({ userAuth: user })),
       filter(user => !!user),
       map(user => {
         const firebaseUser = user as firebase.User;
 
-        return {
+        const userDetails = {
           uid: firebaseUser.uid,
           displayName: firebaseUser.displayName,
           email: firebaseUser.email,
         };
+
+        console.log({ userDetails });
+
+        return userDetails;
       }),
       map(userDetails => AuthActions.setCurrentUser({ userDetails })),
     ),

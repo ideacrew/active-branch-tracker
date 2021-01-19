@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
 
-import * as fromUser from './user.reducer';
 import * as UserActions from './user.actions';
 import { logoutSuccess, setCurrentUser } from '@idc/auth';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
@@ -22,14 +20,18 @@ export class UserEffects {
   loadUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.loadUser),
-      switchMap(({ uid }) =>
-        this.userService.getUserRef(uid).pipe(
+      switchMap(({ uid }) => {
+        console.log({ uid });
+        return this.userService.getUserRef(uid).pipe(
           map((user: UserEntity | undefined) =>
             UserActions.loadUserSuccess({ user }),
           ),
-          catchError(() => of(UserActions.loadUserFailure())),
-        ),
-      ),
+          catchError(e => {
+            console.error(e);
+            return of(UserActions.loadUserFailure());
+          }),
+        );
+      }),
     ),
   );
 

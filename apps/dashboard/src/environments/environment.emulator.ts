@@ -3,7 +3,7 @@ export const environment = {
   useEmulators: true,
   firebase: {
     apiKey: 'fake-api-key',
-    // authDomain: 'active-branches-report.firebaseapp.com',
+    authDomain: 'http://localhost:9099',
     // databaseURL: 'https://active-branches-report.firebaseio.com',
     projectId: 'active-branches-report',
     // storageBucket: 'active-branches-report.appspot.com',
