@@ -6,3 +6,4 @@ lib/**/*.js.map
 typings/
 
 node_modules/
+service-account.json
