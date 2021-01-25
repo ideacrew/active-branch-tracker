@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const firebase = require('@firebase/rules-unit-testing');
 const TEST_FIREBASE_PROJECT_ID = 'test-firestore-rules-project';
-const port = require('../firebase.json').emulators.firestore.port || 8080;
+const port = require('../../firebase.json').emulators.firestore.port || 8080;
 const coverageUrl = `http://localhost:${port}/emulator/v1/projects/${TEST_FIREBASE_PROJECT_ID}:ruleCoverage.html`;
 
 const philAuth = {
@@ -13,7 +13,7 @@ const lemAuth = { uid: 'lem', email: 'lem@example.com' };
 
 before(async () => {
   const rulesContent = fs.readFileSync(
-    path.resolve(__dirname, '../firestore.rules'),
+    path.resolve(__dirname, '../../firestore.rules'),
     'utf8',
   );
   await firebase.loadFirestoreRules({
