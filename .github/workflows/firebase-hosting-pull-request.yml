@@ -14,17 +14,20 @@ on:
 jobs:
   test_security_rules:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./functions
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '12.x'
+      - name: Install Firebase Emulator Suite
+        run: npm install -g firebase-tools
       - name: Install dependencies
         run: npm i
-        working-directory: functions
       - name: Run security tests
-        run: npx firebase emulators:exec --only=firestore 'npm run test:rules'
-        working-directory: functions
+        run: npx firebase emulators:exec --only=firestore 'npm run test'
 
   # build_and_preview:
   #   runs-on: ubuntu-latest
