@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '12.x'
       - name: Install dependencies
-        run: npm ci
+        run: npm i
         working-directory: functions
       - name: Run security tests
         run: npx firebase emulators:exec --only=firestore 'npm run test:rules'
