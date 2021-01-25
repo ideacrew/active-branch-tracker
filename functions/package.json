@@ -10,8 +10,7 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "test": "mocha test.js --timeout 5000 --exit",
-    "test:functions": "tsc && mocha test-functions.js --reporter spec",
-    "test:functions:watch": "tsc --watch && mocha ./test-functions.js --reporter spec --watch"
+    "test:functions": "tsc && mocha test/*.spec.js --exit"
   },
   "engines": {
     "node": "12"

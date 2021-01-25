@@ -6,7 +6,7 @@ export async function createNewUser(
   _context: functions.EventContext,
 ): Promise<void> {
   // Set custom claims
-  await setCustomClaims(user);
+  // await setCustomClaims(user);
 
   // Set user document
   await addNewUserToDatabase(user);
@@ -14,17 +14,17 @@ export async function createNewUser(
 
 const admins = ['mark.goho@ideacrew.com', 'angus.irvine@ideacrew.com'];
 
-const setCustomClaims = async (user: functions.auth.UserRecord) => {
-  const isAdmin = admins.includes(user.email!);
-  try {
-    functions.logger.info('Setting custom claims for', user.displayName);
-    await admin.auth().setCustomUserClaims(user.uid, {
-      admin: isAdmin,
-    });
-  } catch (e) {
-    functions.logger.error('Not able to assign custom claims', e);
-  }
-};
+// const setCustomClaims = async (user: functions.auth.UserRecord) => {
+//   const isAdmin = admins.includes(user.email!);
+//   try {
+//     functions.logger.info('Setting custom claims for', user.displayName);
+//     await admin.auth().setCustomUserClaims(user.uid, {
+//       admin: isAdmin,
+//     });
+//   } catch (e) {
+//     functions.logger.error('Not able to assign custom claims', e);
+//   }
+// };
 
 const addNewUserToDatabase = async (user: functions.auth.UserRecord) => {
   const isAdmin = admins.includes(user.email!);
