@@ -32,7 +32,9 @@
     "deploy:all": "npx firebase deploy",
     "deploy:functions": "firebase deploy --only functions",
     "deploy:dashboard": "firebase deploy --only hosting",
-    "workspace-generator": "nx workspace-generator"
+    "workspace-generator": "nx workspace-generator",
+    "test:functions": "firebase emulators:exec --project=fakeproject",
+    "t:f": "mocha --exit functions/test/*.spec.js"
   },
   "private": true,
   "dependencies": {
