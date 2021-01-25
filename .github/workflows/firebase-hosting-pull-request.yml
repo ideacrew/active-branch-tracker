@@ -19,18 +19,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12.x'
-      - uses: actions/cache@v2
-        id: npm-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node12x-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node12x-
       - name: Install dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
+        working-directory: functions
       - name: Run security tests
-        run: npx firebase emulators:exec 'npm run test:rules'
+        run: npx firebase emulators:exec --only=firestore 'npm run test:rules'
+        working-directory: functions
 
   # build_and_preview:
   #   runs-on: ubuntu-latest
