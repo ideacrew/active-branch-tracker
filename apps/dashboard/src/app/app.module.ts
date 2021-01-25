@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { isDevMode, NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire';
-import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -13,14 +12,16 @@ import {
   ORIGIN as FUNCTIONS_ORIGIN,
   NEW_ORIGIN_BEHAVIOR,
 } from '@angular/fire/functions';
+import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 
 import { DisplayConfigModule } from '@idc/display-config';
-import { AuthModule, LoginComponent } from '@idc/auth';
+import { AuthModule } from '@idc/auth';
 import { UserDataAccessModule } from '@idc/user/data-access';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { RootEffects } from './store/root.effects';
+import { AppRoutingModule } from './app-routing.module';
 
 // Needed while https://github.com/firebase/firebase-js-sdk/issues/4110 is still a bug
 import './firebase-init';
@@ -33,40 +34,11 @@ import './firebase-init';
       ? AngularFireModule.initializeApp(environment.firebase, 'myapp')
       : AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireAuthGuardModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
-    RouterModule.forRoot(
-      [
-        { path: '', redirectTo: 'branches', pathMatch: 'full' },
-        { path: 'login', component: LoginComponent },
-        {
-          path: 'branches',
-          loadChildren: () =>
-            import('@idc/branches/feature').then(m => m.BranchesFeatureModule),
-        },
-        {
-          path: 'branches/:branchId',
-          loadChildren: () =>
-            import('@idc/branches/feature').then(m => m.BranchDetailModule),
-        },
-        {
-          path: 'environments',
-          loadChildren: () =>
-            import('@idc/environments/feature').then(
-              module => module.EnvironmentsFeatureModule,
-            ),
-        },
-        {
-          path: 'user',
-          loadChildren: () =>
-            import('@idc/user/feature').then(
-              module => module.UserFeatureModule,
-            ),
-        },
-      ],
-      { relativeLinkResolution: 'legacy' },
-    ),
+    AppRoutingModule,
     StoreModule.forRoot(
       {
         router: routerReducer,

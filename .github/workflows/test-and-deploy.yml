@@ -3,6 +3,7 @@ name: test and deploy front end
 on:
   push:
     paths:
+      - 'firestore.rules'
       - 'apps'
       - 'libs'
       - 'firebase.json'

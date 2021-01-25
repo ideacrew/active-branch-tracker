@@ -16,15 +16,13 @@ const admins = ['mark.goho@ideacrew.com', 'angus.irvine@ideacrew.com'];
 
 const setCustomClaims = async (user: functions.auth.UserRecord) => {
   const isAdmin = admins.includes(user.email!);
-  console.log(
-    isAdmin ? 'User should be an admin' : 'User should NOT be an admin',
-  );
   try {
+    functions.logger.info('Setting custom claims for', user.displayName);
     await admin.auth().setCustomUserClaims(user.uid, {
       admin: isAdmin,
     });
   } catch (e) {
-    console.error('Not able to assign custom claims', e);
+    functions.logger.error('Not able to assign custom claims', e);
   }
 };
 
@@ -36,9 +34,10 @@ const addNewUserToDatabase = async (user: functions.auth.UserRecord) => {
     await newUserRef.set({
       email: user.email,
       displayName: user.displayName,
+      photoUrl: user.photoURL,
       admin: isAdmin,
     });
   } catch (e) {
-    console.error('Unable to add new user to database', e);
+    functions.logger.error('Unable to add new user to database', e);
   }
 };

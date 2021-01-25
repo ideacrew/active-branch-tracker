@@ -7,7 +7,7 @@
     "nx": "nx",
     "seed:db": "cross-env FIRESTORE_EMULATOR_HOST=localhost:8080 node db/scripts/seedDb",
     "start:live": "ng serve --hmr",
-    "start:emulators": "firebase emulators:start",
+    "start:emulators": "firebase emulators:start --only=firestore,functions,auth --import=./db/exports --export-on-exit=./db/exports",
     "start:functions": "cd functions && npm run watch",
     "start:app": "ng serve --configuration=emulator --hmr",
     "test": "ng test",
