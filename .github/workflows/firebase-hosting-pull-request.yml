@@ -27,7 +27,9 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Run tests
-        run: firebase emulators:exec --only=firestore,auth,functions --project=fakeproject 'npm run test:functions'
+        run: |
+          npx tsc
+          firebase emulators:exec --only=firestore,auth,functions --project=fakeproject 'npm run test'
   build_and_preview:
     needs: [tests]
     runs-on: ubuntu-latest
