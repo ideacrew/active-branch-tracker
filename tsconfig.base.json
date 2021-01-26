@@ -34,5 +34,5 @@
       "@ic/google-analytics": ["libs/google-analytics/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp", "functions"]
 }

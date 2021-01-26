@@ -3,13 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 
 import * as UserActions from './user.actions';
 import { logoutSuccess, setCurrentUser } from '@idc/auth';
-import {
-  catchError,
-  map,
-  switchMap,
-  tap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { UserService } from '../user.service';
 import { of } from 'rxjs';
 import { UserEntity } from './user.models';
@@ -27,9 +21,7 @@ export class UserEffects {
   loadUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.loadUser),
-      withLatestFrom(this.userFacade.user$),
-      switchMap(([{ uid }, existingUser]) => {
-        console.log({ uid, existingUser });
+      switchMap(({ uid }) => {
         return this.userService.getUserRef(uid).pipe(
           map((user: UserEntity | undefined) =>
             UserActions.loadUserSuccess({ user }),

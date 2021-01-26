@@ -14,7 +14,6 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.login),
       switchMap(() => this.authService.login()),
-      // tap(credential => console.log('User Credential', credential)),
       map(() => AuthActions.loginSuccess()),
       catchError((error: string) => of(AuthActions.loginFailure())),
     ),
@@ -59,8 +58,6 @@ export class AuthEffects {
           displayName: firebaseUser.displayName,
           email: firebaseUser.email,
         };
-
-        console.log({ userDetails });
 
         return userDetails;
       }),

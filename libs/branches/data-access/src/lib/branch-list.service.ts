@@ -43,6 +43,7 @@ export class BranchListService {
             try {
               console.log('Playing sound');
               await this.playSound();
+              newFailure = false;
             } catch (e) {
               console.error('Could not play sound');
             }
