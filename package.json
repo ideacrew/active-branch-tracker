@@ -8,6 +8,7 @@
     "seed:db": "cross-env FIRESTORE_EMULATOR_HOST=localhost:8080 node db/scripts/seedDb",
     "start:live": "ng serve --hmr",
     "start:emulators": "firebase emulators:start --only=firestore,functions,auth --import=./db/exports --export-on-exit=./db/exports",
+    "start:emulators:local": "cross-env FIRESTORE_EMULATOR_HOST=localhost:8080 GCLOUD_PROJECT=fakeproject firebase emulators:start --project=fakeproject --only=firestore,functions,auth",
     "start:functions": "cd functions && npm run watch",
     "start:app": "ng serve --configuration=emulator --hmr",
     "test": "ng test",
