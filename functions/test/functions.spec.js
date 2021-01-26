@@ -27,7 +27,7 @@ describe('Unit tests', () => {
         admin: true,
         email: 'mark.goho@ideacrew.com',
         displayName: 'Mark Goho',
-        photoUrl: 'https://example.com',
+        photoURL: 'https://example.com',
       });
     });
 
@@ -47,7 +47,7 @@ describe('Unit tests', () => {
         admin: false,
         email: 'markgoho@gmail.com',
         displayName: 'Mark Goho',
-        photoUrl: 'https://example.com',
+        photoURL: 'https://example.com',
       });
     });
   });
