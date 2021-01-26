@@ -3,10 +3,17 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 
 import * as UserActions from './user.actions';
 import { logoutSuccess, setCurrentUser } from '@idc/auth';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import {
+  catchError,
+  map,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { UserService } from '../user.service';
 import { of } from 'rxjs';
 import { UserEntity } from './user.models';
+import { UserFacade } from './user.facade';
 
 @Injectable()
 export class UserEffects {
@@ -20,14 +27,15 @@ export class UserEffects {
   loadUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.loadUser),
-      switchMap(({ uid }) => {
-        console.log({ uid });
+      withLatestFrom(this.userFacade.user$),
+      switchMap(([{ uid }, existingUser]) => {
+        console.log({ uid, existingUser });
         return this.userService.getUserRef(uid).pipe(
           map((user: UserEntity | undefined) =>
             UserActions.loadUserSuccess({ user }),
           ),
           catchError(e => {
-            console.error(e);
+            // console.error(e);
             return of(UserActions.loadUserFailure());
           }),
         );
@@ -42,5 +50,9 @@ export class UserEffects {
     ),
   );
 
-  constructor(private actions$: Actions, private userService: UserService) {}
+  constructor(
+    private actions$: Actions,
+    private userService: UserService,
+    private userFacade: UserFacade,
+  ) {}
 }

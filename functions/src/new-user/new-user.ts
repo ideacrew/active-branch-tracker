@@ -30,13 +30,16 @@ const addNewUserToDatabase = async (user: admin.auth.UserRecord) => {
   const isAdmin = admins.includes(user.email!);
 
   const newUserRef = admin.firestore().doc(`users/${user.uid}`);
+
+  const newUser = {
+    email: user.email,
+    displayName: user.displayName,
+    photoURL: user.photoURL,
+    admin: isAdmin,
+  };
+
   try {
-    await newUserRef.set({
-      email: user.email,
-      displayName: user.displayName,
-      photoUrl: user.photoURL,
-      admin: isAdmin,
-    });
+    await newUserRef.set(newUser);
   } catch (e) {
     functions.logger.error('Unable to add new user to database', e);
   }

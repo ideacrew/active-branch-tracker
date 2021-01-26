@@ -1,33 +1,29 @@
-[debug] [2021-01-26T19:31:24.950Z] ----------------------------------------------------------------------
-[debug] [2021-01-26T19:31:24.952Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only=firestore,functions,auth --import=./db/exports --export-on-exit=./db/exports
-[debug] [2021-01-26T19:31:24.952Z] CLI Version:   9.2.2
-[debug] [2021-01-26T19:31:24.952Z] Platform:      win32
-[debug] [2021-01-26T19:31:24.952Z] Node Version:  v12.18.3
-[debug] [2021-01-26T19:31:24.954Z] Time:          Tue Jan 26 2021 14:31:24 GMT-0500 (Eastern Standard Time)
-[debug] [2021-01-26T19:31:24.954Z] ----------------------------------------------------------------------
-[debug] [2021-01-26T19:31:24.954Z] 
-[debug] [2021-01-26T19:31:24.966Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2021-01-26T19:31:24.967Z] > authorizing via signed-in user
+[debug] [2021-01-26T20:44:00.295Z] ----------------------------------------------------------------------
+[debug] [2021-01-26T20:44:00.297Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only=firestore,functions,auth --import=./db/exports --export-on-exit=./db/exports
+[debug] [2021-01-26T20:44:00.297Z] CLI Version:   9.2.2
+[debug] [2021-01-26T20:44:00.297Z] Platform:      win32
+[debug] [2021-01-26T20:44:00.297Z] Node Version:  v12.18.3
+[debug] [2021-01-26T20:44:00.299Z] Time:          Tue Jan 26 2021 15:44:00 GMT-0500 (Eastern Standard Time)
+[debug] [2021-01-26T20:44:00.299Z] ----------------------------------------------------------------------
+[debug] [2021-01-26T20:44:00.299Z] 
+[debug] [2021-01-26T20:44:00.313Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-01-26T20:44:00.313Z] > authorizing via signed-in user
 [info] i  emulators: Starting emulators: auth, functions, firestore {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore"}}
-[debug] [2021-01-26T19:31:26.008Z] [hub] writing locator at C:\Users\Mark\AppData\Local\Temp\hub-active-branches-report.json
+[debug] [2021-01-26T20:44:01.348Z] [hub] writing locator at C:\Users\Mark\AppData\Local\Temp\hub-active-branches-report.json
 [warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: database, hosting, pubsub {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mdatabase, hosting, pubsub\u001b[22m"}}
 [info] +  functions: Using node@12 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@12 from host."}}
-[debug] [2021-01-26T19:31:27.049Z] defaultcredentials: writing to file C:\Users\Mark\AppData\Roaming\firebase\markgoho_gmail_com_application_default_credentials.json
-[debug] [2021-01-26T19:31:27.051Z] Setting GAC to C:\Users\Mark\AppData\Roaming\firebase\markgoho_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\Mark\\AppData\\Roaming\\firebase\\markgoho_gmail_com_application_default_credentials.json"}}
-[debug] [2021-01-26T19:31:27.054Z] > refreshing access token with scopes: []
-[debug] [2021-01-26T19:31:27.054Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2021-01-26T19:31:27.175Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Tue, 26 Jan 2021 19:31:28 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2021-01-26T19:31:27.185Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/active-branches-report/adminSdkConfig [none]
-[debug] [2021-01-26T19:31:27.406Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/active-branches-report/adminSdkConfig 200
-[debug] [2021-01-26T19:31:27.407Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/active-branches-report/adminSdkConfig {"projectId":"active-branches-report","databaseURL":"https://active-branches-report.firebaseio.com","storageBucket":"active-branches-report.appspot.com","locationId":"us-east1"}
+[debug] [2021-01-26T20:44:02.404Z] defaultcredentials: writing to file C:\Users\Mark\AppData\Roaming\firebase\markgoho_gmail_com_application_default_credentials.json
+[debug] [2021-01-26T20:44:02.406Z] Setting GAC to C:\Users\Mark\AppData\Roaming\firebase\markgoho_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\Mark\\AppData\\Roaming\\firebase\\markgoho_gmail_com_application_default_credentials.json"}}
+[debug] [2021-01-26T20:44:02.409Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/active-branches-report/adminSdkConfig [none]
+[debug] [2021-01-26T20:44:02.689Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/active-branches-report/adminSdkConfig 200
+[debug] [2021-01-26T20:44:02.689Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/active-branches-report/adminSdkConfig {"projectId":"active-branches-report","databaseURL":"https://active-branches-report.firebaseio.com","storageBucket":"active-branches-report.appspot.com","locationId":"us-east1"}
 [info] i  firestore: Importing data from C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\db\exports\firestore_export\firestore_export.overall_export_metadata {"metadata":{"emulator":{"name":"firestore"},"message":"Importing data from C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\db\\exports\\firestore_export\\firestore_export.overall_export_metadata"}}
-[debug] [2021-01-26T19:31:28.446Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
-[debug] [2021-01-26T19:31:28.446Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2021-01-26T19:31:28.446Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Mark\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.11.12.jar","--host","localhost","--port",8080,"--seed_from_export","C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\db\\exports\\firestore_export\\firestore_export.overall_export_metadata","--rules","C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\firestore.rules","--functions_emulator","localhost:5001"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Mark\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.11.12.jar\",\"--host\",\"localhost\",\"--port\",8080,\"--seed_from_export\",\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\db\\\\exports\\\\firestore_export\\\\firestore_export.overall_export_metadata\",\"--rules\",\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\firestore.rules\",\"--functions_emulator\",\"localhost:5001\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[debug] [2021-01-26T20:44:03.735Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2021-01-26T20:44:03.735Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-01-26T20:44:03.735Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Mark\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.11.12.jar","--host","localhost","--port",8080,"--seed_from_export","C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\db\\exports\\firestore_export\\firestore_export.overall_export_metadata","--rules","C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\firestore.rules","--functions_emulator","localhost:5001"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Mark\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.11.12.jar\",\"--host\",\"localhost\",\"--port\",8080,\"--seed_from_export\",\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\db\\\\exports\\\\firestore_export\\\\firestore_export.overall_export_metadata\",\"--rules\",\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\firestore.rules\",\"--functions_emulator\",\"localhost:5001\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
 [info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
-[debug] [2021-01-26T19:31:30.938Z] API endpoint: http://localhost: {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://localhost:"}}
-[debug] [2021-01-26T19:31:30.939Z] 8080
+[debug] [2021-01-26T20:44:06.629Z] API endpoint: http://localhost: {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://localhost:"}}
+[debug] [2021-01-26T20:44:06.630Z] 8080
 If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
 
    export FIRESTORE_EMULATOR_HOST=localhost:8080
@@ -37,51 +33,51 @@ Dev App Server is now running.
  {"metadata":{"emulator":{"name":"firestore"},"message":"8080\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\r\n\n   export FIRESTORE_EMULATOR_HOST=localhost:8080\n\nDev App Server is now running.\n\r\n"}}
 [info] i  auth: Importing config from C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\db\exports\auth_export\config.json {"metadata":{"emulator":{"name":"database"},"message":"Importing config from C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\db\\exports\\auth_export\\config.json"}}
 [info] i  auth: Importing accounts from C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\db\exports\auth_export\accounts.json {"metadata":{"emulator":{"name":"database"},"message":"Importing accounts from C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\db\\exports\\auth_export\\accounts.json"}}
-[debug] [2021-01-26T19:31:36.647Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2021-01-26T19:31:36.648Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2021-01-26T19:31:36.648Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Mark\\.cache\\firebase\\emulators\\ui-v1.4.1\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Mark\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.4.1\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[debug] [2021-01-26T20:44:12.286Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-01-26T20:44:12.287Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-01-26T20:44:12.287Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Mark\\.cache\\firebase\\emulators\\ui-v1.4.1\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Mark\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.4.1\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
 [info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
-[debug] [2021-01-26T19:31:36.814Z] Web / API server started at http://localhost:4000
+[debug] [2021-01-26T20:44:12.439Z] Web / API server started at http://localhost:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at http://localhost:4000\n"}}
 [info] i  functions: Watching "C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\" for Cloud Functions..."}}
-[debug] [2021-01-26T19:31:37.200Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
-[debug] [2021-01-26T19:31:37.200Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
-[debug] [2021-01-26T19:31:37.200Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
-[debug] [2021-01-26T19:31:37.200Z] [worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: Assigning socketPath: \\?\pipe\C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\22108 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: Assigning socketPath: \\\\?\\pipe\\C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\22108"}}
-[debug] [2021-01-26T19:31:37.201Z] [worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: BUSY"}}
-[debug] [2021-01-26T19:31:37.605Z] [runtime-status] [22108] Functions runtime initialized. {"cwd":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions","node_version":"12.18.3"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] Functions runtime initialized. {\"cwd\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\",\"node_version\":\"12.18.3\"}"}}
-[debug] [2021-01-26T19:31:37.606Z] [runtime-status] [22108] Disabled runtime features: undefined {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] Disabled runtime features: undefined"}}
-[debug] [2021-01-26T19:31:37.610Z] [runtime-status] [22108] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.4.2","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-admin\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.4.2\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:37.629Z] [runtime-status] [22108] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:37.630Z] [runtime-status] [22108] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:37.631Z] [runtime-status] [22108] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
-[debug] [2021-01-26T19:31:37.631Z] [runtime-status] [22108] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:37.731Z] [runtime-status] [22108] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] Checked functions.config() {\"config\":{}}"}}
-[debug] [2021-01-26T19:31:37.731Z] [runtime-status] [22108] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}}"}}
-[debug] [2021-01-26T19:31:37.732Z] [runtime-status] [22108] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:37.735Z] [runtime-status] [22108] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.4.2","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-admin\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.4.2\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:37.736Z] [runtime-status] [22108] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:37.736Z] [runtime-status] [22108] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.4.2","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-admin\\lib\\index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"9.4.2\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}}"}}
-[debug] [2021-01-26T19:31:37.912Z] [runtime-status] [22108] initializeApp(DEFAULT) {"storageBucket":"active-branches-report.appspot.com","databaseURL":"https://active-branches-report.firebaseio.com","projectId":"active-branches-report"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] initializeApp(DEFAULT) {\"storageBucket\":\"active-branches-report.appspot.com\",\"databaseURL\":\"https://active-branches-report.firebaseio.com\",\"projectId\":\"active-branches-report\"}"}}
-[debug] [2021-01-26T19:31:38.015Z] [runtime-status] [22108] auth.setJwtVerificationEnabled(false) {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [22108] auth.setJwtVerificationEnabled(false)"}}
+[debug] [2021-01-26T20:44:12.845Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
+[debug] [2021-01-26T20:44:12.845Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
+[debug] [2021-01-26T20:44:12.846Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
+[debug] [2021-01-26T20:44:12.846Z] [worker-~diagnostic~-0d746fce-0316-43d1-bd77-490691df7420]: Assigning socketPath: \\?\pipe\C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\23396 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-0d746fce-0316-43d1-bd77-490691df7420]: Assigning socketPath: \\\\?\\pipe\\C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\23396"}}
+[debug] [2021-01-26T20:44:12.846Z] [worker-~diagnostic~-0d746fce-0316-43d1-bd77-490691df7420]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-0d746fce-0316-43d1-bd77-490691df7420]: BUSY"}}
+[debug] [2021-01-26T20:44:13.275Z] [runtime-status] [23396] Functions runtime initialized. {"cwd":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions","node_version":"12.18.3"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] Functions runtime initialized. {\"cwd\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\",\"node_version\":\"12.18.3\"}"}}
+[debug] [2021-01-26T20:44:13.276Z] [runtime-status] [23396] Disabled runtime features: undefined {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] Disabled runtime features: undefined"}}
+[debug] [2021-01-26T20:44:13.283Z] [runtime-status] [23396] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.4.2","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-admin\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.4.2\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}"}}
+[debug] [2021-01-26T20:44:13.287Z] [runtime-status] [23396] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
+[debug] [2021-01-26T20:44:13.288Z] [runtime-status] [23396] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
+[debug] [2021-01-26T20:44:13.290Z] [runtime-status] [23396] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2021-01-26T20:44:13.291Z] [runtime-status] [23396] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
+[debug] [2021-01-26T20:44:13.390Z] [runtime-status] [23396] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] Checked functions.config() {\"config\":{}}"}}
+[debug] [2021-01-26T20:44:13.390Z] [runtime-status] [23396] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}}"}}
+[debug] [2021-01-26T20:44:13.391Z] [runtime-status] [23396] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
+[debug] [2021-01-26T20:44:13.393Z] [runtime-status] [23396] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.4.2","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-admin\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.4.2\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}"}}
+[debug] [2021-01-26T20:44:13.394Z] [runtime-status] [23396] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
+[debug] [2021-01-26T20:44:13.394Z] [runtime-status] [23396] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.4.2","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-admin\\lib\\index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"9.4.2\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}}"}}
+[debug] [2021-01-26T20:44:13.556Z] [runtime-status] [23396] initializeApp(DEFAULT) {"storageBucket":"active-branches-report.appspot.com","databaseURL":"https://active-branches-report.firebaseio.com","projectId":"active-branches-report"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] initializeApp(DEFAULT) {\"storageBucket\":\"active-branches-report.appspot.com\",\"databaseURL\":\"https://active-branches-report.firebaseio.com\",\"projectId\":\"active-branches-report\"}"}}
+[debug] [2021-01-26T20:44:13.686Z] [runtime-status] [23396] auth.setJwtVerificationEnabled(false) {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [23396] auth.setJwtVerificationEnabled(false)"}}
 [info] +  functions[webhook]: http function initialized (http://localhost:5001/active-branches-report/us-central1/webhook). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://localhost:5001/active-branches-report/us-central1/webhook)."}}
 [info] i  functions[oldBranchesNotification]: function ignored because the pubsub emulator does not exist or is not running. {"metadata":{"emulator":{"name":"functions"},"message":"function ignored because the pubsub emulator does not exist or is not running."}}
 [info] +  functions[staleBranchOnDemand]: http function initialized (http://localhost:5001/active-branches-report/us-central1/staleBranchOnDemand). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://localhost:5001/active-branches-report/us-central1/staleBranchOnDemand)."}}
 [info] +  functions[branchDeployment]: http function initialized (http://localhost:5001/active-branches-report/us-central1/branchDeployment). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://localhost:5001/active-branches-report/us-central1/branchDeployment)."}}
 [info] +  functions[brakeManOutput]: http function initialized (http://localhost:5001/active-branches-report/us-central1/brakeManOutput). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://localhost:5001/active-branches-report/us-central1/brakeManOutput)."}}
-[debug] [2021-01-26T19:31:38.181Z] addFirestoreTrigger "{\"eventTrigger\":{\"resource\":\"projects/active-branches-report/databases/(default)/documents/environments/{environmentId}\",\"eventType\":\"providers/cloud.firestore/eventTypes/document.update\",\"service\":\"firestore.googleapis.com\"}}"
-[debug] [2021-01-26T19:31:38.181Z] >>> HTTP REQUEST PUT http://localhost:8080/emulator/v1/projects/active-branches-report/triggers/watchEnvironments-0  
+[debug] [2021-01-26T20:44:13.704Z] addFirestoreTrigger "{\"eventTrigger\":{\"resource\":\"projects/active-branches-report/databases/(default)/documents/environments/{environmentId}\",\"eventType\":\"providers/cloud.firestore/eventTypes/document.update\",\"service\":\"firestore.googleapis.com\"}}"
+[debug] [2021-01-26T20:44:13.705Z] >>> HTTP REQUEST PUT http://localhost:8080/emulator/v1/projects/active-branches-report/triggers/watchEnvironments-0  
  {"eventTrigger":{"resource":"projects/active-branches-report/databases/(default)/documents/environments/{environmentId}","eventType":"providers/cloud.firestore/eventTypes/document.update","service":"firestore.googleapis.com"}}
-[debug] [2021-01-26T19:31:38.183Z] [worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: IDLE"}}
-[debug] [2021-01-26T19:31:38.200Z] Jan 26, 2021 2:31:38 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+[debug] [2021-01-26T20:44:13.706Z] [worker-~diagnostic~-0d746fce-0316-43d1-bd77-490691df7420]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-0d746fce-0316-43d1-bd77-490691df7420]: IDLE"}}
+[debug] [2021-01-26T20:44:13.734Z] Jan 26, 2021 3:44:13 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected non-HTTP/2 connection.
- {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 2:31:38 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
-[debug] [2021-01-26T19:31:38.367Z] Jan 26, 2021 2:31:38 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:44:13 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:44:13.913Z] Jan 26, 2021 3:44:13 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected HTTP/2 connection.
- {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 2:31:38 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
-[debug] [2021-01-26T19:31:38.883Z] <<< HTTP RESPONSE 200 {"content-type":"application/json","content-length":"4"}
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:44:13 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:44:14.564Z] <<< HTTP RESPONSE 200 {"content-type":"application/json","content-length":"4"}
 [info] +  functions[watchEnvironments]: firestore function initialized. {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mfirestore\u001b[22m function initialized."}}
-[debug] [2021-01-26T19:31:38.885Z] addAuthTrigger {"eventTrigger":{"resource":"projects/active-branches-report","eventType":"providers/firebase.auth/eventTypes/user.create","service":"firebaseauth.googleapis.com"}}
+[debug] [2021-01-26T20:44:14.565Z] addAuthTrigger {"eventTrigger":{"resource":"projects/active-branches-report","eventType":"providers/firebase.auth/eventTypes/user.create","service":"firebaseauth.googleapis.com"}}
 [info] +  functions[createUserRecord]: auth function initialized. {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mauth\u001b[22m function initialized."}}
 [info] +  functions[grantAdmin]: http function initialized (http://localhost:5001/active-branches-report/us-central1/grantAdmin). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://localhost:5001/active-branches-report/us-central1/grantAdmin)."}}
 [info] 
@@ -104,108 +100,342 @@ INFO: Detected HTTP/2 connection.
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
-[debug] [2021-01-26T19:31:52.311Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\actionType.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\actionType.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.321Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\actionType.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\actionType.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.335Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\checkConclusion.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\checkConclusion.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.335Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\checkConclusion.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\checkConclusion.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.336Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\branchInfo.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\branchInfo.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.336Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\branchInfo.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\branchInfo.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.348Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\webhookPayload.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\webhookPayload.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.349Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\webhookPayload.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\webhookPayload.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.350Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\checkRun.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\checkRun.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.350Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\checkRun.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\checkRun.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.367Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\util\branchRef.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\util\\branchRef.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.368Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\safeBranchName.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\safeBranchName.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.368Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\safeBranchName.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\safeBranchName.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.386Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\util\branchRef.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\util\\branchRef.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.386Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\checkSuite.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\checkSuite.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.386Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\checkSuite.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\checkSuite.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.400Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\send-grid\send-email.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\send-grid\\send-email.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.400Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\createEvent.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\createEvent.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.400Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\createEvent.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\createEvent.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.438Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\send-grid\send-email.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\send-grid\\send-email.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.438Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\util\grantAdmin.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\util\\grantAdmin.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.438Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\deleteEvent.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\deleteEvent.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.439Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\deleteEvent.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\deleteEvent.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.439Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\grant-admin.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\grant-admin.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.439Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\grant-admin.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\grant-admin.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.439Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\user.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\user.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.440Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\user.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\user.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.463Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\util\grantAdmin.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\util\\grantAdmin.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.464Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\pullRequestEvent.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\pullRequestEvent.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.464Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\pullRequestEvent.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\pullRequestEvent.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.464Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\staleBranches.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\staleBranches.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.465Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\staleBranches.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\staleBranches.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.480Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\brakeman\brakeman.interface.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\brakeman\\brakeman.interface.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.480Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\branch-deployment\branchDeployment.interface.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\branch-deployment\\branchDeployment.interface.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.481Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\deployment-environment\environmentStatus.enum.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\deployment-environment\\environmentStatus.enum.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.558Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\brakeman\brakeman.interface.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\brakeman\\brakeman.interface.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.558Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\brakeman\brakeman.interface.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\brakeman\\brakeman.interface.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.558Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\brakeman\brakeman.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\brakeman\\brakeman.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.558Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\brakeman\brakeman.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\brakeman\\brakeman.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.559Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\brakeman\index.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\brakeman\\index.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.559Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\brakeman\index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\brakeman\\index.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.559Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\branch-deployment\branchDeployment.interface.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\branch-deployment\\branchDeployment.interface.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.559Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\branch-deployment\branchDeployment.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\branch-deployment\\branchDeployment.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.559Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\branch-deployment\branchDeployment.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\branch-deployment\\branchDeployment.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.560Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\branch-deployment\index.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\branch-deployment\\index.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.560Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\branch-deployment\index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\branch-deployment\\index.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.560Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\deployment-environment\environmentStatus.enum.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\deployment-environment\\environmentStatus.enum.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.560Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\deployment-environment\deploymentEnvironment.interface.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\deployment-environment\\deploymentEnvironment.interface.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.560Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\deployment-environment\deploymentEnvironment.interface.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\deployment-environment\\deploymentEnvironment.interface.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.560Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\deployment-environment\deploymentEnvironment.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\deployment-environment\\deploymentEnvironment.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.560Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\deployment-environment\deploymentEnvironment.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\deployment-environment\\deploymentEnvironment.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.560Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\deployment-environment\index.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\deployment-environment\\index.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.561Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\deployment-environment\index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\deployment-environment\\index.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.572Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\new-user\new-user.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\new-user\\new-user.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.572Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\index.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\index.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.572Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\branch-deployment\watchEnvironment.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\branch-deployment\\watchEnvironment.js.map changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.572Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\branch-deployment\watchEnvironment.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\branch-deployment\\watchEnvironment.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.586Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\new-user\new-user.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\new-user\\new-user.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:52.586Z] File C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\lib\index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\lib\\index.js changed, reloading triggers"}}
-[debug] [2021-01-26T19:31:53.598Z] [worker-pool] Shutting down IDLE worker (~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Shutting down IDLE worker (~diagnostic~)"}}
-[debug] [2021-01-26T19:31:53.598Z] [worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: FINISHING {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: FINISHING"}}
-[debug] [2021-01-26T19:31:53.612Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
-[debug] [2021-01-26T19:31:53.612Z] [worker-pool] Adding worker with key ~diagnostic~, total=2 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=2"}}
-[debug] [2021-01-26T19:31:53.612Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
-[debug] [2021-01-26T19:31:53.612Z] [worker-~diagnostic~-0e536569-8b77-4af1-b4a8-910081c3ce04]: Assigning socketPath: \\?\pipe\C:\Users\Mark\Documents\IdeaCrew\active-branch-tracker\functions\12980 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-0e536569-8b77-4af1-b4a8-910081c3ce04]: Assigning socketPath: \\\\?\\pipe\\C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\12980"}}
-[debug] [2021-01-26T19:31:53.613Z] [worker-~diagnostic~-0e536569-8b77-4af1-b4a8-910081c3ce04]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-0e536569-8b77-4af1-b4a8-910081c3ce04]: BUSY"}}
-[debug] [2021-01-26T19:31:53.614Z] [worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: exited"}}
-[debug] [2021-01-26T19:31:53.614Z] [worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-5102caab-10e9-4972-8c17-a9be07d662ec]: FINISHED"}}
-[debug] [2021-01-26T19:31:54.047Z] [runtime-status] [12980] Functions runtime initialized. {"cwd":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions","node_version":"12.18.3"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] Functions runtime initialized. {\"cwd\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\",\"node_version\":\"12.18.3\"}"}}
-[debug] [2021-01-26T19:31:54.048Z] [runtime-status] [12980] Disabled runtime features: undefined {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] Disabled runtime features: undefined"}}
-[debug] [2021-01-26T19:31:54.058Z] [runtime-status] [12980] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.4.2","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-admin\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.4.2\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:54.066Z] [runtime-status] [12980] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:54.073Z] [runtime-status] [12980] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:54.076Z] [runtime-status] [12980] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
-[debug] [2021-01-26T19:31:54.078Z] [runtime-status] [12980] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:54.365Z] [runtime-status] [12980] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] Checked functions.config() {\"config\":{}}"}}
-[debug] [2021-01-26T19:31:54.367Z] [runtime-status] [12980] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}}"}}
-[debug] [2021-01-26T19:31:54.370Z] [runtime-status] [12980] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:54.378Z] [runtime-status] [12980] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.4.2","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-admin\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.4.2\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:54.385Z] [runtime-status] [12980] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.13.1","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-functions\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.13.1\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\index.js\"}"}}
-[debug] [2021-01-26T19:31:54.385Z] [runtime-status] [12980] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.4.2","resolution":"C:\\Users\\Mark\\Documents\\IdeaCrew\\active-branch-tracker\\functions\\node_modules\\firebase-admin\\lib\\index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"9.4.2\",\"resolution\":\"C:\\\\Users\\\\Mark\\\\Documents\\\\IdeaCrew\\\\active-branch-tracker\\\\functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}}"}}
-[debug] [2021-01-26T19:31:54.738Z] [runtime-status] [12980] initializeApp(DEFAULT) {"storageBucket":"active-branches-report.appspot.com","databaseURL":"https://active-branches-report.firebaseio.com","projectId":"active-branches-report"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] initializeApp(DEFAULT) {\"storageBucket\":\"active-branches-report.appspot.com\",\"databaseURL\":\"https://active-branches-report.firebaseio.com\",\"projectId\":\"active-branches-report\"}"}}
-[debug] [2021-01-26T19:31:55.058Z] [runtime-status] [12980] auth.setJwtVerificationEnabled(false) {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [12980] auth.setJwtVerificationEnabled(false)"}}
-[debug] [2021-01-26T19:31:55.085Z] [worker-~diagnostic~-0e536569-8b77-4af1-b4a8-910081c3ce04]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-0e536569-8b77-4af1-b4a8-910081c3ce04]: IDLE"}}
-[debug] [2021-01-26T19:32:05.397Z] Jan 26, 2021 2:32:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+[debug] [2021-01-26T20:44:27.606Z] Jan 26, 2021 3:44:27 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected non-HTTP/2 connection.
- {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 2:32:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
-[debug] [2021-01-26T19:32:05.685Z] Jan 26, 2021 2:32:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:44:27 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:44:27.993Z] Jan 26, 2021 3:44:27 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected non-HTTP/2 connection.
- {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 2:32:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
-[debug] [2021-01-26T19:32:17.068Z] Jan 26, 2021 2:32:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:44:27 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:44:28.262Z] Jan 26, 2021 3:44:28 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected non-HTTP/2 connection.
- {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 2:32:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
-[debug] [2021-01-26T19:32:17.115Z] Jan 26, 2021 2:32:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:44:28 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:44:28.541Z] Jan 26, 2021 3:44:28 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected non-HTTP/2 connection.
- {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 2:32:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
-[debug] [2021-01-26T19:32:17.139Z] Jan 26, 2021 2:32:17 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:44:28 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:44:29.580Z] Jan 26, 2021 3:44:29 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:44:29 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:44:29.934Z] Jan 26, 2021 3:44:29 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:44:29 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:44:31.081Z] Jan 26, 2021 3:44:31 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:44:31 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:44:32.718Z] Jan 26, 2021 3:44:32 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:44:32 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:45:05.429Z] Jan 26, 2021 3:45:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:45:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:45:07.279Z] Jan 26, 2021 3:45:07 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:45:07 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:45:07.630Z] Jan 26, 2021 3:45:07 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:45:07 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:45:07.948Z] Jan 26, 2021 3:45:07 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:45:07 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:45:39.452Z] Jan 26, 2021 3:45:39 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:45:39 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:46:08.358Z] Jan 26, 2021 3:46:08 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:46:08 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:46:08.380Z] Jan 26, 2021 3:46:08 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose
 INFO: channel closed
- {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 2:32:17 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
-[debug] [2021-01-26T19:32:17.452Z] Jan 26, 2021 2:32:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:46:08 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:46:39.476Z] Jan 26, 2021 3:46:39 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected non-HTTP/2 connection.
- {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 2:32:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
-[debug] [2021-01-26T19:33:17.496Z] Jan 26, 2021 2:33:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:46:39 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:47:39.809Z] Jan 26, 2021 3:47:39 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected non-HTTP/2 connection.
- {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 2:33:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:47:39 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:47:48.449Z] Jan 26, 2021 3:47:48 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:47:48 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:47:48.925Z] Jan 26, 2021 3:47:48 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:47:48 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:47:57.996Z] Jan 26, 2021 3:47:57 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:47:57 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:47:58.059Z] Jan 26, 2021 3:47:58 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:47:58 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:47:58.339Z] Jan 26, 2021 3:47:58 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:47:58 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:47:58.343Z] Jan 26, 2021 3:47:58 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:47:58 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:48:03.908Z] Jan 26, 2021 3:48:03 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:03 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:48:03.944Z] Jan 26, 2021 3:48:03 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:03 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:48:03.952Z] Jan 26, 2021 3:48:03 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:03 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:48:04.293Z] Jan 26, 2021 3:48:04 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:04 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:48:05.752Z] Jan 26, 2021 3:48:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:48:05.799Z] Jan 26, 2021 3:48:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:48:06.082Z] Jan 26, 2021 3:48:06 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:06 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:48:06.086Z] Jan 26, 2021 3:48:06 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:06 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:48:07.755Z] Jan 26, 2021 3:48:07 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:07 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:48:40.147Z] Jan 26, 2021 3:48:40 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:40 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:48:50.168Z] Jan 26, 2021 3:48:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:48:50.489Z] Jan 26, 2021 3:48:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:48:50.805Z] Jan 26, 2021 3:48:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:48:51.121Z] Jan 26, 2021 3:48:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:48:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:11.986Z] Jan 26, 2021 3:49:11 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:11 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:17.026Z] Jan 26, 2021 3:49:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:17.037Z] Jan 26, 2021 3:49:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:17.046Z] Jan 26, 2021 3:49:17 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:17 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:49:17.347Z] Jan 26, 2021 3:49:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:20.784Z] Jan 26, 2021 3:49:20 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:20 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:20.831Z] Jan 26, 2021 3:49:20 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:20 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:21.100Z] Jan 26, 2021 3:49:21 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:21 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:21.103Z] Jan 26, 2021 3:49:21 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:21 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:49:22.375Z] Jan 26, 2021 3:49:22 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:22 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:22.387Z] Jan 26, 2021 3:49:22 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:22 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:22.702Z] Jan 26, 2021 3:49:22 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:22 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:22.706Z] Jan 26, 2021 3:49:22 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:22 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:49:42.325Z] Jan 26, 2021 3:49:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:42.326Z] Jan 26, 2021 3:49:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:57.656Z] Jan 26, 2021 3:49:57 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:57 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:49:57.983Z] Jan 26, 2021 3:49:57 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:49:57 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:50:02.559Z] Jan 26, 2021 3:50:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:50:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:50:02.575Z] Jan 26, 2021 3:50:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:50:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:50:02.888Z] Jan 26, 2021 3:50:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:50:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:50:02.891Z] Jan 26, 2021 3:50:02 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:50:02 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:50:12.584Z] Jan 26, 2021 3:50:12 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:50:12 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:50:12.589Z] Jan 26, 2021 3:50:12 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:50:12 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:50:42.659Z] Jan 26, 2021 3:50:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:50:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:51:02.896Z] Jan 26, 2021 3:51:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:51:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:51:42.990Z] Jan 26, 2021 3:51:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:51:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:52:03.242Z] Jan 26, 2021 3:52:03 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:52:03 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:52:43.327Z] Jan 26, 2021 3:52:43 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:52:43 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:52:47.146Z] Jan 26, 2021 3:52:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:52:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:52:47.240Z] Jan 26, 2021 3:52:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:52:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:52:47.461Z] Jan 26, 2021 3:52:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:52:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:52:47.470Z] Jan 26, 2021 3:52:47 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:52:47 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:52:50.194Z] Jan 26, 2021 3:52:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:52:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:52:50.225Z] Jan 26, 2021 3:52:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:52:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:52:50.521Z] Jan 26, 2021 3:52:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:52:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:52:50.525Z] Jan 26, 2021 3:52:50 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:52:50 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:53:20.294Z] Jan 26, 2021 3:53:20 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:53:20 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:53:20.374Z] Jan 26, 2021 3:53:20 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:53:20 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:53:20.625Z] Jan 26, 2021 3:53:20 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:53:20 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:53:20.628Z] Jan 26, 2021 3:53:20 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:53:20 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:53:23.663Z] Jan 26, 2021 3:53:23 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:53:23 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:53:23.713Z] Jan 26, 2021 3:53:23 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:53:23 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:53:23.747Z] Jan 26, 2021 3:53:23 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:53:23 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:53:24.080Z] Jan 26, 2021 3:53:24 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:53:24 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:53:43.667Z] Jan 26, 2021 3:53:43 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:53:43 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:54:24.410Z] Jan 26, 2021 3:54:24 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:54:24 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:54:44.007Z] Jan 26, 2021 3:54:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:54:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:54:47.537Z] Jan 26, 2021 3:54:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:54:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:54:47.870Z] Jan 26, 2021 3:54:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:54:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:54:52.268Z] Jan 26, 2021 3:54:52 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:54:52 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:54:52.299Z] Jan 26, 2021 3:54:52 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:54:52 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:54:52.584Z] Jan 26, 2021 3:54:52 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:54:52 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:54:52.588Z] Jan 26, 2021 3:54:52 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:54:52 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:55:36.974Z] Jan 26, 2021 3:55:36 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:55:36 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:55:37.037Z] Jan 26, 2021 3:55:37 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:55:37 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:55:37.305Z] Jan 26, 2021 3:55:37 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:55:37 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:55:37.308Z] Jan 26, 2021 3:55:37 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:55:37 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:55:41.107Z] Jan 26, 2021 3:55:41 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:55:41 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:55:41.118Z] Jan 26, 2021 3:55:41 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:55:41 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:55:41.126Z] Jan 26, 2021 3:55:41 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:55:41 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\r\nINFO: channel closed\r\n"}}
+[debug] [2021-01-26T20:55:41.433Z] Jan 26, 2021 3:55:41 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:55:41 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:55:44.351Z] Jan 26, 2021 3:55:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:55:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:56:41.777Z] Jan 26, 2021 3:56:41 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:56:41 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:56:44.678Z] Jan 26, 2021 3:56:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:56:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:57:42.118Z] Jan 26, 2021 3:57:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:57:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:57:45.012Z] Jan 26, 2021 3:57:45 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:57:45 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:58:42.452Z] Jan 26, 2021 3:58:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:58:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:58:45.326Z] Jan 26, 2021 3:58:45 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:58:45 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:59:45.666Z] Jan 26, 2021 3:59:45 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:59:45 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T20:59:58.593Z] Jan 26, 2021 3:59:58 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 3:59:58 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T21:00:58.935Z] Jan 26, 2021 4:00:58 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 4:00:58 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T21:01:01.595Z] Jan 26, 2021 4:01:01 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 4:01:01 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T21:01:59.268Z] Jan 26, 2021 4:01:59 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 4:01:59 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T21:02:01.920Z] Jan 26, 2021 4:02:01 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 4:02:01 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T21:02:59.604Z] Jan 26, 2021 4:02:59 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 4:02:59 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
+[debug] [2021-01-26T21:03:02.250Z] Jan 26, 2021 4:03:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 26, 2021 4:03:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected non-HTTP/2 connection.\r\n"}}
