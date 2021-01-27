@@ -13,9 +13,14 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
-      switchMap(() => this.authService.login()),
+      switchMap(() => {
+        return this.authService.login();
+      }),
       map(() => AuthActions.loginSuccess()),
-      catchError((error: string) => of(AuthActions.loginFailure())),
+      catchError((error: unknown) => {
+        console.log('CATCH ERROR', error);
+        return of(AuthActions.loginFailure({ error }));
+      }),
     ),
   );
 
@@ -26,6 +31,17 @@ export class AuthEffects {
         tap(() => this.router.navigate(['/user'])),
       ),
     { dispatch: false },
+  );
+
+  loginFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.loginFailure),
+        tap(() => this.router.navigate(['/login'])),
+      ),
+    {
+      dispatch: false,
+    },
   );
 
   logout$ = createEffect(() =>

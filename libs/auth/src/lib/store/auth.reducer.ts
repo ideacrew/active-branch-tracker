@@ -8,7 +8,7 @@ export interface AuthState {
   uid: string | undefined;
   displayName?: string | null;
   email?: string | null;
-  error: string | undefined;
+  error: unknown | undefined;
 }
 
 export interface UserPartialState {
@@ -27,16 +27,10 @@ const authReducer = createReducer(
     ...userDetails,
   })),
   on(AuthActions.logout, state => initialState),
-
-  // on(UserActions.loadUser, (state, { userAuth }) => ({
-  //   ...state,
-  //   firebaseUser: userAuth,
-  // })),
-  // on(UserActions.loadUserSuccess, (state, { user }) => {
-  //   return { ...state, user };
-  // }),
-
-  // on(UserActions.loadUserFailure, (state, { error }) => ({ ...state, error })),
+  on(AuthActions.loginFailure, (state, { error }) => ({
+    ...initialState,
+    error,
+  })),
 );
 
 export function reducer(

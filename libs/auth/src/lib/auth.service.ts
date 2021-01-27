@@ -13,8 +13,13 @@ export class AuthService {
 
   constructor(public afAuth: AngularFireAuth) {}
 
-  login(): Promise<firebase.auth.UserCredential> {
-    return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  async login(): Promise<void> {
+    try {
+      await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    } catch (e) {
+      console.log('AUTH ERROR', e);
+      throw new Error('Error!')
+    }
   }
 
   logout(): Promise<void> {
@@ -25,4 +30,3 @@ export class AuthService {
     return this.afAuth.user;
   }
 }
- 
