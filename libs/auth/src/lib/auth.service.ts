@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private authStream = new Subject<void>();
+  authStream$ = this.authStream.asObservable();
+
   constructor(public afAuth: AngularFireAuth) {}
 
   login(): Promise<firebase.auth.UserCredential> {
@@ -22,3 +25,4 @@ export class AuthService {
     return this.afAuth.user;
   }
 }
+ 

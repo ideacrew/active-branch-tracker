@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 
 import { UserEntity } from './store/user.models';
 
@@ -11,9 +11,11 @@ import { UserEntity } from './store/user.models';
 export class UserService {
   constructor(private afs: AngularFirestore) {}
 
-  getUserRef(uid: string): Observable<UserEntity | undefined> {
+  async getUserOnce(uid: string): Promise<UserEntity | undefined> {
     return this.afs
       .doc<UserEntity>(`users/${uid}`)
-      .valueChanges();
+      .valueChanges()
+      .pipe(take(1))
+      .toPromise();
   }
 }

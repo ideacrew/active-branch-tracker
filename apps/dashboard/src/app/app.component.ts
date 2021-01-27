@@ -8,7 +8,7 @@ import { ServiceWorkerUpdateService } from './service-worker-update.service';
   selector: 'idc-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   constructor(

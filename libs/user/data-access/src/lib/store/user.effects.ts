@@ -3,11 +3,10 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 
 import * as UserActions from './user.actions';
 import { logoutSuccess, setCurrentUser } from '@idc/auth';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
 import { UserService } from '../user.service';
 import { of } from 'rxjs';
 import { UserEntity } from './user.models';
-import { UserFacade } from './user.facade';
 
 @Injectable()
 export class UserEffects {
@@ -18,19 +17,14 @@ export class UserEffects {
     ),
   );
 
-  loadUser$ = createEffect(() =>
+  loadUserOnce$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.loadUser),
-      switchMap(({ uid }) => {
-        return this.userService.getUserRef(uid).pipe(
-          map((user: UserEntity | undefined) =>
-            UserActions.loadUserSuccess({ user }),
-          ),
-          catchError(e => {
-            // console.error(e);
-            return of(UserActions.loadUserFailure());
-          }),
-        );
+      switchMap(async ({ uid }) => await this.userService.getUserOnce(uid)),
+      map(user => UserActions.loadUserSuccess({ user })),
+      catchError(e => {
+        console.error(e);
+        return of(UserActions.loadUserFailure());
       }),
     ),
   );
@@ -42,9 +36,5 @@ export class UserEffects {
     ),
   );
 
-  constructor(
-    private actions$: Actions,
-    private userService: UserService,
-    private userFacade: UserFacade,
-  ) {}
+  constructor(private actions$: Actions, private userService: UserService) {}
 }

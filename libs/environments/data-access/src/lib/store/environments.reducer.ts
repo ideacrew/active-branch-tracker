@@ -9,16 +9,14 @@ export const ENVIRONMENTS_FEATURE_KEY = 'environments';
 export interface State extends EntityState<EnvironmentsEntity> {
   selectedId?: string | number; // which Environments record has been selected
   loaded: boolean; // has the Environments list been loaded
-  error?: string | null; // last known error (if any)
+  error?: { code: string; name: string } | null; // last known error (if any)
 }
 
 export interface EnvironmentsPartialState {
   readonly [ENVIRONMENTS_FEATURE_KEY]: State;
 }
 
-export const environmentsAdapter: EntityAdapter<EnvironmentsEntity> = createEntityAdapter<
-  EnvironmentsEntity
->();
+export const environmentsAdapter: EntityAdapter<EnvironmentsEntity> = createEntityAdapter<EnvironmentsEntity>();
 
 export const initialState: State = environmentsAdapter.getInitialState({
   // set initial required properties
@@ -33,12 +31,16 @@ const environmentsReducer = createReducer(
     error: null,
   })),
   on(EnvironmentsActions.loadEnvironmentsSuccess, (state, { environments }) =>
-    environmentsAdapter.addAll(environments, { ...state, loaded: true }),
+    environmentsAdapter.setAll(environments, { ...state, loaded: true }),
   ),
-  on(EnvironmentsActions.loadEnvironmentsFailure, (state, { error }) => ({
-    ...state,
-    error,
-  })),
+  on(EnvironmentsActions.loadEnvironmentsFailure, (state, { error }) => {
+    if (error.code === 'permission-denied') {
+      return {
+        ...initialState,
+        error,
+      };
+    }
+  }),
 );
 
 export function reducer(state: State | undefined, action: Action) {
