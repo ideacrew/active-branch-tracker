@@ -24,8 +24,28 @@ describe('Unit tests', () => {
 
       const snap = await admin.firestore().doc('users/xyz6789').get();
       expect(snap.data()).to.eql({
-        admin: true,
+        role: 'admin',
         email: 'mark.goho@ideacrew.com',
+        displayName: 'Mark Goho',
+        photoURL: 'https://example.com',
+      });
+    });
+
+    it('makes an ideacrew person a user', async () => {
+      const wrapped = test.wrap(myFunctions.createUserRecord);
+      const user = test.auth.makeUserRecord({
+        uid: 'abc1234',
+        email: 'markgoho@gmail.com',
+        displayName: 'Mark Goho',
+        photoURL: 'https://example.com',
+      });
+
+      await wrapped(user);
+
+      const snap = await admin.firestore().doc('users/abc1234').get();
+      expect(snap.data()).to.eql({
+        role: 'user',
+        email: 'markgoho@gmail.com',
         displayName: 'Mark Goho',
         photoURL: 'https://example.com',
       });
@@ -44,7 +64,7 @@ describe('Unit tests', () => {
 
       const snap = await admin.firestore().doc('users/abc1234').get();
       expect(snap.data()).to.eql({
-        admin: false,
+        role: 'disabled',
         email: 'markgoho@gmail.com',
         displayName: 'Mark Goho',
         photoURL: 'https://example.com',
