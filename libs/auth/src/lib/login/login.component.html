@@ -12,6 +12,7 @@
   <input type="text" name="email" id="email" [(ngModel)]="email" />
   <label for="password">Password</label>
   <input type="text" name="password" id="password" [(ngModel)]="password" />
+  <span *ngIf="authFacade.errorMessage$ | async as message">{{ message }}</span>
   <button class="login-button" (click)="loginWithEmailPassword()" type="button">
     Log In
   </button>

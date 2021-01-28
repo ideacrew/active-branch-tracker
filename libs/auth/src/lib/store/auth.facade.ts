@@ -9,6 +9,7 @@ import * as AuthSelectors from './auth.selectors';
 export class AuthFacade {
   firebaseUID$ = this.store.pipe(select(AuthSelectors.getUID));
   loggedIn$ = this.store.pipe(select(AuthSelectors.getLoggedIn));
+  errorMessage$ = this.store.pipe(select(AuthSelectors.getErrorMessage));
 
   constructor(private store: Store<fromUser.UserPartialState>) {}
 

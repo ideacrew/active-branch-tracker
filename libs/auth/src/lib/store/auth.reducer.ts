@@ -8,7 +8,7 @@ export interface AuthState {
   uid: string | undefined;
   displayName?: string | null;
   email?: string | null;
-  error: unknown | undefined;
+  error: { code: string; message: string } | undefined;
 }
 
 export interface UserPartialState {
@@ -27,7 +27,7 @@ const authReducer = createReducer(
     ...userDetails,
   })),
   on(AuthActions.logout, state => initialState),
-  on(AuthActions.loginWithGoogleFailure, (state, { error }) => ({
+  on(AuthActions.loginWithEmailPasswordFailure, (state, { error }) => ({
     ...initialState,
     error,
   })),

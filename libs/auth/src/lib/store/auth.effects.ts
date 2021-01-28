@@ -31,7 +31,7 @@ export class AuthEffects {
         this.authService.loginWithEmailPassword(email, password),
       ),
       map(() => AuthActions.loginWithEmailPasswordSuccess()),
-      catchError((error: unknown) =>
+      catchError((error: { code: string; message: string }) =>
         of(AuthActions.loginWithEmailPasswordFailure({ error })),
       ),
     ),

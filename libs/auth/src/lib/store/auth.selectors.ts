@@ -9,3 +9,8 @@ export const getAuthState = createFeatureSelector<UserPartialState, AuthState>(
 export const getUID = createSelector(getAuthState, userState => userState.uid);
 
 export const getLoggedIn = createSelector(getUID, uid => !!uid);
+
+export const getErrorMessage = createSelector(
+  getAuthState,
+  state => state.error?.message,
+);
