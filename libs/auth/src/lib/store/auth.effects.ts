@@ -12,23 +12,39 @@ import { AuthService } from '../auth.service';
 export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.login),
+      ofType(AuthActions.loginWithGoogle),
       switchMap(() => {
         return this.authService.login().catch(e => console.log('CATCH', e));
       }),
-      map(() => AuthActions.loginSuccess()),
+      map(() => AuthActions.loginWithGoogleSuccess()),
       catchError((error: unknown) => {
         console.log('CATCH ERROR', error);
-        return of(AuthActions.loginFailure({ error }));
+        return of(AuthActions.loginWithGoogleFailure({ error }));
       }),
+    ),
+  );
+
+  loginWithEmailPassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginWithEmailPassword),
+      switchMap(({ email, password }) =>
+        this.authService.loginWithEmailPassword(email, password),
+      ),
+      map(() => AuthActions.loginWithEmailPasswordSuccess()),
+      catchError((error: unknown) =>
+        of(AuthActions.loginWithEmailPasswordFailure({ error })),
+      ),
     ),
   );
 
   loginSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(AuthActions.loginSuccess),
-        tap(() => this.router.navigate(['/user'])),
+        ofType(
+          AuthActions.loginWithGoogleSuccess,
+          AuthActions.loginWithEmailPasswordSuccess,
+        ),
+        tap(() => this.router.navigate(['/branches'])),
       ),
     { dispatch: false },
   );
@@ -36,7 +52,7 @@ export class AuthEffects {
   loginFailure$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(AuthActions.loginFailure),
+        ofType(AuthActions.loginWithGoogleFailure),
         tap(() => this.router.navigate(['/login'])),
       ),
     {

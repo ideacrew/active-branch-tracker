@@ -8,19 +8,10 @@
   text-align: center;
 }
 
-button {
-  margin-top: 1rem;
-  align-self: center;
-  border-radius: 2px;
-}
-
-.google-button {
-  color: inherit;
-  background-color: var(--google-blue);
-  border: 1px solid var(--google-blue);
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  padding-right: 0.5rem;
+.login-button {
+  border: 1px solid white;
+  color: white;
+  padding: 1rem 3rem;
 }
 
 .logout-button {

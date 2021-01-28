@@ -126,11 +126,11 @@ export const watchEnvironments = functions.firestore
     }
   });
 
-export const createUserRecord = functions.auth
-  .user()
-  .onCreate(async (user, context) => {
-    await (await import('./new-user/new-user')).createNewUser(user, context);
-  });
+// export const createUserRecord = functions.auth
+//   .user()
+//   .onCreate(async (user, context) => {
+//     await (await import('./new-user/new-user')).createNewUser(user, context);
+//   });
 
 // export const deleteUserRecord = functions.auth
 //   .user()

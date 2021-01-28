@@ -27,7 +27,7 @@ const authReducer = createReducer(
     ...userDetails,
   })),
   on(AuthActions.logout, state => initialState),
-  on(AuthActions.loginFailure, (state, { error }) => ({
+  on(AuthActions.loginWithGoogleFailure, (state, { error }) => ({
     ...initialState,
     error,
   })),

@@ -34,18 +34,18 @@ describe('Unit tests', () => {
     it('makes an ideacrew person a user', async () => {
       const wrapped = test.wrap(myFunctions.createUserRecord);
       const user = test.auth.makeUserRecord({
-        uid: 'abc1234',
-        email: 'markgoho@gmail.com',
+        uid: 'asdfa34234',
+        email: 'bob.johnson@ideacrew.com',
         displayName: 'Mark Goho',
         photoURL: 'https://example.com',
       });
 
       await wrapped(user);
 
-      const snap = await admin.firestore().doc('users/abc1234').get();
+      const snap = await admin.firestore().doc('users/asdfa34234').get();
       expect(snap.data()).to.eql({
         role: 'user',
-        email: 'markgoho@gmail.com',
+        email: 'bob.johnson@ideacrew.com',
         displayName: 'Mark Goho',
         photoURL: 'https://example.com',
       });
