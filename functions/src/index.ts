@@ -132,10 +132,10 @@ export const createUserRecord = functions.auth
     await (await import('./new-user/new-user')).createNewUser(user, context);
   });
 
-export const deleteUserRecord = functions.auth
-  .user()
-  .onDelete(async (user, context) => {
-    await (await import('./delete-user/delete-user')).deleteUser(user, context);
-  });
+// export const deleteUserRecord = functions.auth
+//   .user()
+//   .onDelete(async (user, context) => {
+//     await (await import('./delete-user/delete-user')).deleteUser(user, context);
+//   });
 
 export const grantAdmin = functions.https.onCall(enableAdminForUser);

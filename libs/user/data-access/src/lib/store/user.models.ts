@@ -6,6 +6,7 @@ export interface UserEntity {
   displayName?: string;
   email?: string;
   photoURL?: string;
+  disabled?: boolean;
   config: {
     automaticUpdates: boolean;
   };

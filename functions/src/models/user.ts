@@ -2,6 +2,7 @@ export interface YellrUser {
   email: string;
   displayName: string;
   photoURL: string;
-  admin: boolean;
-  disabled: boolean;
+  role: YellrRole;
 }
+
+export type YellrRole = 'admin' | 'user' | 'disabled';

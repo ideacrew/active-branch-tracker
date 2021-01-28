@@ -14,7 +14,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.login),
       switchMap(() => {
-        return this.authService.login();
+        return this.authService.login().catch(e => console.log('CATCH', e));
       }),
       map(() => AuthActions.loginSuccess()),
       catchError((error: unknown) => {
