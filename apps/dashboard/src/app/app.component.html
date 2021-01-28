@@ -16,17 +16,11 @@
     </a>
   </li>
   <li class="nav-link">
-    <a
-      routerLink="/user"
-      class="avatar"
-      *ngIf="userFacade.user$ | async as user; else notLoggedIn"
-    >
-      <span>{{ user.displayName }}</span>
-      <img
-        class="profile-image"
-        src="{{ user.photoURL }}"
-        alt="profile image of {{ user.displayName }}"
-      />
+    <a routerLink="/login">
+      <span>Login</span
+      ><svg height="24px" width="24px" class="svg-icon" title="User">
+        <use href="assets/icons.svg#person"></use>
+      </svg>
     </a>
   </li>
 </ul>
@@ -34,12 +28,3 @@
 <main>
   <router-outlet></router-outlet>
 </main>
-
-<ng-template #notLoggedIn>
-  <a routerLink="/login">
-    <span>Login</span
-    ><svg height="24px" width="24px" class="svg-icon" title="User">
-      <use href="assets/icons.svg#person"></use>
-    </svg>
-  </a>
-</ng-template>

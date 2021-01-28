@@ -10,8 +10,6 @@ module.exports = {
     '<rootDir>/libs/environments/feature',
     '<rootDir>/libs/testing',
     '<rootDir>/libs/auth',
-    '<rootDir>/libs/user/data-access',
-    '<rootDir>/libs/user/feature',
     '<rootDir>/libs/google-analytics',
   ],
 };

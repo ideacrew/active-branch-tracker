@@ -30,13 +30,6 @@ const routes = [
         module => module.EnvironmentsFeatureModule,
       ),
   },
-  {
-    path: 'user',
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-    loadChildren: () =>
-      import('@idc/user/feature').then(module => module.UserFeatureModule),
-  },
 ];
 
 @NgModule({

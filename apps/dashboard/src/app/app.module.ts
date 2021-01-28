@@ -16,7 +16,6 @@ import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 
 import { DisplayConfigModule } from '@idc/display-config';
 import { AuthModule } from '@idc/auth';
-import { UserDataAccessModule } from '@idc/user/data-access';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -31,7 +30,7 @@ import './firebase-init';
   imports: [
     BrowserModule,
     environment.useEmulators
-      ? AngularFireModule.initializeApp(environment.firebase, 'myapp')
+      ? AngularFireModule.initializeApp(environment.firebase, 'fakeproject')
       : AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireAuthGuardModule,
@@ -57,7 +56,6 @@ import './firebase-init';
     DisplayConfigModule,
     AngularFirestoreModule,
     AuthModule,
-    UserDataAccessModule,
   ],
   bootstrap: [AppComponent],
   providers: [

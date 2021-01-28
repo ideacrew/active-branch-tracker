@@ -9,9 +9,6 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private authStream = new Subject<void>();
-  authStream$ = this.authStream.asObservable();
-
   constructor(public afAuth: AngularFireAuth) {}
 
   login(): Promise<firebase.auth.UserCredential> {
@@ -30,6 +27,6 @@ export class AuthService {
   }
 
   get user$(): Observable<firebase.User | null> {
-    return this.afAuth.user.pipe(tap(console.log));
+    return this.afAuth.user;
   }
 }

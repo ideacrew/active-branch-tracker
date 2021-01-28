@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AuthFacade } from '../store/auth.facade';
-import * as AuthActions from '../store/auth.actions';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Component({
   templateUrl: './login.component.html',
@@ -8,24 +9,21 @@ import * as AuthActions from '../store/auth.actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
-  constructor(public authFacade: AuthFacade) {}
+  readonly errorMessage = new Subject<string>();
+  errorMessage$ = this.errorMessage.asObservable();
 
-  login(): void {
-    this.authFacade.dispatch(AuthActions.loginWithGoogle());
-  }
+  email = '';
+  password = '';
+  constructor(public auth: AuthService, private router: Router) {}
 
   loginWithEmailPassword(): void {
-    this.authFacade.dispatch(
-      AuthActions.loginWithEmailPassword({
-        email: this.email,
-        password: this.password,
-      }),
-    );
+    this.auth
+      .loginWithEmailPassword(this.email, this.password)
+      .then(() => this.router.navigate(['/branches']))
+      .catch(error => this.errorMessage.next(error.message));
   }
 
   logout(): void {
-    this.authFacade.dispatch(AuthActions.logout());
+    this.auth.logout().then(() => this.router.navigate(['/login']));
   }
 }
