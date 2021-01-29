@@ -11,7 +11,7 @@
   <label for="email">Email</label>
   <input type="text" name="email" id="email" [(ngModel)]="email" />
   <label for="password">Password</label>
-  <input type="text" name="password" id="password" [(ngModel)]="password" />
+  <input type="password" name="password" id="password" [(ngModel)]="password" />
   <div class="error-message" *ngIf="errorMessage$ | async as message">
     {{ message }}
   </div>
