@@ -83,7 +83,7 @@ jobs:
       - name: Build Application
         run: npm run build
       - name: Deploy
-        run: npm run deploy:all -- --token ${{ secrets.FIREBASE_TOKEN }}
+        run: npm run deploy:dashboard -- --token ${{ secrets.FIREBASE_TOKEN }}
       - name: print log
         uses: actions/upload-artifact@v1
         if: failure()
