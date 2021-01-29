@@ -4,19 +4,20 @@
     name="status"
     id="status"
   >
-    <option *ngIf="currentStatus === undefined" selected
-      >Select a status</option
-    >
+    <option *ngIf="currentStatus === undefined" selected>
+      Select a status
+    </option>
     <option
       *ngFor="let status of statusNames"
       [value]="status"
       [selected]="status === currentStatus"
-      >{{ status }}</option
     >
+      {{ status }}
+    </option>
   </select>
   <button (click)="editing = false" type="button">Cancel</button>
 </div>
 
-<span class="current-status" *ngIf="!editing" (click)="editing = true">
+<span class="current-status" *ngIf="!editing" (click)="editStatus()">
   {{ currentStatus ? currentStatus : 'Select a status' }}
 </span>

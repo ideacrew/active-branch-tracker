@@ -1,0 +1,21 @@
+<button
+  *ngIf="auth.user$ | async; else loggedOut"
+  class="logout-button"
+  (click)="logout()"
+>
+  Sign Out
+</button>
+
+<ng-template #loggedOut>
+  <h1>Log in to SonOfYellr</h1>
+  <label for="email">Email</label>
+  <input type="text" name="email" id="email" [(ngModel)]="email" />
+  <label for="password">Password</label>
+  <input type="password" name="password" id="password" [(ngModel)]="password" />
+  <div class="error-message" *ngIf="errorMessage$ | async as message">
+    {{ message }}
+  </div>
+  <button class="login-button" (click)="loginWithEmailPassword()" type="button">
+    Log In
+  </button>
+</ng-template>

@@ -1,0 +1,55 @@
+:host {
+  --google-blue: #4285f4;
+  padding: 1rem;
+  display: block;
+}
+
+.auth-heading {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.login-button {
+  border: 1px solid white;
+  color: white;
+  padding: 1rem 3rem;
+}
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid currentColor;
+  color: white;
+}
+
+span {
+  color: #fff;
+  margin-left: 0.25rem;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  margin-top: 1.5rem;
+}
+
+p {
+  max-width: 60ch;
+  margin: 0.5rem 0;
+  line-height: 1.25;
+}

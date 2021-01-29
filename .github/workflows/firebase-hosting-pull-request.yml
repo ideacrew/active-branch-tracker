@@ -4,14 +4,50 @@
 name: Deploy to Firebase Hosting on PR
 on:
   pull_request:
+    paths:
+      - 'firestore.rules'
+      - 'apps'
+      - 'libs'
+      - 'firebase.json'
+      - 'package.json'
 
 jobs:
+  tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./functions
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12.x'
+      - name: Install Firebase Emulator Suite
+        run: npm install -g firebase-tools
+      - name: Install dependencies
+        run: npm i
+      - name: Run tests
+        run: npm run test:ci
   build_and_preview:
+    needs: [tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: sudo snap install hugo --channel=extended
-      - run: cd hugo && hugo --minify
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12.x'
+      - uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node12x-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node12x-
+      - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Build Application
+        run: npm run build
       - name: deploy to preview channel
         id: firebase_hosting_preview
         uses: FirebaseExtended/action-hosting-deploy@v0

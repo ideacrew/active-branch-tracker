@@ -22,6 +22,7 @@ export class BranchContainerComponent {
 
   @Input() branch: BranchesEntity;
   @Input() viewType: 'expanded' | 'collapsed' = 'expanded';
+  @Input() loggedIn: boolean;
 
   @Output() readonly trackBranch = new EventEmitter<BranchesEntity>();
   @Output() readonly untrackBranch = new EventEmitter<BranchesEntity>();

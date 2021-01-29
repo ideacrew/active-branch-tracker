@@ -1,0 +1,105 @@
+import { Injectable } from '@angular/core';
+import { createEffect, Actions, ofType } from '@ngrx/effects';
+import { catchError, filter, map, switchMap, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { of } from 'rxjs';
+import firebase from 'firebase/app';
+
+import * as AuthActions from './auth.actions';
+import { AuthService } from '../auth.service';
+
+@Injectable()
+export class AuthEffects {
+  login$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginWithGoogle),
+      switchMap(() => {
+        return this.authService.login().catch(e => console.log('CATCH', e));
+      }),
+      map(() => AuthActions.loginWithGoogleSuccess()),
+      catchError((error: unknown) => {
+        console.log('CATCH ERROR', error);
+        return of(AuthActions.loginWithGoogleFailure({ error }));
+      }),
+    ),
+  );
+
+  loginWithEmailPassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginWithEmailPassword),
+      switchMap(({ email, password }) =>
+        this.authService.loginWithEmailPassword(email, password),
+      ),
+      map(() => AuthActions.loginWithEmailPasswordSuccess()),
+      catchError((error: { code: string; message: string }) =>
+        of(AuthActions.loginWithEmailPasswordFailure({ error })),
+      ),
+    ),
+  );
+
+  loginSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          AuthActions.loginWithGoogleSuccess,
+          AuthActions.loginWithEmailPasswordSuccess,
+        ),
+        tap(() => this.router.navigate(['/branches'])),
+      ),
+    { dispatch: false },
+  );
+
+  loginFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.loginWithGoogleFailure),
+        tap(() => this.router.navigate(['/login'])),
+      ),
+    {
+      dispatch: false,
+    },
+  );
+
+  logout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.logout),
+      switchMap(() => this.authService.logout()),
+      map(() => AuthActions.logoutSuccess()),
+    ),
+  );
+
+  logoutSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.logoutSuccess),
+        tap(() => this.router.navigate(['/login'])),
+      ),
+    {
+      dispatch: false,
+    },
+  );
+
+  authState$ = createEffect(() =>
+    this.authService.user$.pipe(
+      filter(user => !!user),
+      map(user => {
+        const firebaseUser = user as firebase.User;
+
+        const userDetails = {
+          uid: firebaseUser.uid,
+          displayName: firebaseUser.displayName,
+          email: firebaseUser.email,
+        };
+
+        return userDetails;
+      }),
+      map(userDetails => AuthActions.setCurrentUser({ userDetails })),
+    ),
+  );
+
+  constructor(
+    private actions$: Actions,
+    private router: Router,
+    private authService: AuthService,
+  ) {}
+}

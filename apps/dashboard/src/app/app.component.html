@@ -1,36 +1,30 @@
-<div class="application-container collapsed-sidebar">
-  <div class="sidebar collapsed">
-    <!-- <div class="sidebar" [class.collapsed]="uiFacade.sidebarCollapsed$ | async"> -->
-    <ul>
-      <li class="nav-link">
-        <a routerLink="/branches">
-          <span>Branches</span
-          ><svg
-            height="1.5rem"
-            width="1.5rem"
-            class="svg-icon"
-            title="Branches"
-          >
-            <use href="assets/icons.svg#branch"></use>
-          </svg>
-        </a>
-      </li>
-      <li class="nav-link">
-        <a routerLink="/environments">
-          <span>Environments</span
-          ><svg
-            height="1.5rem"
-            width="1.5rem"
-            class="svg-icon"
-            title="Environments"
-          >
-            <use href="assets/icons.svg#rocket"></use>
-          </svg>
-        </a>
-      </li>
-    </ul>
-  </div>
-  <main>
-    <router-outlet></router-outlet>
-  </main>
-</div>
+<ul class="sidebar">
+  <li class="nav-link">
+    <a routerLink="/branches">
+      <span>Branches</span
+      ><svg height="24px" width="24px" class="svg-icon" title="Branches">
+        <use href="assets/icons.svg#branch"></use>
+      </svg>
+    </a>
+  </li>
+  <li class="nav-link">
+    <a routerLink="/environments">
+      <span>Environments</span
+      ><svg height="24px" width="24px" class="svg-icon" title="Environments">
+        <use href="assets/icons.svg#rocket"></use>
+      </svg>
+    </a>
+  </li>
+  <li class="nav-link">
+    <a routerLink="/login">
+      <span>Login</span
+      ><svg height="24px" width="24px" class="svg-icon" title="User">
+        <use href="assets/icons.svg#person"></use>
+      </svg>
+    </a>
+  </li>
+</ul>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

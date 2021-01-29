@@ -14,13 +14,14 @@
   <!-- Container Heading -->
   <div class="container-heading">
     <div class="heading-left">
-      <ng-container *ngIf="!branch.defaultBranch && !branch.environment"
+      <ng-container
+        *ngIf="!branch.defaultBranch && !branch.environment && loggedIn"
         ><button
           *ngIf="branch.tracked === false; else untrack"
           class="light-bulb-button"
           (click)="trackBranch.emit(branch)"
         >
-          <svg class="svg-icon light-bulb" width="1rem" height="2rem">
+          <svg class="svg-icon light-bulb" width="16px" height="32px">
             <use href="assets/icons.svg#light-bulb"></use>
           </svg></button
       ></ng-container>
@@ -34,7 +35,7 @@
           >
         </h2>
         <div class="branch-name">
-          <svg class="svg-icon branch-icon" width="1rem" height="1rem">
+          <svg class="svg-icon branch-icon" width="16px" height="16px">
             <use href="assets/icons.svg#branch"></use>
           </svg>
           <a
@@ -46,6 +47,7 @@
           >
         </div>
         <idc-branch-status
+          [loggedIn]="loggedIn"
           *ngIf="!branch.defaultBranch"
           [currentStatus]="branch.status"
           (newStatus)="changeBranchStatus($event)"
@@ -55,8 +57,8 @@
     <svg
       class="svg-icon"
       [ngClass]="branch.checkSuiteStatus"
-      width="2rem"
-      height="2rem"
+      width="32px"
+      height="32px"
     >
       <use
         *ngIf="branch.checkSuiteStatus === CheckSuiteConclusion.Failure"
@@ -77,8 +79,8 @@
         <svg
           *ngIf="branch.checkSuiteStatus === CheckSuiteConclusion.Success"
           class="svg-icon"
-          width="1rem"
-          height="1rem"
+          width="16px"
+          height="16px"
         >
           <use href="assets/icons.svg#clock"></use>
         </svg>
@@ -93,7 +95,7 @@
       </div>
 
       <div *ngIf="branch.head_sha" class="latest-sha">
-        <svg class="svg-icon" width="1rem" height="1rem">
+        <svg class="svg-icon" width="16px" height="16px">
           <use href="assets/icons.svg#git-commit"></use>
         </svg>
         <a href="{{ branch | commitLink }}">{{
@@ -102,14 +104,14 @@
       </div>
 
       <div class="pull-request">
-        <svg class="svg-icon" width="1rem" height="1rem">
+        <svg class="svg-icon" width="16px" height="16px">
           <use href="assets/icons.svg#pull-request"></use>
         </svg>
         <a href="{{ branch | prLink }}">{{ branch.pullRequestNumber }}</a>
       </div>
 
       <div class="committer">
-        <svg class="svg-icon" width="1rem" height="1rem">
+        <svg class="svg-icon" width="16px" height="16px">
           <use href="assets/icons.svg#person"></use>
         </svg>
         <ng-container *ngIf="branch.head_commit; else sender">
@@ -141,7 +143,7 @@
 
 <ng-template #untrack>
   <button class="light-bulb-button" (click)="untrackBranch.emit(branch)">
-    <svg class="svg-icon light-bulb" width="1rem" height="2rem">
+    <svg class="svg-icon light-bulb" width="16px" height="32px">
       <use href="assets/icons.svg#light-bulb"></use>
     </svg>
   </button>

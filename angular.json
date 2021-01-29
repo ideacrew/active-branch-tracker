@@ -66,6 +66,10 @@
                 {
                   "replace": "apps/dashboard/src/environments/environment.ts",
                   "with": "apps/dashboard/src/environments/environment.emulator.ts"
+                },
+                {
+                  "replace": "apps/dashboard/src/app/firebase-init.ts",
+                  "with": "apps/dashboard/src/app/firebase-init.emulators.ts"
                 }
               ]
             }
@@ -327,8 +331,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/environments/data-access/jest.config.js",
-            "passWithNoTests": true,
-            "setupFile": "libs/environments/data-access/src/test-setup.ts"
+            "passWithNoTests": true
           },
           "outputs": ["coverage/libs/environments/data-access"]
         }
@@ -359,8 +362,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/environments/feature/jest.config.js",
-            "passWithNoTests": true,
-            "setupFile": "libs/environments/feature/src/test-setup.ts"
+            "passWithNoTests": true
           },
           "outputs": ["coverage/libs/environments/feature"]
         }
@@ -391,14 +393,101 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/testing/jest.config.js",
-            "passWithNoTests": true,
-            "setupFile": "libs/testing/src/test-setup.ts"
+            "passWithNoTests": true
           },
           "outputs": ["coverage/libs/testing"]
         }
       },
       "schematics": {
         "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "auth": {
+      "projectType": "library",
+      "root": "libs/auth",
+      "sourceRoot": "libs/auth/src",
+      "prefix": "idc",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/auth/tsconfig.lib.json",
+            "project": "libs/auth/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/auth/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/auth/tsconfig.lib.json",
+              "libs/auth/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/auth/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/auth/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/auth"]
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "google-analytics": {
+      "projectType": "library",
+      "root": "libs/google-analytics",
+      "sourceRoot": "libs/google-analytics/src",
+      "prefix": "idc",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/google-analytics/tsconfig.lib.json",
+            "project": "libs/google-analytics/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/google-analytics/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/google-analytics/tsconfig.lib.json",
+              "libs/google-analytics/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/google-analytics/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/google-analytics/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/google-analytics"]
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
           "style": "scss"
         }
       }

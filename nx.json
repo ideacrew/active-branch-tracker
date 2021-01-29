@@ -49,6 +49,12 @@
     },
     "testing": {
       "tags": []
+    },
+    "auth": {
+      "tags": []
+    },
+    "google-analytics": {
+      "tags": []
     }
   },
   "affected": {
