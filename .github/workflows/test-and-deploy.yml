@@ -1,6 +1,7 @@
 name: test and deploy front end
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'firestore.rules'
