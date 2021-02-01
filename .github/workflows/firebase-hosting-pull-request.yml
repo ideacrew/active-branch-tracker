@@ -12,22 +12,22 @@ on:
       - 'package.json'
 
 jobs:
-  # tests:
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #     run:
-  #       working-directory: ./functions
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '12.x'
-  #     - name: Install Firebase Emulator Suite
-  #       run: npm install -g firebase-tools
-  #     - name: Install dependencies
-  #       run: npm i
-  #     - name: Run tests
-  #       run: npm run test:ci
+  tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./functions
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12.x'
+      - name: Install Firebase Emulator Suite
+        run: npm install -g firebase-tools
+      - name: Install dependencies
+        run: npm i
+      - name: Run tests
+        run: npm run test:ci
   build_and_preview:
     needs: [tests]
     runs-on: ubuntu-latest
