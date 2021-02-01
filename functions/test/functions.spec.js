@@ -68,7 +68,6 @@ describe('Unit tests', () => {
   }).timeout(5000);
 
   it('should test updates to environment document', async () => {
-    console.log(process.env);
     const wrapped = test.wrap(myFunctions.watchEnvironments);
 
     const beforeSnap = test.firestore.makeDocumentSnapshot(

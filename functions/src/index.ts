@@ -12,11 +12,6 @@ export const oldBranchesNotification = functions.pubsub
     await (await import('./staleBranches')).staleBranches(context);
   });
 
-export const simpleHttp = functions.https.onRequest((request, response) => {
-  console.log('Simple Http Functions running');
-  response.send(`text: ${request.query.text}`);
-});
-
 export const branchDeployment = functions.https.onRequest(
   async (request, response) => {
     await (await import('./branch-deployment/')).handleBranchDeployment(
