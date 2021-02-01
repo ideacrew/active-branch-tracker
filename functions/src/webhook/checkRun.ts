@@ -1,5 +1,5 @@
 import * as admin from 'firebase-admin';
-import { WebhookPayload, App } from './webhookPayload';
+import { WebhookPayload, App } from '../webhookPayload';
 import { CheckConclusion } from './checkConclusion';
 
 export interface CheckRunPayload extends WebhookPayload {
@@ -53,7 +53,7 @@ export interface CheckRun {
 }
 
 export async function handleCheckRunEvent(
-  payload: CheckRunPayload
+  payload: CheckRunPayload,
 ): Promise<any> {
   const { check_run, repository, organization } = payload;
 

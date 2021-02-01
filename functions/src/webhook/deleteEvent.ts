@@ -1,8 +1,8 @@
 import * as admin from 'firebase-admin';
-import { Repository, Sender, Organization } from './webhookPayload';
-import { createSafeBranchName } from './safeBranchName';
+import { Repository, Sender, Organization } from '../webhookPayload';
+import { createSafeBranchName } from '../safeBranchName';
 import { MailDataRequired } from '@sendgrid/mail';
-import { sendMail } from './send-grid/send-email';
+import { sendMail } from '../send-grid/send-email';
 
 export interface DeleteEventPayload {
   ref: string; // branch name

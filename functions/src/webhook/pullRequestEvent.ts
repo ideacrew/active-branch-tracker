@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 
-import { Repository, Organization, Sender } from './webhookPayload';
-import { GithubUser } from './user';
+import { Repository, Organization, Sender } from '../webhookPayload';
+import { GithubUser } from '../user';
 
 export enum PullRequestAction {
   Assigned = 'assigned',
