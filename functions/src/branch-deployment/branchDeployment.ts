@@ -1,46 +1,55 @@
+import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+
+admin.initializeApp();
+
 import { BranchDeployment } from './branchDeployment.interface';
-import { getBranchRef, BranchRef } from '../util/branchRef';
 
-export async function handleBranchDeployment(deployment: BranchDeployment) {
-  const { branch, env, org, repo } = deployment;
+export async function handleBranchDeployment(
+  request: functions.https.Request,
+  response: functions.Response<unknown>,
+) {
+  const deployment: BranchDeployment = JSON.parse(request.body.payload);
 
-  const branchRef = {
-    organizationName: org,
-    repositoryName: repo,
-    branchName: branch,
-  };
+  await updateEnvironmentWithBranchInfo(deployment);
 
-  await updateEnvironmentWithBranchInfo(org, deployment);
-  await updateBranchWithEnvironmentInfo(branchRef, env);
+  await updateBranchWithEnvironmentInfo(deployment);
+
+  response.send(deployment);
 }
 
 async function updateBranchWithEnvironmentInfo(
-  branchRef: BranchRef,
-  environmentName: string,
+  deployment: BranchDeployment,
 ): Promise<void> {
-  const fsBranchRef = getBranchRef(branchRef);
+  const branchRef = admin
+    .firestore()
+    .collection('branches')
+    .doc(`${deployment.org}-${deployment.branch}`);
 
-  const branch = await fsBranchRef.get();
-  if (branch.exists) {
-    try {
-      await fsBranchRef.set({ environment: environmentName }, { merge: true });
-    } catch (e) {
-      console.error(e);
-    }
-  } else {
+  try {
+    await branchRef.set({ environment: deployment.env }, { merge: true });
+  } catch (e) {
+    functions.logger.error(
+      'Could not update environment on branch',
+      deployment.branch,
+      e,
+    );
     return Promise.resolve();
   }
 }
 
-async function updateEnvironmentWithBranchInfo(
-  organizationName: string,
-  deployment: BranchDeployment,
-) {
+async function updateEnvironmentWithBranchInfo(deployment: BranchDeployment) {
   const environmentRef = admin
     .firestore()
     .collection('environments')
-    .doc(`${organizationName}-${deployment.env}`);
+    .doc(`${deployment.org}-${deployment.env}`);
 
-  await environmentRef.set({ latestDeployment: deployment }, { merge: true });
+  try {
+    await environmentRef.set({ latestDeployment: deployment }, { merge: true });
+  } catch (e) {
+    functions.logger.error(
+      'Could not set environment with latest deployment',
+      e,
+    );
+  }
 }

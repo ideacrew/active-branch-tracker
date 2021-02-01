@@ -1,10 +1,10 @@
 import * as admin from 'firebase-admin';
 
-import { WebhookPayload } from './webhookPayload';
+import { WebhookPayload } from '../webhookPayload';
 import { BranchInfo } from './branchInfo';
 import { CheckConclusion } from './checkConclusion';
-import { createSafeBranchName } from './safeBranchName';
-import { getBranchRef } from './util/branchRef';
+import { createSafeBranchName } from '../safeBranchName';
+import { getBranchRef } from '../util/branchRef';
 
 export enum CheckSuiteActionType {
   Completed = 'completed',
@@ -109,7 +109,7 @@ export async function handleCheckSuiteEvent(
   let checkSuiteFailures = 0;
   let tracked: boolean = false;
 
-  
+
   if (existingStatus.exists) {
     const existingStatusDoc = existingStatus.data() as BranchInfo;
     checkSuiteRuns = existingStatusDoc.checkSuiteRuns;

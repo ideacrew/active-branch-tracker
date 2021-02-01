@@ -1,10 +1,14 @@
 import * as admin from 'firebase-admin';
-import * as sgMail from '@sendgrid/mail';
 import * as functions from 'firebase-functions';
-import { BranchInfo } from './branchInfo';
+
+admin.initializeApp();
+
+import * as sgMail from '@sendgrid/mail';
+
+import { BranchInfo } from './webhook/branchInfo';
 
 export async function staleBranches(
-  context: functions.EventContext,
+  _context: functions.EventContext,
 ): Promise<void> {
   // can only use forEach to loop
   const oldBranches = await getStaleBranchesFromDB();

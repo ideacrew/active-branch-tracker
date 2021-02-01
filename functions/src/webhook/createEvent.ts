@@ -1,9 +1,9 @@
 import * as admin from 'firebase-admin';
 
-import { Repository, Organization, Sender } from './webhookPayload';
+import { Repository, Organization, Sender } from '../webhookPayload';
 import { BranchInfo, BranchStatus } from './branchInfo';
 import { CheckConclusion } from './checkConclusion';
-import { createSafeBranchName } from './safeBranchName';
+import { createSafeBranchName } from '../safeBranchName';
 
 export interface CreateEventPayload {
   ref: string; // name of thing that got created
