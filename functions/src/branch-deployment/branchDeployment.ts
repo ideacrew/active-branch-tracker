@@ -39,10 +39,14 @@ async function updateBranchWithEnvironmentInfo(
 }
 
 async function updateEnvironmentWithBranchInfo(deployment: BranchDeployment) {
+  const { org, env } = deployment;
+
   const environmentRef = admin
     .firestore()
+    .collection('orgs')
+    .doc(org)
     .collection('environments')
-    .doc(`${deployment.org}-${deployment.env}`);
+    .doc(env);
 
   try {
     await environmentRef.set({ latestDeployment: deployment }, { merge: true });
