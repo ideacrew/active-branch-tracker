@@ -44,10 +44,7 @@ export class EnvironmentsListComponent implements OnInit {
         env => env.architecture === 'standalone',
       );
 
-      const envs = { e2e, standalone };
-      console.log(envs);
-
-      return envs;
+      return { e2e, standalone };
     }),
   );
 
