@@ -5,8 +5,8 @@ on:
   push:
     paths:
       - 'firestore.rules'
-      - 'apps'
-      - 'libs'
+      - 'apps/**'
+      - 'libs/**'
       - 'firebase.json'
       - 'package.json'
     branches:
