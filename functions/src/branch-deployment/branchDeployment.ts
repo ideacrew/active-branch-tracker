@@ -41,6 +41,8 @@ async function updateBranchWithEnvironmentInfo(
 async function updateEnvironmentWithBranchInfo(deployment: BranchDeployment) {
   const { org, env } = deployment;
 
+  const FieldValue = admin.firestore.FieldValue;
+
   const environmentRef = admin
     .firestore()
     .collection('orgs')
@@ -49,7 +51,15 @@ async function updateEnvironmentWithBranchInfo(deployment: BranchDeployment) {
     .doc(env);
 
   try {
-    await environmentRef.set({ latestDeployment: deployment }, { merge: true });
+    await environmentRef.set(
+      {
+        latestDeployment: {
+          ...deployment,
+          deployedAt: FieldValue.serverTimestamp(),
+        },
+      },
+      { merge: true },
+    );
   } catch (e) {
     functions.logger.error(
       'Could not set environment with latest deployment',
