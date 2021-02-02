@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { EnvironmentsDataAccessModule } from '@idc/environments/data-access';
 import { EnvironmentsComponent } from './environments/environments.component';
 import { OrgListComponent } from './org-list/org-list.component';
+import { EnvironmentsListComponent } from './environments-list/environments-list.component';
 
 @NgModule({
   imports: [
@@ -12,9 +13,18 @@ import { OrgListComponent } from './org-list/org-list.component';
 
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: OrgListComponent },
+      {
+        path: ':orgId',
+        pathMatch: 'full',
+        component: EnvironmentsListComponent,
+      },
     ]),
     EnvironmentsDataAccessModule,
   ],
-  declarations: [EnvironmentsComponent, OrgListComponent],
+  declarations: [
+    EnvironmentsComponent,
+    OrgListComponent,
+    EnvironmentsListComponent,
+  ],
 })
 export class EnvironmentsFeatureModule {}

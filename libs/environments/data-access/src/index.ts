@@ -5,3 +5,4 @@ export { EnvironmentsActions, EnvironmentsFeature, EnvironmentsSelectors };
 export * from './lib/store/environments.models';
 export * from './lib/store/environments.facade';
 export * from './lib/environments-data-access.module';
+export * from './lib/environments.service';

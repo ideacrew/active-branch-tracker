@@ -6,6 +6,11 @@ import { DeploymentEnvironment } from '@idc/util';
 
 import { EnvironmentsEntity } from './store/environments.models';
 
+export interface OrgEnvironment {
+  id: string;
+  name: string;
+}
+
 @Injectable()
 export class EnvironmentsService {
   constructor(private afs: AngularFirestore) {}
@@ -13,6 +18,14 @@ export class EnvironmentsService {
   queryEnvironments(): Observable<EnvironmentsEntity[]> {
     return this.afs
       .collection<DeploymentEnvironment>('environments')
+      .valueChanges({ idField: 'id' });
+  }
+
+  queryEnvironmentsByOrg(orgName: string): Observable<OrgEnvironment[]> {
+    return this.afs
+      .collection('orgs')
+      .doc(orgName)
+      .collection<OrgEnvironment>('environments')
       .valueChanges({ idField: 'id' });
   }
 }
