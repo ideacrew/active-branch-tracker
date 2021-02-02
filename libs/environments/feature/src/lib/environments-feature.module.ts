@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { EnvironmentsDataAccessModule } from '@idc/environments/data-access';
-import { EnvironmentsComponent } from './environments/environments.component';
+
 import { OrgListComponent } from './org-list/org-list.component';
 import { EnvironmentsListComponent } from './environments-list/environments-list.component';
 
@@ -21,10 +21,6 @@ import { EnvironmentsListComponent } from './environments-list/environments-list
     ]),
     EnvironmentsDataAccessModule,
   ],
-  declarations: [
-    EnvironmentsComponent,
-    OrgListComponent,
-    EnvironmentsListComponent,
-  ],
+  declarations: [OrgListComponent, EnvironmentsListComponent],
 })
 export class EnvironmentsFeatureModule {}
