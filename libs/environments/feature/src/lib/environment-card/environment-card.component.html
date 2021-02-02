@@ -1,0 +1,14 @@
+<h4>{{ environment.name }}</h4>
+
+<ng-container *ngIf="environment.latestDeployment; else noDeployment">
+  <div>
+    {{ environment.latestDeployment.branch }}
+  </div>
+  <div>
+    {{ environment.latestDeployment.deployedAt.toDate() | date }}
+  </div>
+</ng-container>
+
+<ng-template #noDeployment>
+  <span>Waiting for deployment</span>
+</ng-template>

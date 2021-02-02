@@ -1,4 +1,3 @@
-import { parseI18nMeta } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import {
@@ -45,10 +44,10 @@ export class EnvironmentsListComponent implements OnInit {
         env => env.architecture === 'standalone',
       );
 
-      return {
-        e2e,
-        standalone,
-      };
+      const envs = { e2e, standalone };
+      console.log(envs);
+
+      return envs;
     }),
   );
 

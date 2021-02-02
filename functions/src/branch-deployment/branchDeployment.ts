@@ -9,6 +9,7 @@ export async function handleBranchDeployment(
   request: functions.https.Request,
   response: functions.Response<unknown>,
 ) {
+  console.log(typeof request.body.payload);
   const deployment: BranchDeployment = JSON.parse(request.body.payload);
 
   await updateEnvironmentWithBranchInfo(deployment);

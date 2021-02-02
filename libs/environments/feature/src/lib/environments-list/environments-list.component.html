@@ -3,11 +3,28 @@
 <h2>Prod-like Environments</h2>
 <ng-container *ngIf="prodLike$ | async as prodEnvs">
   <h3>End-to-end</h3>
-  <span *ngFor="let env of prodEnvs.e2e">{{ env.name }}</span>
+  <div class="environments-list">
+    <idc-environment-card
+      *ngFor="let env of prodEnvs.e2e"
+      [environment]="env"
+    ></idc-environment-card>
+  </div>
+
   <ng-container *ngIf="prodEnvs.standalone.length > 0">
     <h3>Standalone</h3>
-    <span *ngFor="let env of prodEnvs.standalone">{{ env.name }}</span>
+    <div class="environments-list">
+      <idc-environment-card
+        *ngFor="let env of prodEnvs.standalone"
+        [environment]="env"
+      ></idc-environment-card>
+    </div>
   </ng-container>
 </ng-container>
+
 <h2>Non-prod Environments</h2>
-<span *ngFor="let env of nonProd$ | async">{{ env.name }}</span>
+<div class="environments-list">
+  <idc-environment-card
+    *ngFor="let env of nonProd$ | async"
+    [environment]="env"
+  ></idc-environment-card>
+</div>

@@ -9,6 +9,18 @@ export interface OrgEnvironment {
   name: string;
   prodlike: boolean;
   architecture: Architecture;
+  latestDeployment: BranchDeployment;
+}
+
+export interface BranchDeployment {
+  branch: string;
+  env: string;
+  app: string;
+  user_name: string;
+  commit_sha: string;
+  org: string;
+  repo: string;
+  deployedAt: unknown;
 }
 
 export type Architecture = 'standalone' | 'e2e';

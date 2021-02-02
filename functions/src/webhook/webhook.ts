@@ -32,10 +32,6 @@ export async function handleWebhook(
       await handleCheckSuiteEvent(request.body as CheckSuitePayload);
       break;
 
-    // case 'check_run':
-    //   await handleCheckRunEvent(request.body as CheckRunPayload);
-    //   break;
-
     case 'pull_request':
       await handlePullRequestEvent(request.body as PullRequestEventPayload);
       break;

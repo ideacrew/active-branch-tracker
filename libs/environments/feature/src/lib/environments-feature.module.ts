@@ -6,6 +6,7 @@ import { EnvironmentsDataAccessModule } from '@idc/environments/data-access';
 
 import { OrgListComponent } from './org-list/org-list.component';
 import { EnvironmentsListComponent } from './environments-list/environments-list.component';
+import { EnvironmentCardComponent } from './environment-card/environment-card.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { EnvironmentsListComponent } from './environments-list/environments-list
     ]),
     EnvironmentsDataAccessModule,
   ],
-  declarations: [OrgListComponent, EnvironmentsListComponent],
+  declarations: [OrgListComponent, EnvironmentsListComponent, EnvironmentCardComponent],
 })
 export class EnvironmentsFeatureModule {}
