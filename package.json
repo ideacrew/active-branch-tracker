@@ -6,7 +6,7 @@
     "ng": "nx",
     "nx": "nx",
     "seed:db": "cross-env FIRESTORE_EMULATOR_HOST=localhost:8080 node db/scripts/seedDb",
-    "start:live": "ng serve --hmr",
+    "start:live": "ng serve",
     "start:emulators": "firebase emulators:start --only=firestore,functions,auth --import=./db/exports --export-on-exit=./db/exports",
     "start:emulators:unit-tests": "firebase emulators:start --only=firestore,functions,auth --import=./db/ut-exports --export-on-exit=./db/ut-exports",
     "start:emulators:local": "cross-env GCLOUD_PROJECT=fakeproject firebase emulators:start --project=fakeproject --only=firestore,functions,auth",
