@@ -26,9 +26,9 @@ export class EnvironmentsFacade {
 
   environmentsByOrg$ = this.store.pipe(select(EnvironmentsSelectors.orgs));
 
-  constructor(private store: Store<fromEnvironments.EnvironmentsPartialState>) {
-    this.dispatch(loadEnvironments());
-  }
+  constructor(
+    private store: Store<fromEnvironments.EnvironmentsPartialState>,
+  ) {}
 
   dispatch(action: Action): void {
     this.store.dispatch(action);
