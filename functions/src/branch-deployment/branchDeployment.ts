@@ -4,6 +4,7 @@ import * as admin from 'firebase-admin';
 admin.initializeApp();
 
 import { BranchDeployment } from './branchDeployment.interface';
+import { createSafeBranchName } from '../safeBranchName';
 
 export async function handleBranchDeployment(
   request: functions.https.Request,
@@ -25,7 +26,7 @@ async function updateBranchWithEnvironmentInfo(
   const branchRef = admin
     .firestore()
     .collection('branches')
-    .doc(`${deployment.org}-${deployment.branch}`);
+    .doc(`${deployment.org}-${createSafeBranchName(deployment.branch)}`);
 
   try {
     await branchRef.set({ environment: deployment.env }, { merge: true });

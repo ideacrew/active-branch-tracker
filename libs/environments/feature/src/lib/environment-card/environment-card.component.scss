@@ -1,5 +1,7 @@
 :host {
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.75rem;
   background-color: hsl(0, 0%, 33%);
   padding: 1rem;
   border-radius: 5px;
