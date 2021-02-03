@@ -7,6 +7,7 @@ import { EnvironmentsDataAccessModule } from '@idc/environments/data-access';
 import { OrgListComponent } from './org-list/org-list.component';
 import { EnvironmentsListComponent } from './environments-list/environments-list.component';
 import { EnvironmentCardComponent } from './environment-card/environment-card.component';
+import { RelativeDatePipe } from './relative-date.pipe';
 
 @NgModule({
   imports: [
@@ -22,6 +23,6 @@ import { EnvironmentCardComponent } from './environment-card/environment-card.co
     ]),
     EnvironmentsDataAccessModule,
   ],
-  declarations: [OrgListComponent, EnvironmentsListComponent, EnvironmentCardComponent],
+  declarations: [OrgListComponent, EnvironmentsListComponent, EnvironmentCardComponent, RelativeDatePipe],
 })
 export class EnvironmentsFeatureModule {}

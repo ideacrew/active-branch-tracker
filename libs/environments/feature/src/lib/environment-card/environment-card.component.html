@@ -5,7 +5,7 @@
     {{ environment.latestDeployment.branch }}
   </div>
   <div>
-    {{ environment.latestDeployment.deployedAt.toDate() | date:'medium' }}
+    {{ environment.latestDeployment.deployedAt.toDate() | relativeDate }}
   </div>
 </ng-container>
 
