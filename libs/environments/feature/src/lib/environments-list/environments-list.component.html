@@ -5,6 +5,8 @@
   <h3>End-to-end</h3>
   <div class="environments-list">
     <idc-environment-card
+      (newOwner)="updateOwner($event)"
+      (newOwnerRelease)="updateRelease($event)"
       *ngFor="let env of prodEnvs.e2e"
       [environment]="env"
     ></idc-environment-card>
@@ -14,6 +16,8 @@
     <h3>Standalone</h3>
     <div class="environments-list">
       <idc-environment-card
+        (newOwner)="updateOwner($event)"
+        (newOwnerRelease)="updateRelease($event)"
         *ngFor="let env of prodEnvs.standalone"
         [environment]="env"
       ></idc-environment-card>
@@ -24,6 +28,8 @@
 <h2>Non-prod Environments</h2>
 <div class="environments-list">
   <idc-environment-card
+    (newOwner)="updateOwner($event)"
+    (newOwnerRelease)="updateRelease($event)"
     *ngFor="let env of nonProd$ | async"
     [environment]="env"
   ></idc-environment-card>

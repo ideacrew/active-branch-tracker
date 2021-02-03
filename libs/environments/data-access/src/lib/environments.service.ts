@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
+import * as firebase from 'firebase/app';
+
 export interface OrgEnvironment {
   id: string;
   name: string;
@@ -11,6 +13,17 @@ export interface OrgEnvironment {
   latestDeployment: BranchDeployment;
   owner: string;
   ownerRelease?: firebase.default.firestore.Timestamp;
+}
+
+export interface OwnerUpdate {
+  orgId: string;
+  envId: string;
+  owner: string;
+}
+export interface OwnerReleaseUpdate {
+  orgId: string;
+  envId: string;
+  ownerRelease: Date;
 }
 
 export interface BranchDeployment {
@@ -50,5 +63,31 @@ export class EnvironmentsService {
         map(org => org.name),
         take(1),
       );
+  }
+
+  async updateEnvironmentOwner({
+    orgId,
+    envId,
+    owner,
+  }: OwnerUpdate): Promise<void> {
+    const docRef = this.afs.doc<OrgEnvironment>(
+      `orgs/${orgId}/environments/${envId}`,
+    );
+
+    await docRef.update({ owner });
+  }
+
+  async updateEnvironmentReleaseDate({
+    orgId,
+    envId,
+    ownerRelease,
+  }: OwnerReleaseUpdate): Promise<void> {
+    const docRef = this.afs.doc<OrgEnvironment>(
+      `orgs/${orgId}/environments/${envId}`,
+    );
+
+    await docRef.update({
+      ownerRelease: firebase.default.firestore.Timestamp.fromDate(ownerRelease),
+    });
   }
 }

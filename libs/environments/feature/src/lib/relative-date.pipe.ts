@@ -7,9 +7,10 @@ import { formatRelative } from 'date-fns';
 export class RelativeDatePipe implements PipeTransform {
   transform(d: Date, ...args: unknown[]): string {
     if (d instanceof Date) {
+      // console.log({ d });
       return formatRelative(d, new Date());
     } else {
-      throw 'The Relative Date pipe needs a Date object';
+      throw new Error('The Relative Date pipe needs a Date object');
     }
   }
 }
