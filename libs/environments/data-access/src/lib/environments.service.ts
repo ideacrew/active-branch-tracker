@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-
 import { map, take } from 'rxjs/operators';
 
 export interface OrgEnvironment {
@@ -10,6 +9,8 @@ export interface OrgEnvironment {
   prodlike: boolean;
   architecture: Architecture;
   latestDeployment: BranchDeployment;
+  owner: string;
+  ownerRelease?: firebase.default.firestore.Timestamp;
 }
 
 export interface BranchDeployment {

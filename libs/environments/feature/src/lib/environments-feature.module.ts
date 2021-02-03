@@ -23,6 +23,11 @@ import { RelativeDatePipe } from './relative-date.pipe';
     ]),
     EnvironmentsDataAccessModule,
   ],
-  declarations: [OrgListComponent, EnvironmentsListComponent, EnvironmentCardComponent, RelativeDatePipe],
+  declarations: [
+    OrgListComponent,
+    EnvironmentsListComponent,
+    EnvironmentCardComponent,
+    RelativeDatePipe,
+  ],
 })
 export class EnvironmentsFeatureModule {}

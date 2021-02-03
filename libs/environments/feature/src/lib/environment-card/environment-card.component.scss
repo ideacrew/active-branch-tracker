@@ -8,7 +8,16 @@
   color: #fff;
 }
 
+.svg-value {
+  display: flex;
+  align-items: center;
+}
+
 h4 {
   font-weight: 300;
 }
 
+svg {
+  fill: #fff;
+  margin-right: 0.5rem;
+}

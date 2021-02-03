@@ -5,9 +5,18 @@
 
 h1,
 h2,
-h3 {
+h3,
+a {
   color: hsl(120, 13%, 90%);
   font-weight: 300;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 h2 {
