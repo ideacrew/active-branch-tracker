@@ -4,6 +4,13 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 import * as firebase from 'firebase/app';
+export type AppName = 'enroll' | 'gluedb';
+export type DataRefreshStatus = 'started' | 'completed' | 'error';
+export interface AppData {
+  status: DataRefreshStatus;
+  user_name: string;
+  dataTimestamp: firebase.default.firestore.Timestamp;
+}
 
 export interface OrgEnvironment {
   id: string;
@@ -13,6 +20,8 @@ export interface OrgEnvironment {
   latestDeployment: BranchDeployment;
   owner: string;
   ownerRelease?: firebase.default.firestore.Timestamp;
+  gluedb?: AppData;
+  enroll?: AppData;
 }
 
 export interface OwnerUpdate {
@@ -63,6 +72,15 @@ export class EnvironmentsService {
         map(org => org.name),
         take(1),
       );
+  }
+
+  getEnvironmentDetail({ orgId, envId }): Observable<OrgEnvironment> {
+    return this.afs
+      .collection('orgs')
+      .doc(orgId)
+      .collection<OrgEnvironment>('environments')
+      .doc(envId)
+      .valueChanges({ idField: 'id' });
   }
 
   async updateEnvironmentOwner({

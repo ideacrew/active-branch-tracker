@@ -17,7 +17,7 @@ export interface DataRefreshPayload {
 export interface AppData {
   status: DataRefreshStatus;
   user_name: string;
-  dataTimestamp: FirebaseFirestore.FieldValue;
+  dataTimestamp: FirebaseFirestore.Timestamp;
 }
 
 export async function handleDataRefresh(

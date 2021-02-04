@@ -1,4 +1,8 @@
-<h4>{{ environment.name }}</h4>
+<h4>
+  <a class="env-name" routerLink="./{{ environment.id }}">{{
+    environment.name
+  }}</a>
+</h4>
 
 <ng-container *ngIf="environment.latestDeployment; else noDeployment">
   <div class="svg-value">

@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 
-import { addWeeks, setHours } from 'date-fns';
+import { addWeeks } from 'date-fns';
 
 import {
   OrgEnvironment,

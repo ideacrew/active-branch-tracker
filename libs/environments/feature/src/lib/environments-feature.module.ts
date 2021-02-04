@@ -10,6 +10,7 @@ import { EnvironmentsListComponent } from './environments-list/environments-list
 import { EnvironmentCardComponent } from './environment-card/environment-card.component';
 import { RelativeDatePipe } from './relative-date.pipe';
 import { AutofocusInputDirective } from './autofocus-input.directive';
+import { EnvironmentDetailComponent } from './environment-detail/environment-detail.component';
 
 @NgModule({
   imports: [
@@ -18,8 +19,11 @@ import { AutofocusInputDirective } from './autofocus-input.directive';
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: OrgListComponent },
       {
+        path: ':orgId/:envId',
+        component: EnvironmentDetailComponent,
+      },
+      {
         path: ':orgId',
-        pathMatch: 'full',
         component: EnvironmentsListComponent,
       },
     ]),
@@ -31,6 +35,7 @@ import { AutofocusInputDirective } from './autofocus-input.directive';
     EnvironmentCardComponent,
     RelativeDatePipe,
     AutofocusInputDirective,
+    EnvironmentDetailComponent,
   ],
 })
 export class EnvironmentsFeatureModule {}

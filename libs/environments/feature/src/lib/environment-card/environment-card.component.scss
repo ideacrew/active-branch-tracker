@@ -8,6 +8,16 @@
   color: #fff;
 }
 
+.env-name {
+  color: hsl(0, 0%, 85%);
+  font-weight: 300;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .svg-value {
   display: flex;
   align-items: center;
@@ -16,10 +26,6 @@
 .editable {
   cursor: pointer;
   user-select: none;
-}
-
-h4 {
-  font-weight: 300;
 }
 
 svg {
