@@ -21,6 +21,15 @@ export const branchDeployment = functions.https.onRequest(
   },
 );
 
+export const dataRefresh = functions.https.onRequest(
+  async (request, response) => {
+    await (await import('./data-refresh/dataRefresh')).handleDataRefresh(
+      request,
+      response,
+    );
+  },
+);
+
 export const watchEnvironments = functions.firestore
   .document('environments/{environmentId}')
   .onUpdate(async (change, context) => {
