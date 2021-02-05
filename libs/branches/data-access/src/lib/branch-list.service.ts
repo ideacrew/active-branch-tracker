@@ -22,7 +22,7 @@ export class BranchListService {
     const today = new Date().getTime();
     const oneMonthAgo = today - oneMonthInMs;
     const branchesRef = this.afs.collection<BranchInfo>('branches', ref =>
-      ref.where('timestamp', '>=', oneMonthAgo),
+      ref.where('timestamp', '>=', oneMonthAgo).orderBy('timestamp'),
     );
 
     return branchesRef.snapshotChanges().pipe(
