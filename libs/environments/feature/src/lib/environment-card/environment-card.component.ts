@@ -13,6 +13,7 @@ import {
   OwnerReleaseUpdate,
   OwnerUpdate,
 } from '@idc/environments/data-access';
+import { convertDateInputToLocalDate } from '../convertDate';
 
 @Component({
   selector: 'idc-environment-card',
@@ -61,13 +62,7 @@ export class EnvironmentCardComponent {
   }
 
   updateOwnershipRelease(): void {
-    this.editingOwnerReleaseDate = false;
-    const year = +this.currentReleaseDate.slice(0, 4);
-    const month = +this.currentReleaseDate.slice(5, 7);
-    const day = +this.currentReleaseDate.slice(8, 10);
-
-    // Month is 0-based
-    const newDate = new Date(year, month - 1, day, 18);
+    const newDate = convertDateInputToLocalDate(this.currentReleaseDate);
 
     this.newOwnerRelease.emit({
       envId: this.environment.id,

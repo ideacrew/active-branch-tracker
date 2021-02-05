@@ -1,4 +1,4 @@
-<h1><a href="../environments">Orgs</a> / {{ orgName$ | async }}</h1>
+<h1><a routerLink="../">Orgs</a> / {{ orgName$ | async }}</h1>
 
 <h2>Prod-like Environments</h2>
 <ng-container *ngIf="prodLike$ | async as prodEnvs">

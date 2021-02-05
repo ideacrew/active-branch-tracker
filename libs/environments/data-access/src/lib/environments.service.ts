@@ -19,7 +19,7 @@ export interface OrgEnvironment {
   architecture: Architecture;
   latestDeployment: BranchDeployment;
   owner: string;
-  ownerRelease?: firebase.default.firestore.Timestamp;
+  ownerRelease: firebase.default.firestore.Timestamp;
   gluedb?: AppData;
   enroll?: AppData;
 }
@@ -105,6 +105,22 @@ export class EnvironmentsService {
     );
 
     await docRef.update({
+      ownerRelease: firebase.default.firestore.Timestamp.fromDate(ownerRelease),
+    });
+  }
+
+  async updateOwnerInformation({
+    orgId,
+    envId,
+    owner,
+    ownerRelease,
+  }): Promise<void> {
+    const docRef = this.afs.doc<OrgEnvironment>(
+      `orgs/${orgId}/environments/${envId}`,
+    );
+
+    await docRef.update({
+      owner,
       ownerRelease: firebase.default.firestore.Timestamp.fromDate(ownerRelease),
     });
   }

@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 
 admin.initializeApp();
 
-export type AppName = 'enroll' | 'gluedb';
+export type AppName = 'enroll' | 'glue';
 export type DataRefreshStatus = 'started' | 'completed' | 'error';
 
 export interface DataRefreshPayload {

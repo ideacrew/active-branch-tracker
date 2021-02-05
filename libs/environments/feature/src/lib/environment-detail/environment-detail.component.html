@@ -1,3 +1,96 @@
-<pre>
-  {{ environmentDetail$ | async | json }}
-</pre>
+<ng-container *ngIf="environmentDetail$ | async as env">
+  <h1>
+    <a routerLink="../../">Orgs</a> /
+    <a routerLink="../">{{ orgName$ | async }}</a> /
+    {{ env.name }}
+  </h1>
+  <h2 class="card-title">Ownership</h2>
+  <div *ngIf="env.owner !== 'Open'; else noOwner" class="value">
+    {{ env.owner }} needs
+    <span *ngIf="env.ownerRelease; else noDate"
+      >until {{ env.ownerRelease.toDate() | relativeDate }}</span
+    >
+  </div>
+  <form class="change-ownership-form" *ngIf="changingOwnership === true">
+    <div class="input-group">
+      <label for="owner-name">New Owner</label>
+      <input
+        [(ngModel)]="newOwner"
+        type="text"
+        name="owner-name"
+        id="owner-name"
+      />
+    </div>
+    <div class="input-group">
+      <label for="need-until">Need Until</label>
+      <input
+        [(ngModel)]="newReleaseDate"
+        type="date"
+        name="need-until"
+        id="need-until"
+      />
+    </div>
+  </form>
+  <div *ngIf="changingOwnership === false" class="button-group">
+    <button type="button" (click)="changingOwnership = true" class="button">
+      Change Ownership
+    </button>
+  </div>
+
+  <div *ngIf="changingOwnership === true" class="button-group">
+    <button type="button" (click)="updateOwnership()" class="button">
+      Update Ownership
+    </button>
+    <button
+      *ngIf="changingOwnership === true"
+      type="button"
+      (click)="changingOwnership = false"
+      class="button"
+    >
+      Cancel Change
+    </button>
+  </div>
+
+  <h2 class="card-title">Enroll Deployment</h2>
+  <div
+    *ngIf="env.latestDeployment; else noDeployment"
+    class="value"
+    [attr.title]="env.latestDeployment.deployedAt.toDate() | date: 'medium'"
+  >
+    <span class="branch-name">{{ env.latestDeployment.branch }}</span>
+    deployed {{ env.latestDeployment.deployedAt.toDate() | relativeDate }} by
+    {{ env.latestDeployment.user_name }}
+  </div>
+
+  <h2 class="card-title">Database Snapshots</h2>
+  <ng-container *ngIf="env.enroll && env.glue; else noSnapshot">
+    <div class="value">
+      Enroll has data from
+      <span [attr.title]="env.enroll.dataTimestamp.toDate() | date: 'medium'">{{
+        env.enroll.dataTimestamp.toDate() | relativeDate
+      }}</span>
+    </div>
+    <div class="value">
+      GlueDB has data from
+      <span [attr.title]="env.glue.dataTimestamp.toDate() | date: 'medium'">{{
+        env.glue.dataTimestamp.toDate() | relativeDate
+      }}</span>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #noDate>
+  <span>indefinitely</span>
+</ng-template>
+
+<ng-template #noSnapshot>
+  <div class="value">There is no snapshot information</div>
+</ng-template>
+
+<ng-template #noOwner>
+  <div class="value">This environment is not owned</div>
+</ng-template>
+
+<ng-template #noDeployment
+  ><div class="value">There is no deployment information</div></ng-template
+>
