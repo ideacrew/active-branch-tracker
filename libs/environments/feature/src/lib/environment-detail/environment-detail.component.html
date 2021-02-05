@@ -66,15 +66,17 @@
   <ng-container *ngIf="env.enroll && env.glue; else noSnapshot">
     <div class="value">
       Enroll has data from
-      <span [attr.title]="env.enroll.dataTimestamp.toDate() | date: 'medium'">{{
-        env.enroll.dataTimestamp.toDate() | relativeDate
-      }}</span>
+      <span [attr.title]="env.enroll.dataTimestamp.toDate() | date: 'medium'"
+        >{{ env.enroll.dataTimestamp.toDate() | relativeDate }} by
+        {{ env.enroll.user_name }}</span
+      >
     </div>
     <div class="value">
       GlueDB has data from
-      <span [attr.title]="env.glue.dataTimestamp.toDate() | date: 'medium'">{{
-        env.glue.dataTimestamp.toDate() | relativeDate
-      }}</span>
+      <span [attr.title]="env.glue.dataTimestamp.toDate() | date: 'medium'"
+        >{{ env.glue.dataTimestamp.toDate() | relativeDate }} by
+        {{ env.glue.user_name }}</span
+      >
     </div>
   </ng-container>
 </ng-container>
