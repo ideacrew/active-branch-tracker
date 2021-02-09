@@ -5,12 +5,23 @@ admin.initializeApp();
 
 import { BranchDeployment } from './branchDeployment.interface';
 import { createSafeBranchName } from '../safeBranchName';
+import { checkOwnership } from '../check-ownership/checkOwnership';
+import { sendSlackMessage } from '../slack-notifications/slackNotification';
 
 export async function handleBranchDeployment(
   request: functions.https.Request,
   response: functions.Response<unknown>,
 ) {
   const deployment: BranchDeployment = JSON.parse(request.body.payload);
+
+  const { org, env, branch } = deployment;
+
+  const ownedEnvironment = await checkOwnership({ org, env });
+  if (!ownedEnvironment) {
+    await sendSlackMessage(
+      `⚠ <!channel> *${branch}* is being deployed to *${org}-${env}* with _no current owner_! ⚠`,
+    );
+  }
 
   await updateEnvironmentWithBranchInfo(deployment);
 

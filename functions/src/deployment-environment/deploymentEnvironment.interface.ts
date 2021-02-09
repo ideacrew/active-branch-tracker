@@ -1,9 +1,10 @@
 import { BranchDeployment } from '../branch-deployment';
-import { EnvironmentStatus } from './environmentStatus.enum';
+import { AppData } from '../data-refresh/dataRefresh';
 
 export interface DeploymentEnvironment {
   name: string;
   owner: string;
-  status: EnvironmentStatus;
   latestDeployment: BranchDeployment;
+  enroll?: AppData;
+  glue?: AppData;
 }

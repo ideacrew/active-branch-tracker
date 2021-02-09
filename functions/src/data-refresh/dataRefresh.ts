@@ -1,5 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import { checkOwnership } from '../check-ownership/checkOwnership';
+import { sendSlackMessage } from '../slack-notifications/slackNotification';
 
 admin.initializeApp();
 
@@ -38,6 +40,13 @@ export async function handleDataRefresh(
     .doc(env);
 
   if (status === 'started') {
+    const ownedEnvironment = await checkOwnership({ org, env });
+    if (!ownedEnvironment) {
+      await sendSlackMessage(
+        `⚠ <!channel> *${org}-${env}* is having its data refreshed with _no current owner_! ⚠`,
+      );
+    }
+
     try {
       const FieldValue = admin.firestore.FieldValue;
       await envRef.set(
