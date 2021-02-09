@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { checkOwnership } from '../check-ownership/checkOwnership';
 import { sendSlackMessage } from '../slack-notifications/slackNotification';
+import { yellrEnvLink } from '../util/yellrEnvLink';
 
 admin.initializeApp();
 
@@ -41,9 +42,10 @@ export async function handleDataRefresh(
 
   if (status === 'started') {
     const ownedEnvironment = await checkOwnership({ org, env });
+    const yellrLink = yellrEnvLink({ org, env });
     if (!ownedEnvironment) {
       await sendSlackMessage(
-        `⚠ <!channel> *${org}-${env}* is having its data refreshed with _no current owner_! ⚠`,
+        `⚠ <!channel> <${yellrLink}|*${org}-${env}*> is having its data refreshed with _no current owner_! ⚠`,
       );
     }
 

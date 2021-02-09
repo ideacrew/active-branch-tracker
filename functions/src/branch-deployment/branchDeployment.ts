@@ -7,6 +7,7 @@ import { BranchDeployment } from './branchDeployment.interface';
 import { createSafeBranchName } from '../safeBranchName';
 import { checkOwnership } from '../check-ownership/checkOwnership';
 import { sendSlackMessage } from '../slack-notifications/slackNotification';
+import { yellrEnvLink } from '../util/yellrEnvLink';
 
 export async function handleBranchDeployment(
   request: functions.https.Request,
@@ -18,8 +19,9 @@ export async function handleBranchDeployment(
 
   const ownedEnvironment = await checkOwnership({ org, env });
   if (!ownedEnvironment) {
+    const yellrLink = yellrEnvLink({ org, env });
     await sendSlackMessage(
-      `⚠ <!channel> *${branch}* is being deployed to *${org}-${env}* with _no current owner_! ⚠`,
+      `⚠ <!channel> *${branch}* is being deployed to <${yellrLink}|*${org}-${env}*> with _no current owner_! ⚠`,
     );
   }
 
