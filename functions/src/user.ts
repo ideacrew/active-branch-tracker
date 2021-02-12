@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export interface GithubUser {
   login: string; // username?
   id: number;

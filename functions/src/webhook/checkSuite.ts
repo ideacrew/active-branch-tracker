@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable camelcase */
 import * as admin from 'firebase-admin';
 
 import { WebhookPayload } from '../webhookPayload';
@@ -68,9 +70,13 @@ export interface CheckSuite {
   };
 }
 
+/**
+ * Handles a check suite event from GitHub Actions
+ * @param {CheckSuitePayload} payload
+ */
 export async function handleCheckSuiteEvent(
   payload: CheckSuitePayload,
-): Promise<any> {
+): Promise<void> {
   const { check_suite, repository, organization } = payload;
 
   const { name: repositoryName, default_branch } = repository;
@@ -107,8 +113,7 @@ export async function handleCheckSuiteEvent(
 
   let checkSuiteRuns = 0;
   let checkSuiteFailures = 0;
-  let tracked: boolean = false;
-
+  let tracked = false;
 
   if (existingStatus.exists) {
     const existingStatusDoc = existingStatus.data() as BranchInfo;

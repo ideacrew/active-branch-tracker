@@ -7,6 +7,11 @@ export interface BranchRef {
   branchName: string;
 }
 
+/**
+ * Takes a branch ref object and returns a document references
+ * @param {BranchRef} branchRef
+ * @return {FirebaseFirestore.DocumentReference} a doc reference
+ */
 export function getBranchRef({
   organizationName,
   repositoryName,

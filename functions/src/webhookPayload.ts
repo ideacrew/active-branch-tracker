@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable camelcase */
 export interface WebhookPayload {
   sender: Sender;
   organization: Organization;

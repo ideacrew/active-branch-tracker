@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable camelcase */
 export interface BrakemanOutput {
   scan_info: ScanInfo;
   warnings: BrakemanWarning[];

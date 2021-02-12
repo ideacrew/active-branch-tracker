@@ -4,12 +4,16 @@ import * as functions from 'firebase-functions';
 admin.initializeApp();
 
 import * as sgMail from '@sendgrid/mail';
+import { ClientResponse } from '@sendgrid/client/src/response';
 
 import { BranchInfo } from './webhook/branchInfo';
 
-export async function staleBranches(
-  _context: functions.EventContext,
-): Promise<void> {
+/**
+ * Gets stale branches
+ * @param {functions.EventContext} _context unused
+ * @return {Promise<void>}
+ */
+export async function staleBranches(): Promise<void> {
   // can only use forEach to loop
   const oldBranches = await getStaleBranchesFromDB();
 
@@ -23,6 +27,10 @@ export async function staleBranches(
   }
 }
 
+/**
+ * Gets stale branches from the DB
+ * @return {Promise<BranchInfo[]>}
+ */
 export async function getStaleBranchesFromDB(): Promise<BranchInfo[]> {
   const today = new Date().getTime();
 
@@ -45,6 +53,12 @@ export async function getStaleBranchesFromDB(): Promise<BranchInfo[]> {
   return oldBranches;
 }
 
+/**
+ * Generates a list of branches
+ * @param {string} list
+ * @param {BranchInfo} branch
+ * @return {string}
+ */
 function generateBranchList(list: string, branch: BranchInfo): string {
   return (
     list +
@@ -54,7 +68,14 @@ function generateBranchList(list: string, branch: BranchInfo): string {
   );
 }
 
-async function sendMail(branchList: string) {
+/**
+ *
+ * @param {string} branchList The branch list in string form
+ * @return {Promise<[ClientResponse, unknown]>}
+ */
+async function sendMail(
+  branchList: string,
+): Promise<[ClientResponse, unknown]> {
   sgMail.setApiKey(functions.config().sendgrid.key);
   const msg: sgMail.MailDataRequired = {
     to: 'lead_devs@ideacrew.com',

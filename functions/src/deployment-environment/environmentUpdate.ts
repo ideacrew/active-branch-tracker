@@ -9,13 +9,12 @@ import { DeploymentEnvironment } from './deploymentEnvironment.interface';
 /**
  * Watch for updates to environment documents. If there is a new branch
  * deployed, update the branch document with environment name
- * @param change a change to an Environment document
- * @param _context not used here
+ * @param {functions.Change<functions.firestore.QueryDocumentSnapshot>} change a change to an Environment document
+ * @return {Promise<void>}
  */
 export async function handleEnvironmentUpdate(
   change: functions.Change<functions.firestore.QueryDocumentSnapshot>,
-  _context: functions.EventContext,
-) {
+): Promise<void> {
   const {
     org: oldOrg,
     // repo: oldRepo,
@@ -45,6 +44,7 @@ export async function handleEnvironmentUpdate(
 
     // Only update the branch information if a branch exists
     if (oldBranchDoc.exists) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { environment, ...branchData } = oldBranchDoc.data() as BranchInfo;
 
       await oldBranchRef.set(branchData);

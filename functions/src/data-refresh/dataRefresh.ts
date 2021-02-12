@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { checkOwnership } from '../check-ownership/checkOwnership';
@@ -23,6 +24,12 @@ export interface AppData {
   dataTimestamp: FirebaseFirestore.Timestamp;
 }
 
+/**
+ * Handles a data refresh
+ * @param {functions.https.Request} request
+ * @param {functions.Response<unknown>} response
+ * @return {Promise<void>}
+ */
 export async function handleDataRefresh(
   request: functions.https.Request,
   response: functions.Response<unknown>,

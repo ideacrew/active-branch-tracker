@@ -9,10 +9,16 @@ import { checkOwnership } from '../check-ownership/checkOwnership';
 import { sendSlackMessage } from '../slack-notifications/slackNotification';
 import { yellrEnvLink } from '../util/yellrEnvLink';
 
+/**
+ * Handles a new branch deployment
+ * @param {functions.https.Request} request
+ * @param {functions.Response<unknown>} response
+ * @return {Promise<void>}
+ */
 export async function handleBranchDeployment(
   request: functions.https.Request,
   response: functions.Response<unknown>,
-) {
+): Promise<void> {
   const deployment: BranchDeploymentPayload = JSON.parse(request.body.payload);
 
   const { org, env, branch, status } = deployment;
@@ -32,6 +38,11 @@ export async function handleBranchDeployment(
   response.send(deployment);
 }
 
+/**
+ * Updates a branch document with environment information
+ * @param {BranchDeploymentPayload} deployment
+ * @return {Promise<void>}
+ */
 async function updateBranchWithEnvironmentInfo(
   deployment: BranchDeploymentPayload,
 ): Promise<void> {
@@ -52,7 +63,14 @@ async function updateBranchWithEnvironmentInfo(
   }
 }
 
-async function updateEnvironmentWithBranchInfo(deployment: BranchDeploymentPayload) {
+/**
+ *
+ * @param {BranchDeploymentPayload} deployment
+ * @return {Promise<void>}
+ */
+async function updateEnvironmentWithBranchInfo(
+  deployment: BranchDeploymentPayload,
+): Promise<void> {
   const { org, env, status } = deployment;
 
   const FieldValue = admin.firestore.FieldValue;

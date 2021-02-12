@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable camelcase */
 import * as admin from 'firebase-admin';
 
 import { Repository, Organization, Sender } from '../webhookPayload';
@@ -16,9 +18,14 @@ export interface CreateEventPayload {
   sender: Sender;
 }
 
+/**
+ * Handles a create event from GitHub Actions
+ * @param {CreateEventPayload} payload
+ * @return {Promise<void>} promise
+ */
 export async function handleCreateEvent(
   payload: CreateEventPayload,
-): Promise<any> {
+): Promise<void> {
   const { ref: branchName, repository, organization, sender } = payload;
 
   const safeBranchName = createSafeBranchName(branchName);

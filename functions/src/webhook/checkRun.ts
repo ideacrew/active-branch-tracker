@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import * as admin from 'firebase-admin';
 import { WebhookPayload, App } from '../webhookPayload';
 import { CheckConclusion } from './checkConclusion';
@@ -52,9 +53,14 @@ export interface CheckRun {
   pull_requests: [];
 }
 
+/**
+ * Handles a check run event
+ * @param { CheckRunPayload } payload
+ * @return { Promise<void> } promise
+ */
 export async function handleCheckRunEvent(
   payload: CheckRunPayload,
-): Promise<any> {
+): Promise<void> {
   const { check_run, repository, organization } = payload;
 
   const { name: repositoryName } = repository;

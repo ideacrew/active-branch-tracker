@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import * as admin from 'firebase-admin';
 import { Repository, Sender, Organization } from '../webhookPayload';
 import { createSafeBranchName } from '../safeBranchName';
@@ -13,9 +14,14 @@ export interface DeleteEventPayload {
   sender: Sender;
 }
 
+/**
+ * Handles the delete event from GitHub Actions
+ * @param {DeleteEventPayload} payload
+ * @return {Promise<void>} promise
+ */
 export async function handleDeleteEvent(
   payload: DeleteEventPayload,
-): Promise<any> {
+): Promise<void> {
   const { ref: branchName, repository, organization } = payload;
 
   const safeBranchName = createSafeBranchName(branchName);

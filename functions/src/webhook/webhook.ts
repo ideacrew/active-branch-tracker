@@ -11,10 +11,15 @@ import {
   PullRequestEventPayload,
 } from './pullRequestEvent';
 
+/**
+ * Handles the incoming webhook from GitHub Actions
+ * @param {functions.https.Request} request
+ * @param {functions.Response<unknown>} response
+ */
 export async function handleWebhook(
   request: functions.https.Request,
   response: functions.Response<unknown>,
-) {
+): Promise<void> {
   const eventType = request.header('X-Github-Event');
 
   console.log({ eventType });

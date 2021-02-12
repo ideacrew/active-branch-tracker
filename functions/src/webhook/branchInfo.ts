@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { CheckConclusion } from './checkConclusion';
 
 export interface BranchInfo {

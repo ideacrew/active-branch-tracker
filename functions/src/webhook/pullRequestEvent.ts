@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable camelcase */
 import * as admin from 'firebase-admin';
 
 import { Repository, Organization, Sender } from '../webhookPayload';
@@ -115,9 +117,14 @@ export interface PullRequest {
   changed_files: number;
 }
 
+/**
+ * Handles a Pull Request webhook
+ * @param {PullRequestEventPayload} payload A PR event payload
+ * @return { Promise<any> } a promise
+ */
 export async function handlePullRequestEvent(
-  payload: PullRequestEventPayload
-): Promise<any> {
+  payload: PullRequestEventPayload,
+): Promise<void> {
   const { action, pull_request, repository, organization } = payload;
   const { login: organizationName } = organization;
   const { number: pullRequestNumber, head, merged } = pull_request;
