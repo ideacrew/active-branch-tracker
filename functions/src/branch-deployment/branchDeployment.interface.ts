@@ -1,9 +1,10 @@
-export interface BranchDeployment {
-  branch: string;
-  env: string;
+export interface BranchDeploymentPayload {
   app: string;
-  user_name: string;
+  branch: string;
   commit_sha: string;
+  env: string;
   org: string;
   repo: string;
+  status: 'started' | 'completed';
+  user_name: string;
 }

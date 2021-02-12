@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 
 admin.initializeApp();
 
-import { BranchDeployment } from './branchDeployment.interface';
+import { BranchDeploymentPayload } from './branchDeployment.interface';
 import { createSafeBranchName } from '../safeBranchName';
 import { checkOwnership } from '../check-ownership/checkOwnership';
 import { sendSlackMessage } from '../slack-notifications/slackNotification';
@@ -13,12 +13,12 @@ export async function handleBranchDeployment(
   request: functions.https.Request,
   response: functions.Response<unknown>,
 ) {
-  const deployment: BranchDeployment = JSON.parse(request.body.payload);
+  const deployment: BranchDeploymentPayload = JSON.parse(request.body.payload);
 
-  const { org, env, branch } = deployment;
+  const { org, env, branch, status } = deployment;
 
   const ownedEnvironment = await checkOwnership({ org, env });
-  if (!ownedEnvironment) {
+  if (!ownedEnvironment && status === 'started') {
     const yellrLink = yellrEnvLink({ org, env });
     await sendSlackMessage(
       `⚠ <!channel> *${branch}* is being deployed to <${yellrLink}|*${org}-${env}*> with _no current owner_! ⚠`,
@@ -33,7 +33,7 @@ export async function handleBranchDeployment(
 }
 
 async function updateBranchWithEnvironmentInfo(
-  deployment: BranchDeployment,
+  deployment: BranchDeploymentPayload,
 ): Promise<void> {
   const branchRef = admin
     .firestore()
@@ -52,8 +52,8 @@ async function updateBranchWithEnvironmentInfo(
   }
 }
 
-async function updateEnvironmentWithBranchInfo(deployment: BranchDeployment) {
-  const { org, env } = deployment;
+async function updateEnvironmentWithBranchInfo(deployment: BranchDeploymentPayload) {
+  const { org, env, status } = deployment;
 
   const FieldValue = admin.firestore.FieldValue;
 
@@ -69,7 +69,7 @@ async function updateEnvironmentWithBranchInfo(deployment: BranchDeployment) {
       {
         latestDeployment: {
           ...deployment,
-          deployedAt: FieldValue.serverTimestamp(),
+          [status]: FieldValue.serverTimestamp(),
         },
       },
       { merge: true },
