@@ -80,7 +80,7 @@ async function updateEnvironmentWithBranchInfo(
     .collection('orgs')
     .doc(org)
     .collection('environments')
-    .doc(env);
+    .doc(env.toLowerCase());
 
   try {
     await environmentRef.set(
