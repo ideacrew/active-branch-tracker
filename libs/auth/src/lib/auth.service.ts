@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 
 import { Observable } from 'rxjs';
-import { filter, map, take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +24,6 @@ export class AuthService {
   logout(): Promise<void> {
     return this.afAuth.signOut();
   }
-
 
   get user$(): Observable<firebase.User | null> {
     return this.afAuth.user;

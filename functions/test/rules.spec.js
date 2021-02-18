@@ -84,6 +84,15 @@ describe('testing assertions', () => {
       lemDb.doc(envDoc).update({ content: 'after' }),
     );
   });
+
+  it('can only read user documents if logged in and match uid', async () => {
+    const userDoc = 'users/phil';
+    await admin.doc(userDoc).set({ content: 'before' });
+
+    await firebase.assertSucceeds(philDb.doc(userDoc).get());
+    await firebase.assertFails(lemDb.doc(userDoc).get());
+    await firebase.assertFails(noUserDb.doc(userDoc).get());
+  });
 });
 
 after(async () => {
