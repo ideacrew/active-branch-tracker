@@ -5,21 +5,18 @@ import {
 } from '@angular/fire/auth-guard';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from '@idc/auth';
+import { AppShellComponent } from './app-shell/app-shell.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes = [
-  { path: '', redirectTo: 'branches', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: 'branches',
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
     loadChildren: () =>
       import('@idc/branches/feature').then(m => m.BranchesFeatureModule),
-  },
-  {
-    path: 'branches/:branchId',
-    loadChildren: () =>
-      import('@idc/branches/feature').then(m => m.BranchDetailModule),
   },
   {
     path: 'environments',

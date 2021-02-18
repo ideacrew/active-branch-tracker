@@ -37,3 +37,10 @@ export const watchEnvironments = functions.firestore
       await import('./deployment-environment/environmentUpdate')
     ).handleEnvironmentUpdate(change);
   });
+
+export const setCustomClaims = functions.https.onRequest(
+  async () =>
+    await (
+      await import('./custom-claims/setCustomClaims')
+    ).handleCustomClaims(),
+);

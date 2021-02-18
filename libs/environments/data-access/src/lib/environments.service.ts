@@ -17,7 +17,7 @@ export interface OrgEnvironment {
   name: string;
   prodlike: boolean;
   architecture: Architecture;
-  latestDeployment: BranchDeployment;
+  latestDeployment: LatestDeployment;
   owner: string;
   ownerRelease: firebase.default.firestore.Timestamp;
   gluedb?: AppData;
@@ -35,15 +35,17 @@ export interface OwnerReleaseUpdate {
   ownerRelease: Date;
 }
 
-export interface BranchDeployment {
-  branch: string;
-  env: string;
+export interface LatestDeployment {
   app: string;
-  user_name: string;
+  branch: string;
   commit_sha: string;
+  completed?: firebase.default.firestore.Timestamp;
+  env: string;
   org: string;
   repo: string;
-  deployedAt: unknown;
+  started?: firebase.default.firestore.Timestamp;
+  status: 'started' | 'completed';
+  user_name: string;
 }
 
 export type Architecture = 'standalone' | 'e2e';

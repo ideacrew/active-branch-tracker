@@ -32,5 +32,8 @@
       "@ic/google-analytics": ["libs/google-analytics/src/index.ts"]
     }
   },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true
+  },
   "exclude": ["node_modules", "tmp", "functions"]
 }

@@ -13,7 +13,7 @@ export const checkOwnership = async ({
     .collection('orgs')
     .doc(org)
     .collection('environments')
-    .doc(env);
+    .doc(env.toLowerCase());
 
   const envDoc = await envRef.get();
 
