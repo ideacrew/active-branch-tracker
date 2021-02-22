@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-
 import * as firebase from 'firebase/app';
+
+import { YellrUser } from '@idc/user/data-access';
+
 import { Org, OrgEnvironment, OwnerReleaseUpdate, OwnerUpdate } from './models';
 
 @Injectable()
@@ -87,7 +89,14 @@ export class EnvironmentsService {
       .valueChanges({ idField: 'id' });
   }
 
-  getOrgList(): Observable<Org[]> {
-    return this.afs.collection<Org>('orgs').valueChanges({ idField: 'id' });
+  getOrgList(user: YellrUser): Observable<Org[]> {
+    if (user.role === 'admin') {
+      return this.afs.collection<Org>('orgs').valueChanges({ idField: 'id' });
+    } else {
+      // Here __name__ is equivalent to the document id
+      return this.afs
+        .collection<Org>('orgs', ref => ref.where('__name__', '==', user.org))
+        .valueChanges({ idField: 'id' });
+    }
   }
 }

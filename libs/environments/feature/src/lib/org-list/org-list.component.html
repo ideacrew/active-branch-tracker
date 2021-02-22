@@ -1,13 +1,6 @@
-<ng-container *ngIf="user.user$ | async as user">
-  <ng-container *ngIf="user.role === 'external'; else allOrgs"
-    >{{ user | json }}
-  </ng-container>
-</ng-container>
-<ng-template #allOrgs>
-  <a *ngFor="let org of envService.getOrgList() | async" class="org-link">{{
-    org.name
-  }}</a>
-</ng-template>
-<!--
-<a class="org-link" routerLink="./dchbx">DCHBX</a>
-<a class="org-link" routerLink="./health-connector">Health Connector</a> -->
+<a
+  class="org-link"
+  [routerLink]="['./', org.id]"
+  *ngFor="let org of orgList$ | async"
+  >{{ org.name }}</a
+>

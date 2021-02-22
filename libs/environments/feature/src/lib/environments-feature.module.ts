@@ -11,6 +11,7 @@ import { EnvironmentCardComponent } from './environment-card/environment-card.co
 import { RelativeDatePipe } from './relative-date.pipe';
 import { AutofocusInputDirective } from './autofocus-input.directive';
 import { EnvironmentDetailComponent } from './environment-detail/environment-detail.component';
+import { OrgAccessGuard } from './org-access.guard';
 
 @NgModule({
   imports: [
@@ -21,10 +22,12 @@ import { EnvironmentDetailComponent } from './environment-detail/environment-det
       {
         path: ':orgId/:envId',
         component: EnvironmentDetailComponent,
+        canActivate: [OrgAccessGuard],
       },
       {
         path: ':orgId',
         component: EnvironmentsListComponent,
+        canActivate: [OrgAccessGuard],
       },
     ]),
     EnvironmentsDataAccessModule,
