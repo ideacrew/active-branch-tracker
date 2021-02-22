@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { EnvironmentsService } from '@idc/environments/data-access';
 import { UserService } from '@idc/user/data-access';
 
 @Component({
@@ -7,5 +8,8 @@ import { UserService } from '@idc/user/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrgListComponent {
-  constructor(public user: UserService) {}
+  constructor(
+    public user: UserService,
+    public envService: EnvironmentsService,
+  ) {}
 }

@@ -4,54 +4,7 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 import * as firebase from 'firebase/app';
-export type AppName = 'enroll' | 'gluedb';
-export type DataRefreshStatus = 'started' | 'completed' | 'error';
-export interface AppData {
-  status: DataRefreshStatus;
-  user_name: string;
-  dataTimestamp: firebase.default.firestore.Timestamp;
-}
-
-export interface OrgEnvironment {
-  id: string;
-  name: string;
-  prodlike: boolean;
-  architecture: Architecture;
-  latestDeployment: LatestDeployment;
-  owner: string;
-  ownerRelease: firebase.default.firestore.Timestamp;
-  gluedb?: AppData;
-  enroll?: AppData;
-}
-
-export interface OwnerUpdate {
-  orgId: string;
-  envId: string;
-  owner: string;
-}
-export interface OwnerReleaseUpdate {
-  orgId: string;
-  envId: string;
-  ownerRelease: Date;
-}
-
-export interface LatestDeployment {
-  app: string;
-  branch: string;
-  commit_sha: string;
-  completed?: firebase.default.firestore.Timestamp;
-  env: string;
-  org: string;
-  repo: string;
-  started?: firebase.default.firestore.Timestamp;
-  status: 'started' | 'completed';
-  user_name: string;
-}
-
-export type Architecture = 'standalone' | 'e2e';
-export interface Org {
-  name: string;
-}
+import { Org, OrgEnvironment, OwnerReleaseUpdate, OwnerUpdate } from './models';
 
 @Injectable()
 export class EnvironmentsService {
@@ -125,5 +78,16 @@ export class EnvironmentsService {
       owner,
       ownerRelease: firebase.default.firestore.Timestamp.fromDate(ownerRelease),
     });
+  }
+
+  getSingleOrg(org: string): Observable<Org> {
+    return this.afs
+      .collection<Org>('orgs')
+      .doc(org)
+      .valueChanges({ idField: 'id' });
+  }
+
+  getOrgList(): Observable<Org[]> {
+    return this.afs.collection<Org>('orgs').valueChanges({ idField: 'id' });
   }
 }
