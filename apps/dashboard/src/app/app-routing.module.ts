@@ -5,7 +5,7 @@ import {
 } from '@angular/fire/auth-guard';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from '@idc/auth';
-import { AppShellComponent } from './app-shell/app-shell.component';
+import { AdminOnlyGuard } from '@idc/user/data-access';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -13,7 +13,7 @@ const routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'branches',
-    canActivate: [AngularFireAuthGuard],
+    canLoad: [AdminOnlyGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     loadChildren: () =>
       import('@idc/branches/feature').then(m => m.BranchesFeatureModule),
