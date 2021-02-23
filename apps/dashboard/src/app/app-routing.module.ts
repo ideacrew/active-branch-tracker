@@ -19,7 +19,6 @@ const routes = [
   {
     path: 'branches',
     canLoad: [AdminOnlyGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
     loadChildren: () =>
       import('@idc/branches/feature').then(m => m.BranchesFeatureModule),
   },
