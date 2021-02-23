@@ -31,7 +31,10 @@
       />
     </div>
   </form>
-  <div *ngIf="changingOwnership === false" class="button-group">
+  <div
+    *ngIf="changingOwnership === false && isAdmin === true"
+    class="button-group"
+  >
     <button type="button" (click)="changingOwnership = true" class="button">
       Change Ownership
     </button>

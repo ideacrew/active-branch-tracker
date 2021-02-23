@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  HostBinding,
   Input,
   Output,
 } from '@angular/core';
@@ -14,6 +15,7 @@ import {
   OwnerUpdate,
 } from '@idc/environments/data-access';
 import { convertDateInputToLocalDate } from '../convertDate';
+import { UserService } from '@idc/user/data-access';
 
 @Component({
   selector: 'idc-environment-card',
@@ -27,6 +29,8 @@ export class EnvironmentCardComponent {
   editingOwnerReleaseDate = false;
   currentReleaseDate: string;
 
+  isAdmin = this.userService.isAdmin.value;
+
   @Input() org: string;
   @Input() environment: OrgEnvironment;
   @Output() readonly newOwner = new EventEmitter<Partial<OwnerUpdate>>();
@@ -34,15 +38,25 @@ export class EnvironmentCardComponent {
     Partial<OwnerReleaseUpdate>
   >();
 
+  constructor(private userService: UserService) {}
+
+  @HostBinding('class.is-admin') get isAnAdmin(): boolean {
+    return this.isAdmin;
+  }
+
   editOwnership(): void {
-    this.currentOwner = this.environment.owner;
-    this.editingOwnership = true;
+    if (this.isAdmin) {
+      this.currentOwner = this.environment.owner;
+      this.editingOwnership = true;
+    }
   }
 
   editOwnerReleaseDate(): void {
-    this.editingOwnerReleaseDate = true;
-    const nextWeek = addWeeks(new Date(), 1);
-    this.currentReleaseDate = nextWeek.toISOString().slice(0, 10);
+    if (this.isAdmin) {
+      this.editingOwnerReleaseDate = true;
+      const nextWeek = addWeeks(new Date(), 1);
+      this.currentReleaseDate = nextWeek.toISOString().slice(0, 10);
+    }
   }
 
   cancelEditingOwnership(): void {
