@@ -1,9 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import {
   EnvironmentsService,
   OrgEnvironment,
 } from '@idc/environments/data-access';
+import { UserService } from '@idc/user/data-access';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { convertDateInputToLocalDate } from '../convertDate';
 
@@ -18,6 +19,7 @@ export class EnvironmentDetailComponent implements OnInit {
   changingOwnership = false;
   newOwner = '';
   newReleaseDate = '';
+  isAdmin = this.userService.isAdmin.value;
 
   orgEnvIds$ = this.route.paramMap.pipe(
     filter((params: ParamMap) => params.has('orgId') && params.has('envId')),
@@ -48,9 +50,14 @@ export class EnvironmentDetailComponent implements OnInit {
     }),
   );
 
+  @HostBinding('class.is-admin') get isAnAdmin(): boolean {
+    return this.isAdmin;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private envService: EnvironmentsService,
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {}

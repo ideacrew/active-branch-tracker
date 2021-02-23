@@ -31,7 +31,10 @@
       />
     </div>
   </form>
-  <div *ngIf="changingOwnership === false" class="button-group">
+  <div
+    *ngIf="changingOwnership === false && isAdmin === true"
+    class="button-group"
+  >
     <button type="button" (click)="changingOwnership = true" class="button">
       Change Ownership
     </button>
@@ -55,10 +58,10 @@
   <div
     *ngIf="env.latestDeployment; else noDeployment"
     class="value"
-    [attr.title]="env.latestDeployment.deployedAt.toDate() | date: 'medium'"
+    [attr.title]="env.latestDeployment.completed.toDate() | date: 'medium'"
   >
     <span class="branch-name">{{ env.latestDeployment.branch }}</span>
-    deployed {{ env.latestDeployment.deployedAt.toDate() | relativeDate }} by
+    deployed {{ env.latestDeployment.completed.toDate() | relativeDate }} by
     {{ env.latestDeployment.user_name }}
   </div>
 

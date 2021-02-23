@@ -9,7 +9,18 @@ const philAuth = {
   uid: 'phil',
   email: 'phil@example.com',
 };
+
+const philUser = {
+  org: 'dchbx',
+  role: 'external',
+};
+
 const lemAuth = { uid: 'lem', email: 'lem@example.com' };
+
+const lemUser = {
+  org: 'ideacrew',
+  role: 'admin',
+};
 
 before(async () => {
   const rulesContent = fs.readFileSync(
@@ -71,18 +82,53 @@ describe('testing assertions', () => {
     );
   });
 
-  it(`can only read and update an environment if logged in`, async () => {
-    const envDoc = 'environments/pvt-2';
+  it(`can read and write an org if an admin`, async () => {
+    const orgDoc = 'orgs/dchbx';
+    await admin.doc('users/lem').set(lemUser);
+    await admin.doc(orgDoc).set({ content: 'before' });
+
+    await firebase.assertSucceeds(lemDb.doc(orgDoc).get());
+    await firebase.assertSucceeds(
+      lemDb.doc(orgDoc).update({ content: 'after' }),
+    );
+  });
+
+  it(`can read but not write an org if member of org`, async () => {
+    const orgDoc = 'orgs/dchbx';
+    await admin.doc('users/phil').set(philUser);
+    await admin.doc(orgDoc).set({ content: 'before' });
+
+    await firebase.assertSucceeds(philDb.doc(orgDoc).get());
+    await firebase.assertFails(philDb.doc(orgDoc).update({ content: 'after' }));
+  });
+
+  it('can read and write to environment docs if admin', async () => {
+    const envDoc = 'orgs/dchbx/environments/env-1';
+    await admin.doc('users/lem').set(lemUser);
     await admin.doc(envDoc).set({ content: 'before' });
 
-    await firebase.assertFails(noUserDb.doc(envDoc).get());
-    await firebase.assertFails(
-      noUserDb.doc(envDoc).update({ content: 'after' }),
-    );
     await firebase.assertSucceeds(lemDb.doc(envDoc).get());
     await firebase.assertSucceeds(
       lemDb.doc(envDoc).update({ content: 'after' }),
     );
+  });
+
+  it('can read but not write to environment docs if member of org', async () => {
+    const envDoc = 'orgs/dchbx/environments/env-1';
+    await admin.doc('users/phil').set(philUser);
+    await admin.doc(envDoc).set({ content: 'before' });
+
+    await firebase.assertSucceeds(philDb.doc(envDoc).get());
+    await firebase.assertFails(philDb.doc(envDoc).update({ content: 'after' }));
+  });
+
+  it('can only read user documents if logged in and match uid', async () => {
+    const userDoc = 'users/phil';
+    await admin.doc(userDoc).set({ content: 'before' });
+
+    await firebase.assertSucceeds(philDb.doc(userDoc).get());
+    await firebase.assertFails(lemDb.doc(userDoc).get());
+    await firebase.assertFails(noUserDb.doc(userDoc).get());
   });
 });
 

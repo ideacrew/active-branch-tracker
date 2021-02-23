@@ -11,5 +11,6 @@ module.exports = {
     '<rootDir>/libs/testing',
     '<rootDir>/libs/auth',
     '<rootDir>/libs/google-analytics',
+    '<rootDir>/libs/user/data-access',
   ],
 };

@@ -45,14 +45,14 @@ export async function handleDataRefresh(
     .collection('orgs')
     .doc(org)
     .collection('environments')
-    .doc(env);
+    .doc(env.toLowerCase());
 
   if (status === 'started') {
     const ownedEnvironment = await checkOwnership({ org, env });
     const yellrLink = yellrEnvLink({ org, env });
     if (!ownedEnvironment) {
       await sendSlackMessage(
-        `⚠ <!channel> <${yellrLink}|*${org}-${env}*> is having its data refreshed with _no current owner_! ⚠`,
+        `⚠ <!channel> <${yellrLink}|*${org}-${env.toLowerCase()}*> is having its data refreshed with _no current owner_! ⚠`,
       );
     }
 

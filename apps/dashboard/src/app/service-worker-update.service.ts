@@ -9,13 +9,13 @@ import { environment } from '../environments/environment';
 export class ServiceWorkerUpdateService {
   constructor(appRef: ApplicationRef, updates: SwUpdate) {
     const appIsStable$ = appRef.isStable.pipe(
-      first(isStable => isStable === true)
+      first(isStable => isStable === true),
     );
     const everyOneHour$ = interval(1 * 60 * 60 * 1000);
-    const everySixHoursOnceAppIsStable$ = concat(appIsStable$, everyOneHour$);
+    const everyHourOnceAppIsStable$ = concat(appIsStable$, everyOneHour$);
 
     if (environment.production === true) {
-      everySixHoursOnceAppIsStable$.subscribe(async () => {
+      everyHourOnceAppIsStable$.subscribe(async () => {
         await updates.checkForUpdate();
       });
 

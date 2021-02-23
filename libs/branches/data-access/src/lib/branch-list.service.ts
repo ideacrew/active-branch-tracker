@@ -26,7 +26,6 @@ export class BranchListService {
     );
 
     return branchesRef.snapshotChanges().pipe(
-      tap(console.log),
       tap(async (docChange: DocumentChangeAction<BranchInfo>[]) => {
         const modified = docChange.filter(change => change.type === 'modified');
         let newFailure = false;

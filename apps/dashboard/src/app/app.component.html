@@ -1,29 +1,40 @@
-<ul class="sidebar">
-  <li class="nav-link">
-    <a routerLink="/branches">
-      <span>Branches</span
-      ><svg height="24px" width="24px" class="svg-icon" title="Branches">
-        <use href="assets/icons.svg#branch"></use>
-      </svg>
-    </a>
-  </li>
-  <li class="nav-link">
-    <a routerLink="/environments">
-      <span>Environments</span
-      ><svg height="24px" width="24px" class="svg-icon" title="Environments">
-        <use href="assets/icons.svg#rocket"></use>
-      </svg>
-    </a>
-  </li>
-  <li class="nav-link">
-    <a routerLink="/login">
-      <span>Login</span
-      ><svg height="24px" width="24px" class="svg-icon" title="User">
-        <use href="assets/icons.svg#person"></use>
-      </svg>
-    </a>
-  </li>
-</ul>
+<aside class="sidebar">
+  <ul>
+    <ng-container *ngIf="authService.user$ | async">
+      <ng-container *ngIf="userService.user$ | async as user">
+        <li *ngIf="user.role === 'admin'" class="nav-link">
+          <a routerLink="/branches">
+            <span class="visually-hidden">Branches</span
+            ><svg height="24px" width="24px" class="svg-icon" title="Branches">
+              <use href="assets/icons.svg#branch"></use>
+            </svg>
+          </a>
+        </li>
+      </ng-container>
+      <li class="nav-link">
+        <a routerLink="/environments">
+          <span class="visually-hidden">Environments</span
+          ><svg
+            height="24px"
+            width="24px"
+            class="svg-icon"
+            title="Environments"
+          >
+            <use href="assets/icons.svg#rocket"></use>
+          </svg>
+        </a>
+      </li>
+    </ng-container>
+    <li class="nav-link">
+      <a routerLink="/login">
+        <span class="visually-hidden">Login</span
+        ><svg height="24px" width="24px" class="svg-icon" title="User">
+          <use href="assets/icons.svg#person"></use>
+        </svg>
+      </a>
+    </li>
+  </ul>
+</aside>
 
 <main>
   <router-outlet></router-outlet>
