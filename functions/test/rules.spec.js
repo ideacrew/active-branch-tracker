@@ -11,14 +11,14 @@ const philAuth = {
 };
 
 const philUser = {
-  org: 'dchbx',
+  orgs: ['dchbx', 'health-connector'],
   role: 'external',
 };
 
 const lemAuth = { uid: 'lem', email: 'lem@example.com' };
 
 const lemUser = {
-  org: 'ideacrew',
+  orgs: ['ideacrew'],
   role: 'admin',
 };
 

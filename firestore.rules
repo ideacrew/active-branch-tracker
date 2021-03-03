@@ -18,7 +18,7 @@ service cloud.firestore {
 
     match /orgs/{orgId} {
       function belongsToOrg() {
-        return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.org == orgId;
+        return orgId in get(/databases/$(database)/documents/users/$(request.auth.uid)).data.orgs;
       }
 
       allow read: if isAdmin() || belongsToOrg();
