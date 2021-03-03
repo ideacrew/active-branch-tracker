@@ -35,7 +35,7 @@
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "firebase": "^8.2.4",
+    "firebase": "^8.2.9",
     "firebase-functions-test": "^0.2.3",
     "mocha": "^8.3.0",
     "prettier": "^2.2.1",
