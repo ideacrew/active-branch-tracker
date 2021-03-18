@@ -23,11 +23,6 @@ export class ActiveBranchesComponent implements OnInit {
   DisplayType = DisplayType;
   searchQuery = new FormControl('');
 
-  deployedBranchesVM$ = combineLatest([
-    this.branchesFacade.deployedBranches$,
-    this.configFacade.deployedBranchesDisplay$,
-  ]).pipe(map(([branches, display]) => ({ branches, display })));
-
   trackedBranchesVM$ = combineLatest([
     this.branchesFacade.trackedBranches$,
     this.configFacade.trackedBranchesDisplay$,

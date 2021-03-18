@@ -33,7 +33,6 @@ export interface BranchInfo {
   createdBy?: string;
   releaseDate?: number;
   pullRequestNumber?: number;
-  environment?: string;
 }
 
 export enum BranchStatus {

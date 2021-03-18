@@ -15,41 +15,6 @@
   ></idc-branch-container>
 </div>
 
-<!-- DEPLOYED BRANCHES -->
-<ng-container *ngIf="deployedBranchesVM$ | async as vm">
-  <div class="branch-container-heading">
-    <h2 class="branch-type-heading">Deployed Branches</h2>
-    <button
-      *ngIf="vm.display === DisplayType.Collapsed"
-      type="button"
-      class="unfold-view"
-      (click)="configFacade.setDeployedBranches(DisplayType.Expanded)"
-    >
-      <svg height="24px" width="24px" class="svg-icon expand">
-        <use href="assets/icons.svg#expand"></use>
-      </svg>
-    </button>
-    <button
-      *ngIf="vm.display === DisplayType.Expanded"
-      type="button"
-      class="fold-view"
-      (click)="configFacade.setDeployedBranches(DisplayType.Collapsed)"
-    >
-      <svg height="24px" width="24px" class="svg-icon collapse">
-        <use href="assets/icons.svg#collapse"></use>
-      </svg>
-    </button>
-  </div>
-  <div class="branches-list">
-    <idc-branch-container
-      [loggedIn]="loggedIn$ | async"
-      *ngFor="let branch of vm.branches; trackBy: trackByBranchName"
-      [viewType]="vm.display"
-      [branch]="branch"
-    ></idc-branch-container>
-  </div>
-</ng-container>
-
 <!-- TRACKED BRANCHES -->
 <ng-container *ngIf="trackedBranchesVM$ | async as vm">
   <div class="branch-container-heading">

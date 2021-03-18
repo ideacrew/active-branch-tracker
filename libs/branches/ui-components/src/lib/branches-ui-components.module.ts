@@ -9,7 +9,15 @@ import { BranchStatusComponent } from './branch-status/branch-status.component';
 
 @NgModule({
   imports: [CommonModule, UtilModule],
-  declarations: [BranchContainerComponent, ReleaseDateComponent, BranchStatusComponent],
-  exports: [BranchContainerComponent, ReleaseDateComponent, BranchStatusComponent],
+  declarations: [
+    BranchContainerComponent,
+    ReleaseDateComponent,
+    BranchStatusComponent,
+  ],
+  exports: [
+    BranchContainerComponent,
+    ReleaseDateComponent,
+    BranchStatusComponent,
+  ],
 })
 export class BranchesUiComponentsModule {}

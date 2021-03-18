@@ -30,7 +30,6 @@ export interface BranchInfo {
   timestamp: number;
   releaseDate?: number;
   pullRequestNumber?: number;
-  environment?: string;
   status?: BranchStatus;
 }
 

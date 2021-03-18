@@ -6,7 +6,6 @@
     tracked: branch.tracked,
     'has-pr': branch.pullRequestNumber,
     'is-old': branch | isOld,
-    deployed: branch.environment,
     success: branch.checkSuiteStatus === CheckSuiteConclusion.Success,
     failure: branch.checkSuiteStatus === CheckSuiteConclusion.Failure
   }"
@@ -14,8 +13,7 @@
   <!-- Container Heading -->
   <div class="container-heading">
     <div class="heading-left">
-      <ng-container
-        *ngIf="!branch.defaultBranch && !branch.environment && loggedIn"
+      <ng-container *ngIf="!branch.defaultBranch && loggedIn"
         ><button
           *ngIf="branch.tracked === false; else untrack"
           class="light-bulb-button"
@@ -46,12 +44,12 @@
             >{{ branch.branchName }}</a
           >
         </div>
-        <idc-branch-status
+        <!-- <idc-branch-status
           [loggedIn]="loggedIn"
           *ngIf="!branch.defaultBranch"
           [currentStatus]="branch.status"
           (newStatus)="changeBranchStatus($event)"
-        ></idc-branch-status>
+        ></idc-branch-status> -->
       </div>
     </div>
     <svg
@@ -69,7 +67,6 @@
         href="assets/icons.svg#check"
       ></use>
     </svg>
-    <div class="environment">{{ branch.environment }}</div>
   </div>
 
   <!-- Container Content -->

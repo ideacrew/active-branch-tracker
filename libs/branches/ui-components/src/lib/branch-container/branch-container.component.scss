@@ -62,18 +62,6 @@
     outline: 0;
     border: 3px solid hsla(59, 93%, 45%, 0.8);
   }
-
-  &.deployed {
-    .environment {
-      display: block;
-    }
-
-    .container-heading {
-      svg {
-        display: none;
-      }
-    }
-  }
 }
 
 .environment {

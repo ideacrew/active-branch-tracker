@@ -15,9 +15,7 @@ export class BranchesFacade {
   defaultBranches$ = this.store.pipe(
     select(BranchesSelectors.getDefaultBranches),
   );
-  deployedBranches$ = this.store.pipe(
-    select(BranchesSelectors.getDeployedBranches),
-  );
+
   trackedBranches$ = this.store.pipe(
     select(BranchesSelectors.getTrackedBranches),
   );

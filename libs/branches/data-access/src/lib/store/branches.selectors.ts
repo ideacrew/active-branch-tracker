@@ -84,22 +84,13 @@ export const getFeatureBranches = createSelector(
     branches?.filter(branchInfo => branchInfo.defaultBranch === false),
 );
 
-export const getDeployedBranches = createSelector(
-  getFeatureBranches,
-  branches =>
-    branches?.filter(branchInfo => branchInfo.environment?.length > 0),
-);
-
 export const getTrackedBranches = createSelector(getFeatureBranches, branches =>
-  branches?.filter(branchInfo => branchInfo.tracked && !branchInfo.environment),
+  branches?.filter(branchInfo => branchInfo.tracked),
 );
 
 export const getUntrackedBranches = createSelector(
   getFeatureBranches,
-  branches =>
-    branches?.filter(
-      branchInfo => branchInfo.tracked === false && !branchInfo.environment,
-    ),
+  branches => branches?.filter(branchInfo => branchInfo.tracked === false),
 );
 
 export const branchesByOrganization = createSelector(
