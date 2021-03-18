@@ -10,7 +10,7 @@ on:
       - 'firebase.json'
       - 'package.json'
     branches:
-      - main
+      - trunk
 jobs:
   lint:
     name: lint
