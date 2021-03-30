@@ -6,6 +6,8 @@ const test = require('firebase-functions-test')({
   projectId: process.env.GCLOUD_PROJECT,
 });
 
+admin.initializeApp();
+
 const axiosConfig = (functionName, data) => {
   return {
     method: 'post',
@@ -50,23 +52,23 @@ describe('Unit tests', () => {
       commit_sha: 'abc1234',
     });
 
-    // const envSnap = await admin
-    //   .firestore()
-    //   .collection('orgs')
-    //   .doc('maine')
-    //   .collection('environments')
-    //   .doc('hotfix-2')
-    //   .get();
+    const envSnap = await admin
+      .firestore()
+      .collection('orgs')
+      .doc('maine')
+      .collection('environments')
+      .doc('hotfix-2')
+      .get();
 
-    // expect(envSnap.data()).to.eql({
-    //   status: 'started',
-    //   branch: 'feature-fix',
-    //   env: 'hotfix-2',
-    //   app: 'enroll',
-    //   user_name: 'kvootla',
-    //   org: 'maine',
-    //   repo: 'enroll',
-    //   commit_sha: 'abc1234',
-    // });
+    expect(envSnap.data().latestDeployment).to.include({
+      status: 'started',
+      branch: 'feature-fix',
+      env: 'hotfix-2',
+      app: 'enroll',
+      user_name: 'kvootla',
+      org: 'maine',
+      repo: 'enroll',
+      commit_sha: 'abc1234',
+    });
   }).timeout(5000);
 });

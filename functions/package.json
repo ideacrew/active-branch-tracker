@@ -10,8 +10,10 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "test": "mocha test/rules.spec.js --timeout 5000 --exit",
+    "test:functions": "mocha test/functions.spec.js --timeout 5000 --exit",
     "test:watch": "mocha test/rules.spec.js --watch",
-    "test:ci": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=fakeproject \"npm run test\""
+    "test:ci": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=fakeproject \"npm run test\"",
+    "t:functions": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=fakeproject \"npm run test:functions\""
   },
   "engines": {
     "node": "12"
