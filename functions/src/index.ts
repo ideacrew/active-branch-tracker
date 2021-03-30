@@ -21,3 +21,13 @@ export const dataRefresh = functions.https.onRequest(
     );
   },
 );
+
+export const secretWebService = functions.https.onRequest(
+  async (request, response) => {
+    if (request.query.apiKey === 'abc1234') {
+      response.status(200).send('Here is the secret message');
+    } else {
+      response.status(403).send('You are unauthorized');
+    }
+  },
+);
