@@ -50,6 +50,7 @@
     "@angular/platform-browser-dynamic": "11.2.0",
     "@angular/router": "11.2.0",
     "@angular/service-worker": "11.2.0",
+    "@ngrx/component-store": "11.0.0",
     "@ngrx/effects": "11.0.0",
     "@ngrx/entity": "11.0.0",
     "@ngrx/router-store": "11.0.0",
@@ -59,8 +60,7 @@
     "date-fns": "^2.16.1",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
-    "zone.js": "^0.10.2",
-    "@ngrx/component-store": "11.0.0"
+    "zone.js": "^0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.1102.2",
@@ -91,6 +91,9 @@
     "eslint": "6.8.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.11.2",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-jsdoc": "latest",
+    "eslint-plugin-prefer-arrow": "latest",
     "faker": "^5.1.0",
     "firebase": "^8.3.1",
     "firebase-tools": "^9.8.0",
