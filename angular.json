@@ -398,13 +398,12 @@
       "prefix": "idc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/testing/tsconfig.lib.json",
-              "libs/testing/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/testing/**/*"]
+            "lintFilePatterns": [
+              "libs/testing/src/**/*.ts",
+              "libs/testing/src/**/*.html"
+            ]
           }
         },
         "test": {
