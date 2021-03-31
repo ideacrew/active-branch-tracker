@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 
-import * as fromBranches from './branches.reducer';
 import * as BranchesActions from './branches.actions';
 import { map, exhaustMap } from 'rxjs/operators';
 import { BranchListService } from '../branch-list.service';
@@ -13,7 +12,7 @@ export class BranchesEffects {
     this.actions$.pipe(
       ofType(BranchesActions.loadBranches),
       fetch({
-        run: action =>
+        run: () =>
           this.branchListService
             .queryBranches()
             .pipe(

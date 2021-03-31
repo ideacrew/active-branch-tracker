@@ -5,7 +5,7 @@ import { formatRelative } from 'date-fns';
   name: 'relativeDate',
 })
 export class RelativeDatePipe implements PipeTransform {
-  transform(d: Date, ...args: unknown[]): string {
+  transform(d: Date): string {
     if (d instanceof Date) {
       // console.log({ d });
       return formatRelative(d, new Date());

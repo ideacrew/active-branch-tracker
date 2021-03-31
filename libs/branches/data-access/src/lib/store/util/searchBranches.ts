@@ -5,10 +5,10 @@ interface BranchQuery {
   rawQuery: string;
 }
 
-export function searchBranches({
+export const searchBranches = ({
   branches,
   rawQuery,
-}: BranchQuery): BranchesEntity[] {
+}: BranchQuery): BranchesEntity[] => {
   if (rawQuery === undefined || rawQuery === '') {
     return branches;
   } else {
@@ -21,4 +21,4 @@ export function searchBranches({
       // branch.status?.search(query) !== -1,
     );
   }
-}
+};

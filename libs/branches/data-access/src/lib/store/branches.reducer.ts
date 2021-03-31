@@ -17,11 +17,11 @@ export interface BranchesPartialState {
   readonly [BRANCHES_FEATURE_KEY]: State;
 }
 
-export const branchesAdapter: EntityAdapter<BranchesEntity> = createEntityAdapter<
-  BranchesEntity
->({
-  sortComparer: sortByTime,
-});
+export const branchesAdapter: EntityAdapter<BranchesEntity> = createEntityAdapter<BranchesEntity>(
+  {
+    sortComparer: sortByTime,
+  },
+);
 
 export const initialState: State = branchesAdapter.getInitialState({
   // set initial required properties
@@ -48,11 +48,13 @@ const branchesReducer = createReducer(
   })),
 );
 
-export function reducer(state: State | undefined, action: Action): State {
-  return branchesReducer(state, action);
-}
+export const reducer = (state: State | undefined, action: Action): State =>
+  branchesReducer(state, action);
 
-function sortByTime(branchA: BranchesEntity, branchB: BranchesEntity): number {
+const sortByTime = (
+  branchA: BranchesEntity,
+  branchB: BranchesEntity,
+): number => {
   const { updated_at: updatedA, created_at: createdA } = branchA;
   const { updated_at: updatedB, created_at: createdB } = branchB;
 
@@ -60,4 +62,4 @@ function sortByTime(branchA: BranchesEntity, branchB: BranchesEntity): number {
     new Date(updatedB || createdB).getTime()
     ? -1
     : 1;
-}
+};

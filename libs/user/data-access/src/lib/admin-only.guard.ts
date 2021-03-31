@@ -33,13 +33,13 @@ export class AdminOnlyGuard implements CanActivate, CanLoad {
           return of(false);
         } else {
           return this.userService.user$.pipe(
-            map(user => user?.role === 'admin'),
+            map(serviceUser => serviceUser?.role === 'admin'),
           );
         }
       }),
       tap(access => {
         if (!access) {
-          this.router.navigate(['/login']);
+          void this.router.navigate(['/login']);
         }
       }),
     );

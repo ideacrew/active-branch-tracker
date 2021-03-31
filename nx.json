@@ -6,7 +6,7 @@
     "nx.json": "*",
     "tsconfig.base.json": "*"
   },
-  "affected": { "defaultBase": "main" },
+  "affected": { "defaultBase": "trunk" },
   "npmScope": "idc",
   "tasksRunnerOptions": {
     "default": {

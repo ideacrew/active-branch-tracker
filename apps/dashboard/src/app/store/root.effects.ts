@@ -5,7 +5,7 @@ import {
   ofType,
   ROOT_EFFECTS_INIT,
 } from '@ngrx/effects';
-import { tap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import {
   LocalStorageService,

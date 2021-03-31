@@ -1,6 +1,6 @@
 import { Injectable, ApplicationRef } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { first } from 'rxjs/operators';
+import { first, switchMap } from 'rxjs/operators';
 import { interval, concat } from 'rxjs';
 
 import { environment } from '../environments/environment';
@@ -15,14 +15,13 @@ export class ServiceWorkerUpdateService {
     const everyHourOnceAppIsStable$ = concat(appIsStable$, everyOneHour$);
 
     if (environment.production === true) {
-      everyHourOnceAppIsStable$.subscribe(async () => {
-        await updates.checkForUpdate();
-      });
+      everyHourOnceAppIsStable$
+        .pipe(switchMap(() => updates.checkForUpdate()))
+        .subscribe();
 
-      updates.available.subscribe(async () => {
-        await updates.activateUpdate();
-        document.location.reload();
-      });
+      updates.available
+        .pipe(switchMap(() => updates.activateUpdate()))
+        .subscribe(() => document.location.reload());
     }
   }
 }

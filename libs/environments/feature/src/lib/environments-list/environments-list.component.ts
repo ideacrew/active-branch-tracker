@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import {
   EnvironmentsService,
@@ -62,14 +62,21 @@ export class EnvironmentsListComponent {
     private envService: EnvironmentsService,
   ) {}
 
-  updateOwner({ envId, owner }: Partial<OwnerUpdate>): void {
-    this.envService.updateEnvironmentOwner({ orgId: this.orgId, envId, owner });
+  async updateOwner({ envId, owner }: Partial<OwnerUpdate>): Promise<void> {
+    await this.envService.updateEnvironmentOwner({
+      orgId: this.orgId,
+      envId,
+      owner,
+    });
   }
 
-  updateRelease({ envId, ownerRelease }: Partial<OwnerReleaseUpdate>): void {
+  async updateRelease({
+    envId,
+    ownerRelease,
+  }: Partial<OwnerReleaseUpdate>): Promise<void> {
     console.log('Updating to', ownerRelease);
 
-    this.envService.updateEnvironmentReleaseDate({
+    await this.envService.updateEnvironmentReleaseDate({
       orgId: this.orgId,
       envId,
       ownerRelease,

@@ -1,5 +1,6 @@
 /**
  * Takes a time-less date string and converts it to local time at 6pm
+ *
  * @param inputDate an input date string like 2020-02-05
  */
 export const convertDateInputToLocalDate = (inputDate: string): Date => {

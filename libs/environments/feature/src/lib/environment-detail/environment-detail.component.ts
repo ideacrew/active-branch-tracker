@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+import { Component, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import {
   EnvironmentsService,
@@ -13,7 +13,7 @@ import { convertDateInputToLocalDate } from '../convertDate';
   styleUrls: ['./environment-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EnvironmentDetailComponent implements OnInit {
+export class EnvironmentDetailComponent {
   orgId = '';
   envId = '';
   changingOwnership = false;
@@ -59,8 +59,6 @@ export class EnvironmentDetailComponent implements OnInit {
     private envService: EnvironmentsService,
     private userService: UserService,
   ) {}
-
-  ngOnInit(): void {}
 
   async updateOwnership(): Promise<void> {
     const owner = this.newOwner.trim() === '' ? 'Open' : this.newOwner;
