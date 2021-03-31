@@ -3,7 +3,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { map, debounceTime, tap, distinctUntilChanged } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 
-import { BranchInfo, CheckSuiteConclusion } from '@idc/util';
+import { BranchInfo, BranchStatus, CheckSuiteConclusion } from '@idc/util';
 import {
   BranchesFacade,
   BranchesEntity,
@@ -46,7 +46,7 @@ export class ActiveBranchesComponent implements OnInit {
       .pipe(
         debounceTime(200),
         distinctUntilChanged(),
-        tap(query =>
+        tap((query: string) =>
           this.branchesFacade.dispatch(
             BranchesActions.queryBranches({ query }),
           ),
@@ -67,7 +67,13 @@ export class ActiveBranchesComponent implements OnInit {
     this.branchesFacade.dispatch(BranchesActions.untrackBranch({ branch }));
   }
 
-  setBranchStatus({ branchId, status }): void {
+  setBranchStatus({
+    branchId,
+    status,
+  }: {
+    branchId: string;
+    status: BranchStatus;
+  }): void {
     this.branchesFacade.dispatch(
       BranchesActions.setBranchStatus({ branchId, status }),
     );

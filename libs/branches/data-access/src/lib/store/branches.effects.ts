@@ -20,7 +20,7 @@ export class BranchesEffects {
                 BranchesActions.loadBranchesSuccess({ branches }),
               ),
             ),
-        onError: (action, error) => {
+        onError: (action, error: string) => {
           console.error('Error', error);
           return BranchesActions.loadBranchesFailure({ error });
         },
