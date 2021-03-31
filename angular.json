@@ -8,28 +8,16 @@
   "schematics": {
     "@nrwl/angular:application": {
       "style": "scss",
-      "linter": "eslint",
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
       "style": "scss",
-      "linter": "eslint",
       "unitTestRunner": "jest",
       "strict": true
     },
     "@nrwl/angular:component": {
       "style": "scss"
-    },
-    "@nrwl/angular": {
-      "convert-tslint-to-eslint": {
-        "removeTSLintIfNoMoreTSLintTargets": true
-      }
-    },
-    "@nrwl/cypress": {
-      "convert-tslint-to-eslint": {
-        "removeTSLintIfNoMoreTSLintTargets": false
-      }
     }
   },
   "projects": {
@@ -307,13 +295,12 @@
       "prefix": "idc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/util/tsconfig.lib.json",
-              "libs/util/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/util/**/*"]
+            "lintFilePatterns": [
+              "libs/util/src/**/*.ts",
+              "libs/util/src/**/*.html"
+            ]
           }
         },
         "test": {
