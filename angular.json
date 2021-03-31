@@ -485,13 +485,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/google-analytics/tsconfig.lib.json",
-              "libs/google-analytics/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/google-analytics/**/*"]
+            "lintFilePatterns": [
+              "libs/google-analytics/src/**/*.ts",
+              "libs/google-analytics/src/**/*.html"
+            ]
           }
         },
         "test": {
