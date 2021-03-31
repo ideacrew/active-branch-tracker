@@ -25,6 +25,11 @@
       "convert-tslint-to-eslint": {
         "removeTSLintIfNoMoreTSLintTargets": true
       }
+    },
+    "@nrwl/cypress": {
+      "convert-tslint-to-eslint": {
+        "removeTSLintIfNoMoreTSLintTargets": false
+      }
     }
   },
   "projects": {
@@ -124,13 +129,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "apps/dashboard/tsconfig.app.json",
-              "apps/dashboard/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/dashboard/**/*"]
+            "lintFilePatterns": [
+              "apps/dashboard/src/**/*.ts",
+              "apps/dashboard/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -169,10 +173,9 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": ["apps/dashboard-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/dashboard-e2e/**/*"]
+            "lintFilePatterns": ["apps/dashboard-e2e/**/*.{js,ts}"]
           }
         }
       }
