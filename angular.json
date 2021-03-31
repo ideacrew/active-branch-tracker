@@ -244,15 +244,11 @@
       "prefix": "idc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/branches/ui-components/tsconfig.lib.json",
-              "libs/branches/ui-components/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/branches/ui-components/**/*"
+            "lintFilePatterns": [
+              "libs/branches/ui-components/src/**/*.ts",
+              "libs/branches/ui-components/src/**/*.html"
             ]
           }
         },
