@@ -17,6 +17,19 @@ export interface BranchesPartialState {
   readonly [BRANCHES_FEATURE_KEY]: State;
 }
 
+const sortByTime = (
+  branchA: BranchesEntity,
+  branchB: BranchesEntity,
+): number => {
+  const { updated_at: updatedA, created_at: createdA } = branchA;
+  const { updated_at: updatedB, created_at: createdB } = branchB;
+
+  return new Date(updatedA || createdA).getTime() >
+    new Date(updatedB || createdB).getTime()
+    ? -1
+    : 1;
+};
+
 export const branchesAdapter: EntityAdapter<BranchesEntity> = createEntityAdapter<BranchesEntity>(
   {
     sortComparer: sortByTime,
@@ -50,16 +63,3 @@ const branchesReducer = createReducer(
 
 export const reducer = (state: State | undefined, action: Action): State =>
   branchesReducer(state, action);
-
-const sortByTime = (
-  branchA: BranchesEntity,
-  branchB: BranchesEntity,
-): number => {
-  const { updated_at: updatedA, created_at: createdA } = branchA;
-  const { updated_at: updatedB, created_at: createdB } = branchB;
-
-  return new Date(updatedA || createdA).getTime() >
-    new Date(updatedB || createdB).getTime()
-    ? -1
-    : 1;
-};
