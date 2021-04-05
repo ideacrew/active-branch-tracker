@@ -10,7 +10,7 @@
 </div>
 <div class="branches-list">
   <idc-branch-container
-    *ngFor="let branch of defaultBranches$ | async"
+    *ngFor="let branch of defaultBranches$ | async; trackBy: trackByBranchName"
     [branch]="branch"
   ></idc-branch-container>
 </div>

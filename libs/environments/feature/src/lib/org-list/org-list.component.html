@@ -1,6 +1,6 @@
 <a
   class="org-link"
   [routerLink]="['./', org.id]"
-  *ngFor="let org of orgList$ | async"
+  *ngFor="let org of orgList$ | async; trackBy: trackByOrgId"
   >{{ org.name }}</a
 >

@@ -1,8 +1,8 @@
 import * as faker from 'faker';
 
-import { BranchInfo, CheckSuiteConclusion } from '@idc/util';
+import { BranchInfo } from '@idc/util';
 
-export function mockDefaultBranchInfo(): BranchInfo {
+export const mockDefaultBranchInfo = (): BranchInfo => {
   const organizationName = 'org-name';
   const repositoryName = 'repo-name';
   const branchName = faker.random.word();
@@ -16,8 +16,8 @@ export function mockDefaultBranchInfo(): BranchInfo {
     defaultBranch: true,
     checkSuiteRuns: 100,
     checkSuiteFailures: 0,
-    checkSuiteStatus: CheckSuiteConclusion.Success,
+    checkSuiteStatus: 'success',
     tracked: true,
     timestamp: today.getTime(),
   };
-}
+};

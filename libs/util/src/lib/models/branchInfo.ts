@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { CheckSuiteConclusion } from './checkSuiteConclusion';
 
 export interface BranchInfo {
@@ -31,12 +32,4 @@ export interface BranchInfo {
   timestamp: number;
   releaseDate?: number;
   pullRequestNumber?: number;
-  status?: BranchStatus;
-}
-
-export enum BranchStatus {
-  Development = 'Development',
-  Review = 'Stakeholder Review',
-  Accepted = 'Accepted Pending Release',
-  OnHold = 'On Hold',
 }

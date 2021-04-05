@@ -7,7 +7,7 @@
     <idc-environment-card
       (newOwner)="updateOwner($event)"
       (newOwnerRelease)="updateRelease($event)"
-      *ngFor="let env of prodEnvs.e2e"
+      *ngFor="let env of prodEnvs.e2e; trackBy: trackByEnvironmentName"
       [environment]="env"
     ></idc-environment-card>
   </div>
@@ -18,7 +18,7 @@
       <idc-environment-card
         (newOwner)="updateOwner($event)"
         (newOwnerRelease)="updateRelease($event)"
-        *ngFor="let env of prodEnvs.standalone"
+        *ngFor="let env of prodEnvs.standalone; trackBy: trackByEnvironmentName"
         [environment]="env"
       ></idc-environment-card>
     </div>
@@ -30,7 +30,7 @@
   <idc-environment-card
     (newOwner)="updateOwner($event)"
     (newOwnerRelease)="updateRelease($event)"
-    *ngFor="let env of nonProd$ | async"
+    *ngFor="let env of nonProd$ | async; trackBy: trackByEnvironmentName"
     [environment]="env"
   ></idc-environment-card>
 </div>

@@ -30,7 +30,7 @@ export class OrgAccessGuard implements CanActivate {
       }),
       tap(allowedAccess => {
         if (!allowedAccess) {
-          this.router.navigate(['/environments']);
+          void this.router.navigate(['/environments']);
         }
       }),
     );

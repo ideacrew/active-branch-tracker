@@ -23,10 +23,7 @@ export class ActiveBranchesComponent implements OnDestroy {
     .pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      tap((query: string) => {
-        console.log('search query tap', query);
-        this.branchesService.query.next(query);
-      }),
+      tap((query: string) => this.branchesService.query.next(query)),
     )
     .subscribe();
 

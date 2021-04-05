@@ -82,4 +82,8 @@ export class EnvironmentsListComponent {
       ownerRelease,
     });
   }
+
+  trackByEnvironmentName(index: number, env: OrgEnvironment): string {
+    return `${env.id}-${env.name}`;
+  }
 }

@@ -10,6 +10,9 @@ export class LocalStorageService {
   }
 
   getSavedState(localStorageKey: string): DisplayConfig {
-    return JSON.parse(localStorage.getItem(localStorageKey));
+    const config: string = localStorage.getItem(localStorageKey);
+    const displayConfig: DisplayConfig = JSON.parse(config) as DisplayConfig;
+
+    return displayConfig;
   }
 }

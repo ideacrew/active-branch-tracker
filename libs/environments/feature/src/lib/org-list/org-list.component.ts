@@ -18,4 +18,8 @@ export class OrgListComponent {
     public userService: UserService,
     public envService: EnvironmentsService,
   ) {}
+
+  trackByOrgId(index: number, org: Org): string {
+    return `${org.id}-${org.name}`;
+  }
 }

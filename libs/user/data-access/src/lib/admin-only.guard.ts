@@ -25,8 +25,6 @@ export class AdminOnlyGuard implements CanActivate, CanLoad {
   }
 
   canAccess(): Observable<boolean> {
-    console.log('Running canAccess method');
-
     return this.authService.user$.pipe(
       switchMap(user => {
         if (user === undefined || user === null) {
