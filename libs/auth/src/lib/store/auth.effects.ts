@@ -13,7 +13,9 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginWithGoogle),
-      switchMap(() => this.authService.login().catch(e => console.log('CATCH', e))),
+      switchMap(() =>
+        this.authService.login().catch(e => console.log('CATCH', e)),
+      ),
       map(() => AuthActions.loginWithGoogleSuccess()),
       catchError((error: unknown) => {
         console.log('CATCH ERROR', error);
@@ -35,23 +37,11 @@ export class AuthEffects {
     ),
   );
 
-  loginSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(
-          AuthActions.loginWithGoogleSuccess,
-          AuthActions.loginWithEmailPasswordSuccess,
-        ),
-        tap(() => this.router.navigate(['/branches'])),
-      ),
-    { dispatch: false },
-  );
-
   loginFailure$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loginWithGoogleFailure),
-        tap(() => this.router.navigate(['/login'])),
+        tap(() => void this.router.navigate(['/login'])),
       ),
     {
       dispatch: false,
@@ -64,17 +54,6 @@ export class AuthEffects {
       switchMap(() => this.authService.logout()),
       map(() => AuthActions.logoutSuccess()),
     ),
-  );
-
-  logoutSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.logoutSuccess),
-        tap(() => this.router.navigate(['/login'])),
-      ),
-    {
-      dispatch: false,
-    },
   );
 
   authState$ = createEffect(() =>

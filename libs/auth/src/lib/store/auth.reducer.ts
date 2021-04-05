@@ -26,16 +26,14 @@ const authReducer = createReducer(
     ...state,
     ...userDetails,
   })),
-  on(AuthActions.logout, state => initialState),
-  on(AuthActions.loginWithEmailPasswordFailure, (state, { error }) => ({
+  on(AuthActions.logout, () => initialState),
+  on(AuthActions.loginWithEmailPasswordFailure, (_state, { error }) => ({
     ...initialState,
     error,
   })),
 );
 
-export function reducer(
+export const reducer = (
   state: AuthState | undefined,
   action: Action,
-): AuthState {
-  return authReducer(state, action);
-}
+): AuthState => authReducer(state, action);

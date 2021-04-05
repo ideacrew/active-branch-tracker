@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { AuthError } from '../authError.interface';
 
 @Component({
   templateUrl: './login.component.html',
@@ -19,11 +20,10 @@ export class LoginComponent {
   loginWithEmailPassword(): void {
     this.auth
       .loginWithEmailPassword(this.email, this.password)
-      .then(() => this.router.navigate(['/branches']))
-      .catch(error => this.errorMessage.next(error.message));
+      .catch((error: AuthError) => this.errorMessage.next(error.message));
   }
 
   logout(): void {
-    this.auth.logout().then(() => this.router.navigate(['/login']));
+    void this.auth.logout().then(() => this.router.navigate(['/login']));
   }
 }

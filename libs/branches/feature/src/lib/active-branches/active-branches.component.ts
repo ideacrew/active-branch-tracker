@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, debounceTime, tap, distinctUntilChanged } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 
@@ -18,7 +18,7 @@ import { AuthService } from '@idc/auth';
   styleUrls: ['./active-branches.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActiveBranchesComponent implements OnInit {
+export class ActiveBranchesComponent implements OnDestroy {
   CheckSuiteConclusion = CheckSuiteConclusion;
   DisplayType = DisplayType;
   searchQuery = new FormControl('');
@@ -35,25 +35,22 @@ export class ActiveBranchesComponent implements OnInit {
 
   loggedIn$: Observable<boolean> = this.auth.user$.pipe(map(user => !!user));
 
+  searchSub: Subscription = this.searchQuery.valueChanges
+    .pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      tap((query: string) => {
+        console.log('search query tap');
+        this.branchesFacade.dispatch(BranchesActions.queryBranches({ query }));
+      }),
+    )
+    .subscribe();
+
   constructor(
     public branchesFacade: BranchesFacade,
     public configFacade: DisplayConfigFacade,
     private auth: AuthService,
   ) {}
-
-  ngOnInit(): void {
-    this.searchQuery.valueChanges
-      .pipe(
-        debounceTime(200),
-        distinctUntilChanged(),
-        tap((query: string) =>
-          this.branchesFacade.dispatch(
-            BranchesActions.queryBranches({ query }),
-          ),
-        ),
-      )
-      .subscribe();
-  }
 
   trackByBranchName(index: number, branch: BranchInfo): string {
     return `${branch.organizationName}${branch.repositoryName}${branch.branchName}`;
@@ -77,5 +74,9 @@ export class ActiveBranchesComponent implements OnInit {
     this.branchesFacade.dispatch(
       BranchesActions.setBranchStatus({ branchId, status }),
     );
+  }
+
+  ngOnDestroy(): void {
+    this.searchSub.unsubscribe();
   }
 }

@@ -22,7 +22,9 @@ export async function handleBranchDeployment(
 
   const { org, env, branch, status } = deployment;
 
+  // Could this be a separate function?
   const ownedEnvironment = await checkOwnership({ org, env });
+
   if (!ownedEnvironment && status === 'started') {
     const yellrLink = yellrEnvLink({ org, env });
     await sendSlackMessage(

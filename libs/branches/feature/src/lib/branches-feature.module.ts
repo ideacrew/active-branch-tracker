@@ -17,6 +17,5 @@ import { ActiveBranchesComponent } from './active-branches/active-branches.compo
     BranchesDataAccessModule,
   ],
   declarations: [ActiveBranchesComponent],
-  exports: [ActiveBranchesComponent],
 })
 export class BranchesFeatureModule {}

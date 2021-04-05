@@ -18,6 +18,7 @@ export class BranchListService {
   constructor(private afs: AngularFirestore) {}
 
   queryBranches(): Observable<BranchesEntity[]> {
+    console.log('Query Branches method being run');
     const oneMonthInMs = 1000 * 60 * 60 * 24 * 30;
     const today = new Date().getTime();
     const oneMonthAgo = today - oneMonthInMs;

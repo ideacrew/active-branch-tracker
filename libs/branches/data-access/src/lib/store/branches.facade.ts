@@ -28,6 +28,7 @@ export class BranchesFacade {
   );
 
   constructor(private store: Store<fromBranches.BranchesPartialState>) {
+    console.log('Branches Facade Constructor');
     this.dispatch(loadBranches());
   }
 

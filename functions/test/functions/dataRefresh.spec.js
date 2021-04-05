@@ -27,7 +27,7 @@ describe('Unit tests', () => {
   it('tests a new deployment', async () => {
     const data = qs.stringify({
       payload:
-        '{"status": "started", "branch": "feature-fix", "env": "hotfix-2", "app": "enroll", "user_name": "kvootla", "org": "maine", "repo": "enroll", "commit_sha": "abc1234" }',
+        '{"status": "started", "branch": "feature-fix", "env": "hotfix-3", "app": "enroll", "user_name": "kvootla", "org": "maine", "repo": "enroll", "commit_sha": "abc1234" }',
     });
 
     const config = axiosConfig('branchDeployment', data);
@@ -44,7 +44,7 @@ describe('Unit tests', () => {
     expect(responsePayload.data).to.deep.eq({
       status: 'started',
       branch: 'feature-fix',
-      env: 'hotfix-2',
+      env: 'hotfix-3',
       app: 'enroll',
       user_name: 'kvootla',
       org: 'maine',
@@ -57,13 +57,13 @@ describe('Unit tests', () => {
       .collection('orgs')
       .doc('maine')
       .collection('environments')
-      .doc('hotfix-2')
+      .doc('hotfix-3')
       .get();
 
     expect(envSnap.data().latestDeployment).to.include({
       status: 'started',
       branch: 'feature-fix',
-      env: 'hotfix-2',
+      env: 'hotfix-3',
       app: 'enroll',
       user_name: 'kvootla',
       org: 'maine',
