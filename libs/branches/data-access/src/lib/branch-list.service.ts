@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
-  DocumentChangeAction,
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 
-import { BranchInfo, CheckSuiteConclusion, BranchStatus } from '@idc/util';
+import { BranchInfo, BranchStatus } from '@idc/util';
 import { BranchesEntity } from './store/branches.models';
 
 @Injectable()
@@ -26,40 +24,32 @@ export class BranchListService {
       ref.where('timestamp', '>=', oneMonthAgo).orderBy('timestamp'),
     );
 
-    return branchesRef.snapshotChanges().pipe(
-      tap(async (docChange: DocumentChangeAction<BranchInfo>[]) => {
-        const modified = docChange.filter(change => change.type === 'modified');
-        let newFailure = false;
+    return branchesRef.valueChanges({ idField: 'id' });
+    // tap(async (docChange: DocumentChangeAction<BranchInfo>[]) => {
+    //   const modified = docChange.filter(change => change.type === 'modified');
+    //   let newFailure = false;
 
-        for (const branch of modified) {
-          const { checkSuiteStatus, tracked } = branch.payload.doc.data();
-          if (
-            checkSuiteStatus === CheckSuiteConclusion.Failure &&
-            tracked === true
-          ) {
-            newFailure = true;
-            console.log({ newFailure: branch.payload.doc.data() });
-          }
-        }
+    //   for (const branch of modified) {
+    //     const { checkSuiteStatus, tracked } = branch.payload.doc.data();
+    //     if (
+    //       checkSuiteStatus === CheckSuiteConclusion.Failure &&
+    //       tracked === true
+    //     ) {
+    //       newFailure = true;
+    //       console.log({ newFailure: branch.payload.doc.data() });
+    //     }
+    //   }
 
-        if (newFailure === true) {
-          try {
-            console.log('Playing sound');
-            await this.playSound();
-            newFailure = false;
-          } catch (e) {
-            console.error('Could not play sound');
-          }
-        }
-      }),
-      map((docChange: DocumentChangeAction<BranchInfo>[]) =>
-        docChange.map(doc => {
-          const data = doc.payload.doc.data();
-
-          return { id: doc.payload.doc.id, ...data };
-        }),
-      ),
-    );
+    //   if (newFailure === true) {
+    //     try {
+    //       console.log('Playing sound');
+    //       await this.playSound();
+    //       newFailure = false;
+    //     } catch (e) {
+    //       console.error('Could not play sound');
+    //     }
+    //   }
+    // }),
   }
 
   async trackBranch(branch: BranchInfo): Promise<void> {

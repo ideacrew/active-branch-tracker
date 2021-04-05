@@ -9,33 +9,25 @@ import {
   catchError,
   withLatestFrom,
 } from 'rxjs/operators';
-import { AuthService } from '@idc/auth';
+import { AuthFacade, AuthService } from '@idc/auth';
 
 import * as BranchesActions from './branches.actions';
 import { BranchListService } from '../branch-list.service';
 
 @Injectable()
 export class BranchesEffects {
-  loadBranches$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(BranchesActions.loadBranches),
-        withLatestFrom(action => {
-          console.log('Concatenating latest from');
-          return this.authService.user$;
-        }),
-        switchMap(user => {
-          console.log({ user });
-          return this.branchListService.queryBranches().pipe(
-            tap(() => console.log('Tap method of branches effects')),
+  loadBranches$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BranchesActions.loadBranches),
+      tap(() => console.log('Load branches action')),
+      switchMap(() =>
+        this.branchListService
+          .queryBranches()
+          .pipe(
             map(branches => BranchesActions.loadBranchesSuccess({ branches })),
-            catchError((error: string) =>
-              of(BranchesActions.loadBranchesFailure({ error })),
-            ),
-          );
-        }),
+          ),
       ),
-    { dispatch: false },
+    ),
   );
 
   trackBranch$ = createEffect(() =>
@@ -72,5 +64,6 @@ export class BranchesEffects {
     private actions$: Actions,
     private branchListService: BranchListService,
     private authService: AuthService,
+    private authFacade: AuthFacade,
   ) {}
 }
