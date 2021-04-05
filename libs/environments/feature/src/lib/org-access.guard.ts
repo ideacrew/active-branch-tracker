@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
-  UrlTree,
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -15,18 +14,16 @@ import { map, tap } from 'rxjs/operators';
 })
 export class OrgAccessGuard implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
-  canActivate(
-    route: ActivatedRouteSnapshot,
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.userService.user$.pipe(
       map(user => {
         const orgId = route.paramMap.get('orgId');
 
-        return user.orgs.includes(orgId) || user.role === 'admin';
+        if (user !== undefined && orgId !== null) {
+          return user.orgs.includes(orgId) || user.role === 'admin';
+        } else {
+          return false;
+        }
       }),
       tap(allowedAccess => {
         if (!allowedAccess) {

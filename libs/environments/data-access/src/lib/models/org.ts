@@ -1,4 +1,4 @@
 export interface Org {
-  id?: string;
+  id: string;
   name: string;
 }

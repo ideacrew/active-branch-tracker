@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+
 import { BranchInfo } from './models';
 
 export const getCommitLink = (branch: BranchInfo): string => {

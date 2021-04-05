@@ -20,8 +20,10 @@ export interface BranchInfo {
     tree_id: string;
     message: string;
   };
+  // Why is this optional?
   head_sha?: string;
-  created_at?: string;
+  // Is created_at ever not there?
+  created_at: string;
   updated_at?: string;
   checkSuiteStatus?: CheckSuiteConclusion;
   defaultBranch: boolean;
@@ -31,5 +33,8 @@ export interface BranchInfo {
   tracked: boolean;
   timestamp: number;
   releaseDate?: number;
+
+  // This is definitely optional, but is there a different type
+  // that could be created where the PR is always present?
   pullRequestNumber?: number;
 }

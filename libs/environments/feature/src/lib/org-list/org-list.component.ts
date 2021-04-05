@@ -1,8 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
 import { EnvironmentsService, Org } from '@idc/environments/data-access';
 import { UserService } from '@idc/user/data-access';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './org-list.component.html',
@@ -11,7 +12,13 @@ import { switchMap } from 'rxjs/operators';
 })
 export class OrgListComponent {
   orgList$: Observable<Org[]> = this.userService.user$.pipe(
-    switchMap(user => this.envService.getOrgList(user)),
+    switchMap(user => {
+      if (user !== undefined) {
+        return this.envService.getOrgList(user);
+      } else {
+        return of([] as Org[]);
+      }
+    }),
   );
 
   constructor(

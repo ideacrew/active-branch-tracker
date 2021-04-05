@@ -1,11 +1,15 @@
 import { Component, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
+
 import {
   EnvironmentsService,
   OrgEnvironment,
 } from '@idc/environments/data-access';
 import { UserService } from '@idc/user/data-access';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { filterNullish } from '@idc/util';
+
 import { convertDateInputToLocalDate } from '../convertDate';
 
 @Component({
@@ -24,8 +28,8 @@ export class EnvironmentDetailComponent {
   orgEnvIds$ = this.route.paramMap.pipe(
     filter((params: ParamMap) => params.has('orgId') && params.has('envId')),
     map((params: ParamMap) => ({
-      orgId: params.get('orgId'),
-      envId: params.get('envId'),
+      orgId: params.get('orgId') ?? 'no-org-id',
+      envId: params.get('envId') ?? 'no-env-id',
     })),
     tap(({ orgId, envId }) => {
       this.orgId = orgId;
@@ -37,17 +41,19 @@ export class EnvironmentDetailComponent {
     switchMap(({ orgId }) => this.envService.getOrgName(orgId)),
   );
 
-  environmentDetail$ = this.orgEnvIds$.pipe(
+  environmentDetail$: Observable<OrgEnvironment> = this.orgEnvIds$.pipe(
     switchMap(({ orgId, envId }) =>
-      this.envService.getEnvironmentDetail({ orgId, envId }),
+      this.envService.getEnvironmentDetail({ orgId, envId }).pipe(
+        filterNullish(),
+        tap(env => {
+          this.newOwner = env.owner;
+          this.newReleaseDate = env.ownerRelease
+            ?.toDate()
+            .toISOString()
+            .slice(0, 10);
+        }),
+      ),
     ),
-    tap((env: OrgEnvironment) => {
-      this.newOwner = env.owner;
-      this.newReleaseDate = env.ownerRelease
-        ?.toDate()
-        .toISOString()
-        .slice(0, 10);
-    }),
   );
 
   @HostBinding('class.is-admin') get isAnAdmin(): boolean {

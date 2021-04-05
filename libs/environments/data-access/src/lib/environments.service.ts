@@ -5,6 +5,7 @@ import { map, take } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
 
 import { YellrUser } from '@idc/user/data-access';
+import { filterNullish } from '@idc/util';
 
 import { Org, OrgEnvironment, OwnerReleaseUpdate, OwnerUpdate } from './models';
 import { EnvInfo } from './models/envInfo';
@@ -27,12 +28,16 @@ export class EnvironmentsService {
       .doc<Org>(orgName)
       .valueChanges()
       .pipe(
+        filterNullish(),
         map(org => org.name),
         take(1),
       );
   }
 
-  getEnvironmentDetail({ orgId, envId }: EnvInfo): Observable<OrgEnvironment> {
+  getEnvironmentDetail({
+    orgId,
+    envId,
+  }: EnvInfo): Observable<OrgEnvironment | undefined> {
     return this.afs
       .collection('orgs')
       .doc(orgId)
@@ -45,7 +50,7 @@ export class EnvironmentsService {
     orgId,
     envId,
     owner,
-  }: Partial<OwnerUpdate>): Promise<void> {
+  }: OwnerUpdate): Promise<void> {
     const docRef = this.afs.doc<OrgEnvironment>(
       `orgs/${orgId}/environments/${envId}`,
     );
@@ -83,7 +88,7 @@ export class EnvironmentsService {
     });
   }
 
-  getSingleOrg(org: string): Observable<Org> {
+  getSingleOrg(org: string): Observable<Org | undefined> {
     return this.afs
       .collection<Org>('orgs')
       .doc(org)

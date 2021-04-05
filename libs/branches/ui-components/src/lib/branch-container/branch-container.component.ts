@@ -16,9 +16,9 @@ import { DisplayType } from '@idc/display-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BranchContainerComponent {
-  @Input() branch: BranchInfo;
+  @Input() branch!: BranchInfo;
   @Input() viewType: DisplayType = 'expanded';
-  @Input() loggedIn: boolean;
+  @Input() loggedIn = false;
 
   @Output() readonly trackBranch = new EventEmitter<BranchInfo>();
   @Output() readonly untrackBranch = new EventEmitter<BranchInfo>();

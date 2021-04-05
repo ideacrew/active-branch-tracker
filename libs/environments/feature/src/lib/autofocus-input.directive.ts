@@ -4,7 +4,7 @@ import { AfterContentInit, Directive, ElementRef, Input } from '@angular/core';
   selector: '[idcAutofocusInput]',
 })
 export class AutofocusInputDirective implements AfterContentInit {
-  @Input() readonly autoFocus: boolean;
+  @Input() readonly autoFocus: boolean = false;
 
   constructor(private el: ElementRef<HTMLInputElement>) {}
 

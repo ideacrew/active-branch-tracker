@@ -51,14 +51,7 @@
       d="M10.5 5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm.061 3.073a4 4 0 10-5.123 0 6.004 6.004 0 00-3.431 5.142.75.75 0 001.498.07 4.5 4.5 0 018.99 0 .75.75 0 101.498-.07 6.005 6.005 0 00-3.432-5.142z"
     ></path>
   </svg>
-  <span
-    tabindex="0"
-    (click)="editOwnership()"
-    (keydown.enter)="editOwnership()"
-    class="owner-value"
-    *ngIf="editingOwnership === false; else ownerInput"
-    >{{ environment.owner }}</span
-  >
+  <span tabindex="0" class="owner-value">{{ environment.owner }}</span>
 </div>
 
 <div
@@ -80,9 +73,7 @@
   <span
     tabindex="0"
     (keydown.enter)="editOwnerReleaseDate()"
-    (click)="editOwnerReleaseDate()"
     class="owner-release-value"
-    *ngIf="editingOwnerReleaseDate === false; else dateInput"
   >
     <ng-container *ngIf="environment.ownerRelease; else noDate">{{
       environment.ownerRelease.toDate() | relativeDate
@@ -91,29 +82,3 @@
 </div>
 
 <ng-template #noDate>N/A</ng-template>
-
-<ng-template #ownerInput>
-  <input
-    idcAutofocusInput
-    [(ngModel)]="currentOwner"
-    (blur)="cancelEditingOwnership()"
-    (keydown.esc)="cancelEditingOwnership()"
-    (keydown.enter)="updateOwnership()"
-    type="text"
-    name="owner"
-    id="owner"
-  />
-</ng-template>
-
-<ng-template #dateInput>
-  <input
-    idcAutofocusInput
-    [(ngModel)]="currentReleaseDate"
-    (blur)="cancelEditingOwnershipReleaseDate()"
-    (keydown.esc)="cancelEditingOwnershipReleaseDate()"
-    (keydown.enter)="updateOwnershipRelease()"
-    type="date"
-    name="owner-release"
-    id="owner-release"
-  />
-</ng-template>

@@ -25,14 +25,14 @@ import { UserService } from '@idc/user/data-access';
 })
 export class EnvironmentCardComponent {
   editingOwnership = false;
-  currentOwner: string;
+  currentOwner = '';
   editingOwnerReleaseDate = false;
-  currentReleaseDate: string;
+  currentReleaseDate = '';
 
   isAdmin = this.userService.isAdmin.value;
 
-  @Input() org: string;
-  @Input() environment: OrgEnvironment;
+  @Input() org = '';
+  @Input() environment!: OrgEnvironment;
   @Output() readonly newOwner = new EventEmitter<Partial<OwnerUpdate>>();
   @Output() readonly newOwnerRelease = new EventEmitter<
     Partial<OwnerReleaseUpdate>

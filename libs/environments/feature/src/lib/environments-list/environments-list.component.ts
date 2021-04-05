@@ -3,8 +3,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import {
   EnvironmentsService,
   OrgEnvironment,
-  OwnerReleaseUpdate,
-  OwnerUpdate,
 } from '@idc/environments/data-access';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError, filter, map, switchMap, tap } from 'rxjs/operators';
@@ -19,8 +17,8 @@ export class EnvironmentsListComponent {
 
   orgId$ = this.route.paramMap.pipe(
     filter((params: ParamMap) => params.has('orgId')),
-    map((params: ParamMap) => params.get('orgId')),
-    tap(orgId => (this.orgId = orgId)),
+    map((params: ParamMap) => params.get('orgId') ?? ''),
+    tap((orgId: string) => (this.orgId = orgId)),
   );
 
   orgName$ = this.orgId$.pipe(
@@ -61,27 +59,6 @@ export class EnvironmentsListComponent {
     private route: ActivatedRoute,
     private envService: EnvironmentsService,
   ) {}
-
-  async updateOwner({ envId, owner }: Partial<OwnerUpdate>): Promise<void> {
-    await this.envService.updateEnvironmentOwner({
-      orgId: this.orgId,
-      envId,
-      owner,
-    });
-  }
-
-  async updateRelease({
-    envId,
-    ownerRelease,
-  }: Partial<OwnerReleaseUpdate>): Promise<void> {
-    console.log('Updating to', ownerRelease);
-
-    await this.envService.updateEnvironmentReleaseDate({
-      orgId: this.orgId,
-      envId,
-      ownerRelease,
-    });
-  }
 
   trackByEnvironmentName(index: number, env: OrgEnvironment): string {
     return `${env.id}-${env.name}`;

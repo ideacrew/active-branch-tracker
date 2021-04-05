@@ -11,7 +11,7 @@ export interface DisplayConfigPartialState {
   readonly [DISPLAYCONFIG_FEATURE_KEY]: State;
 }
 
-const defaultConfig: DisplayConfig = {
+export const defaultConfig: DisplayConfig = {
   deployedBranches: 'collapsed',
   trackedBranches: 'collapsed',
   untrackedBranches: 'collapsed',
