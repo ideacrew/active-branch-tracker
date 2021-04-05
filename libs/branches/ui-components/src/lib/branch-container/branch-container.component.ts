@@ -5,9 +5,8 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { CheckSuiteConclusion, ReleaseDateInfo, BranchStatus } from '@idc/util';
 
-import { BranchesEntity } from '@idc/branches/data-access';
+import { ReleaseDateInfo, BranchStatus, BranchInfo } from '@idc/util';
 import { DisplayType } from '@idc/display-config';
 
 @Component({
@@ -17,15 +16,12 @@ import { DisplayType } from '@idc/display-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BranchContainerComponent {
-  CheckSuiteConclusion = CheckSuiteConclusion;
-  DisplayType = DisplayType;
-
-  @Input() branch: BranchesEntity;
-  @Input() viewType: 'expanded' | 'collapsed' = 'expanded';
+  @Input() branch: BranchInfo;
+  @Input() viewType: DisplayType = 'expanded';
   @Input() loggedIn: boolean;
 
-  @Output() readonly trackBranch = new EventEmitter<BranchesEntity>();
-  @Output() readonly untrackBranch = new EventEmitter<BranchesEntity>();
+  @Output() readonly trackBranch = new EventEmitter<BranchInfo>();
+  @Output() readonly untrackBranch = new EventEmitter<BranchInfo>();
   @Output() readonly newReleaseDate = new EventEmitter<ReleaseDateInfo>();
   @Output() readonly changeStatus = new EventEmitter<{
     branchId: string | number;

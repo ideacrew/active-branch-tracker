@@ -3,13 +3,9 @@ import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, debounceTime, tap, distinctUntilChanged } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 
-import { BranchInfo, BranchStatus, CheckSuiteConclusion } from '@idc/util';
-import {
-  BranchesFacade,
-  BranchesEntity,
-  BranchesActions,
-} from '@idc/branches/data-access';
-import { DisplayType, DisplayConfigFacade } from '@idc/display-config';
+import { BranchInfo } from '@idc/util';
+import { BranchListService } from '@idc/branches/data-access';
+import { DisplayConfigFacade } from '@idc/display-config';
 import { AuthService } from '@idc/auth';
 
 @Component({
@@ -19,19 +15,7 @@ import { AuthService } from '@idc/auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ActiveBranchesComponent implements OnDestroy {
-  CheckSuiteConclusion = CheckSuiteConclusion;
-  DisplayType = DisplayType;
   searchQuery = new FormControl('');
-
-  trackedBranchesVM$ = combineLatest([
-    this.branchesFacade.trackedBranches$,
-    this.configFacade.trackedBranchesDisplay$,
-  ]).pipe(map(([branches, display]) => ({ branches, display })));
-
-  untrackedBranchesVM$ = combineLatest([
-    this.branchesFacade.untrackedBranches$,
-    this.configFacade.untrackedBranchesDisplay$,
-  ]).pipe(map(([branches, display]) => ({ branches, display })));
 
   loggedIn$: Observable<boolean> = this.auth.user$.pipe(map(user => !!user));
 
@@ -40,40 +24,55 @@ export class ActiveBranchesComponent implements OnDestroy {
       debounceTime(200),
       distinctUntilChanged(),
       tap((query: string) => {
-        console.log('search query tap');
-        this.branchesFacade.dispatch(BranchesActions.queryBranches({ query }));
+        console.log('search query tap', query);
+        this.branchesService.query.next(query);
       }),
     )
     .subscribe();
 
+  allBranches$: Observable<BranchInfo[]> = this.branchesService
+    .filteredBranches$;
+
+  defaultBranches$ = this.allBranches$.pipe(
+    map(branches => branches?.filter(branchInfo => branchInfo.defaultBranch)),
+  );
+
+  trackedBranches$ = this.allBranches$.pipe(
+    map(branches => branches?.filter(branchInfo => branchInfo.tracked)),
+  );
+
+  untrackedBranches$ = this.allBranches$.pipe(
+    map(branches =>
+      branches?.filter(branchInfo => branchInfo.tracked === false),
+    ),
+  );
+
+  trackedBranchesVM$ = combineLatest([
+    this.trackedBranches$,
+    this.configFacade.trackedBranchesDisplay$,
+  ]).pipe(map(([branches, display]) => ({ branches, display })));
+
+  untrackedBranchesVM$ = combineLatest([
+    this.untrackedBranches$,
+    this.configFacade.untrackedBranchesDisplay$,
+  ]).pipe(map(([branches, display]) => ({ branches, display })));
+
   constructor(
-    public branchesFacade: BranchesFacade,
     public configFacade: DisplayConfigFacade,
     private auth: AuthService,
+    private branchesService: BranchListService,
   ) {}
 
   trackByBranchName(index: number, branch: BranchInfo): string {
     return `${branch.organizationName}${branch.repositoryName}${branch.branchName}`;
   }
 
-  trackBranch(branch: BranchesEntity): void {
-    this.branchesFacade.dispatch(BranchesActions.trackBranch({ branch }));
+  async trackBranch(branch: BranchInfo): Promise<void> {
+    await this.branchesService.trackBranch(branch);
   }
 
-  untrackBranch(branch: BranchesEntity): void {
-    this.branchesFacade.dispatch(BranchesActions.untrackBranch({ branch }));
-  }
-
-  setBranchStatus({
-    branchId,
-    status,
-  }: {
-    branchId: string;
-    status: BranchStatus;
-  }): void {
-    this.branchesFacade.dispatch(
-      BranchesActions.setBranchStatus({ branchId, status }),
-    );
+  async untrackBranch(branch: BranchInfo): Promise<void> {
+    await this.branchesService.untrackBranch(branch);
   }
 
   ngOnDestroy(): void {

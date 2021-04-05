@@ -10,7 +10,7 @@
 </div>
 <div class="branches-list">
   <idc-branch-container
-    *ngFor="let branch of branchesFacade.defaultBranches$ | async"
+    *ngFor="let branch of defaultBranches$ | async"
     [branch]="branch"
   ></idc-branch-container>
 </div>
@@ -20,20 +20,20 @@
   <div class="branch-container-heading">
     <h2 class="branch-type-heading">Tracked Branches</h2>
     <button
-      *ngIf="vm.display === DisplayType.Collapsed"
+      *ngIf="vm.display === 'collapsed'"
       type="button"
       class="unfold-view"
-      (click)="configFacade.setTrackedBranches(DisplayType.Expanded)"
+      (click)="configFacade.setTrackedBranches('expanded')"
     >
       <svg height="24px" width="24px" class="svg-icon expand">
         <use href="assets/icons.svg#expand"></use>
       </svg>
     </button>
     <button
-      *ngIf="vm.display === DisplayType.Expanded"
+      *ngIf="vm.display === 'expanded'"
       type="button"
       class="fold-view"
-      (click)="configFacade.setTrackedBranches(DisplayType.Collapsed)"
+      (click)="configFacade.setTrackedBranches('collapsed')"
     >
       <svg height="24px" width="24px" class="svg-icon collapse">
         <use href="assets/icons.svg#collapse"></use>
@@ -47,7 +47,6 @@
       [branch]="branch"
       [loggedIn]="loggedIn$ | async"
       (untrackBranch)="untrackBranch($event)"
-      (changeStatus)="setBranchStatus($event)"
     ></idc-branch-container>
   </div>
 </ng-container>
@@ -57,20 +56,20 @@
   <div class="branch-container-heading">
     <h2 class="branch-type-heading other-branches">Other Branches</h2>
     <button
-      *ngIf="vm.display === DisplayType.Collapsed"
+      *ngIf="vm.display === 'collapsed'"
       type="button"
       class="unfold-view"
-      (click)="configFacade.setUntrackedBranches(DisplayType.Expanded)"
+      (click)="configFacade.setUntrackedBranches('expanded')"
     >
       <svg height="24px" width="24px" class="svg-icon expand">
         <use href="assets/icons.svg#expand"></use>
       </svg>
     </button>
     <button
-      *ngIf="vm.display === DisplayType.Expanded"
+      *ngIf="vm.display === 'expanded'"
       type="button"
       class="fold-view"
-      (click)="configFacade.setUntrackedBranches(DisplayType.Collapsed)"
+      (click)="configFacade.setUntrackedBranches('collapsed')"
     >
       <svg height="24px" width="24px" class="svg-icon collapse">
         <use href="assets/icons.svg#collapse"></use>

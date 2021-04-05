@@ -7,6 +7,7 @@ import * as firebase from 'firebase/app';
 import { YellrUser } from '@idc/user/data-access';
 
 import { Org, OrgEnvironment, OwnerReleaseUpdate, OwnerUpdate } from './models';
+import { EnvInfo } from './models/envInfo';
 
 @Injectable()
 export class EnvironmentsService {
@@ -31,7 +32,7 @@ export class EnvironmentsService {
       );
   }
 
-  getEnvironmentDetail({ orgId, envId }): Observable<OrgEnvironment> {
+  getEnvironmentDetail({ orgId, envId }: EnvInfo): Observable<OrgEnvironment> {
     return this.afs
       .collection('orgs')
       .doc(orgId)
@@ -44,7 +45,7 @@ export class EnvironmentsService {
     orgId,
     envId,
     owner,
-  }: OwnerUpdate): Promise<void> {
+  }: Partial<OwnerUpdate>): Promise<void> {
     const docRef = this.afs.doc<OrgEnvironment>(
       `orgs/${orgId}/environments/${envId}`,
     );
@@ -71,7 +72,7 @@ export class EnvironmentsService {
     envId,
     owner,
     ownerRelease,
-  }): Promise<void> {
+  }: OwnerUpdate): Promise<void> {
     const docRef = this.afs.doc<OrgEnvironment>(
       `orgs/${orgId}/environments/${envId}`,
     );

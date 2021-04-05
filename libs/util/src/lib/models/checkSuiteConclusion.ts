@@ -1,9 +1,8 @@
-export enum CheckSuiteConclusion {
-  Success = 'success',
-  Failure = 'failure',
-  Neutral = 'neutral',
-  Cancelled = 'cancelled',
-  TimedOut = 'timed_out',
-  ActionRequired = 'action_required',
-  Stale = 'stale',
-}
+export type CheckSuiteConclusion =
+  | 'success'
+  | 'failure'
+  | 'neutral'
+  | 'cancelled'
+  | 'timed_out'
+  | 'action_required'
+  | 'stale';

@@ -1,6 +1,7 @@
 import { CheckSuiteConclusion } from './checkSuiteConclusion';
 
 export interface BranchInfo {
+  id?: string;
   repositoryName: string;
   organizationName: string;
   branchName: string;

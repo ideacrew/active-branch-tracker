@@ -1,14 +1,14 @@
-import { BranchesEntity } from '../branches.models';
+import { BranchInfo } from '@idc/util';
 
 interface BranchQuery {
-  branches: BranchesEntity[];
+  branches: BranchInfo[];
   rawQuery: string;
 }
 
 export const searchBranches = ({
   branches,
   rawQuery,
-}: BranchQuery): BranchesEntity[] => {
+}: BranchQuery): BranchInfo[] => {
   if (rawQuery === undefined || rawQuery === '') {
     return branches;
   } else {

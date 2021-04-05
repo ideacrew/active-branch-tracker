@@ -39,19 +39,25 @@ export class DisplayConfigFacade {
   }
 
   setUntrackedBranches(display: DisplayType): void {
-    display === DisplayType.Collapsed
-      ? this.dispatch(collapseUntrackedBranches())
-      : this.dispatch(expandUntrackedBranches());
+    if (display === 'collapsed') {
+      this.dispatch(collapseUntrackedBranches());
+    } else {
+      this.dispatch(expandUntrackedBranches());
+    }
   }
   setTrackedBranches(display: DisplayType): void {
-    display === DisplayType.Collapsed
-      ? this.dispatch(collapseTrackedBranches())
-      : this.dispatch(expandTrackedBranches());
+    if (display === 'collapsed') {
+      this.dispatch(collapseTrackedBranches());
+    } else {
+      this.dispatch(expandTrackedBranches());
+    }
   }
 
   setDeployedBranches(display: DisplayType): void {
-    display === DisplayType.Collapsed
-      ? this.dispatch(collapseDeployedBranches())
-      : this.dispatch(expandDeployedBranches());
+    if (display === 'collapsed') {
+      this.dispatch(collapseDeployedBranches());
+    } else {
+      this.dispatch(expandDeployedBranches());
+    }
   }
 }

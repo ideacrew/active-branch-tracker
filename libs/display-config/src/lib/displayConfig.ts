@@ -1,7 +1,4 @@
-export enum DisplayType {
-  Expanded = 'expanded',
-  Collapsed = 'collapsed',
-}
+export type DisplayType = 'expanded' | 'collapsed';
 
 export interface DisplayConfig {
   deployedBranches: DisplayType;

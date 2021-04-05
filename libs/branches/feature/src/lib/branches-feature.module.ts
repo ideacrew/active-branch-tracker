@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { BranchesUiComponentsModule } from '@idc/branches/ui-components';
-import { BranchesDataAccessModule } from '@idc/branches/data-access';
 
 import { ActiveBranchesComponent } from './active-branches/active-branches.component';
 
@@ -14,7 +13,6 @@ import { ActiveBranchesComponent } from './active-branches/active-branches.compo
     ReactiveFormsModule,
     RouterModule.forChild([{ path: '', component: ActiveBranchesComponent }]),
     BranchesUiComponentsModule,
-    BranchesDataAccessModule,
   ],
   declarations: [ActiveBranchesComponent],
 })

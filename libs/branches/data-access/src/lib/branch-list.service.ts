@@ -3,28 +3,36 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { BranchInfo, BranchStatus } from '@idc/util';
-import { BranchesEntity } from './store/branches.models';
+import { BranchInfo } from '@idc/util';
 
-@Injectable()
+import { searchBranches } from './searchBranches';
+
+const oneMonthInMs = 1000 * 60 * 60 * 24 * 30;
+const today = new Date().getTime();
+const oneMonthAgo = today - oneMonthInMs;
+
+@Injectable({
+  providedIn: 'root',
+})
 export class BranchListService {
   branchInfo$: Observable<BranchInfo[]>;
   scream: HTMLAudioElement = new Audio('/assets/trombone.mp3');
+  query = new BehaviorSubject<string>('');
 
   constructor(private afs: AngularFirestore) {}
 
-  queryBranches(): Observable<BranchesEntity[]> {
-    console.log('Query Branches method being run');
-    const oneMonthInMs = 1000 * 60 * 60 * 24 * 30;
-    const today = new Date().getTime();
-    const oneMonthAgo = today - oneMonthInMs;
+  queryBranches(): Observable<BranchInfo[]> {
+
     const branchesRef = this.afs.collection<BranchInfo>('branches', ref =>
       ref.where('timestamp', '>=', oneMonthAgo).orderBy('timestamp'),
     );
 
-    return branchesRef.valueChanges({ idField: 'id' });
+    return branchesRef
+      .valueChanges({ idField: 'id' })
+      .pipe(map(branches => branches.sort(sortByTime)));
     // tap(async (docChange: DocumentChangeAction<BranchInfo>[]) => {
     //   const modified = docChange.filter(change => change.type === 'modified');
     //   let newFailure = false;
@@ -52,16 +60,21 @@ export class BranchListService {
     // }),
   }
 
+  get filteredBranches$(): Observable<BranchInfo[]> {
+    return combineLatest([
+      this.queryBranches(),
+      this.query.asObservable(),
+    ]).pipe(
+      map(([branches, rawQuery]) => searchBranches({ branches, rawQuery })),
+    );
+  }
+
   async trackBranch(branch: BranchInfo): Promise<void> {
     await this.getBranchRef(branch).update({ tracked: true });
   }
 
   async untrackBranch(branch: BranchInfo): Promise<void> {
     await this.getBranchRef(branch).update({ tracked: false });
-  }
-
-  async setBranchStatus(branchId: string, status: BranchStatus): Promise<void> {
-    await this.getSimpleRef(branchId).update({ status });
   }
 
   getSimpleRef(branchId: string): AngularFirestoreDocument<BranchInfo> {
@@ -80,3 +93,13 @@ export class BranchListService {
     await this.scream.play();
   }
 }
+
+const sortByTime = (branchA: BranchInfo, branchB: BranchInfo): number => {
+  const { updated_at: updatedA, created_at: createdA } = branchA;
+  const { updated_at: updatedB, created_at: createdB } = branchB;
+
+  return new Date(updatedA || createdA).getTime() >
+    new Date(updatedB || createdB).getTime()
+    ? -1
+    : 1;
+};

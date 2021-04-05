@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as DisplayConfigActions from './display-config.actions';
-import { DisplayConfig, DisplayType } from '../displayConfig';
+import { DisplayConfig } from '../displayConfig';
 
 export const DISPLAYCONFIG_FEATURE_KEY = 'displayConfig';
 
@@ -11,10 +11,10 @@ export interface DisplayConfigPartialState {
   readonly [DISPLAYCONFIG_FEATURE_KEY]: State;
 }
 
-const defaultConfig = {
-  deployedBranches: DisplayType.Collapsed,
-  trackedBranches: DisplayType.Collapsed,
-  untrackedBranches: DisplayType.Collapsed,
+const defaultConfig: DisplayConfig = {
+  deployedBranches: 'collapsed',
+  trackedBranches: 'collapsed',
+  untrackedBranches: 'collapsed',
 };
 
 export const initialState: State = {
@@ -34,30 +34,29 @@ const displayConfigReducer = createReducer(
 
   on(DisplayConfigActions.expandDeployedBranches, state => ({
     ...state,
-    deployedBranches: DisplayType.Expanded,
+    deployedBranches: 'expanded',
   })),
   on(DisplayConfigActions.collapseDeployedBranches, state => ({
     ...state,
-    deployedBranches: DisplayType.Collapsed,
+    deployedBranches: 'collapsed',
   })),
   on(DisplayConfigActions.expandTrackedBranches, state => ({
     ...state,
-    trackedBranches: DisplayType.Expanded,
+    trackedBranches: 'expanded',
   })),
   on(DisplayConfigActions.collapseTrackedBranches, state => ({
     ...state,
-    trackedBranches: DisplayType.Collapsed,
+    trackedBranches: 'collapsed',
   })),
   on(DisplayConfigActions.expandUntrackedBranches, state => ({
     ...state,
-    untrackedBranches: DisplayType.Expanded,
+    untrackedBranches: 'expanded',
   })),
   on(DisplayConfigActions.collapseUntrackedBranches, state => ({
     ...state,
-    untrackedBranches: DisplayType.Collapsed,
+    untrackedBranches: 'collapsed',
   })),
 );
 
-export function reducer(state: State | undefined, action: Action): State {
-  return displayConfigReducer(state, action);
-}
+export const reducer = (state: State | undefined, action: Action): State =>
+  displayConfigReducer(state, action);
