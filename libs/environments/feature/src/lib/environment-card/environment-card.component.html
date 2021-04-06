@@ -1,5 +1,5 @@
 <h4>
-  <a class="env-name" routerLink="./{{ environment.id }}">{{
+  <a class="env-link" routerLink="./{{ environment.id }}">{{
     environment.name
   }}</a>
 </h4>
@@ -51,7 +51,7 @@
       d="M10.5 5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm.061 3.073a4 4 0 10-5.123 0 6.004 6.004 0 00-3.431 5.142.75.75 0 001.498.07 4.5 4.5 0 018.99 0 .75.75 0 101.498-.07 6.005 6.005 0 00-3.432-5.142z"
     ></path>
   </svg>
-  <span tabindex="0" class="owner-value">{{ environment.owner }}</span>
+  <span class="owner-value">{{ environment.owner }}</span>
 </div>
 
 <div
@@ -70,11 +70,7 @@
     ></path>
   </svg>
 
-  <span
-    tabindex="0"
-    (keydown.enter)="editOwnerReleaseDate()"
-    class="owner-release-value"
-  >
+  <span class="owner-release-value">
     <ng-container *ngIf="environment.ownerRelease; else noDate">{{
       environment.ownerRelease.toDate() | relativeDate
     }}</ng-container>
