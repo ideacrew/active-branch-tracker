@@ -34,7 +34,7 @@ jobs:
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Lint Application
-        run: npx affected:lint
+        run: npm run affected:lint
   test:
     name: test
     runs-on: ubuntu-latest
