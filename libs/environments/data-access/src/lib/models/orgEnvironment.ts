@@ -12,6 +12,6 @@ export interface OrgEnvironment {
   latestDeployment: LatestDeployment;
   owner: string;
   ownerRelease: firebase.default.firestore.Timestamp;
-  gluedb?: AppData;
+  glue?: AppData;
   enroll?: AppData;
 }

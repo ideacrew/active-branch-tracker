@@ -41,11 +41,12 @@
     </button>
   </div>
   <div class="branches-list">
+    <!-- https://angular.io/guide/template-typecheck#strict-null-checks -->
     <idc-branch-container
       *ngFor="let branch of vm.branches; trackBy: trackByBranchName"
       [viewType]="vm.display"
       [branch]="branch"
-      [loggedIn]="loggedIn$ | async"
+      [loggedIn]="(loggedIn$ | async)!"
       (untrackBranch)="untrackBranch($event)"
     ></idc-branch-container>
   </div>
@@ -79,7 +80,7 @@
   <div class="branches-list">
     <idc-branch-container
       *ngFor="let branch of vm.branches; trackBy: trackByBranchName"
-      [loggedIn]="loggedIn$ | async"
+      [loggedIn]="(loggedIn$ | async)!"
       [viewType]="vm.display"
       [branch]="branch"
       (trackBranch)="trackBranch($event)"

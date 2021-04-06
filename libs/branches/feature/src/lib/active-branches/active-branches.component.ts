@@ -17,7 +17,9 @@ import { AuthService } from '@idc/auth';
 export class ActiveBranchesComponent implements OnDestroy {
   searchQuery = new FormControl('');
 
-  loggedIn$: Observable<boolean> = this.auth.user$.pipe(map(user => !!user));
+  loggedIn$: Observable<boolean> = this.auth.user$.pipe(
+    map(user => user !== null),
+  );
 
   searchSub: Subscription = this.searchQuery.valueChanges
     .pipe(

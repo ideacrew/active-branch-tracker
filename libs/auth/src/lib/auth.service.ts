@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
-
 import { Observable } from 'rxjs';
+
+import { filterNullish } from '@idc/util';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,9 @@ export class AuthService {
 
   get user$(): Observable<firebase.User | null> {
     return this.afAuth.user;
+  }
+
+  get alwaysUser$(): Observable<firebase.User> {
+    return this.afAuth.user.pipe(filterNullish());
   }
 }
