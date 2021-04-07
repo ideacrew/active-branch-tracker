@@ -3,13 +3,19 @@ import * as admin from 'firebase-admin';
 
 admin.initializeApp();
 
-import { CheckSuitePayload, handleCheckSuiteEvent } from './checkSuite';
-import { CreateEventPayload, handleCreateEvent } from './createEvent';
-import { DeleteEventPayload, handleDeleteEvent } from './deleteEvent';
+import { handleCheckSuiteEvent } from './checkSuite';
+import { handleCreateEvent } from './createEvent';
+import { handleDeleteEvent } from './deleteEvent';
+import {
+  CheckSuitePayload,
+  CreateEventPayload,
+  DeleteEventPayload,
+} from './interfaces';
+import { handleIssueCommentEvent, IssueCommentPayload } from './issue-comment';
 import {
   handlePullRequestEvent,
   PullRequestEventPayload,
-} from './pullRequestEvent';
+} from './pull-request';
 
 /**
  * Handles the incoming webhook from GitHub Actions
@@ -21,8 +27,6 @@ export async function handleWebhook(
   response: functions.Response<unknown>,
 ): Promise<void> {
   const eventType = request.header('X-Github-Event');
-
-  console.log({ eventType });
 
   switch (eventType) {
     case 'create':
@@ -40,6 +44,9 @@ export async function handleWebhook(
     case 'pull_request':
       await handlePullRequestEvent(request.body as PullRequestEventPayload);
       break;
+
+    case 'issue_comment':
+      await handleIssueCommentEvent(request.body as IssueCommentPayload);
   }
 
   response.status(200).send('Thanks');

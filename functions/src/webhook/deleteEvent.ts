@@ -1,18 +1,10 @@
 /* eslint-disable camelcase */
 import * as admin from 'firebase-admin';
-import { Repository, Sender, Organization } from '../webhookPayload';
-import { createSafeBranchName } from '../safeBranchName';
 import { MailDataRequired } from '@sendgrid/mail';
-import { sendMail } from '../send-grid/send-email';
 
-export interface DeleteEventPayload {
-  ref: string; // branch name
-  ref_type: 'branch' | 'tag'; // type of thing that got deleted
-  pusher_type: string;
-  repository: Repository;
-  organization: Organization;
-  sender: Sender;
-}
+import { createSafeBranchName } from '../safeBranchName';
+import { sendMail } from '../send-grid/send-email';
+import { DeleteEventPayload } from './interfaces';
 
 /**
  * Handles the delete event from GitHub Actions

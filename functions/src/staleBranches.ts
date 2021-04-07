@@ -6,7 +6,7 @@ admin.initializeApp();
 import * as sgMail from '@sendgrid/mail';
 import { ClientResponse } from '@sendgrid/client/src/response';
 
-import { BranchInfo } from './webhook/branchInfo';
+import { BranchInfo } from './models/branchInfo';
 
 /**
  * Gets stale branches

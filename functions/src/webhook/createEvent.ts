@@ -2,21 +2,9 @@
 /* eslint-disable camelcase */
 import * as admin from 'firebase-admin';
 
-import { Repository, Organization, Sender } from '../webhookPayload';
-import { BranchInfo, BranchStatus } from './branchInfo';
-import { CheckConclusion } from './checkConclusion';
+import { BranchInfo } from '../models/branchInfo';
 import { createSafeBranchName } from '../safeBranchName';
-
-export interface CreateEventPayload {
-  ref: string; // name of thing that got created
-  ref_type: 'branch' | 'tag'; // type of thing that got created
-  master_branch: string;
-  description: any;
-  pusher_type: 'user';
-  repository: Repository;
-  organization: Organization;
-  sender: Sender;
-}
+import { CreateEventPayload } from './interfaces';
 
 /**
  * Handles a create event from GitHub Actions
@@ -47,11 +35,10 @@ export async function handleCreateEvent(
     created_at: new Date().toISOString(),
     checkSuiteRuns: 0,
     checkSuiteFailures: 0,
-    checkSuiteStatus: CheckConclusion.Neutral,
+    checkSuiteStatus: 'neutral',
     createdBy,
     tracked: false,
     timestamp: new Date().getTime(),
-    status: BranchStatus.Development,
   };
 
   try {
