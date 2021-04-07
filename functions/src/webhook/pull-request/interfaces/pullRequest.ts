@@ -1,3 +1,4 @@
+import { Assignee, Label } from '../../interfaces';
 import { WebhookPayload } from '../../interfaces/basePayload';
 import { GitHubUser } from '../../interfaces/githubUser';
 import { Repository } from '../../interfaces/repository';
@@ -5,25 +6,36 @@ import { Repository } from '../../interfaces/repository';
 /* eslint-disable camelcase */
 export interface PullRequestEventPayload extends WebhookPayload {
   action: PullRequestAction;
+  changes?: {
+    title: {
+      from: string;
+    };
+    body: {
+      from: string;
+    };
+  };
   number: number; // pull request number
   pull_request: PullRequest;
 }
 
 export type PullRequestAction =
+  | 'opened'
+  | 'edited'
+  | 'closed'
   | 'assigned'
   | 'unassigned'
   | 'review_requested'
   | 'review_request_removed'
+  | 'ready_for_review'
+  | 'converted_to_draft'
   | 'labeled'
   | 'unlabeled'
-  | 'opened'
-  | 'edited'
-  | 'closed'
-  | 'ready_for_review'
+  | 'synchronize'
+  | 'auto_merge_enabled'
+  | 'auto_merge_disabled'
   | 'locked'
   | 'unlocked'
-  | 'reopened'
-  | 'synchronize';
+  | 'reopened';
 
 export interface PullRequest {
   url: string; // link to pull request
@@ -44,11 +56,11 @@ export interface PullRequest {
   closed_at: string | null;
   merged_at: string | null;
   merge_commit_sha: string | null;
-  assignee: unknown;
-  assignees: unknown[];
-  requested_reviewers: unknown[];
+  assignee: Assignee | null;
+  assignees: Assignee[];
+  requested_reviewers: GitHubUser[];
   requested_teams: unknown[];
-  labels: unknown[];
+  labels: Label[];
   milestone: unknown;
   draft: boolean;
   commits_url: string;
