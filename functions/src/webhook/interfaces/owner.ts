@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-export interface GithubUser {
-  login: string; // username?
+export interface Owner {
+  login: string;
   id: number;
   node_id: string;
   avatar_url: string;
