@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable camelcase */
 import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
 
 import { BranchInfo } from '../models/branchInfo';
 import { createSafeBranchName } from '../safeBranchName';
@@ -44,6 +45,6 @@ export async function handleCreateEvent(
   try {
     await branchRef.create(branchInfo);
   } catch (e) {
-    console.error(e);
+    functions.logger.error(e);
   }
 }
