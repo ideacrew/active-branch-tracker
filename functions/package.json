@@ -11,7 +11,7 @@
     "logs": "firebase functions:log",
     "test": "mocha test/rules.spec.js --timeout 5000 --exit",
     "test:functions": "mocha test/functions/*.spec.js --timeout 5000 --exit",
-    "test:functions:local": "cross-env GCLOUD_PROJECT=fakeproject FIREBASE_FIRESTORE_EMULATOR_ADDRESS=localhost:8080 FIRESTORE_EMULATOR_HOST=localhost:8080 mocha test/functions/*.spec.js",
+    "test:functions:local": "cross-env GCLOUD_PROJECT=fakeproject FIREBASE_FIRESTORE_EMULATOR_ADDRESS=localhost:8080 FIRESTORE_EMULATOR_HOST=localhost:8080 mocha test/functions/openedPullRequest.spec.js",
     "test:watch": "mocha test/rules.spec.js --watch",
     "test:ci": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=fakeproject \"npm run test\"",
     "t:functions": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=fakeproject \"npm run test:functions\"",
