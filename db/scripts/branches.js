@@ -36,7 +36,7 @@ function generateBranch(
     checkSuiteFailures: faker.random.number({ min: 0, max: 5 }),
     defaultBranch,
     status: 'Development',
-    tracked: faker.random.boolean(),
+    tracked: faker.datatype.boolean(),
     timestamp: new Date().getTime(),
     head_sha: faker.git.shortSha(),
     updated_at: faker.date.past().toISOString(),

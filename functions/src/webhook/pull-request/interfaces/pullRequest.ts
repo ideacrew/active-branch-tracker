@@ -70,14 +70,14 @@ export interface PullRequest {
   statuses_url: string;
   head: {
     label: string;
-    ref: string;
+    ref: string; // name of feature branch
     sha: string;
     user: GitHubUser;
     repo: Repository;
   };
   base: {
     label: string;
-    ref: string;
+    ref: string; // branch that PR is targeting
     sha: string;
     user: GitHubUser;
     repo: Repository;
