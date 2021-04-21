@@ -19,23 +19,23 @@ export interface PullRequestEventPayload extends WebhookPayload {
 }
 
 export type PullRequestAction =
-  | 'opened'
-  | 'edited'
-  | 'closed'
-  | 'assigned'
-  | 'unassigned'
-  | 'review_requested'
-  | 'review_request_removed'
-  | 'ready_for_review'
-  | 'converted_to_draft'
-  | 'labeled'
-  | 'unlabeled'
-  | 'synchronize'
+  | 'opened' // the first time a PR is opened
+  | 'edited' // when the title of the PR is changed
+  | 'closed' // when a PR is closed (possibly merged)
+  | 'assigned' // people get assigned
+  | 'unassigned' // people get unassigned
+  | 'review_requested' // people are requested as reviewers
+  | 'review_request_removed' // people are removed as reviewers
+  | 'ready_for_review' // converted _from draft_ to ready for review
+  | 'converted_to_draft' // pr converted to draft
+  | 'labeled' // add labels
+  | 'unlabeled' // remove labels
+  | 'synchronize' // new commit to the branch
   | 'auto_merge_enabled'
   | 'auto_merge_disabled'
   | 'locked'
   | 'unlocked'
-  | 'reopened';
+  | 'reopened'; // when a PR is re-opened
 
 export interface PullRequest {
   url: string; // link to pull request
