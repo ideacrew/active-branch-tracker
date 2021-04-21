@@ -6,32 +6,53 @@ import { PullRequestEventPayload } from './interfaces/pullRequest';
 export const handleClosedPullRequest = async (
   payload: PullRequestEventPayload,
 ): Promise<void> => {
-  if (payload.pull_request.merged) {
-    const { pull_request: pullRequest, repository, organization } = payload;
-    const { login: organizationName } = organization;
-    const { head } = pullRequest;
-    const { ref: branchName } = head;
-    const { name: repositoryName } = repository;
+  const { pull_request: pullRequest, repository, organization } = payload;
+  const { login: organizationName } = organization;
+  const {
+    head,
+    number: pullRequestNumber,
+    merged,
+    closed_at: closedAt,
+  } = pullRequest;
+  const { name: repositoryName } = repository;
 
-    const branchRef = admin
-      .firestore()
-      .collection(`branches`)
-      .doc(`${organizationName}-${repositoryName}-${branchName}`);
+  const pullRequestRef = admin
+    .firestore()
+    .collection(`pullRequests`)
+    .doc(
+      `${organizationName}-${repositoryName}-${head.ref}-${pullRequestNumber}`,
+    );
 
-    try {
-      const branch = await branchRef.get();
+  const prDoc = await pullRequestRef.get();
 
-      if (branch.exists) {
-        await branchRef.delete();
+  if (prDoc.exists) {
+    if (merged) {
+      // Change this to be a reference to the PR document
+      try {
+        await pullRequestRef.update({
+          merged,
+          closed: closedAt === null ? false : true,
+        });
+      } catch (e) {
+        functions.logger.error('Error updating Pull Request as merged', {
+          error: e,
+        });
       }
-    } catch (e) {
-      functions.logger.error(
-        'Error deleting branch associated with closed Pull Request',
-        { error: e },
-      );
+    } else {
+      try {
+        await pullRequestRef.update({
+          closed: closedAt === null ? false : true,
+        });
+      } catch (e) {
+        functions.logger.error('Error updating Pull Request as closed', {
+          error: e,
+        });
+      }
     }
   } else {
-    functions.logger.info('Pull Request closed, but not merged');
+    functions.logger.error(
+      'Pull Request Document could not be updated because it did not exist',
+    );
     return Promise.resolve();
   }
 };

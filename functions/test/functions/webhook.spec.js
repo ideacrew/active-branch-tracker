@@ -63,6 +63,7 @@ describe('Webhook tests', () => {
         _seconds: 1617809215,
       },
       userName: 'markgoho',
+      merged: false,
     });
   }).timeout(5000);
 });

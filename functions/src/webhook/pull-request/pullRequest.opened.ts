@@ -10,7 +10,13 @@ export const handleOpenedPullRequest = async (
 ): Promise<void> => {
   const { pull_request: pullRequest, repository, organization } = payload;
   const { login: organizationName } = organization;
-  const { number: pullRequestNumber, head, base } = pullRequest;
+  const {
+    number: pullRequestNumber,
+    head,
+    base,
+    merged,
+    closed_at: closedAt,
+  } = pullRequest;
   const { name: repositoryName } = repository;
 
   const createdAt = firestoreTimestamp(pullRequest.created_at);
@@ -29,6 +35,8 @@ export const handleOpenedPullRequest = async (
     createdAt,
     updatedAt,
     userName: pullRequest.user.login,
+    merged,
+    closed: closedAt === null ? false : true,
   };
 
   try {

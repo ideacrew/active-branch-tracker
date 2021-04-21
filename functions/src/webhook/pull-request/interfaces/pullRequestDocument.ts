@@ -12,4 +12,7 @@ export interface PullRequestDocument {
 
   createdAt: FirebaseFirestore.Timestamp;
   updatedAt: FirebaseFirestore.Timestamp;
+
+  merged: boolean;
+  closed: boolean;
 }
