@@ -34,7 +34,10 @@
       "@idc/testing": ["libs/testing/src/index.ts"],
       "@idc/auth": ["libs/auth/src/index.ts"],
       "@ic/google-analytics": ["libs/google-analytics/src/index.ts"],
-      "@idc/user/data-access": ["libs/user/data-access/src/index.ts"]
+      "@idc/user/data-access": ["libs/user/data-access/src/index.ts"],
+      "@idc/pull-requests/data-access": [
+        "libs/pull-requests/data-access/src/index.ts"
+      ]
     }
   },
   "angularCompilerOptions": {

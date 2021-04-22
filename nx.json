@@ -27,6 +27,7 @@
     "testing": { "tags": [] },
     "auth": { "tags": [] },
     "google-analytics": { "tags": [] },
-    "user-data-access": { "tags": [] }
+    "user-data-access": { "tags": [] },
+    "pull-requests-data-access": { "tags": [] }
   }
 }

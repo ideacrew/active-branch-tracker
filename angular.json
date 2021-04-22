@@ -8,11 +8,13 @@
   "schematics": {
     "@nrwl/angular:application": {
       "style": "scss",
+      "linter": "eslint",
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
       "style": "scss",
+      "linter": "eslint",
       "unitTestRunner": "jest",
       "strict": true
     },
@@ -526,6 +528,31 @@
           "outputs": ["coverage/libs/user/data-access"],
           "options": {
             "jestConfig": "libs/user/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "pull-requests-data-access": {
+      "projectType": "library",
+      "root": "libs/pull-requests/data-access",
+      "sourceRoot": "libs/pull-requests/data-access/src",
+      "prefix": "idc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/pull-requests/data-access/src/**/*.ts",
+              "libs/pull-requests/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/pull-requests/data-access"],
+          "options": {
+            "jestConfig": "libs/pull-requests/data-access/jest.config.js",
             "passWithNoTests": true
           }
         }
