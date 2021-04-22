@@ -31,6 +31,13 @@ const routes = [
         module => module.EnvironmentsFeatureModule,
       ),
   },
+  {
+    path: 'pull-requests',
+    loadChildren: () =>
+      import('@idc/pull-requests/feature').then(
+        module => module.PullRequestsFeatureModule,
+      ),
+  },
 ];
 
 @NgModule({

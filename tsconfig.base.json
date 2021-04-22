@@ -37,7 +37,8 @@
       "@idc/user/data-access": ["libs/user/data-access/src/index.ts"],
       "@idc/pull-requests/data-access": [
         "libs/pull-requests/data-access/src/index.ts"
-      ]
+      ],
+      "@idc/pull-requests/feature": ["libs/pull-requests/feature/src/index.ts"]
     }
   },
   "angularCompilerOptions": {
