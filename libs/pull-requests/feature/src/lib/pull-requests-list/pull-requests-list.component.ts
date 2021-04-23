@@ -1,16 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import {
+  PullRequestsService,
+  PullRequest,
+} from '@idc/pull-requests/data-access';
 
 @Component({
-  selector: 'idc-pull-requests-list',
   templateUrl: './pull-requests-list.component.html',
   styleUrls: ['./pull-requests-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PullRequestsListComponent implements OnInit {
+export class PullRequestsListComponent {
+  pullRequests$: Observable<PullRequest[]> = this.prService.queryPullRequests();
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor(private prService: PullRequestsService) {}
 }
