@@ -11,6 +11,10 @@ export class PullRequestsService {
   constructor(private afs: AngularFirestore) {}
 
   queryPullRequests(): Observable<PullRequest[]> {
-    return this.afs.collection<PullRequest>('pullRequests').valueChanges();
+    return this.afs
+      .collection<PullRequest>('pullRequests', ref =>
+        ref.where('closed', '==', false),
+      )
+      .valueChanges();
   }
 }

@@ -2,14 +2,34 @@
   <ul>
     <ng-container *ngIf="authService.user$ | async">
       <ng-container *ngIf="userService.user$ | async as user">
-        <li *ngIf="user.role === 'admin'" class="nav-link">
-          <a routerLink="/branches">
-            <span class="visually-hidden">Branches</span
-            ><svg height="24px" width="24px" class="svg-icon" title="Branches">
-              <use href="assets/icons.svg#branch"></use>
-            </svg>
-          </a>
-        </li>
+        <ng-container *ngIf="user.role === 'admin'">
+          <li class="nav-link">
+            <a routerLink="/branches">
+              <span class="visually-hidden">Branches</span
+              ><svg
+                height="24px"
+                width="24px"
+                class="svg-icon"
+                title="Branches"
+              >
+                <use href="assets/icons.svg#branch"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="nav-link">
+            <a routerLink="/pull-requests">
+              <span class="visually-hidden">Pull Requests</span
+              ><svg
+                height="24px"
+                width="24px"
+                class="svg-icon"
+                title="Pull Requests"
+              >
+                <use href="assets/icons.svg#pull-request"></use>
+              </svg>
+            </a>
+          </li>
+        </ng-container>
       </ng-container>
       <li class="nav-link">
         <a routerLink="/environments">

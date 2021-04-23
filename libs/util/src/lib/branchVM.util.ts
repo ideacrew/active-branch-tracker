@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 
 import { BranchInfo } from './models';
+import { PullRequest } from '@idc/pull-requests/data-access';
 
 export const getCommitLink = (branch: BranchInfo): string => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -11,6 +12,12 @@ export const getCommitLink = (branch: BranchInfo): string => {
 
 export const getPullRequestLink = (branch: BranchInfo): string => {
   const { repositoryName, organizationName, pullRequestNumber } = branch;
+
+  return `//github.com/${organizationName}/${repositoryName}/pull/${pullRequestNumber}`;
+};
+
+export const getPullRequestLinkFromPR = (pr: PullRequest): string => {
+  const { repositoryName, organizationName, number: pullRequestNumber } = pr;
 
   return `//github.com/${organizationName}/${repositoryName}/pull/${pullRequestNumber}`;
 };

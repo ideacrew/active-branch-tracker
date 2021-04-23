@@ -1,3 +1,15 @@
-<pre>
-  {{ pullRequests$ | async | json }}
-</pre>
+<h1>Open Pull Requests</h1>
+<div class="pr-container">
+  <div class="pr-card" *ngFor="let pr of pullRequests$ | async">
+    <h2 class="pr-heading">
+      <!-- replace this pipe -->
+      <a href="{{ pr | prLinkFromPr }}" target="_blank"
+        >{{ pr.organizationName }}/{{ pr.repositoryName }}</a
+      >
+    </h2>
+    <h3 class="branch-names">
+      {{ pr.branchName }} => {{ pr.targetBranchName }}
+    </h3>
+    <time>{{ pr.createdAt.toDate() | relativeDate }}</time>
+  </div>
+</div>

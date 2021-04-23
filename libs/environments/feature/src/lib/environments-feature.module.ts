@@ -4,11 +4,11 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { EnvironmentsDataAccessModule } from '@idc/environments/data-access';
+import { UtilModule } from '@idc/util';
 
 import { OrgListComponent } from './org-list/org-list.component';
 import { EnvironmentsListComponent } from './environments-list/environments-list.component';
 import { EnvironmentCardComponent } from './environment-card/environment-card.component';
-import { RelativeDatePipe } from './relative-date.pipe';
 import { AutofocusInputDirective } from './autofocus-input.directive';
 import { EnvironmentDetailComponent } from './environment-detail/environment-detail.component';
 import { OrgAccessGuard } from './org-access.guard';
@@ -31,12 +31,12 @@ import { OrgAccessGuard } from './org-access.guard';
       },
     ]),
     EnvironmentsDataAccessModule,
+    UtilModule,
   ],
   declarations: [
     OrgListComponent,
     EnvironmentsListComponent,
     EnvironmentCardComponent,
-    RelativeDatePipe,
     AutofocusInputDirective,
     EnvironmentDetailComponent,
   ],
