@@ -30,7 +30,7 @@
     "slack": "^11.0.2"
   },
   "devDependencies": {
-    "@firebase/rules-unit-testing": "^1.2.9",
+    "@firebase/rules-unit-testing": "^1.2.10",
     "@types/chai": "^4.2.16",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
