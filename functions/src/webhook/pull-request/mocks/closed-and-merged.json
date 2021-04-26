@@ -1,18 +1,18 @@
 {
   "action": "closed",
-  "number": 12,
+  "number": 13,
   "pull_request": {
-    "url": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/12",
-    "id": 610764732,
-    "node_id": "MDExOlB1bGxSZXF1ZXN0NjEwNzY0NzMy",
-    "html_url": "https://github.com/ideacrew/active-branch-tracker/pull/12",
-    "diff_url": "https://github.com/ideacrew/active-branch-tracker/pull/12.diff",
-    "patch_url": "https://github.com/ideacrew/active-branch-tracker/pull/12.patch",
-    "issue_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/issues/12",
-    "number": 12,
+    "url": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/13",
+    "id": 620443841,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0NjIwNDQzODQx",
+    "html_url": "https://github.com/ideacrew/active-branch-tracker/pull/13",
+    "diff_url": "https://github.com/ideacrew/active-branch-tracker/pull/13.diff",
+    "patch_url": "https://github.com/ideacrew/active-branch-tracker/pull/13.patch",
+    "issue_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/issues/13",
+    "number": 13,
     "state": "closed",
     "locked": false,
-    "title": "refactor webhook interfaces",
+    "title": "update seed data and mocks for PRs",
     "user": {
       "login": "markgoho",
       "id": 9759954,
@@ -34,37 +34,48 @@
       "site_admin": false
     },
     "body": "",
-    "created_at": "2021-04-07T15:26:55Z",
-    "updated_at": "2021-04-08T17:59:01Z",
-    "closed_at": "2021-04-08T17:59:01Z",
-    "merged_at": "2021-04-08T17:59:01Z",
-    "merge_commit_sha": "79e371fadca5bf63220bf8976052df0450ebb87f",
+    "created_at": "2021-04-21T18:47:40Z",
+    "updated_at": "2021-04-21T19:25:12Z",
+    "closed_at": "2021-04-21T19:25:12Z",
+    "merged_at": "2021-04-21T19:25:12Z",
+    "merge_commit_sha": "56bf5ab5943019ce610e776609405ced9fef3026",
     "assignee": null,
     "assignees": [],
-    "requested_reviewers": [],
-    "requested_teams": [],
-    "labels": [
+    "requested_reviewers": [
       {
-        "id": 2201259444,
-        "node_id": "MDU6TGFiZWwyMjAxMjU5NDQ0",
-        "url": "https://api.github.com/repos/ideacrew/active-branch-tracker/labels/enhancement",
-        "name": "enhancement",
-        "color": "a2eeef",
-        "default": true,
-        "description": "New feature or request"
+        "login": "eidarus",
+        "id": 80279681,
+        "node_id": "MDQ6VXNlcjgwMjc5Njgx",
+        "avatar_url": "https://avatars.githubusercontent.com/u/80279681?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/eidarus",
+        "html_url": "https://github.com/eidarus",
+        "followers_url": "https://api.github.com/users/eidarus/followers",
+        "following_url": "https://api.github.com/users/eidarus/following{/other_user}",
+        "gists_url": "https://api.github.com/users/eidarus/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/eidarus/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/eidarus/subscriptions",
+        "organizations_url": "https://api.github.com/users/eidarus/orgs",
+        "repos_url": "https://api.github.com/users/eidarus/repos",
+        "events_url": "https://api.github.com/users/eidarus/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/eidarus/received_events",
+        "type": "User",
+        "site_admin": false
       }
     ],
+    "requested_teams": [],
+    "labels": [],
     "milestone": null,
     "draft": false,
-    "commits_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/12/commits",
-    "review_comments_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/12/comments",
+    "commits_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/13/commits",
+    "review_comments_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/13/comments",
     "review_comment_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/comments{/number}",
-    "comments_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/issues/12/comments",
-    "statuses_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/statuses/ddffe58713187d78c80d665011c49a4fd4a83c4a",
+    "comments_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/issues/13/comments",
+    "statuses_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/statuses/5586ee3db4671b161226e38c4860f2637278e9f7",
     "head": {
-      "label": "ideacrew:test-pr",
-      "ref": "test-pr",
-      "sha": "ddffe58713187d78c80d665011c49a4fd4a83c4a",
+      "label": "ideacrew:sample-pull-request",
+      "ref": "sample-pull-request",
+      "sha": "5586ee3db4671b161226e38c4860f2637278e9f7",
       "user": {
         "login": "ideacrew",
         "id": 16527269,
@@ -152,14 +163,14 @@
         "releases_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/releases{/id}",
         "deployments_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/deployments",
         "created_at": "2020-07-13T17:13:39Z",
-        "updated_at": "2021-04-06T17:05:16Z",
-        "pushed_at": "2021-04-08T17:59:01Z",
+        "updated_at": "2021-04-21T16:02:46Z",
+        "pushed_at": "2021-04-21T19:25:12Z",
         "git_url": "git://github.com/ideacrew/active-branch-tracker.git",
         "ssh_url": "git@github.com:ideacrew/active-branch-tracker.git",
         "clone_url": "https://github.com/ideacrew/active-branch-tracker.git",
         "svn_url": "https://github.com/ideacrew/active-branch-tracker",
         "homepage": "https://yellr.app",
-        "size": 4336,
+        "size": 5251,
         "stargazers_count": 0,
         "watchers_count": 0,
         "language": "TypeScript",
@@ -187,7 +198,7 @@
     "base": {
       "label": "ideacrew:trunk",
       "ref": "trunk",
-      "sha": "1604892b7ad643147fcc141580982fb9ede0a54e",
+      "sha": "b0928a6a64ba030dc181bae29faab1ab837577a2",
       "user": {
         "login": "ideacrew",
         "id": 16527269,
@@ -275,14 +286,14 @@
         "releases_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/releases{/id}",
         "deployments_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/deployments",
         "created_at": "2020-07-13T17:13:39Z",
-        "updated_at": "2021-04-06T17:05:16Z",
-        "pushed_at": "2021-04-08T17:59:01Z",
+        "updated_at": "2021-04-21T16:02:46Z",
+        "pushed_at": "2021-04-21T19:25:12Z",
         "git_url": "git://github.com/ideacrew/active-branch-tracker.git",
         "ssh_url": "git@github.com:ideacrew/active-branch-tracker.git",
         "clone_url": "https://github.com/ideacrew/active-branch-tracker.git",
         "svn_url": "https://github.com/ideacrew/active-branch-tracker",
         "homepage": "https://yellr.app",
-        "size": 4336,
+        "size": 5251,
         "stargazers_count": 0,
         "watchers_count": 0,
         "language": "TypeScript",
@@ -309,28 +320,28 @@
     },
     "_links": {
       "self": {
-        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/12"
+        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/13"
       },
       "html": {
-        "href": "https://github.com/ideacrew/active-branch-tracker/pull/12"
+        "href": "https://github.com/ideacrew/active-branch-tracker/pull/13"
       },
       "issue": {
-        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/issues/12"
+        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/issues/13"
       },
       "comments": {
-        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/issues/12/comments"
+        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/issues/13/comments"
       },
       "review_comments": {
-        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/12/comments"
+        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/13/comments"
       },
       "review_comment": {
         "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/comments{/number}"
       },
       "commits": {
-        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/12/commits"
+        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/13/commits"
       },
       "statuses": {
-        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/statuses/ddffe58713187d78c80d665011c49a4fd4a83c4a"
+        "href": "https://api.github.com/repos/ideacrew/active-branch-tracker/statuses/5586ee3db4671b161226e38c4860f2637278e9f7"
       }
     },
     "author_association": "MEMBER",
@@ -360,13 +371,13 @@
       "type": "User",
       "site_admin": false
     },
-    "comments": 1,
-    "review_comments": 0,
+    "comments": 0,
+    "review_comments": 1,
     "maintainer_can_modify": false,
-    "commits": 4,
-    "additions": 2615,
-    "deletions": 773,
-    "changed_files": 45
+    "commits": 5,
+    "additions": 3514,
+    "deletions": 665,
+    "changed_files": 17
   },
   "repository": {
     "id": 279365735,
@@ -435,14 +446,14 @@
     "releases_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/releases{/id}",
     "deployments_url": "https://api.github.com/repos/ideacrew/active-branch-tracker/deployments",
     "created_at": "2020-07-13T17:13:39Z",
-    "updated_at": "2021-04-06T17:05:16Z",
-    "pushed_at": "2021-04-08T17:59:01Z",
+    "updated_at": "2021-04-21T16:02:46Z",
+    "pushed_at": "2021-04-21T19:25:12Z",
     "git_url": "git://github.com/ideacrew/active-branch-tracker.git",
     "ssh_url": "git@github.com:ideacrew/active-branch-tracker.git",
     "clone_url": "https://github.com/ideacrew/active-branch-tracker.git",
     "svn_url": "https://github.com/ideacrew/active-branch-tracker",
     "homepage": "https://yellr.app",
-    "size": 4336,
+    "size": 5251,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "TypeScript",
