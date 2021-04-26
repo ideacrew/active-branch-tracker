@@ -23,9 +23,9 @@ jobs:
         id: npm-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node12x-${{ hashFiles('**/package-lock.json') }}
+          key: functions-${{ runner.os }}-node12x-${{ hashFiles('./package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node12x-
+            functions-${{ runner.os }}-node12x-
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
