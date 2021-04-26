@@ -1,0 +1,35 @@
+name: test cloud functions
+
+on:
+  push:
+    paths:
+      - 'firestore.rules'
+      - 'functions/**'
+    branches:
+      - trunk
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./functions
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12.x'
+      - uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node12x-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node12x-
+      - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: install firebase-tools
+        run: npm i -g firebase-tools
+      - name: Test Application
+        run: npm run test:ci

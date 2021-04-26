@@ -28,7 +28,7 @@ describe('Webhook tests', () => {
   });
 
   it('Tests an opened Pull Request', async () => {
-    const data = require('../../src/webhook/pull-request/mocks/pullRequest.opened.json');
+    const data = require('../../src/webhook/pull-request/mocks/opened.json');
 
     const config = axiosConfig('pull_request', data);
 
@@ -41,26 +41,28 @@ describe('Webhook tests', () => {
     const prSnapshot = await admin
       .firestore()
       .collection('pullRequests')
-      .doc('ideacrew-active-branch-tracker-test-pr-12')
+      .doc('ideacrew-active-branch-tracker-sample-pull-request-13')
       .get();
 
     expect(prSnapshot.data()).to.deep.eq({
-      additions: 3,
-      branchName: 'test-pr',
-      changedFiles: 1,
+      additions: 506,
+      branchName: 'sample-pull-request',
+      changedFiles: 8,
       commits: 1,
       createdAt: {
         _nanoseconds: 0,
-        _seconds: 1617809215,
+        _seconds: 1619030860,
       },
-      deletions: 0,
-      number: 12,
+      closed: false,
+      merged: false,
+      deletions: 7,
+      number: 13,
       organizationName: 'ideacrew',
       repositoryName: 'active-branch-tracker',
       targetBranchName: 'trunk',
       updatedAt: {
         _nanoseconds: 0,
-        _seconds: 1617809215,
+        _seconds: 1619030860,
       },
       userName: 'markgoho',
       merged: false,
