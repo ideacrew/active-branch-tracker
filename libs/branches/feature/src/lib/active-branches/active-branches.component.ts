@@ -42,7 +42,9 @@ export class ActiveBranchesComponent implements OnDestroy {
 
   untrackedBranches$ = this.allBranches$.pipe(
     map(branches =>
-      branches?.filter(branchInfo => branchInfo.tracked === false),
+      branches?.filter(
+        branchInfo => branchInfo.tracked === false && !branchInfo.defaultBranch,
+      ),
     ),
   );
 
