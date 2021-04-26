@@ -18,6 +18,7 @@ export async function handlePullRequestEvent(
 
   switch (action) {
     case 'opened':
+    case 'synchronize':
       await handleOpenedPullRequest(payload);
       break;
 
