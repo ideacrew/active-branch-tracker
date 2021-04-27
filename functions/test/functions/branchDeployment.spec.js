@@ -75,70 +75,67 @@ describe('Branch deployment payload', () => {
     });
   }).timeout(5000);
 
-  it.only(
-    'tests a new deployment to an environment without an owner',
-    async () => {
-      const org = 'maine';
-      const env = 'qa';
+  it('tests a new deployment to an environment without an owner', async () => {
+    const org = 'maine';
+    const env = 'qa';
 
-      const envRef = admin.firestore().doc(`orgs/${org}/environments/${env}`);
-      // Set environment metadata first
-      try {
-        await envRef.set({
-          architecture: 'e2e',
-          name: 'QA',
-          owner: 'Open',
-          prodlike: true,
-        });
-      } catch (e) {
-        console.log('ERROR:', e);
-      }
-
-      const snap = await envRef.get();
-      expect(snap.data()).to.deep.eq({
+    const envRef = admin.firestore().doc(`orgs/${org}/environments/${env}`);
+    // Set environment metadata first
+    try {
+      await envRef.set({
         architecture: 'e2e',
         name: 'QA',
         owner: 'Open',
         prodlike: true,
       });
+    } catch (e) {
+      console.log('ERROR:', e);
+    }
 
-      const data = qs.stringify({
-        payload: `{"status": "started", "branch": "feature-fix", "env": "${env}", "app": "enroll", "user_name": "kvootla", "org": "${org}", "repo": "enroll", "commit_sha": "abc1234" }`,
-      });
+    const snap = await envRef.get();
+    expect(snap.data()).to.deep.eq({
+      architecture: 'e2e',
+      name: 'QA',
+      owner: 'Open',
+      prodlike: true,
+    });
 
-      const config = axiosConfig('branchDeployment', data);
+    const data = qs.stringify({
+      payload: `{"status": "started", "branch": "feature-fix", "env": "${env}", "app": "enroll", "user_name": "kvootla", "org": "${org}", "repo": "enroll", "commit_sha": "abc1234" }`,
+    });
 
-      try {
-        await axios(config);
-      } catch (e) {
-        console.log('ERROR:', e);
-      }
+    const config = axiosConfig('branchDeployment', data);
 
-      const postDeploymentRef = admin
-        .firestore()
-        .doc(`orgs/${org}/environments/${env}`);
+    try {
+      await axios(config);
+    } catch (e) {
+      console.log('ERROR:', e);
+    }
 
-      const postDeploymentSnapshot = await postDeploymentRef.get();
+    const postDeploymentRef = admin
+      .firestore()
+      .doc(`orgs/${org}/environments/${env}`);
 
-      const postDeploymentData = postDeploymentSnapshot.data();
+    const postDeploymentSnapshot = await postDeploymentRef.get();
 
-      expect(postDeploymentData).to.include({
-        architecture: 'e2e',
-        name: 'QA',
-        owner: 'Open',
-        prodlike: true,
-      });
+    const postDeploymentData = postDeploymentSnapshot.data();
 
-      expect(postDeploymentData.latestDeployment).to.include({
-        status: 'started',
-        branch: 'feature-fix',
-        env,
-        app: 'enroll',
-        user_name: 'kvootla',
-        org,
-        repo: 'enroll',
-        commit_sha: 'abc1234',
-      });
-    },
-  ).timeout(5000);
+    expect(postDeploymentData).to.include({
+      architecture: 'e2e',
+      name: 'QA',
+      owner: 'Open',
+      prodlike: true,
+    });
+
+    expect(postDeploymentData.latestDeployment).to.include({
+      status: 'started',
+      branch: 'feature-fix',
+      env,
+      app: 'enroll',
+      user_name: 'kvootla',
+      org,
+      repo: 'enroll',
+      commit_sha: 'abc1234',
+    });
+  }).timeout(5000);
 });
