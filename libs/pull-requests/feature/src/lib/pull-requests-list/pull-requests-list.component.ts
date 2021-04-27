@@ -12,7 +12,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PullRequestsListComponent {
-  pullRequests$: Observable<PullRequest[]> = this.prService.queryPullRequests();
+  pullRequests$: Observable<PullRequest[]> = this.prService.sortedPullRequests$;
 
   constructor(private prService: PullRequestsService) {}
 }
