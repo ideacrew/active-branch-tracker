@@ -191,7 +191,7 @@ describe('Pull Request tests', () => {
     });
   }).timeout(5000);
 
-  it.only('Tests a pull request that gets converted to draft', async () => {
+  it('Tests a pull request that gets converted to draft', async () => {
     const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
     const draftPR = require('../../src/webhook/pull-request/mocks/converted-to-draft.json');
     const readyPR = require('../../src/webhook/pull-request/mocks/ready-for-review.json');
