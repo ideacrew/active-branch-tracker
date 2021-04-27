@@ -27,6 +27,7 @@ export async function handleBranchDeployment(
 
   if (!ownedEnvironment && status === 'started') {
     const yellrLink = yellrEnvLink({ org, env });
+    functions.logger.info(`${org}/${env} is not owned!`);
     await sendSlackMessage(
       `⚠ <!channel> *${branch}* is being deployed to <${yellrLink}|*${org}-${env}*> with _no current owner_! ⚠`,
     );

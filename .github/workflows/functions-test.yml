@@ -19,15 +19,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12.x'
-      - uses: actions/cache@v2
-        id: npm-cache
-        with:
-          path: node_modules
-          key: functions-${{ runner.os }}-node12x-${{ hashFiles('./package-lock.json') }}
-          restore-keys: |
-            functions-${{ runner.os }}-node12x-
       - name: Install dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: install firebase-tools
         run: npm i -g firebase-tools

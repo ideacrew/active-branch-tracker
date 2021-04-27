@@ -21,7 +21,7 @@ const axiosConfig = (functionName, data) => {
   };
 };
 
-describe('Unit tests', () => {
+describe('Branch deployment payload', () => {
   after(() => {
     console.log('Cleaning up');
     test.cleanup();
@@ -74,4 +74,71 @@ describe('Unit tests', () => {
       commit_sha: 'abc1234',
     });
   }).timeout(5000);
+
+  it.only(
+    'tests a new deployment to an environment without an owner',
+    async () => {
+      const org = 'maine';
+      const env = 'qa';
+
+      const envRef = admin.firestore().doc(`orgs/${org}/environments/${env}`);
+      // Set environment metadata first
+      try {
+        await envRef.set({
+          architecture: 'e2e',
+          name: 'QA',
+          owner: 'Open',
+          prodlike: true,
+        });
+      } catch (e) {
+        console.log('ERROR:', e);
+      }
+
+      const snap = await envRef.get();
+      expect(snap.data()).to.deep.eq({
+        architecture: 'e2e',
+        name: 'QA',
+        owner: 'Open',
+        prodlike: true,
+      });
+
+      const data = qs.stringify({
+        payload: `{"status": "started", "branch": "feature-fix", "env": "${env}", "app": "enroll", "user_name": "kvootla", "org": "${org}", "repo": "enroll", "commit_sha": "abc1234" }`,
+      });
+
+      const config = axiosConfig('branchDeployment', data);
+
+      try {
+        await axios(config);
+      } catch (e) {
+        console.log('ERROR:', e);
+      }
+
+      const postDeploymentRef = admin
+        .firestore()
+        .doc(`orgs/${org}/environments/${env}`);
+
+      const postDeploymentSnapshot = await postDeploymentRef.get();
+
+      const postDeploymentData = postDeploymentSnapshot.data();
+
+      expect(postDeploymentData).to.include({
+        architecture: 'e2e',
+        name: 'QA',
+        owner: 'Open',
+        prodlike: true,
+      });
+
+      expect(postDeploymentData.latestDeployment).to.include({
+        status: 'started',
+        branch: 'feature-fix',
+        env,
+        app: 'enroll',
+        user_name: 'kvootla',
+        org,
+        repo: 'enroll',
+        commit_sha: 'abc1234',
+      });
+    },
+  ).timeout(5000);
 });
