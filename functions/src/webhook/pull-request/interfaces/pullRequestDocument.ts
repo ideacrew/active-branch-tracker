@@ -15,4 +15,5 @@ export interface PullRequestDocument {
 
   merged: boolean;
   closed: boolean;
+  draft: boolean;
 }

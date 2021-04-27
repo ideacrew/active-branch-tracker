@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 import * as functions from 'firebase-functions';
 
-import { PullRequestEventPayload } from './interfaces/pullRequest';
+import { PullRequestEventPayload } from './interfaces/pullRequestPayload';
 import { handleClosedPullRequest } from './pullRequest.closed';
 import { handleOpenedPullRequest } from './pullRequest.opened';
 
@@ -19,6 +19,8 @@ export async function handlePullRequestEvent(
   switch (action) {
     case 'opened':
     case 'synchronize':
+    case 'converted_to_draft':
+    case 'ready_for_review':
       await handleOpenedPullRequest(payload);
       break;
 

@@ -55,6 +55,7 @@ describe('Pull Request tests', () => {
       },
       closed: false,
       merged: false,
+      draft: false,
       deletions: 7,
       number: 13,
       organizationName: 'ideacrew',
@@ -99,6 +100,7 @@ describe('Pull Request tests', () => {
       },
       closed: false,
       merged: false,
+      draft: false,
       deletions: 665,
       number: 13,
       organizationName: 'ideacrew',
@@ -164,16 +166,16 @@ describe('Pull Request tests', () => {
     });
   }).timeout(5000);
 
-  it('Tests a pull request event that has been opened as a draft', async () => {
+  it.only('Tests a pull request that gets converted to draft', async () => {
     const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
-    const synchronizedPR = require('../../src/webhook/pull-request/mocks/synchronize.json');
+    const draftPR = require('../../src/webhook/pull-request/mocks/converted-to-draft.json');
 
     const openedPRConfig = axiosConfig('pull_request', openedPR);
-    const synchronizedPRConfig = axiosConfig('pull_request', synchronizedPR);
+    const draftPRConfig = axiosConfig('pull_request', draftPR);
 
     try {
       await axios(openedPRConfig);
-      await axios(synchronizedPRConfig);
+      await axios(draftPRConfig);
     } catch (e) {
       console.error('ERROR:', e);
     }
@@ -184,27 +186,8 @@ describe('Pull Request tests', () => {
       .doc('ideacrew-active-branch-tracker-sample-pull-request-13')
       .get();
 
-    expect(prSnapshot.data()).to.deep.eq({
-      additions: 2038,
-      branchName: 'sample-pull-request',
-      changedFiles: 13,
-      commits: 2,
-      createdAt: {
-        _nanoseconds: 0,
-        _seconds: 1619030860,
-      },
-      closed: false,
-      merged: false,
-      deletions: 665,
-      number: 13,
-      organizationName: 'ideacrew',
-      repositoryName: 'active-branch-tracker',
-      targetBranchName: 'trunk',
-      updatedAt: {
-        _nanoseconds: 0,
-        _seconds: 1619031586,
-      },
-      userName: 'markgoho',
+    expect(prSnapshot.data()).to.include({
+      draft: true,
     });
   }).timeout(5000);
 });

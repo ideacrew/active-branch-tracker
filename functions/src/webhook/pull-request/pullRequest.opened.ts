@@ -2,7 +2,7 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
 import { firestoreTimestamp } from '../../util';
-import { PullRequestEventPayload } from './interfaces/pullRequest';
+import { PullRequestEventPayload } from './interfaces/pullRequestPayload';
 import { PullRequestDocument } from './interfaces/pullRequestDocument';
 
 export const handleOpenedPullRequest = async (
@@ -15,6 +15,7 @@ export const handleOpenedPullRequest = async (
     head,
     base,
     merged,
+    draft,
     closed_at: closedAt,
   } = pullRequest;
   const { name: repositoryName } = repository;
@@ -36,6 +37,7 @@ export const handleOpenedPullRequest = async (
     updatedAt,
     userName: pullRequest.user.login,
     merged,
+    draft,
     closed: closedAt === null ? false : true,
   };
 
