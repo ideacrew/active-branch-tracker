@@ -14,12 +14,18 @@
     <svg class="svg-icon" width="16px" height="16px">
       <use href="assets/icons.svg#pull-request"></use>
     </svg>
-    <span>{{ pullRequest.targetBranchName }}</span>
+    <a
+      class="pr-link"
+      target="_blank"
+      rel="noopener noreferrer"
+      href="{{ pullRequest | prLinkFromPr }}"
+      >{{ pullRequest.targetBranchName }}</a
+    >
   </div>
   <div class="last-updated" title="Last updated">
     <svg class="svg-icon" width="16px" height="16px">
       <use href="assets/icons.svg#clock"></use>
     </svg>
-    <time>{{ pullRequest.updatedAt.toDate() | relativeDate }}</time>
+    <span>{{ pullRequest.updatedAt.toDate() | relativeDate }}</span>
   </div>
 </div>

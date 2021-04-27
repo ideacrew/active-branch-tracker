@@ -1,6 +1,7 @@
 :host {
   background-color: hsl(0, 0%, 33%);
   color: hsl(0, 0%, 90%);
+  cursor: pointer;
 }
 
 .heading {
@@ -29,6 +30,15 @@
   svg {
     margin-right: 0.5rem;
   }
+}
+
+.pr-link::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
 }
 
 .card-content {
