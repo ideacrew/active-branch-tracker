@@ -1,13 +1,13 @@
 <div class="heading">
   <h2 class="repo-name">
     {{ pullRequest.organizationName }}/{{ pullRequest.repositoryName }}
-    <div class="branch-name">
-      <svg class="svg-icon branch-icon" width="16px" height="16px">
-        <use href="assets/icons.svg#branch"></use>
-      </svg>
-      <span class="no-wrap">{{ pullRequest.branchName }}</span>
-    </div>
   </h2>
+  <div class="branch-name">
+    <svg class="svg-icon branch-icon" width="16px" height="16px">
+      <use href="assets/icons.svg#branch"></use>
+    </svg>
+    <span class="no-wrap">{{ pullRequest.branchName }}</span>
+  </div>
 </div>
 <div class="card-content">
   <div class="pull-request">

@@ -5,6 +5,13 @@
 
 .heading {
   background-color: #000;
+  .branch-name {
+    color: hsl(0, 0%, 65%);
+  }
+}
+
+.repo-name {
+  color: hsl(0, 0%, 46%);
 }
 
 .svg-icon {
@@ -13,7 +20,6 @@
 
 .branch-name {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 1rem;
   display: flex;
   align-items: center;
   font-size: 1.25rem;
