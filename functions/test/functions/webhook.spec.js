@@ -163,4 +163,48 @@ describe('Pull Request tests', () => {
       merged: true,
     });
   }).timeout(5000);
+
+  it('Tests a pull request event that has been opened as a draft', async () => {
+    const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
+    const synchronizedPR = require('../../src/webhook/pull-request/mocks/synchronize.json');
+
+    const openedPRConfig = axiosConfig('pull_request', openedPR);
+    const synchronizedPRConfig = axiosConfig('pull_request', synchronizedPR);
+
+    try {
+      await axios(openedPRConfig);
+      await axios(synchronizedPRConfig);
+    } catch (e) {
+      console.error('ERROR:', e);
+    }
+
+    const prSnapshot = await admin
+      .firestore()
+      .collection('pullRequests')
+      .doc('ideacrew-active-branch-tracker-sample-pull-request-13')
+      .get();
+
+    expect(prSnapshot.data()).to.deep.eq({
+      additions: 2038,
+      branchName: 'sample-pull-request',
+      changedFiles: 13,
+      commits: 2,
+      createdAt: {
+        _nanoseconds: 0,
+        _seconds: 1619030860,
+      },
+      closed: false,
+      merged: false,
+      deletions: 665,
+      number: 13,
+      organizationName: 'ideacrew',
+      repositoryName: 'active-branch-tracker',
+      targetBranchName: 'trunk',
+      updatedAt: {
+        _nanoseconds: 0,
+        _seconds: 1619031586,
+      },
+      userName: 'markgoho',
+    });
+  }).timeout(5000);
 });
