@@ -3,10 +3,16 @@
   padding: 1rem;
 }
 
+.page-title {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid hsl(120, 10%, 45%);
+}
+
 .pr-container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 .pr-card {
