@@ -55,6 +55,7 @@ describe('Pull Request tests', () => {
       },
       closed: false,
       merged: false,
+      draft: false,
       deletions: 7,
       number: 13,
       organizationName: 'ideacrew',
@@ -99,6 +100,7 @@ describe('Pull Request tests', () => {
       },
       closed: false,
       merged: false,
+      draft: false,
       deletions: 665,
       number: 13,
       organizationName: 'ideacrew',
@@ -161,6 +163,59 @@ describe('Pull Request tests', () => {
     expect(prSnapshot.data()).to.include({
       closed: true,
       merged: true,
+    });
+  }).timeout(5000);
+
+  it('Tests a pull request that gets converted to draft', async () => {
+    const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
+    const draftPR = require('../../src/webhook/pull-request/mocks/converted-to-draft.json');
+
+    const openedPRConfig = axiosConfig('pull_request', openedPR);
+    const draftPRConfig = axiosConfig('pull_request', draftPR);
+
+    try {
+      await axios(openedPRConfig);
+      await axios(draftPRConfig);
+    } catch (e) {
+      console.error('ERROR:', e);
+    }
+
+    const prSnapshot = await admin
+      .firestore()
+      .collection('pullRequests')
+      .doc('ideacrew-active-branch-tracker-sample-pull-request-13')
+      .get();
+
+    expect(prSnapshot.data()).to.include({
+      draft: true,
+    });
+  }).timeout(5000);
+
+  it.only('Tests a pull request that gets converted to draft', async () => {
+    const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
+    const draftPR = require('../../src/webhook/pull-request/mocks/converted-to-draft.json');
+    const readyPR = require('../../src/webhook/pull-request/mocks/ready-for-review.json');
+
+    const openedPRConfig = axiosConfig('pull_request', openedPR);
+    const draftPRConfig = axiosConfig('pull_request', draftPR);
+    const readyPRConfig = axiosConfig('pull_request', readyPR);
+
+    try {
+      await axios(openedPRConfig);
+      await axios(draftPRConfig);
+      await axios(readyPRConfig);
+    } catch (e) {
+      console.error('ERROR:', e);
+    }
+
+    const prSnapshot = await admin
+      .firestore()
+      .collection('pullRequests')
+      .doc('ideacrew-active-branch-tracker-sample-pull-request-13')
+      .get();
+
+    expect(prSnapshot.data()).to.include({
+      draft: false,
     });
   }).timeout(5000);
 });

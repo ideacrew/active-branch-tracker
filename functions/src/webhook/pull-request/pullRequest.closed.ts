@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
-import { PullRequestEventPayload } from './interfaces/pullRequest';
+import { PullRequestEventPayload } from './interfaces/pullRequestPayload';
 
 export const handleClosedPullRequest = async (
   payload: PullRequestEventPayload,
