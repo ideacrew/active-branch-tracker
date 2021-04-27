@@ -1,0 +1,25 @@
+<div class="heading">
+  <h2 class="repo-name">
+    {{ pullRequest.organizationName }}/{{ pullRequest.repositoryName }}
+    <div class="branch-name">
+      <svg class="svg-icon branch-icon" width="16px" height="16px">
+        <use href="assets/icons.svg#branch"></use>
+      </svg>
+      <span class="no-wrap">{{ pullRequest.branchName }}</span>
+    </div>
+  </h2>
+</div>
+<div class="card-content">
+  <div class="pull-request">
+    <svg class="svg-icon" width="16px" height="16px">
+      <use href="assets/icons.svg#pull-request"></use>
+    </svg>
+    <span>{{ pullRequest.targetBranchName }}</span>
+  </div>
+  <div class="last-updated" title="Last updated">
+    <svg class="svg-icon" width="16px" height="16px">
+      <use href="assets/icons.svg#clock"></use>
+    </svg>
+    <time>{{ pullRequest.updatedAt.toDate() | relativeDate }}</time>
+  </div>
+</div>

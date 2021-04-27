@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { UtilModule } from '@idc/util';
 
 import { PullRequestsListComponent } from './pull-requests-list/pull-requests-list.component';
+import { PullRequestCardComponent } from './pull-request-card/pull-request-card.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { PullRequestsListComponent } from './pull-requests-list/pull-requests-li
     ]),
     UtilModule,
   ],
-  declarations: [PullRequestsListComponent],
+  declarations: [PullRequestsListComponent, PullRequestCardComponent],
 })
 export class PullRequestsFeatureModule {}

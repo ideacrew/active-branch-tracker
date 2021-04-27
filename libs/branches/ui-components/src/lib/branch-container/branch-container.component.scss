@@ -1,5 +1,4 @@
 .branch {
-  --border-radius: 4px;
   --card-color: hsl(120, 13%, 48%);
   --card-text-color: hsl(120, 79%, 2%);
   --card-color-dark: hsl(120, 22%, 20%);
@@ -7,8 +6,6 @@
   --light-bulb-color: var(--card-color-dark);
 
   background-color: var(--card-color);
-  padding: 1rem;
-  border-radius: var(--border-radius);
   color: var(--card-text-color);
   height: 100%;
 
@@ -125,21 +122,14 @@ a {
   }
 }
 
-.container-heading {
+.card .heading {
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
   background-color: var(--card-text-color);
-  border-radius: var(--border-radius);
   color: var(--card-color);
   z-index: 1;
-}
-
-.repo-name {
-  font-size: 1rem;
-  font-weight: 500;
 }
 
 .last-updated,
@@ -231,11 +221,6 @@ a {
 
 .branch.cancelled .failure-percentage {
   display: none;
-}
-
-.no-wrap {
-  white-space: nowrap;
-  line-height: 1;
 }
 
 .svg-icon {

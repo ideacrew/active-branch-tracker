@@ -1,5 +1,5 @@
 <div
-  class="branch"
+  class="branch card"
   [ngClass]="{
     expanded: viewType === 'expanded',
     collapsed: viewType === 'collapsed',
@@ -11,7 +11,7 @@
   }"
 >
   <!-- Container Heading -->
-  <div class="container-heading">
+  <div class="heading">
     <div class="heading-left">
       <ng-container *ngIf="!branch.defaultBranch && loggedIn"
         ><button

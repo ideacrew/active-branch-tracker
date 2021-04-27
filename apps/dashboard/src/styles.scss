@@ -85,6 +85,7 @@
 :root {
   --background-color: #060906;
   --font-color: hsl(120, 13%, 48%);
+  --border-radius: 4px;
 }
 
 body {
@@ -124,4 +125,37 @@ button {
   clip-path: inset(1px);
   white-space: nowrap;
   position: absolute;
+}
+
+.card {
+  padding: 1rem;
+  border-radius: var(--border-radius);
+
+  .heading {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+  }
+
+  .repo-name {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  a {
+    color: currentColor;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .card-content {
+    margin-top: 1rem;
+  }
+}
+
+.no-wrap {
+  white-space: nowrap;
+  line-height: 1;
 }

@@ -5,9 +5,7 @@ import { Observable } from 'rxjs';
 
 import { filterNullish } from '@idc/util';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthService {
   constructor(public afAuth: AngularFireAuth) {}
 

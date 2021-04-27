@@ -7,7 +7,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import {
   ORIGIN as FUNCTIONS_ORIGIN,
   NEW_ORIGIN_BEHAVIOR,
@@ -32,7 +31,6 @@ import './firebase-init';
     environment.useEmulators
       ? AngularFireModule.initializeApp(environment.firebase, 'fakeproject')
       : AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
     AngularFireAuthGuardModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

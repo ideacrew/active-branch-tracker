@@ -1,0 +1,45 @@
+:host {
+  background-color: hsl(0, 0%, 33%);
+  color: hsl(0, 0%, 90%);
+}
+
+.heading {
+  background-color: #000;
+}
+
+.svg-icon {
+  fill: currentColor;
+}
+
+.branch-name {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+
+  svg {
+    margin-right: 0.5rem;
+  }
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  > * .svg-icon {
+    margin-right: 0.5rem;
+  }
+
+  > * {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.pull-request {
+  font-family: 'Courier New', Courier, monospace;
+}
