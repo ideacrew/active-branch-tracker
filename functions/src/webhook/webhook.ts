@@ -47,6 +47,10 @@ export async function handleWebhook(
 
     case 'issue_comment':
       await handleIssueCommentEvent(request.body as IssueCommentPayload);
+      break;
+
+    default:
+      functions.logger.info('Fallthrough case in GitHub Event', eventType);
   }
 
   response.status(200).send('Thanks');

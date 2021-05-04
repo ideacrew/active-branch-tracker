@@ -17,12 +17,9 @@ export class PullRequestsService {
     ),
   );
 
-  // readyForReview$ = this.sortedPullRequests$.pipe();
-  // drafts$ = this.sortedPullRequests$.pipe();
-
   constructor(private afs: AngularFirestore) {}
 
-  queryPullRequests(): Observable<PullRequest[]> {
+  private queryPullRequests(): Observable<PullRequest[]> {
     return this.afs
       .collection<PullRequest>('pullRequests', ref =>
         ref.where('closed', '==', false),
