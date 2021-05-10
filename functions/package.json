@@ -20,7 +20,7 @@
     "emulators:fakeproject": "firebase emulators:start --only=firestore,functions,auth --project=fakeproject"
   },
   "engines": {
-    "node": "12"
+    "node": "14"
   },
   "main": "lib/index.js",
   "dependencies": {
