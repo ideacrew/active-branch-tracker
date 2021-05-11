@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
+    "lib": ["es2020"],
     "module": "commonjs",
+    "target": "es2020",
+
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
+
     "outDir": "lib",
     "sourceMap": true,
-    "strict": true,
-    "target": "es2018",
-    "lib": ["es2018"],
     "types": []
   },
   "compileOnSave": true,
