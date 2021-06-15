@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const firebase = require('@firebase/rules-unit-testing');
-const TEST_FIREBASE_PROJECT_ID = 'test-firestore-rules-project';
+const DEMO_FIREBASE_PROJECT_ID = 'demo-project';
 const port = require('../../firebase.json').emulators.firestore.port || 8080;
-const coverageUrl = `http://localhost:${port}/emulator/v1/projects/${TEST_FIREBASE_PROJECT_ID}:ruleCoverage.html`;
+const coverageUrl = `http://localhost:${port}/emulator/v1/projects/${DEMO_FIREBASE_PROJECT_ID}:ruleCoverage.html`;
 
 const philAuth = {
   uid: 'phil',
@@ -28,7 +28,7 @@ before(async () => {
     'utf8',
   );
   await firebase.loadFirestoreRules({
-    projectId: TEST_FIREBASE_PROJECT_ID,
+    projectId: DEMO_FIREBASE_PROJECT_ID,
     rules: rulesContent,
   });
 });
@@ -36,28 +36,28 @@ before(async () => {
 describe('testing assertions', () => {
   const noUserDb = firebase
     .initializeTestApp({
-      projectId: TEST_FIREBASE_PROJECT_ID,
+      projectId: DEMO_FIREBASE_PROJECT_ID,
       auth: null,
     })
     .firestore();
 
   const philDb = firebase
     .initializeTestApp({
-      projectId: TEST_FIREBASE_PROJECT_ID,
+      projectId: DEMO_FIREBASE_PROJECT_ID,
       auth: philAuth,
     })
     .firestore();
 
   const lemDb = firebase
     .initializeTestApp({
-      projectId: TEST_FIREBASE_PROJECT_ID,
+      projectId: DEMO_FIREBASE_PROJECT_ID,
       auth: lemAuth,
     })
     .firestore();
 
   const admin = firebase
     .initializeAdminApp({
-      projectId: TEST_FIREBASE_PROJECT_ID,
+      projectId: DEMO_FIREBASE_PROJECT_ID,
     })
     .firestore();
 
