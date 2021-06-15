@@ -19,6 +19,7 @@ export async function handleBranchDeployment(
   response: functions.Response<unknown>,
 ): Promise<void> {
   const deployment: BranchDeploymentPayload = JSON.parse(request.body.payload);
+  functions.logger.info('Incoming branch deployment payload', deployment);
 
   const { org, env, branch, status } = deployment;
 
