@@ -60,9 +60,20 @@
     class="value"
     [attr.title]="env.latestDeployment.completed!.toDate() | date: 'medium'"
   >
-    <span class="branch-name">{{ env.latestDeployment.branch }}</span>
-    deployed {{ env.latestDeployment.completed!.toDate() | relativeDate }} by
-    {{ env.latestDeployment.user_name }}
+    <ng-container
+      *ngIf="env.latestDeployment.status === 'completed'; else deploying"
+    >
+      <span class="branch-name">{{ env.latestDeployment.branch }}</span>
+      deployed {{ env.latestDeployment.completed!.toDate() | relativeDate }} by
+      {{ env.latestDeployment.user_name }}
+    </ng-container>
+
+    <ng-template #deploying>
+      <span class="branch-name">{{ env.latestDeployment.branch }}</span>
+      started deploying at
+      {{ env.latestDeployment.started!.toDate() | relativeDate }} by
+      {{ env.latestDeployment.user_name }}
+    </ng-template>
   </div>
 
   <h2 class="card-title">Database Snapshots</h2>

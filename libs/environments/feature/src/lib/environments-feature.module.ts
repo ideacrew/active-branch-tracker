@@ -12,6 +12,7 @@ import { EnvironmentCardComponent } from './environment-card/environment-card.co
 import { AutofocusInputDirective } from './autofocus-input.directive';
 import { EnvironmentDetailComponent } from './environment-detail/environment-detail.component';
 import { OrgAccessGuard } from './org-access.guard';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { OrgAccessGuard } from './org-access.guard';
     EnvironmentCardComponent,
     AutofocusInputDirective,
     EnvironmentDetailComponent,
+    LoadingSpinnerComponent,
   ],
 })
 export class EnvironmentsFeatureModule {}
