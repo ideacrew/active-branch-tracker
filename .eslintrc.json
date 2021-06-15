@@ -252,7 +252,8 @@
         "@angular-eslint/template/no-call-expression": "error",
         "@angular-eslint/template/no-distracting-elements": "error",
         "@angular-eslint/template/no-negated-async": "error",
-        "@angular-eslint/template/use-track-by-function": "error"
+        "@angular-eslint/template/use-track-by-function": "error",
+        "@angular-eslint/template/eqeqeq": "error"
       },
       "plugins": ["@angular-eslint/eslint-plugin-template"]
     }

@@ -42,7 +42,6 @@
             "main": "apps/dashboard/src/main.ts",
             "polyfills": "apps/dashboard/src/polyfills.ts",
             "tsConfig": "apps/dashboard/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "apps/dashboard/src/robots.txt",
               "apps/dashboard/src/favicon-16x16.png",
@@ -51,7 +50,13 @@
               "apps/dashboard/src/manifest.webmanifest"
             ],
             "styles": ["apps/dashboard/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
