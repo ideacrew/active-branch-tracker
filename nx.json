@@ -23,12 +23,8 @@
     }
   },
   "projects": {
-    "dashboard": {
+    "auth": {
       "tags": []
-    },
-    "dashboard-e2e": {
-      "tags": [],
-      "implicitDependencies": ["dashboard"]
     },
     "branches-data-access": {
       "tags": ["scope:dashboard", "type:data-access"]
@@ -39,11 +35,15 @@
     "branches-ui-components": {
       "tags": ["scope:dashboard", "type:ui"]
     },
+    "dashboard": {
+      "tags": []
+    },
+    "dashboard-e2e": {
+      "tags": [],
+      "implicitDependencies": ["dashboard"]
+    },
     "display-config": {
       "tags": ["scope:dashboard", "type:util"]
-    },
-    "util": {
-      "tags": []
     },
     "environments-data-access": {
       "tags": []
@@ -51,16 +51,7 @@
     "environments-feature": {
       "tags": []
     },
-    "testing": {
-      "tags": []
-    },
-    "auth": {
-      "tags": []
-    },
     "google-analytics": {
-      "tags": []
-    },
-    "user-data-access": {
       "tags": []
     },
     "pull-requests-data-access": {
@@ -68,6 +59,23 @@
     },
     "pull-requests-feature": {
       "tags": []
+    },
+    "testing": {
+      "tags": []
+    },
+    "user-data-access": {
+      "tags": []
+    },
+    "util": {
+      "tags": []
     }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
   }
 }

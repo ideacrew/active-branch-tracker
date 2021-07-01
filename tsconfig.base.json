@@ -20,25 +20,25 @@
     "target": "es2015",
     "typeRoots": ["node_modules/@types"],
     "paths": {
+      "@ic/google-analytics": ["libs/google-analytics/src/index.ts"],
+      "@idc/auth": ["libs/auth/src/index.ts"],
       "@idc/branches/data-access": ["libs/branches/data-access/src/index.ts"],
       "@idc/branches/feature": ["libs/branches/feature/src/index.ts"],
       "@idc/branches/ui-components": [
         "libs/branches/ui-components/src/index.ts"
       ],
       "@idc/display-config": ["libs/display-config/src/index.ts"],
-      "@idc/util": ["libs/util/src/index.ts"],
       "@idc/environments/data-access": [
         "libs/environments/data-access/src/index.ts"
       ],
       "@idc/environments/feature": ["libs/environments/feature/src/index.ts"],
-      "@idc/testing": ["libs/testing/src/index.ts"],
-      "@idc/auth": ["libs/auth/src/index.ts"],
-      "@ic/google-analytics": ["libs/google-analytics/src/index.ts"],
-      "@idc/user/data-access": ["libs/user/data-access/src/index.ts"],
       "@idc/pull-requests/data-access": [
         "libs/pull-requests/data-access/src/index.ts"
       ],
-      "@idc/pull-requests/feature": ["libs/pull-requests/feature/src/index.ts"]
+      "@idc/pull-requests/feature": ["libs/pull-requests/feature/src/index.ts"],
+      "@idc/testing": ["libs/testing/src/index.ts"],
+      "@idc/user/data-access": ["libs/user/data-access/src/index.ts"],
+      "@idc/util": ["libs/util/src/index.ts"]
     }
   },
   "angularCompilerOptions": {
