@@ -53,7 +53,7 @@ jobs:
       - name: Test Application
         run: npm run test
   build:
-    name: build and deploy
+    name: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
