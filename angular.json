@@ -29,19 +29,6 @@
       "sourceRoot": "libs/auth/src",
       "prefix": "idc",
       "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/auth/tsconfig.lib.json",
-            "project": "libs/auth/ng-package.json",
-            "buildableProjectDepsInPackageJsonType": "dependencies"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/auth/tsconfig.lib.prod.json"
-            }
-          }
-        },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
@@ -398,49 +385,6 @@
         }
       }
     },
-    "google-analytics": {
-      "projectType": "library",
-      "root": "libs/google-analytics",
-      "sourceRoot": "libs/google-analytics/src",
-      "prefix": "idc",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/google-analytics/tsconfig.lib.json",
-            "project": "libs/google-analytics/ng-package.json",
-            "buildableProjectDepsInPackageJsonType": "dependencies"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/google-analytics/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/google-analytics/src/**/*.ts",
-              "libs/google-analytics/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/google-analytics/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/google-analytics"]
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "pull-requests-data-access": {
       "projectType": "library",
       "root": "libs/pull-requests/data-access",
@@ -527,18 +471,6 @@
       "sourceRoot": "libs/user/data-access/src",
       "prefix": "idc",
       "architect": {
-        "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
-          "options": {
-            "tsConfig": "libs/user/data-access/tsconfig.lib.json",
-            "project": "libs/user/data-access/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/user/data-access/tsconfig.lib.prod.json"
-            }
-          }
-        },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
