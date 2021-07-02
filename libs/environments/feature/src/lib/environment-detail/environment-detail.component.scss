@@ -124,3 +124,13 @@ svg {
   flex-wrap: wrap;
   gap: 0.75rem;
 }
+
+.add-new-service {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  svg {
+    fill: hsl(120, 13%, 20%);
+  }
+}

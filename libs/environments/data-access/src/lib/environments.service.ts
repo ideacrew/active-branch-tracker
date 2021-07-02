@@ -54,16 +54,19 @@ export class EnvironmentsService {
       .collection('environments')
       .doc(envId)
       .collection<OtherService>('services')
-      .valueChanges({ idField: 'id' }).pipe(
-        filterNullish()
-      );
+      .valueChanges({ idField: 'id' })
+      .pipe(filterNullish());
   }
 
   async addService(
     { orgId, envId }: EnvInfo,
     { name, url }: OtherService,
   ): Promise<void> {
-    const serviceId = name.toLocaleLowerCase().trim();
+    const serviceId = name
+      .toLocaleLowerCase()
+      .trim()
+      .replace(/ /g, '-')
+      .replace(/[^\w-]+/g, '');
 
     const serviceRef = this.afs.doc<OtherService>(
       `orgs/${orgId}/environments/${envId}/services/${serviceId}`,
