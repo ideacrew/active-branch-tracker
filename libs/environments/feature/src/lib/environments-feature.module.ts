@@ -13,6 +13,7 @@ import { AutofocusInputDirective } from './autofocus-input.directive';
 import { EnvironmentDetailComponent } from './environment-detail/environment-detail.component';
 import { OrgAccessGuard } from './org-access.guard';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { ServiceCardComponent } from './service-card/service-card.component';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     AutofocusInputDirective,
     EnvironmentDetailComponent,
     LoadingSpinnerComponent,
+    ServiceCardComponent,
   ],
 })
 export class EnvironmentsFeatureModule {}

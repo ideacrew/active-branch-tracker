@@ -6,6 +6,7 @@ import { filter, map, switchMap, tap } from 'rxjs/operators';
 import {
   EnvironmentsService,
   OrgEnvironment,
+  OtherService,
 } from '@idc/environments/data-access';
 import { UserService } from '@idc/user/data-access';
 import { filterNullish } from '@idc/util';
@@ -56,6 +57,12 @@ export class EnvironmentDetailComponent {
     ),
   );
 
+  services$: Observable<OtherService[]> = this.orgEnvIds$.pipe(
+    switchMap(({ orgId, envId }) =>
+      this.envService.getServices({ orgId, envId }),
+    ),
+  );
+
   @HostBinding('class.is-admin') get isAnAdmin(): boolean {
     return this.isAdmin;
   }
@@ -81,5 +88,9 @@ export class EnvironmentDetailComponent {
     });
 
     this.changingOwnership = false;
+  }
+
+  trackByServiceName(index: number, service: OtherService): string {
+    return `${service.name}`;
   }
 }

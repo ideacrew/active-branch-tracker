@@ -27,9 +27,14 @@ service cloud.firestore {
       match /environments/{envId} {
         allow read: if isAdmin() || belongsToOrg();
         allow write: if isAdmin();
+
+
+        match /services/{serviceId} {
+          allow read: if isAdmin() || belongsToOrg();
+          allow write: if isAdmin()
+        }
       }
     }
-
 
     match /users/{userId} {
       allow read: if request.auth != null && request.auth.uid == userId;

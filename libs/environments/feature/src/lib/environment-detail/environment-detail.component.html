@@ -8,7 +8,7 @@
   <div *ngIf="env.owner !== 'Open'; else noOwner" class="value">
     {{ env.owner }} needs
     <span *ngIf="env.ownerRelease; else noDate"
-      >until {{ env.ownerRelease.toDate() | relativeDate }}</span
+      >until {{ env.ownerRelease | firestoreDate | relativeDate }}</span
     >
   </div>
   <form class="change-ownership-form" *ngIf="changingOwnership === true">
@@ -58,20 +58,23 @@
   <div
     *ngIf="env.latestDeployment; else noDeployment"
     class="value"
-    [attr.title]="env.latestDeployment.completed!.toDate() | date: 'medium'"
+    [attr.title]="
+      env.latestDeployment.completed! | firestoreDate | date: 'medium'
+    "
   >
     <ng-container
       *ngIf="env.latestDeployment.status === 'completed'; else deploying"
     >
       <span class="branch-name">{{ env.latestDeployment.branch }}</span>
-      deployed {{ env.latestDeployment.completed!.toDate() | relativeDate }} by
+      deployed
+      {{ env.latestDeployment.completed! | firestoreDate | relativeDate }} by
       {{ env.latestDeployment.user_name }}
     </ng-container>
 
     <ng-template #deploying>
       <span class="branch-name">{{ env.latestDeployment.branch }}</span>
       started deploying at
-      {{ env.latestDeployment.started!.toDate() | relativeDate }} by
+      {{ env.latestDeployment.started! | firestoreDate | relativeDate }} by
       {{ env.latestDeployment.user_name }}
     </ng-template>
   </div>
@@ -80,19 +83,29 @@
   <ng-container *ngIf="env.enroll && env.glue; else noSnapshot">
     <div class="value">
       Enroll has data from
-      <span [attr.title]="env.enroll.dataTimestamp.toDate() | date: 'medium'"
-        >{{ env.enroll.dataTimestamp.toDate() | relativeDate }} by
+      <span
+        [attr.title]="env.enroll.dataTimestamp | firestoreDate | date: 'medium'"
+        >{{ env.enroll.dataTimestamp | firestoreDate | relativeDate }} by
         {{ env.enroll.user_name }}</span
       >
     </div>
     <div class="value">
       GlueDB has data from
-      <span [attr.title]="env.glue.dataTimestamp.toDate() | date: 'medium'"
-        >{{ env.glue.dataTimestamp.toDate() | relativeDate }} by
+      <span
+        [attr.title]="env.glue.dataTimestamp | firestoreDate | date: 'medium'"
+        >{{ env.glue.dataTimestamp | firestoreDate | relativeDate }} by
         {{ env.glue.user_name }}</span
       >
     </div>
   </ng-container>
+
+  <h2 class="card-title">Applications in this environment</h2>
+  <div class="service-list">
+    <idc-service-card
+      *ngFor="let service of services$ | async; trackBy: trackByServiceName"
+      [service]="service"
+    ></idc-service-card>
+  </div>
 </ng-container>
 
 <ng-template #noDate>

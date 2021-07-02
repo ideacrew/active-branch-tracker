@@ -1,0 +1,39 @@
+:host {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background-color: transparent;
+  padding: 0.75rem;
+  border-radius: 3px;
+  border: 1px solid var(--font-color);
+  color: #fff;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  cursor: pointer;
+}
+
+.env-link {
+  color: var(--font-color);
+  font-weight: 300;
+  text-decoration: none;
+}
+
+.env-link::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+}
+
+.application-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.external-link {
+  fill: var(--font-color);
+  opacity: 0.5;
+}

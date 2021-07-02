@@ -9,6 +9,7 @@ import { BranchLinkPipe } from './branch-link.pipe';
 import { ActionsLinkPipe } from './actions-link.pipe';
 import { PrLinkPipeFromPR } from './pr-link-from-pr.pipe';
 import { RelativeDatePipe } from './relative-date.pipe';
+import { FirestoreDatePipe } from './firestore-date.pipe';
 
 @NgModule({
   imports: [CommonModule],
@@ -21,6 +22,7 @@ import { RelativeDatePipe } from './relative-date.pipe';
     BranchLinkPipe,
     ActionsLinkPipe,
     RelativeDatePipe,
+    FirestoreDatePipe,
   ],
   exports: [
     CommitLinkPipe,
@@ -31,6 +33,7 @@ import { RelativeDatePipe } from './relative-date.pipe';
     BranchLinkPipe,
     ActionsLinkPipe,
     RelativeDatePipe,
+    FirestoreDatePipe,
   ],
 })
 export class UtilModule {}
