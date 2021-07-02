@@ -29,7 +29,7 @@ import './firebase-init';
   imports: [
     BrowserModule,
     environment.useEmulators
-      ? AngularFireModule.initializeApp(environment.firebase, 'fakeproject')
+      ? AngularFireModule.initializeApp(environment.firebase, 'demo-project')
       : AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthGuardModule,
     ServiceWorkerModule.register('ngsw-worker.js', {

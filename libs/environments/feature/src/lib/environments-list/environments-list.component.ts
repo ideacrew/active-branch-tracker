@@ -5,7 +5,14 @@ import {
   OrgEnvironment,
 } from '@idc/environments/data-access';
 import { EMPTY, Observable } from 'rxjs';
-import { catchError, filter, map, switchMap, tap } from 'rxjs/operators';
+import {
+  catchError,
+  filter,
+  map,
+  shareReplay,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 
 @Component({
   templateUrl: './environments-list.component.html',
@@ -34,6 +41,9 @@ export class EnvironmentsListComponent {
         }),
       ),
     ),
+    // allows other subscriptions to share what
+    // allEnvironments$ provides
+    shareReplay(),
   );
 
   prodLike$: Observable<{

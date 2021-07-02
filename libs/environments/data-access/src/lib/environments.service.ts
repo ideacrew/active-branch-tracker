@@ -100,7 +100,6 @@ export class EnvironmentsService {
       return this.afs.collection<Org>('orgs').valueChanges({ idField: 'id' });
     } else {
       // Here __name__ is equivalent to the document id
-
       return this.afs
         .collection<Org>('orgs', ref => ref.where('__name__', 'in', user.orgs))
         .valueChanges({ idField: 'id' });

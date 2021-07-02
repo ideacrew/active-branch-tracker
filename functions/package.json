@@ -17,7 +17,7 @@
     "test:ci": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test\"",
     "test:ci:rules": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test:rules\"",
     "test:ci:functions": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test:functions\"",
-    "emulators:fakeproject": "firebase emulators:start --only=firestore,functions,auth --project=demo-project"
+    "emulators:demoproject": "firebase emulators:start --only=firestore,functions,auth --project=demo-project"
   },
   "engines": {
     "node": "14"
