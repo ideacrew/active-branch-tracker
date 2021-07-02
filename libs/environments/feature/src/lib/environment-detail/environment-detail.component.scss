@@ -118,3 +118,9 @@ svg {
 .branch-name {
   font-family: 'Courier New', Courier, monospace;
 }
+
+.service-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
