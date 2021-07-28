@@ -120,16 +120,16 @@ describe('testing assertions', () => {
     );
   });
 
-  it('can read environment services if member of org', async () => {
-    const serviceDoc = `orgs/${testUserOrg}/environments/env1/services/service1`;
-    await admin.doc(serviceDoc).set({ content: 'before' });
+  // it('can read environment services if member of org', async () => {
+  //   const serviceDoc = `orgs/${testUserOrg}/environments/env1/services/service1`;
+  //   await admin.doc(serviceDoc).set({ content: 'before' });
 
-    await firebase.assertSucceeds(testUserDb.doc(serviceDoc).get());
-    await firebase.assertSucceeds(ideaCrewDb.doc(serviceDoc).get());
-    await firebase.assertFails(
-      testUserDb.doc(serviceDoc).update({ content: 'after' }),
-    );
-  });
+  //   await firebase.assertSucceeds(testUserDb.doc(serviceDoc).get());
+  //   await firebase.assertSucceeds(ideaCrewDb.doc(serviceDoc).get());
+  //   await firebase.assertFails(
+  //     testUserDb.doc(serviceDoc).update({ content: 'after' }),
+  //   );
+  // });
 
   it('can only read user documents if logged in and match uid', async () => {
     const testUserDoc = `users/${testUser1.uid}`;
