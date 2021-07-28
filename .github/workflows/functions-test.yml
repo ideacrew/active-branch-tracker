@@ -25,8 +25,8 @@ jobs:
         id: npm-cache
         uses: actions/cache@v2
         with:
-          path: node_modules
-          key: v1-${{ runner.os }}-node14-${{ hashFiles('**/package-lock.json') }}
+          path: ./functions/node_modules
+          key: v2-${{ runner.os }}-node14-${{ hashFiles('**/functions/package-lock.json') }}
       - name: Cache firebase emulators
         id: firebase-emulators-cache
         uses: actions/cache@v2
