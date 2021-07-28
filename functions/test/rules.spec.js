@@ -57,7 +57,7 @@ describe('testing assertions', () => {
     addUser(ideaCrewUser);
   });
 
-  xit(`should only allow admins to read from branches`, async () => {
+  it(`should only allow admins to read from branches`, async () => {
     const branchDoc = 'branches/branch1';
     await admin.doc(branchDoc).set({ content: 'before' });
 
