@@ -52,7 +52,7 @@ describe('testing assertions', () => {
   const testUserOrg = testUser1.orgs[0];
 
   beforeEach(async () => {
-    // await firebase.clearFirestoreData({ projectId: DEMO_FIREBASE_PROJECT_ID });
+    await firebase.clearFirestoreData({ projectId: DEMO_FIREBASE_PROJECT_ID });
     addUser(testUser1);
     addUser(ideaCrewUser);
   });
