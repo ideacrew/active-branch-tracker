@@ -76,7 +76,7 @@ describe('testing assertions', () => {
   });
 
   // causes service test to fail
-  it(`should allow members of org or admins to read org doc`, async () => {
+  it.only(`should allow members of org or admins to read org doc`, async () => {
     const orgDoc = `orgs/${testUserOrg}`;
     await admin.doc(orgDoc).set({ content: 'before' });
 
