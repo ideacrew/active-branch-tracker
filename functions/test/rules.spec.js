@@ -146,7 +146,7 @@ describe('testing assertions', () => {
 });
 
 after(async () => {
-  // await firebase.clearFirestoreData({ projectId: DEMO_FIREBASE_PROJECT_ID });
-  // await Promise.all(firebase.apps().map(app => app.delete()));
-  // console.log(`View rule coverage information at ${coverageUrl}\n`);
+  await firebase.clearFirestoreData({ projectId: DEMO_FIREBASE_PROJECT_ID });
+  await Promise.all(firebase.apps().map(app => app.delete()));
+  console.log(`View rule coverage information at ${coverageUrl}\n`);
 });
