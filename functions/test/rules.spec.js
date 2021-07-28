@@ -57,21 +57,19 @@ describe('testing assertions', () => {
     addUser(ideaCrewUser);
   });
 
-  it(`should only allow admins to read from branches`, async () => {
+  it(`should only allow admins to read and update branches`, async () => {
     const branchDoc = 'branches/branch1';
     await admin.doc(branchDoc).set({ content: 'before' });
 
+    // Non-admin User
     await firebase.assertFails(testUserDb.doc(branchDoc).get());
-    await firebase.assertSucceeds(ideaCrewDb.doc(branchDoc).get());
-  });
-
-  it(`should only allow admins to update a branch doc`, async () => {
-    const branchDoc = 'branches/branch1';
-    await admin.doc(branchDoc).set({ content: 'before' });
-
     await firebase.assertFails(
       testUserDb.doc(branchDoc).update({ content: 'after' }),
     );
+
+    // Admin user
+    await firebase.assertSucceeds(ideaCrewDb.doc(branchDoc).get());
+
     await firebase.assertSucceeds(
       ideaCrewDb.doc(branchDoc).update({ content: 'after' }),
     );
@@ -88,7 +86,7 @@ describe('testing assertions', () => {
     );
   });
 
-  xit(`should only allow admins to write an org doc`, async () => {
+  it(`should only allow admins to write an org doc`, async () => {
     const orgDoc = `orgs/${testUserOrg}`;
     await admin.doc(orgDoc).set({ content: 'before' });
 
