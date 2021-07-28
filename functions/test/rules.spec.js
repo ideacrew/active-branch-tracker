@@ -53,12 +53,11 @@ describe('testing assertions', () => {
 
   beforeEach(async () => {
     await firebase.clearFirestoreData({ projectId: DEMO_FIREBASE_PROJECT_ID });
-    addUser(testUser1);
-    addUser(ideaCrewUser);
-    console.log('Done!');
+    await addUser(testUser1);
+    await addUser(ideaCrewUser);
   });
 
-  xit(`should only allow admins to read and update branches`, async () => {
+  it(`should only allow admins to read and update branches`, async () => {
     const branchDoc = 'branches/branch1';
     await admin.doc(branchDoc).set({ content: 'before' });
 
@@ -132,14 +131,14 @@ describe('testing assertions', () => {
     );
   });
 
-  xit('can only read user documents if logged in and match uid', async () => {
+  it('can only read user documents if logged in and match uid', async () => {
     const testUserDoc = `users/${testUser1.uid}`;
 
     await firebase.assertSucceeds(testUserDb.doc(testUserDoc).get());
     await firebase.assertFails(ideaCrewDb.doc(testUserDoc).get());
   });
 
-  xit('can only read pull requests if admin', async () => {
+  it('can only read pull requests if admin', async () => {
     const prDoc = 'pullRequests/pr1';
 
     await firebase.assertFails(testUserDb.doc(prDoc).get());
