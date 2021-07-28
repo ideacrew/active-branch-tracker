@@ -88,7 +88,7 @@ describe('testing assertions', () => {
     );
   });
 
-  it(`should only allow admins to write an org doc`, async () => {
+  xit(`should only allow admins to write an org doc`, async () => {
     const orgDoc = `orgs/${testUserOrg}`;
     await admin.doc(orgDoc).set({ content: 'before' });
 
@@ -100,7 +100,7 @@ describe('testing assertions', () => {
     );
   });
 
-  it('can read and write to environment docs if admin', async () => {
+  xit('can read and write to environment docs if admin', async () => {
     const envDoc = `orgs/${testUserOrg}/environments/env-1`;
     await admin.doc(envDoc).set({ content: 'before' });
 
@@ -110,7 +110,7 @@ describe('testing assertions', () => {
     );
   });
 
-  it('should allow read but not write to environment docs if member of org', async () => {
+  xit('should allow read but not write to environment docs if member of org', async () => {
     const envDoc = `orgs/${testUserOrg}/environments/env-1`;
     await admin.doc(envDoc).set({ content: 'before' });
 
@@ -120,7 +120,7 @@ describe('testing assertions', () => {
     );
   });
 
-  xit('can read environment services if member of org', async () => {
+  it('can read environment services if member of org', async () => {
     const serviceDoc = `orgs/${testUserOrg}/environments/env1/services/service1`;
     await admin.doc(serviceDoc).set({ content: 'before' });
 
@@ -131,7 +131,7 @@ describe('testing assertions', () => {
     );
   });
 
-  it('can only read user documents if logged in and match uid', async () => {
+  xit('can only read user documents if logged in and match uid', async () => {
     const testUserDoc = `users/${testUser1.uid}`;
 
     await firebase.assertSucceeds(testUserDb.doc(testUserDoc).get());
