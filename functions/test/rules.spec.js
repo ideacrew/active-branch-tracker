@@ -131,7 +131,7 @@ describe('testing assertions', () => {
     );
   });
 
-  xit('can only read user documents if logged in and match uid', async () => {
+  it('can only read user documents if logged in and match uid', async () => {
     const testUserDoc = `users/${testUser1.uid}`;
 
     await firebase.assertSucceeds(testUserDb.doc(testUserDoc).get());
