@@ -100,7 +100,7 @@ describe('testing assertions', () => {
     );
   });
 
-  it.only('can read and write to environment docs if admin', async () => {
+  xit('can read and write to environment docs if admin', async () => {
     const envDoc = `orgs/${testUserOrg}/environments/env-1`;
     await admin.doc(envDoc).set({ content: 'before' });
 
@@ -120,7 +120,7 @@ describe('testing assertions', () => {
     );
   });
 
-  it.only('can read environment services if member of org', async () => {
+  xit('can read environment services if member of org', async () => {
     const serviceDoc = `orgs/${testUserOrg}/environments/env1/services/service1`;
     await admin.doc(serviceDoc).set({ content: 'before' });
 
