@@ -76,9 +76,12 @@ describe('testing assertions', () => {
   });
 
   // causes service test to fail
-  it.only(`should allow members of org or admins to read org doc`, async () => {
+  it(`should allow members of org or admins to read org doc`, async () => {
     const orgDoc = `orgs/${testUserOrg}`;
     await admin.doc(orgDoc).set({ content: 'before' });
+
+    const orgDocData = (await ideaCrewDb.doc(orgDoc).get()).data();
+    console.log({ orgDocData });
 
     await firebase.assertSucceeds(ideaCrewDb.doc(orgDoc).get());
     await firebase.assertSucceeds(
