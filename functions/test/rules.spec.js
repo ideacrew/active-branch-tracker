@@ -138,7 +138,7 @@ describe('testing assertions', () => {
     await firebase.assertFails(ideaCrewDb.doc(testUserDoc).get());
   });
 
-  it('can only read pull requests if admin', async () => {
+  xit('can only read pull requests if admin', async () => {
     const prDoc = 'pullRequests/pr1';
 
     await firebase.assertFails(testUserDb.doc(prDoc).get());
