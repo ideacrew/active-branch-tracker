@@ -124,7 +124,7 @@ describe('testing assertions', () => {
     await admin.doc(serviceDoc).set({ content: 'before' });
 
     await firebase.assertSucceeds(testUserDb.doc(serviceDoc).get());
-    // await firebase.assertSucceeds(ideaCrewDb.doc(serviceDoc).get());
+    await firebase.assertSucceeds(ideaCrewDb.doc(serviceDoc).get());
     // await firebase.assertFails(
     //   testUserDb.doc(serviceDoc).update({ content: 'after' }),
     // );
