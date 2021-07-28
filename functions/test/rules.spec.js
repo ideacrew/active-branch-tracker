@@ -125,9 +125,9 @@ describe('testing assertions', () => {
 
     await firebase.assertSucceeds(testUserDb.doc(serviceDoc).get());
     await firebase.assertSucceeds(ideaCrewDb.doc(serviceDoc).get());
-    // await firebase.assertFails(
-    //   testUserDb.doc(serviceDoc).update({ content: 'after' }),
-    // );
+    await firebase.assertFails(
+      testUserDb.doc(serviceDoc).update({ content: 'after' }),
+    );
   });
 
   xit('can only read user documents if logged in and match uid', async () => {
