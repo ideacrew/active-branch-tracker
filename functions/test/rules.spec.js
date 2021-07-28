@@ -120,7 +120,7 @@ describe('testing assertions', () => {
     );
   });
 
-  it('can read environment services if member of org', async () => {
+  xit('can read environment services if member of org', async () => {
     const serviceDoc = `orgs/${testUserOrg}/environments/env1/services/service1`;
     await admin.doc(serviceDoc).set({ content: 'before' });
 
