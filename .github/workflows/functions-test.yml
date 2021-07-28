@@ -1,6 +1,7 @@
 name: test cloud functions
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'firestore.rules'

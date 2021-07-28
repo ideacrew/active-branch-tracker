@@ -65,7 +65,7 @@ describe('testing assertions', () => {
     await firebase.assertSucceeds(ideaCrewDb.doc(branchDoc).get());
   });
 
-  xit(`should only allow admins to update a branch doc`, async () => {
+  it(`should only allow admins to update a branch doc`, async () => {
     const branchDoc = 'branches/branch1';
     await admin.doc(branchDoc).set({ content: 'before' });
 
