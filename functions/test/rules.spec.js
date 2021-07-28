@@ -100,7 +100,7 @@ describe('testing assertions', () => {
     );
   });
 
-  xit('can read and write to environment docs if admin', async () => {
+  it('can read and write to environment docs if admin', async () => {
     const envDoc = `orgs/${testUserOrg}/environments/env-1`;
     await admin.doc(envDoc).set({ content: 'before' });
 
