@@ -131,14 +131,14 @@ describe('testing assertions', () => {
     );
   });
 
-  it('can only read user documents if logged in and match uid', async () => {
+  xit('can only read user documents if logged in and match uid', async () => {
     const testUserDoc = `users/${testUser1.uid}`;
 
     await firebase.assertSucceeds(testUserDb.doc(testUserDoc).get());
     await firebase.assertFails(ideaCrewDb.doc(testUserDoc).get());
   });
 
-  xit('can only read pull requests if admin', async () => {
+  it('can only read pull requests if admin', async () => {
     const prDoc = 'pullRequests/pr1';
 
     await firebase.assertFails(testUserDb.doc(prDoc).get());
