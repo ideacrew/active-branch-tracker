@@ -75,7 +75,6 @@ describe('testing assertions', () => {
     );
   });
 
-  // causes service test to fail
   it(`should allow members of org or admins to read org doc`, async () => {
     const orgDoc = `orgs/${testUserOrg}`;
     await admin.doc(orgDoc).set({ content: 'before' });
@@ -101,7 +100,7 @@ describe('testing assertions', () => {
     );
   });
 
-  xit('can read and write to environment docs if admin', async () => {
+  it('can read and write to environment docs if admin', async () => {
     const envDoc = `orgs/${testUserOrg}/environments/env-1`;
     await admin.doc(envDoc).set({ content: 'before' });
 
