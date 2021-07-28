@@ -110,7 +110,7 @@ describe('testing assertions', () => {
     );
   });
 
-  xit('should allow read but not write to environment docs if member of org', async () => {
+  it('should allow read but not write to environment docs if member of org', async () => {
     const envDoc = `orgs/${testUserOrg}/environments/env-1`;
     await admin.doc(envDoc).set({ content: 'before' });
 
