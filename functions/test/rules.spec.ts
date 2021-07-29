@@ -1,6 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-const firebase = require('@firebase/rules-unit-testing');
+import * as fs from 'fs';
+import * as path from 'path';
+import * as firebase from '@firebase/rules-unit-testing';
+import { before, after } from 'mocha';
 const DEMO_FIREBASE_PROJECT_ID = 'demo-project';
 const port = require('../../firebase.json').emulators.firestore.port || 8080;
 const coverageUrl = `http://localhost:${port}/emulator/v1/projects/${DEMO_FIREBASE_PROJECT_ID}:ruleCoverage.html`;

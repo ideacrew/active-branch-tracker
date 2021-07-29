@@ -1,6 +1,8 @@
-const { expect } = require('chai');
-const axios = require('axios');
-const admin = require('firebase-admin');
+import { expect } from 'chai';
+// https://github.com/axios/axios#note-commonjs-usage
+const axios = require('axios').default;
+import * as admin from 'firebase-admin';
+
 const test = require('firebase-functions-test')({
   projectId: process.env.GCLOUD_PROJECT,
 });
