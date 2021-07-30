@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { after } from 'mocha';
 // https://github.com/axios/axios#note-commonjs-usage
 const axios = require('axios').default;
 import * as admin from 'firebase-admin';
@@ -69,7 +70,7 @@ describe('Branch deployment payload', () => {
       branch: 'feature-fix',
       env: 'hotfix-2',
       app: 'enroll',
-      user_name: 'kvootla',
+      // user_name: 'kvootla',
       org: 'maine',
       repo: 'enroll',
       commit_sha: 'abc1234',
@@ -133,7 +134,7 @@ describe('Branch deployment payload', () => {
       branch: 'feature-fix',
       env,
       app: 'enroll',
-      user_name: 'kvootla',
+      // user_name: 'kvootla',
       org,
       repo: 'enroll',
       commit_sha: 'abc1234',

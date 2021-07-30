@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
@@ -7,6 +8,7 @@ import { BranchDeploymentPayload } from './branchDeployment.interface';
 import { checkOwnership } from '../check-ownership/checkOwnership';
 import { sendSlackMessage } from '../slack-notifications/slackNotification';
 import { yellrEnvLink } from '../util/yellrEnvLink';
+import { getRealName } from '../util/getRealName';
 
 /**
  * Handles a new branch deployment
@@ -47,7 +49,7 @@ export async function handleBranchDeployment(
 async function updateEnvironmentWithBranchInfo(
   deployment: BranchDeploymentPayload,
 ): Promise<void> {
-  const { org, env, status } = deployment;
+  const { org, env, status, user_name } = deployment;
 
   const FieldValue = admin.firestore.FieldValue;
 
@@ -58,11 +60,14 @@ async function updateEnvironmentWithBranchInfo(
     .collection('environments')
     .doc(env.toLowerCase());
 
+  const realName = await getRealName(user_name);
+
   try {
     await environmentRef.set(
       {
         latestDeployment: {
           ...deployment,
+          user_name: realName,
           [status]: FieldValue.serverTimestamp(),
         },
       },
