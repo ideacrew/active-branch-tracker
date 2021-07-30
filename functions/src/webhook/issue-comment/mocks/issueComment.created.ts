@@ -3,8 +3,7 @@ import { IssueCommentPayload } from '../interfaces/issueComment';
 export const issueCommentCreated: IssueCommentPayload = {
   action: 'created',
   issue: {
-    url:
-      'https://api.github.com/repos/ideacrew/active-branch-tracker/issues/12',
+    url: 'https://api.github.com/repos/ideacrew/active-branch-tracker/issues/12',
     repository_url:
       'https://api.github.com/repos/ideacrew/active-branch-tracker',
     labels_url:
@@ -54,8 +53,7 @@ export const issueCommentCreated: IssueCommentPayload = {
     author_association: 'MEMBER',
     active_lock_reason: null,
     pull_request: {
-      url:
-        'https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/12',
+      url: 'https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/12',
       html_url: 'https://github.com/ideacrew/active-branch-tracker/pull/12',
       diff_url:
         'https://github.com/ideacrew/active-branch-tracker/pull/12.diff',
@@ -66,8 +64,7 @@ export const issueCommentCreated: IssueCommentPayload = {
     performed_via_github_app: null,
   },
   comment: {
-    url:
-      'https://api.github.com/repos/ideacrew/active-branch-tracker/issues/comments/815035106',
+    url: 'https://api.github.com/repos/ideacrew/active-branch-tracker/issues/comments/815035106',
     html_url:
       'https://github.com/ideacrew/active-branch-tracker/pull/12#issuecomment-815035106',
     issue_url:

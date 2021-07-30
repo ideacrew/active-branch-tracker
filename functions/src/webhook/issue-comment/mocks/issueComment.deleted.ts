@@ -3,8 +3,7 @@ import { IssueCommentPayload } from '../interfaces/issueComment';
 export const issueCommentDeleted: IssueCommentPayload = {
   action: 'deleted',
   issue: {
-    url:
-      'https://api.github.com/repos/ideacrew/active-branch-tracker/issues/12',
+    url: 'https://api.github.com/repos/ideacrew/active-branch-tracker/issues/12',
     repository_url:
       'https://api.github.com/repos/ideacrew/active-branch-tracker',
     labels_url:
@@ -45,8 +44,7 @@ export const issueCommentDeleted: IssueCommentPayload = {
       {
         id: 2201259444,
         node_id: 'MDU6TGFiZWwyMjAxMjU5NDQ0',
-        url:
-          'https://api.github.com/repos/ideacrew/active-branch-tracker/labels/enhancement',
+        url: 'https://api.github.com/repos/ideacrew/active-branch-tracker/labels/enhancement',
         name: 'enhancement',
         color: 'a2eeef',
         default: true,
@@ -65,8 +63,7 @@ export const issueCommentDeleted: IssueCommentPayload = {
     author_association: 'MEMBER',
     active_lock_reason: null,
     pull_request: {
-      url:
-        'https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/12',
+      url: 'https://api.github.com/repos/ideacrew/active-branch-tracker/pulls/12',
       html_url: 'https://github.com/ideacrew/active-branch-tracker/pull/12',
       diff_url:
         'https://github.com/ideacrew/active-branch-tracker/pull/12.diff',
@@ -77,8 +74,7 @@ export const issueCommentDeleted: IssueCommentPayload = {
     performed_via_github_app: null,
   },
   comment: {
-    url:
-      'https://api.github.com/repos/ideacrew/active-branch-tracker/issues/comments/815035106',
+    url: 'https://api.github.com/repos/ideacrew/active-branch-tracker/issues/comments/815035106',
     html_url:
       'https://github.com/ideacrew/active-branch-tracker/pull/12#issuecomment-815035106',
     issue_url:
