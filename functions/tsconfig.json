@@ -12,7 +12,7 @@
 
     "outDir": "lib",
     "sourceMap": true,
-    "types": ["mocha", "expect"]
+    "types": ["mocha"]
   },
   "compileOnSave": true,
   "include": ["src"],
