@@ -86,7 +86,7 @@
     "cypress": "^5.1.0",
     "dotenv": "8.2.0",
     "eslint": "^7.23.0",
-    "eslint-config-prettier": "8.1.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsdoc": "latest",
