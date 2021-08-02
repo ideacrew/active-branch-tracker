@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+
 import { checkOwnership } from '../check-ownership/checkOwnership';
 import { sendSlackMessage } from '../slack-notifications/slackNotification';
 import { yellrEnvLink } from '../util/yellrEnvLink';
-import { getRealName } from '../util/getRealName';
 
 admin.initializeApp();
 
@@ -57,16 +57,13 @@ export async function handleDataRefresh(
       );
     }
 
-    // Get real name from user_name
-    const realName = await getRealName(user_name);
-
     try {
       const FieldValue = admin.firestore.FieldValue;
       await envRef.set(
         {
           [app]: {
             status,
-            user_name: realName,
+            user_name,
             dataTimestamp: FieldValue.serverTimestamp(),
           },
         },
