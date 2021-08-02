@@ -12,7 +12,11 @@ export const getRealName = async (username: string): Promise<string> => {
 
   try {
     const response = await axios(axiosConfig);
-    return response.data?.name as string;
+
+    const realName: string =
+      (response.data.name as string) ?? 'GitHub Name is Blank';
+
+    return realName;
   } catch (e) {
     return 'GitHub username not found';
   }
