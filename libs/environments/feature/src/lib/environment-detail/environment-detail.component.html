@@ -80,7 +80,7 @@
   </div>
 
   <h2 class="card-title">Most Recent Commit</h2>
-  <div class="value">
+  <div class="value" *ngIf="env.latestDeployment; else noDeployment">
     <a
       class="commit-link"
       target="__blank"
