@@ -81,7 +81,6 @@ describe('testing assertions', () => {
     await admin.doc(orgDoc).set({ content: 'before' });
 
     const orgDocData = (await ideaCrewDb.doc(orgDoc).get()).data();
-    console.log({ orgDocData });
 
     await firebase.assertSucceeds(ideaCrewDb.doc(orgDoc).get());
     await firebase.assertSucceeds(
