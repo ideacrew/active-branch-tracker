@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable camelcase */
 import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
 
 import { BranchInfo } from '../../models/branchInfo';
 import { createSafeBranchName } from '../../safeBranchName';
 import { getBranchRef } from '../../util/branchRef';
-import { CheckSuitePayload } from './interfaces/checkSuite';
+import { CheckSuitePayload } from './interfaces';
 
 /**
  * Handles a check suite event from GitHub Actions
@@ -85,6 +86,6 @@ export async function handleCheckSuiteEvent(
       .doc(`${organizationName}-${repositoryName}-${safeBranchName}`)
       .set(currentStatus, { merge: true });
   } catch (e) {
-    console.error(e);
+    functions.logger.error(e);
   }
 }

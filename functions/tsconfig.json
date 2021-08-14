@@ -3,13 +3,13 @@
     "lib": ["es2020"],
     "module": "commonjs",
     "target": "es2020",
-
+    "esModuleInterop": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "skipLibCheck": true,
-
+    "resolveJsonModule": true,
     "outDir": "lib",
     "sourceMap": true,
     "types": ["mocha"]
