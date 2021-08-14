@@ -1,7 +1,7 @@
-import { App } from './app';
-import { WebhookPayload } from './basePayload';
-import { CheckConclusion } from './checkConclusion';
-import { HeadCommit } from './headCommit';
+import { App } from '../../interfaces/app';
+import { WebhookPayload } from '../../interfaces/basePayload';
+import { CheckConclusion } from '../../interfaces/checkConclusion';
+import { HeadCommit } from '../../interfaces/headCommit';
 
 export type CheckSuiteAction = 'completed' | 'requested' | 'rerequested';
 

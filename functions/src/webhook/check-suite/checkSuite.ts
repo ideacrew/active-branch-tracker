@@ -2,10 +2,10 @@
 /* eslint-disable camelcase */
 import * as admin from 'firebase-admin';
 
-import { BranchInfo } from '../models/branchInfo';
-import { createSafeBranchName } from '../safeBranchName';
-import { getBranchRef } from '../util/branchRef';
-import { CheckSuitePayload } from './interfaces';
+import { BranchInfo } from '../../models/branchInfo';
+import { createSafeBranchName } from '../../safeBranchName';
+import { getBranchRef } from '../../util/branchRef';
+import { CheckSuitePayload } from './interfaces/checkSuite';
 
 /**
  * Handles a check suite event from GitHub Actions

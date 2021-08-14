@@ -3,19 +3,17 @@ import * as admin from 'firebase-admin';
 
 admin.initializeApp();
 
-import { handleCheckSuiteEvent } from './checkSuite';
+import { handleCheckSuiteEvent } from './check-suite/checkSuite';
 import { handleCreateEvent } from './createEvent';
 import { handleDeleteEvent } from './deleteEvent';
-import {
-  CheckSuitePayload,
-  CreateEventPayload,
-  DeleteEventPayload,
-} from './interfaces';
+
 import { handleIssueCommentEvent, IssueCommentPayload } from './issue-comment';
 import {
   handlePullRequestEvent,
   PullRequestEventPayload,
 } from './pull-request';
+import { CreateEventPayload, DeleteEventPayload } from './interfaces';
+import { CheckSuitePayload } from './check-suite';
 
 /**
  * Handles the incoming webhook from GitHub Actions
