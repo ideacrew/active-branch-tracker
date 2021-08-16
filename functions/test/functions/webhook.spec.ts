@@ -1,8 +1,9 @@
 import { expect } from 'chai';
 import { after } from 'mocha';
-// https://github.com/axios/axios#note-commonjs-usage
-const axios = require('axios').default;
 import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
+
+import { mockWebhookPayload } from './mockHttpFunction';
 
 const test = require('firebase-functions-test')({
   projectId: process.env.GCLOUD_PROJECT,
@@ -12,33 +13,18 @@ if (admin.apps.length === 0) {
   admin.initializeApp();
 }
 
-const axiosConfig = (eventType, data) => {
-  return {
-    method: 'post',
-    url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/webhook`,
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Github-Event': eventType,
-    },
-    data,
-  };
-};
-
 describe('Pull Request tests', () => {
   after(() => {
-    console.log('Cleaning up');
     test.cleanup();
   });
 
   it('Tests an opened Pull Request', async () => {
     const data = require('../../src/webhook/pull-request/mocks/opened.json');
 
-    const config = axiosConfig('pull_request', data);
-
     try {
-      await axios(config);
+      await mockWebhookPayload('pull_request', data);
     } catch (e) {
-      console.error('ERROR:', e);
+      functions.logger.error('ERROR:', e);
     }
 
     const prSnapshot = await admin
@@ -76,14 +62,11 @@ describe('Pull Request tests', () => {
     const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
     const synchronizedPR = require('../../src/webhook/pull-request/mocks/synchronize.json');
 
-    const openedPRConfig = axiosConfig('pull_request', openedPR);
-    const synchronizedPRConfig = axiosConfig('pull_request', synchronizedPR);
-
     try {
-      await axios(openedPRConfig);
-      await axios(synchronizedPRConfig);
+      await mockWebhookPayload('pull_request', openedPR);
+      await mockWebhookPayload('pull_request', synchronizedPR);
     } catch (e) {
-      console.error('ERROR:', e);
+      functions.logger.error('ERROR:', e);
     }
 
     const prSnapshot = await admin
@@ -121,14 +104,11 @@ describe('Pull Request tests', () => {
     const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
     const closedPR = require('../../src/webhook/pull-request/mocks/closed-not-merged.json');
 
-    const openedPRConfig = axiosConfig('pull_request', openedPR);
-    const closedPRConfig = axiosConfig('pull_request', closedPR);
-
     try {
-      await axios(openedPRConfig);
-      await axios(closedPRConfig);
+      await mockWebhookPayload('pull_request', openedPR);
+      await mockWebhookPayload('pull_request', closedPR);
     } catch (e) {
-      console.error('ERROR:', e);
+      functions.logger.error('ERROR:', e);
     }
 
     const prSnapshot = await admin
@@ -147,14 +127,11 @@ describe('Pull Request tests', () => {
     const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
     const mergedPR = require('../../src/webhook/pull-request/mocks/closed-and-merged.json');
 
-    const openedPRConfig = axiosConfig('pull_request', openedPR);
-    const mergedPRConfig = axiosConfig('pull_request', mergedPR);
-
     try {
-      await axios(openedPRConfig);
-      await axios(mergedPRConfig);
+      await mockWebhookPayload('pull_request', openedPR);
+      await mockWebhookPayload('pull_request', mergedPR);
     } catch (e) {
-      console.error('ERROR:', e);
+      functions.logger.error('ERROR:', e);
     }
 
     const prSnapshot = await admin
@@ -173,14 +150,11 @@ describe('Pull Request tests', () => {
     const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
     const draftPR = require('../../src/webhook/pull-request/mocks/converted-to-draft.json');
 
-    const openedPRConfig = axiosConfig('pull_request', openedPR);
-    const draftPRConfig = axiosConfig('pull_request', draftPR);
-
     try {
-      await axios(openedPRConfig);
-      await axios(draftPRConfig);
+      await mockWebhookPayload('pull_request', openedPR);
+      await mockWebhookPayload('pull_request', draftPR);
     } catch (e) {
-      console.error('ERROR:', e);
+      functions.logger.error('ERROR:', e);
     }
 
     const prSnapshot = await admin
@@ -199,16 +173,12 @@ describe('Pull Request tests', () => {
     const draftPR = require('../../src/webhook/pull-request/mocks/converted-to-draft.json');
     const readyPR = require('../../src/webhook/pull-request/mocks/ready-for-review.json');
 
-    const openedPRConfig = axiosConfig('pull_request', openedPR);
-    const draftPRConfig = axiosConfig('pull_request', draftPR);
-    const readyPRConfig = axiosConfig('pull_request', readyPR);
-
     try {
-      await axios(openedPRConfig);
-      await axios(draftPRConfig);
-      await axios(readyPRConfig);
+      await mockWebhookPayload('pull_request', openedPR);
+      await mockWebhookPayload('pull_request', draftPR);
+      await mockWebhookPayload('pull_request', readyPR);
     } catch (e) {
-      console.error('ERROR:', e);
+      functions.logger.error('ERROR:', e);
     }
 
     const prSnapshot = await admin
@@ -222,3 +192,5 @@ describe('Pull Request tests', () => {
     });
   }).timeout(5000);
 });
+
+// describe('Check Suite tests', () => {});
