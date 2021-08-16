@@ -13,7 +13,7 @@ import { CheckSuitePayload } from './interfaces';
  * @param {CheckSuitePayload} payload
  */
 export async function handleCheckSuiteEvent(
-  payload: CheckSuitePayload,
+  payload: CheckSuitePayload<'completed'>,
 ): Promise<void> {
   const { check_suite, repository, organization } = payload;
 
@@ -29,17 +29,6 @@ export async function handleCheckSuiteEvent(
   } = check_suite;
 
   const safeBranchName = createSafeBranchName(branchName);
-
-  const checkSuitePayloadRef = admin
-    .firestore()
-    .collection('payloads')
-    .doc(`check_suite-${organizationName}-${repositoryName}-${safeBranchName}`);
-
-  try {
-    await checkSuitePayloadRef.set(payload);
-  } catch (e) {
-    console.error('Could not set payload to ref', payload);
-  }
 
   const branchRef = getBranchRef({
     organizationName,

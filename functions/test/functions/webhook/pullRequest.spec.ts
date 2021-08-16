@@ -3,7 +3,7 @@ import { after } from 'mocha';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
-import { mockWebhookPayload } from './mockHttpFunction';
+import { mockWebhookPayload } from '../mockHttpFunction';
 
 const test = require('firebase-functions-test')({
   projectId: process.env.GCLOUD_PROJECT,
@@ -19,7 +19,7 @@ describe('Pull Request tests', () => {
   });
 
   it('Tests an opened Pull Request', async () => {
-    const data = require('../../src/webhook/pull-request/mocks/opened.json');
+    const data = require('../../../../src/webhook/pull-request/mocks/opened.json');
 
     try {
       await mockWebhookPayload('pull_request', data);
@@ -59,8 +59,8 @@ describe('Pull Request tests', () => {
   }).timeout(5000);
 
   it('Tests a synchronized pull request event', async () => {
-    const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
-    const synchronizedPR = require('../../src/webhook/pull-request/mocks/synchronize.json');
+    const openedPR = require('../../../src/webhook/pull-request/mocks/opened.json');
+    const synchronizedPR = require('../../../src/webhook/pull-request/mocks/synchronize.json');
 
     try {
       await mockWebhookPayload('pull_request', openedPR);
@@ -101,8 +101,8 @@ describe('Pull Request tests', () => {
   }).timeout(5000);
 
   it('Tests a closed, but not merged pull request event', async () => {
-    const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
-    const closedPR = require('../../src/webhook/pull-request/mocks/closed-not-merged.json');
+    const openedPR = require('../../../src/webhook/pull-request/mocks/opened.json');
+    const closedPR = require('../../../src/webhook/pull-request/mocks/closed-not-merged.json');
 
     try {
       await mockWebhookPayload('pull_request', openedPR);
@@ -124,8 +124,8 @@ describe('Pull Request tests', () => {
   }).timeout(5000);
 
   it('Tests a closed and merged pull request event', async () => {
-    const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
-    const mergedPR = require('../../src/webhook/pull-request/mocks/closed-and-merged.json');
+    const openedPR = require('../../../src/webhook/pull-request/mocks/opened.json');
+    const mergedPR = require('../../../src/webhook/pull-request/mocks/closed-and-merged.json');
 
     try {
       await mockWebhookPayload('pull_request', openedPR);
@@ -147,8 +147,8 @@ describe('Pull Request tests', () => {
   }).timeout(5000);
 
   it('Tests a pull request that gets converted to draft', async () => {
-    const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
-    const draftPR = require('../../src/webhook/pull-request/mocks/converted-to-draft.json');
+    const openedPR = require('../../../src/webhook/pull-request/mocks/opened.json');
+    const draftPR = require('../../../src/webhook/pull-request/mocks/converted-to-draft.json');
 
     try {
       await mockWebhookPayload('pull_request', openedPR);
@@ -169,9 +169,9 @@ describe('Pull Request tests', () => {
   }).timeout(5000);
 
   it('Tests a pull request that gets converted to draft', async () => {
-    const openedPR = require('../../src/webhook/pull-request/mocks/opened.json');
-    const draftPR = require('../../src/webhook/pull-request/mocks/converted-to-draft.json');
-    const readyPR = require('../../src/webhook/pull-request/mocks/ready-for-review.json');
+    const openedPR = require('../../../src/webhook/pull-request/mocks/opened.json');
+    const draftPR = require('../../../src/webhook/pull-request/mocks/converted-to-draft.json');
+    const readyPR = require('../../../src/webhook/pull-request/mocks/ready-for-review.json');
 
     try {
       await mockWebhookPayload('pull_request', openedPR);
@@ -192,5 +192,3 @@ describe('Pull Request tests', () => {
     });
   }).timeout(5000);
 });
-
-// describe('Check Suite tests', () => {});

@@ -12,6 +12,10 @@ const axiosConfig = (eventType: string, data: unknown): AxiosRequestConfig => {
   };
 };
 
-export const mockWebhookPayload = (eventType: string, data: unknown) => {
-  return axios.request(axiosConfig(eventType, data));
+export const mockWebhookPayload = (
+  eventType: string,
+  data: unknown,
+): Promise<unknown> => {
+  const config = axiosConfig(eventType, data);
+  return axios.request(config);
 };

@@ -8,8 +8,9 @@ export type CheckSuiteAction = 'completed' | 'requested' | 'rerequested';
 export type CheckSuiteStatus = 'requested' | 'in_progress' | 'completed';
 
 /* eslint-disable camelcase */
-export interface CheckSuitePayload extends WebhookPayload {
-  action: CheckSuiteAction;
+export interface CheckSuitePayload<T extends CheckSuiteAction>
+  extends WebhookPayload {
+  action: T;
   check_suite: CheckSuite;
 }
 
