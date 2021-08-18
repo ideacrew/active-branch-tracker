@@ -1,9 +1,16 @@
 import { expect } from 'chai';
 import { after } from 'mocha';
 import * as admin from 'firebase-admin';
-import * as functions from 'firebase-functions';
 
 import { mockWebhookPayload } from '../mockHttpFunction';
+import {
+  mockClosedAndMergedPayload,
+  mockClosedNotMergedPayload,
+  mockDraftPayload,
+  mockOpenedPayload,
+  mockReadyForReviewPayload,
+  mockSynchronizedPayload,
+} from '../../../src/webhook/pull-request';
 
 const test = require('firebase-functions-test')({
   projectId: process.env.GCLOUD_PROJECT,
@@ -19,12 +26,10 @@ describe('Pull Request tests', () => {
   });
 
   it('Tests an opened Pull Request', async () => {
-    const data = require('../../../../src/webhook/pull-request/mocks/opened.json');
-
     try {
-      await mockWebhookPayload('pull_request', data);
+      await mockWebhookPayload('pull_request', mockOpenedPayload);
     } catch (e) {
-      functions.logger.error('ERROR:', e);
+      console.error('ERROR:', e);
     }
 
     const prSnapshot = await admin
@@ -59,14 +64,11 @@ describe('Pull Request tests', () => {
   }).timeout(5000);
 
   it('Tests a synchronized pull request event', async () => {
-    const openedPR = require('../../../src/webhook/pull-request/mocks/opened.json');
-    const synchronizedPR = require('../../../src/webhook/pull-request/mocks/synchronize.json');
-
     try {
-      await mockWebhookPayload('pull_request', openedPR);
-      await mockWebhookPayload('pull_request', synchronizedPR);
+      await mockWebhookPayload('pull_request', mockOpenedPayload);
+      await mockWebhookPayload('pull_request', mockSynchronizedPayload);
     } catch (e) {
-      functions.logger.error('ERROR:', e);
+      console.error('ERROR:', e);
     }
 
     const prSnapshot = await admin
@@ -101,14 +103,11 @@ describe('Pull Request tests', () => {
   }).timeout(5000);
 
   it('Tests a closed, but not merged pull request event', async () => {
-    const openedPR = require('../../../src/webhook/pull-request/mocks/opened.json');
-    const closedPR = require('../../../src/webhook/pull-request/mocks/closed-not-merged.json');
-
     try {
-      await mockWebhookPayload('pull_request', openedPR);
-      await mockWebhookPayload('pull_request', closedPR);
+      await mockWebhookPayload('pull_request', mockOpenedPayload);
+      await mockWebhookPayload('pull_request', mockClosedNotMergedPayload);
     } catch (e) {
-      functions.logger.error('ERROR:', e);
+      console.error('ERROR:', e);
     }
 
     const prSnapshot = await admin
@@ -124,14 +123,11 @@ describe('Pull Request tests', () => {
   }).timeout(5000);
 
   it('Tests a closed and merged pull request event', async () => {
-    const openedPR = require('../../../src/webhook/pull-request/mocks/opened.json');
-    const mergedPR = require('../../../src/webhook/pull-request/mocks/closed-and-merged.json');
-
     try {
-      await mockWebhookPayload('pull_request', openedPR);
-      await mockWebhookPayload('pull_request', mergedPR);
+      await mockWebhookPayload('pull_request', mockOpenedPayload);
+      await mockWebhookPayload('pull_request', mockClosedAndMergedPayload);
     } catch (e) {
-      functions.logger.error('ERROR:', e);
+      console.error('ERROR:', e);
     }
 
     const prSnapshot = await admin
@@ -147,14 +143,11 @@ describe('Pull Request tests', () => {
   }).timeout(5000);
 
   it('Tests a pull request that gets converted to draft', async () => {
-    const openedPR = require('../../../src/webhook/pull-request/mocks/opened.json');
-    const draftPR = require('../../../src/webhook/pull-request/mocks/converted-to-draft.json');
-
     try {
-      await mockWebhookPayload('pull_request', openedPR);
-      await mockWebhookPayload('pull_request', draftPR);
+      await mockWebhookPayload('pull_request', mockOpenedPayload);
+      await mockWebhookPayload('pull_request', mockDraftPayload);
     } catch (e) {
-      functions.logger.error('ERROR:', e);
+      console.error('ERROR:', e);
     }
 
     const prSnapshot = await admin
@@ -169,16 +162,12 @@ describe('Pull Request tests', () => {
   }).timeout(5000);
 
   it('Tests a pull request that gets converted to draft', async () => {
-    const openedPR = require('../../../src/webhook/pull-request/mocks/opened.json');
-    const draftPR = require('../../../src/webhook/pull-request/mocks/converted-to-draft.json');
-    const readyPR = require('../../../src/webhook/pull-request/mocks/ready-for-review.json');
-
     try {
-      await mockWebhookPayload('pull_request', openedPR);
-      await mockWebhookPayload('pull_request', draftPR);
-      await mockWebhookPayload('pull_request', readyPR);
+      await mockWebhookPayload('pull_request', mockOpenedPayload);
+      await mockWebhookPayload('pull_request', mockDraftPayload);
+      await mockWebhookPayload('pull_request', mockReadyForReviewPayload);
     } catch (e) {
-      functions.logger.error('ERROR:', e);
+      console.error('ERROR:', e);
     }
 
     const prSnapshot = await admin

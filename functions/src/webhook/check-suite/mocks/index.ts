@@ -1,1 +1,2 @@
-export * from './completed.mock';
+export * from './completed-success.mock';
+export * from './completed-failure.mock';

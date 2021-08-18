@@ -8,7 +8,10 @@ const admin = firebase.initializeAdminApp({
 });
 
 import { mockWebhookPayload } from '../mockHttpFunction';
-import { mockPayload } from '../../../src/webhook/check-suite/mocks';
+import {
+  mockFailurePayload,
+  mockSuccessPayload,
+} from '../../../src/webhook/check-suite';
 import { createSafeBranchName } from '../../../src/safeBranchName';
 
 // const test = require('firebase-functions-test')({
@@ -20,7 +23,7 @@ import { createSafeBranchName } from '../../../src/safeBranchName';
 // }
 
 describe('Check Suite tests', () => {
-  after(async () => {
+  afterEach(async () => {
     // test.cleanup();
     await firebase.clearFirestoreData({
       projectId: process.env.GCLOUD_PROJECT,
@@ -29,12 +32,12 @@ describe('Check Suite tests', () => {
 
   it('tests a first-time successful check suite result', async () => {
     try {
-      await mockWebhookPayload('check_suite', mockPayload);
+      await mockWebhookPayload('check_suite', mockSuccessPayload);
     } catch (e) {
-      functions.logger.error('ERROR:', e);
+      console.error('ERROR:', e);
     }
 
-    const { check_suite, repository, organization } = mockPayload;
+    const { check_suite, repository, organization } = mockSuccessPayload;
     const { name: repositoryName, default_branch } = repository;
     const { login: organizationName } = organization;
     const {
@@ -60,6 +63,38 @@ describe('Check Suite tests', () => {
       checkSuiteRuns: 1,
       checkSuiteFailures: 0,
       defaultBranch: false,
+    });
+  });
+
+  it('tests a first-time failed check suite result', async () => {
+    try {
+      await mockWebhookPayload('check_suite', mockFailurePayload);
+    } catch (e) {
+      console.error('ERROR:', e);
+    }
+
+    const { check_suite, repository, organization } = mockFailurePayload;
+    const { name: repositoryName, default_branch } = repository;
+    const { login: organizationName } = organization;
+    const {
+      head_branch: branchName,
+      head_commit,
+      head_sha,
+      updated_at,
+      conclusion: checkSuiteStatus,
+    } = check_suite;
+
+    const safeBranchName = createSafeBranchName(branchName);
+
+    const checkSuiteSnapshot = await admin
+      .firestore()
+      .collection('branches')
+      .doc(`${organizationName}-${repositoryName}-${safeBranchName}`)
+      .get();
+
+    expect(checkSuiteSnapshot.data()).to.include({
+      checkSuiteRuns: 1,
+      checkSuiteFailures: 1,
     });
   });
 });

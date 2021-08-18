@@ -25,7 +25,6 @@ const axiosConfig = (functionName, data) => {
 
 describe('Branch deployment payload', () => {
   after(() => {
-    console.log('Cleaning up');
     test.cleanup();
   });
 
@@ -42,7 +41,7 @@ describe('Branch deployment payload', () => {
       // Make the http request
       responsePayload = await axios(config);
     } catch (e) {
-      console.log('ERROR:', e);
+      console.error('ERROR:', e);
     }
 
     // Wait for the promise to be resolved and then check the sent text
@@ -91,7 +90,7 @@ describe('Branch deployment payload', () => {
         prodlike: true,
       });
     } catch (e) {
-      console.log('ERROR:', e);
+      console.error('ERROR:', e);
     }
 
     const snap = await envRef.get();
@@ -111,7 +110,7 @@ describe('Branch deployment payload', () => {
     try {
       await axios(config);
     } catch (e) {
-      console.log('ERROR:', e);
+      console.error('ERROR:', e);
     }
 
     const postDeploymentRef = admin
