@@ -10,7 +10,6 @@ on:
       - 'libs/**'
       - 'firebase.json'
       - 'package.json'
-      - 'functions/**'
 
 jobs:
   tests:
