@@ -1,8 +1,6 @@
 import { expect } from 'chai';
+import { describe, it, afterEach } from 'mocha';
 import * as firebase from '@firebase/rules-unit-testing';
-const admin = firebase.initializeAdminApp({
-  projectId: process.env.GCLOUD_PROJECT,
-});
 
 import { mockWebhookPayload } from '../mockHttpFunction';
 import {
@@ -13,6 +11,10 @@ import {
   mockReadyForReviewPayload,
   mockSynchronizedPayload,
 } from '../../../src/webhook/pull-request';
+
+const admin = firebase.initializeAdminApp({
+  projectId: process.env.GCLOUD_PROJECT,
+});
 
 describe('Pull Request tests', () => {
   afterEach(async () => {
@@ -157,7 +159,7 @@ describe('Pull Request tests', () => {
     });
   }).timeout(5000);
 
-  it('Tests a pull request that gets converted to draft', async () => {
+  it('Tests a pull request that gets converted to draft and then is marked ready for review', async () => {
     try {
       await mockWebhookPayload('pull_request', mockOpenedPayload);
       await mockWebhookPayload('pull_request', mockDraftPayload);

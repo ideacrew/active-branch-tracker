@@ -1,9 +1,6 @@
 import { expect } from 'chai';
-
+import { describe, it, afterEach } from 'mocha';
 import * as firebase from '@firebase/rules-unit-testing';
-const admin = firebase.initializeAdminApp({
-  projectId: process.env.GCLOUD_PROJECT,
-});
 
 import { mockWebhookPayload } from '../mockHttpFunction';
 import {
@@ -11,14 +8,28 @@ import {
   mockSuccessPayload,
 } from '../../../src/webhook/check-suite';
 import { createSafeBranchName } from '../../../src/safeBranchName';
+import { WebhookPayload } from '../../../src/webhook/interfaces';
 
-// const test = require('firebase-functions-test')({
-//   projectId: process.env.GCLOUD_PROJECT,
-// });
+const admin = firebase.initializeAdminApp({
+  projectId: process.env.GCLOUD_PROJECT,
+});
 
-// if (admin.apps.length === 0) {
-//   admin.initializeApp();
-// }
+const getBranchRef = (
+  payload: WebhookPayload,
+  branchName: string,
+): FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData> => {
+  const { repository, organization } = payload;
+  const { login: organizationName } = organization;
+  const { name: repositoryName } = repository;
+  const safeBranchName = createSafeBranchName(branchName);
+
+  const branchRef = admin
+    .firestore()
+    .collection('branches')
+    .doc(`${organizationName}-${repositoryName}-${safeBranchName}`);
+
+  return branchRef;
+};
 
 describe('Check Suite tests', () => {
   afterEach(async () => {
@@ -35,32 +46,16 @@ describe('Check Suite tests', () => {
       console.error('ERROR:', e);
     }
 
-    const { check_suite, repository, organization } = mockSuccessPayload;
-    const { name: repositoryName, default_branch } = repository;
-    const { login: organizationName } = organization;
-    const {
-      head_branch: branchName,
-      head_commit,
-      head_sha,
-      updated_at,
-      conclusion: checkSuiteStatus,
-    } = check_suite;
+    const { head_branch: branchName } = mockSuccessPayload.check_suite;
 
-    const safeBranchName = createSafeBranchName(branchName);
-
-    const checkSuiteSnapshot = await admin
-      .firestore()
-      .collection('branches')
-      .doc(`${organizationName}-${repositoryName}-${safeBranchName}`)
-      .get();
+    const checkSuiteSnapshot = await getBranchRef(
+      mockSuccessPayload,
+      branchName,
+    ).get();
 
     expect(checkSuiteSnapshot.data()).to.include({
-      repositoryName,
-      organizationName,
-      branchName,
       checkSuiteRuns: 1,
       checkSuiteFailures: 0,
-      defaultBranch: false,
     });
   });
 
@@ -71,28 +66,44 @@ describe('Check Suite tests', () => {
       console.error('ERROR:', e);
     }
 
-    const { check_suite, repository, organization } = mockFailurePayload;
-    const { name: repositoryName, default_branch } = repository;
-    const { login: organizationName } = organization;
-    const {
-      head_branch: branchName,
-      head_commit,
-      head_sha,
-      updated_at,
-      conclusion: checkSuiteStatus,
-    } = check_suite;
+    const { head_branch: branchName } = mockFailurePayload.check_suite;
 
-    const safeBranchName = createSafeBranchName(branchName);
-
-    const checkSuiteSnapshot = await admin
-      .firestore()
-      .collection('branches')
-      .doc(`${organizationName}-${repositoryName}-${safeBranchName}`)
-      .get();
+    const checkSuiteSnapshot = await getBranchRef(
+      mockFailurePayload,
+      branchName,
+    ).get();
 
     expect(checkSuiteSnapshot.data()).to.include({
       checkSuiteRuns: 1,
       checkSuiteFailures: 1,
     });
   });
+
+  // This test is designed using two payloads with the same branch, repo, org
+  // The first payload is a successful check suite result with an older completion time
+  // The second payload is a failed check suite result with a newer completion time, but an earlier creation time
+  it.only(
+    'tests a failed test with an older timestamp than a newer successful run',
+    async () => {
+      try {
+        await mockWebhookPayload('check_suite', mockSuccessPayload);
+        await mockWebhookPayload('check_suite', mockFailurePayload);
+      } catch (e) {
+        console.error('ERROR:', e);
+      }
+
+      const { head_branch: branchName } = mockFailurePayload.check_suite;
+
+      const checkSuiteSnapshot = await getBranchRef(
+        mockFailurePayload,
+        branchName,
+      ).get();
+
+      expect(checkSuiteSnapshot.data()).to.include({
+        checkSuiteStatus: 'failure',
+        checkSuiteRuns: 2,
+        checkSuiteFailures: 1,
+      });
+    },
+  ).timeout(5000);
 });

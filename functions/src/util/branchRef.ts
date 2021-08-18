@@ -8,7 +8,7 @@ export interface BranchRef {
 }
 
 /**
- * Takes a branch ref object and returns a document references
+ * Takes a branch ref object and returns a document reference
  * @param {BranchRef} branchRef
  * @return {FirebaseFirestore.DocumentReference} a doc reference
  */
