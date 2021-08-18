@@ -6,8 +6,6 @@ on:
     paths:
       - 'firestore.rules'
       - 'functions/**'
-    branches:
-      - trunk
 jobs:
   test:
     name: test
