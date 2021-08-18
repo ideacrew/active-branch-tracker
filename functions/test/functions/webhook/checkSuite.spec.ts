@@ -100,7 +100,7 @@ describe('Check Suite tests', () => {
     expect(checkSuiteSnapshot.data()).to.include({
       checkSuiteStatus: 'failure',
       checkSuiteRuns: 2,
-      checkSuiteFailures: 1,
+      checkSuiteFailures: 2,
     });
   }).timeout(5000);
 });
