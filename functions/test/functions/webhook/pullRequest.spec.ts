@@ -1,6 +1,8 @@
 import { expect } from 'chai';
-import { after } from 'mocha';
-import * as admin from 'firebase-admin';
+import * as firebase from '@firebase/rules-unit-testing';
+const admin = firebase.initializeAdminApp({
+  projectId: process.env.GCLOUD_PROJECT,
+});
 
 import { mockWebhookPayload } from '../mockHttpFunction';
 import {
@@ -12,17 +14,11 @@ import {
   mockSynchronizedPayload,
 } from '../../../src/webhook/pull-request';
 
-const test = require('firebase-functions-test')({
-  projectId: process.env.GCLOUD_PROJECT,
-});
-
-if (admin.apps.length === 0) {
-  admin.initializeApp();
-}
-
 describe('Pull Request tests', () => {
-  after(() => {
-    test.cleanup();
+  afterEach(async () => {
+    await firebase.clearFirestoreData({
+      projectId: process.env.GCLOUD_PROJECT,
+    });
   });
 
   it('Tests an opened Pull Request', async () => {

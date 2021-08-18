@@ -1,7 +1,5 @@
 import { expect } from 'chai';
-import { after } from 'mocha';
 
-import * as functions from 'firebase-functions';
 import * as firebase from '@firebase/rules-unit-testing';
 const admin = firebase.initializeAdminApp({
   projectId: process.env.GCLOUD_PROJECT,
