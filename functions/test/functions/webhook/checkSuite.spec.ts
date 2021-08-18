@@ -82,28 +82,25 @@ describe('Check Suite tests', () => {
   // This test is designed using two payloads with the same branch, repo, org
   // The first payload is a successful check suite result with an older completion time
   // The second payload is a failed check suite result with a newer completion time, but an earlier creation time
-  it.only(
-    'tests a failed test with an older timestamp than a newer successful run',
-    async () => {
-      try {
-        await mockWebhookPayload('check_suite', mockSuccessPayload);
-        await mockWebhookPayload('check_suite', mockFailurePayload);
-      } catch (e) {
-        console.error('ERROR:', e);
-      }
+  it('tests a failed test with an older timestamp than a newer successful run', async () => {
+    try {
+      await mockWebhookPayload('check_suite', mockSuccessPayload);
+      await mockWebhookPayload('check_suite', mockFailurePayload);
+    } catch (e) {
+      console.error('ERROR:', e);
+    }
 
-      const { head_branch: branchName } = mockFailurePayload.check_suite;
+    const { head_branch: branchName } = mockFailurePayload.check_suite;
 
-      const checkSuiteSnapshot = await getBranchRef(
-        mockFailurePayload,
-        branchName,
-      ).get();
+    const checkSuiteSnapshot = await getBranchRef(
+      mockFailurePayload,
+      branchName,
+    ).get();
 
-      expect(checkSuiteSnapshot.data()).to.include({
-        checkSuiteStatus: 'failure',
-        checkSuiteRuns: 2,
-        checkSuiteFailures: 1,
-      });
-    },
-  ).timeout(5000);
+    expect(checkSuiteSnapshot.data()).to.include({
+      checkSuiteStatus: 'failure',
+      checkSuiteRuns: 2,
+      checkSuiteFailures: 1,
+    });
+  }).timeout(5000);
 });
