@@ -5,7 +5,7 @@ const axios = require('axios').default;
 import * as admin from 'firebase-admin';
 import * as qs from 'qs';
 const test = require('firebase-functions-test')({
-  projectId: process.env.GCP_PROJECT,
+  projectId: process.env.GCLOUD_PROJECT,
 });
 
 if (admin.apps.length === 0) {
@@ -15,7 +15,7 @@ if (admin.apps.length === 0) {
 const axiosConfig = (functionName, data) => {
   return {
     method: 'post',
-    url: `http://localhost:5001/${process.env.GCP_PROJECT}/us-central1/${functionName}`,
+    url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/${functionName}`,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },

@@ -13,13 +13,13 @@ import {
 } from '../../../src/webhook/pull-request';
 
 const admin = firebase.initializeAdminApp({
-  projectId: process.env.GCP_PROJECT,
+  projectId: process.env.GCLOUD_PROJECT,
 });
 
 describe('Pull Request tests', () => {
   afterEach(async () => {
     await firebase.clearFirestoreData({
-      projectId: process.env.GCP_PROJECT,
+      projectId: process.env.GCLOUD_PROJECT,
     });
   });
 

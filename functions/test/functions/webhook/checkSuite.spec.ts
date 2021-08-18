@@ -11,7 +11,7 @@ import { createSafeBranchName } from '../../../src/safeBranchName';
 import { WebhookPayload } from '../../../src/webhook/interfaces';
 
 const admin = firebase.initializeAdminApp({
-  projectId: process.env.GCP_PROJECT,
+  projectId: process.env.GCLOUD_PROJECT,
 });
 
 const getBranchRef = (
@@ -35,7 +35,7 @@ describe('Check Suite tests', () => {
   afterEach(async () => {
     // test.cleanup();
     await firebase.clearFirestoreData({
-      projectId: process.env.GCP_PROJECT,
+      projectId: process.env.GCLOUD_PROJECT,
     });
   });
 
