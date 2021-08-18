@@ -12,11 +12,11 @@
     "test": "npm run test:rules && npm run test:functions",
     "test:rules": "ts-mocha test/rules.spec.ts --timeout 5000 --exit",
     "test:functions": "ts-mocha test/functions/**/**.spec.ts --timeout 5000 --exit",
-    "test:functions:local": "cross-env GCLOUD_PROJECT=demo-project FIREBASE_FIRESTORE_EMULATOR_ADDRESS=localhost:8080 FIRESTORE_EMULATOR_HOST=localhost:8080 ts-mocha test/functions/**/**.spec.ts --watch-extensions ts --watch --watch-files test/functions/**",
+    "test:functions:local": "cross-env GCP_PROJECT=demo-project FIREBASE_FIRESTORE_EMULATOR_ADDRESS=localhost:8080 FIRESTORE_EMULATOR_HOST=localhost:8080 ts-mocha test/functions/**/**.spec.ts --watch-extensions ts --watch --watch-files test/functions/**",
     "test:ci": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test\"",
     "test:ci:rules": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test:rules\"",
     "test:ci:functions": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test:functions\"",
-    "emulators:demoproject": "cross-env GCLOUD_PROJECT=demo-project firebase emulators:start --only=firestore,functions,auth --project=demo-project"
+    "emulators:demoproject": "cross-env GCP_PROJECT=demo-project firebase emulators:start --only=firestore,functions,auth --project=demo-project"
   },
   "engines": {
     "node": "14"
