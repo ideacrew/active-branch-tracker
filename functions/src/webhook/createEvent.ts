@@ -5,6 +5,8 @@ import * as functions from 'firebase-functions';
 
 import { BranchInfo } from '../models/branchInfo';
 import { createSafeBranchName } from '../safeBranchName';
+import { firestoreTimestamp } from '../util';
+import { getRealName } from '../util/getRealName';
 import { CreateEventPayload } from './interfaces';
 
 /**
@@ -33,18 +35,25 @@ export async function handleCreateEvent(
     organizationName,
     branchName,
     defaultBranch: false,
+    // Created at is set by Firestore because the webhook payload
+    // doesn't include a timestamp. In theory, someone could have
+    // created a branch locally, and then pushed it some time later,
+    // but we'll just show the time when the branch was published.
     created_at: new Date().toISOString(),
+    // Transition to using this property eventually
+    createdAt: firestoreTimestamp(new Date().toISOString()),
+    timestamp: new Date().getTime(),
     checkSuiteRuns: 0,
     checkSuiteFailures: 0,
     checkSuiteStatus: 'neutral',
-    createdBy,
+    createdBy: await getRealName(createdBy),
+    createdByUsername: createdBy,
     tracked: false,
-    timestamp: new Date().getTime(),
   };
 
   try {
     await branchRef.create(branchInfo);
   } catch (e) {
-    functions.logger.error(e);
+    functions.logger.error('Could not create new branch document', e);
   }
 }

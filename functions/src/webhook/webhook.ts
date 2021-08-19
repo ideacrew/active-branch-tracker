@@ -8,10 +8,6 @@ import { handleCreateEvent } from './createEvent';
 import { handleDeleteEvent } from './deleteEvent';
 
 import { handleIssueCommentEvent, IssueCommentPayload } from './issue-comment';
-import {
-  handlePullRequestEvent,
-  PullRequestEventPayload,
-} from './pull-request';
 import { CreateEventPayload, DeleteEventPayload } from './interfaces';
 import { CheckSuitePayload } from './check-suite';
 
@@ -39,10 +35,6 @@ export async function handleWebhook(
       await handleCheckSuiteEvent(
         request.body as CheckSuitePayload<'completed'>,
       );
-      break;
-
-    case 'pull_request':
-      await handlePullRequestEvent(request.body as PullRequestEventPayload);
       break;
 
     case 'issue_comment':

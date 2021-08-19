@@ -14,9 +14,11 @@ export interface BranchInfo {
   head_commit?: HeadCommit;
   head_sha?: string;
   created_at?: string;
+  createdAt?: FirebaseFirestore.Timestamp;
   updated_at?: string;
   checkSuiteStatus?: CheckConclusion;
   createdBy?: string;
+  createdByUsername?: string;
   releaseDate?: number;
   pullRequestNumber?: number;
 }

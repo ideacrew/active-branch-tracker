@@ -73,12 +73,7 @@
   <div class="card-content">
     <div class="left-column">
       <div class="last-updated">
-        <svg
-          *ngIf="branch.checkSuiteStatus === 'success'"
-          class="svg-icon"
-          width="16px"
-          height="16px"
-        >
+        <svg class="svg-icon" width="16px" height="16px">
           <use href="assets/icons.svg#clock"></use>
         </svg>
         <span class="no-wrap"
@@ -135,6 +130,14 @@
         >
       </a>
     </div>
+  </div>
+
+  <div class="time-left" *ngIf="branch.tracked">
+    <span class="time-info"
+      >{{ branch.created_at ? (branch.created_at | date) : 'Very old' }} -
+      {{ branch | daysLeft }} days to live</span
+    >
+    <div [style.width.%]="branch | timeLeft" class="time-indicator"></div>
   </div>
 </div>
 

@@ -10,6 +10,8 @@ import { ActionsLinkPipe } from './actions-link.pipe';
 import { PrLinkPipeFromPR } from './pr-link-from-pr.pipe';
 import { RelativeDatePipe } from './relative-date.pipe';
 import { FirestoreDatePipe } from './firestore-date.pipe';
+import { TimeLeftPipe } from './time-left.pipe';
+import { DaysLeftPipe } from './days-left.pipe';
 
 @NgModule({
   imports: [CommonModule],
@@ -23,6 +25,8 @@ import { FirestoreDatePipe } from './firestore-date.pipe';
     ActionsLinkPipe,
     RelativeDatePipe,
     FirestoreDatePipe,
+    TimeLeftPipe,
+    DaysLeftPipe,
   ],
   exports: [
     CommitLinkPipe,
@@ -34,6 +38,8 @@ import { FirestoreDatePipe } from './firestore-date.pipe';
     ActionsLinkPipe,
     RelativeDatePipe,
     FirestoreDatePipe,
+    TimeLeftPipe,
+    DaysLeftPipe,
   ],
 })
 export class UtilModule {}
