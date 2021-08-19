@@ -16,7 +16,7 @@ const admin = firebase.initializeAdminApp({
   projectId: process.env.GCLOUD_PROJECT,
 });
 
-describe('Pull Request tests', () => {
+describe.skip('Pull Request tests', () => {
   afterEach(async () => {
     await firebase.clearFirestoreData({
       projectId: process.env.GCLOUD_PROJECT,
