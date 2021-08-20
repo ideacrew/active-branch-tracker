@@ -2,7 +2,7 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
-import { createSafeBranchName } from '../safeBranchName';
+import { createSafeBranchName } from '../../safeBranchName';
 import { DeleteEventPayload } from './interfaces';
 
 /**

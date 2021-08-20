@@ -5,7 +5,7 @@ admin.initializeApp();
 
 import { handleCheckSuiteEvent } from './check-suite/checkSuite';
 import { handleCreateEvent, CreateEventPayload } from './create';
-import { handleDeleteEvent } from './deleteEvent';
+import { handleDeleteEvent } from './delete/deleteEvent';
 
 import { handleIssueCommentEvent, IssueCommentPayload } from './issue-comment';
 import { DeleteEventPayload } from './interfaces';

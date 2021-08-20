@@ -3,7 +3,6 @@ export * from './assignee';
 export * from './basePayload';
 export * from './checkConclusion';
 export * from './checkRun';
-export * from './deleteEvent';
 export * from './githubUser';
 export * from './headCommit';
 export * from './label';

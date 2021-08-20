@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
-import { WebhookPayload } from './basePayload';
+
+import { WebhookPayload } from '../../interfaces';
 
 export interface DeleteEventPayload extends WebhookPayload {
   ref: string; // branch name
