@@ -3,11 +3,11 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
-import { BranchInfo } from '../models/branchInfo';
-import { createSafeBranchName } from '../safeBranchName';
-import { firestoreTimestamp } from '../util';
-import { getRealName } from '../util/getRealName';
-import { CreateEventPayload } from './interfaces';
+import { BranchInfo } from '../../models/branchInfo';
+import { createSafeBranchName } from '../../safeBranchName';
+import { firestoreTimestamp } from '../../util';
+import { getRealName } from '../../util/getRealName';
+import { CreateEventPayload } from './interfaces/createEvent';
 
 /**
  * Handles a create event from GitHub Actions

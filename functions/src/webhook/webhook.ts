@@ -4,11 +4,11 @@ import * as admin from 'firebase-admin';
 admin.initializeApp();
 
 import { handleCheckSuiteEvent } from './check-suite/checkSuite';
-import { handleCreateEvent } from './createEvent';
+import { handleCreateEvent, CreateEventPayload } from './create';
 import { handleDeleteEvent } from './deleteEvent';
 
 import { handleIssueCommentEvent, IssueCommentPayload } from './issue-comment';
-import { CreateEventPayload, DeleteEventPayload } from './interfaces';
+import { DeleteEventPayload } from './interfaces';
 import { CheckSuitePayload } from './check-suite';
 
 /**

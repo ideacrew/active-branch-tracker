@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { WebhookPayload } from './basePayload';
+import { WebhookPayload } from '../../interfaces/basePayload';
 
 export interface CreateEventPayload extends WebhookPayload {
   ref: string; // name of thing that got created
