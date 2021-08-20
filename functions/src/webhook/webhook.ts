@@ -8,8 +8,8 @@ import { handleCreateEvent, CreateEventPayload } from './create';
 import { handleDeleteEvent } from './delete/deleteEvent';
 
 import { handleIssueCommentEvent, IssueCommentPayload } from './issue-comment';
-import { DeleteEventPayload } from './interfaces';
 import { CheckSuitePayload } from './check-suite';
+import { DeleteEventPayload } from './delete';
 
 /**
  * Handles the incoming webhook from GitHub Actions
