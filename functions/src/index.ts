@@ -29,3 +29,11 @@ export const secretWebService = functions.https.onRequest(
     }
   },
 );
+
+export const deleteOldBranchDocuments = functions.https.onRequest(
+  async (request, response) => {
+    await (
+      await import('./delete-old-branch-docs')
+    ).deleteOldBranchDocs(request, response);
+  },
+);

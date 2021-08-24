@@ -29,7 +29,7 @@ const getBranchRef = (
   return branchRef;
 };
 
-describe('Create tests', () => {
+describe('Delete event tests', () => {
   afterEach(async () => {
     // test.cleanup();
     await firebase.clearFirestoreData({
