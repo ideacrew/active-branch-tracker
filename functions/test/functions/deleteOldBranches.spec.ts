@@ -106,4 +106,42 @@ describe('Delete old branches', () => {
     // Wait for the promise to be resolved and then check the sent text
     expect(responsePayload.data).to.equal('No branches to delete');
   }).timeout(5000);
+
+  it.skip('tests deleting a LOT old branches', async () => {
+    const today = new Date();
+    const ninetyDaysAgo = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000);
+
+    const moreFakeBranches: Partial<BranchInfo>[] = Array.from(
+      { length: 101 },
+      () => {
+        return {
+          defaultBranch: false,
+          timestamp: faker.date.between('Jan 1, 2020', ninetyDaysAgo).getTime(),
+        };
+      },
+    );
+
+    [...moreFakeBranches, ...fakeDefaultBranches].forEach(branch => {
+      admin
+        .firestore()
+        .collection('branches')
+        .doc(faker.random.alpha({ count: 10 }))
+        .set(branch);
+    });
+
+    let responsePayload;
+    try {
+      // Make the http request
+      responsePayload = await axios(axiosConfig);
+    } catch (e) {
+      console.error('ERROR:', e);
+    }
+    const branchesRef = admin.firestore().collection('branches');
+    const snapshot = await branchesRef.get();
+
+    expect(snapshot.size).to.equal(3);
+
+    // Wait for the promise to be resolved and then check the sent text
+    expect(responsePayload.data).to.equal('100 branches successfully deleted');
+  }).timeout(10000);
 });

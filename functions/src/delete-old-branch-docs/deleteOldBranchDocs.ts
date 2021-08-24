@@ -29,11 +29,15 @@ export async function deleteOldBranchDocs(
   const numberOfOldBranches = snapshot.size;
 
   if (numberOfOldBranches > 0) {
-    console.log(`There are ${numberOfOldBranches} old branches.`);
     const batch = admin.firestore().batch();
     snapshot.forEach(branch => batch.delete(branch.ref));
 
-    await batch.commit();
+    try {
+      await batch.commit();
+    } catch (e) {
+      functions.logger.error('Error deleting branches', e);
+      response.send(e);
+    }
     response
       .status(200)
       .send(`${numberOfOldBranches} branches successfully deleted`);
