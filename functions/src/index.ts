@@ -37,3 +37,11 @@ export const deleteOldBranchDocuments = functions.https.onRequest(
     ).deleteOldBranchDocs(request, response);
   },
 );
+
+export const defaultBranchFailure = functions.firestore
+  .document('branches/{docId}')
+  .onUpdate(async change => {
+    await (
+      await import('./default-branch-failure')
+    ).defaultBranchFailure(change);
+  });
