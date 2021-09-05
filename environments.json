@@ -1,0 +1,11 @@
+[
+  { "cpr": "https://cpr-enroll.cme.openhbx.org/" },
+  { "cte": "https://cte-enroll.cme.openhbx.org/" },
+  { "demo": "https://cme.enroll.openhbx.org/" },
+  { "dev": "https://dev-enroll.cme.openhbx.org/" },
+  { "preprod": "https://preprod-enroll.cme.openhbx.org/" },
+  { "pvt": "https://pvt-enroll.cme.openhbx.org/" },
+  { "qa": "https://qa-enroll.cme.openhbx.org/" },
+  { "training": "https://training-enroll.cme.openhbx.org/" },
+  { "uat": "https://uat-enroll.cme.openhbx.org/" }
+]

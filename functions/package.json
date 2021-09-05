@@ -26,6 +26,7 @@
     "@sendgrid/mail": "^7.4.2",
     "firebase-admin": "^9.4.2",
     "firebase-functions": "^3.13.2",
+    "is-up": "^4.0.0",
     "slack": "^11.0.2"
   },
   "devDependencies": {

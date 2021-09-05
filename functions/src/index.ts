@@ -45,3 +45,17 @@ export const defaultBranchFailure = functions.firestore
       await import('./default-branch-failure')
     ).defaultBranchFailure(change);
   });
+
+// export const pingEnvironments = functions.pubsub
+//   .schedule('every 8 hours')
+//   .onRun(async context => {
+//     await (await import('./ping-environments')).pingEnvironments(context);
+//   });
+
+export const pingEnvironments = functions.https.onRequest(
+  async (request, response) => {
+    await (
+      await import('./ping-environments')
+    ).pingEnvironments(request, response);
+  },
+);
