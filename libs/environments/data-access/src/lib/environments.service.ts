@@ -144,7 +144,7 @@ export class EnvironmentsService {
 
   async refreshEnvironmentsStatus(): Promise<void> {
     const callable = this.fns.httpsCallable('pingEnvironmentsCallable');
-    const pingEnvironments = callable({}).toPromise();
+    const pingEnvironments = callable({ data: 'anything' }).toPromise();
     await pingEnvironments;
   }
 }

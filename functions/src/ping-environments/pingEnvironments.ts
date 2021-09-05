@@ -24,12 +24,12 @@ export const pingEnvironmentsHttp = async (
 };
 
 export const pingEnvironmentsCallable = async (
-  _data: unknown,
+  data: unknown,
   _context: functions.https.CallableContext,
-): Promise<null> => {
+): Promise<unknown> => {
   await updateMaineEnvironments();
 
-  return null;
+  return { data };
 };
 
 const updateMaineEnvironments = async () => {
