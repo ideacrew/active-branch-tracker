@@ -4,7 +4,7 @@ import {
   EnvironmentsService,
   OrgEnvironment,
 } from '@idc/environments/data-access';
-import { EMPTY, Observable } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable } from 'rxjs';
 import {
   catchError,
   filter,
@@ -21,7 +21,8 @@ import {
 })
 export class EnvironmentsListComponent {
   orgId = '';
-  refreshing = false;
+  refreshing = new BehaviorSubject<boolean>(false);
+  refreshing$ = this.refreshing.asObservable();
 
   orgId$ = this.route.paramMap.pipe(
     filter((params: ParamMap) => params.has('orgId')),
@@ -76,8 +77,12 @@ export class EnvironmentsListComponent {
   }
 
   async refreshEnvironments(): Promise<void> {
-    this.refreshing = true;
-    await this.envService.refreshEnvironmentsStatus();
-    this.refreshing = false;
+    if (this.refreshing.value === true) {
+      return;
+    } else {
+      this.refreshing.next(true);
+      await this.envService.refreshEnvironmentsStatus();
+      this.refreshing.next(false);
+    }
   }
 }

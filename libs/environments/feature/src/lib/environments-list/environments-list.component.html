@@ -5,7 +5,8 @@
     *ngIf="orgName === 'Maine'"
     class="heading-button"
   >
-    Refresh
+    <span>Refresh</span>
+    <idc-loading-spinner *ngIf="refreshing$ | async"></idc-loading-spinner>
   </button>
 </h1>
 
