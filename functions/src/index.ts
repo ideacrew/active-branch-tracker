@@ -46,16 +46,25 @@ export const defaultBranchFailure = functions.firestore
     ).defaultBranchFailure(change);
   });
 
-// export const pingEnvironments = functions.pubsub
-//   .schedule('every 8 hours')
-//   .onRun(async context => {
-//     await (await import('./ping-environments')).pingEnvironments(context);
-//   });
+export const pingEnvironmentsCron = functions.pubsub
+  .schedule('every 8 hours')
+  .onRun(async context => {
+    await (await import('./ping-environments')).pingEnvironmentsCron(context);
+  });
 
-export const pingEnvironments = functions.https.onRequest(
+export const pingEnvironmentsHttp = functions.https.onRequest(
   async (request, response) => {
     await (
       await import('./ping-environments')
-    ).pingEnvironments(request, response);
+    ).pingEnvironmentsHttp(request, response);
+  },
+);
+
+export const pingEnvironmentsCallable = functions.https.onCall(
+  async (data, context) => {
+    return (await import('./ping-environments')).pingEnvironmentsCallable(
+      data,
+      context,
+    );
   },
 );

@@ -14,4 +14,5 @@ export interface OrgEnvironment {
   ownerRelease: firebase.default.firestore.Timestamp;
   glue?: AppData;
   enroll?: AppData;
+  reachable: boolean;
 }

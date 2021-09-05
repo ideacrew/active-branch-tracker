@@ -10,10 +10,14 @@ import { filterNullish } from '@idc/util';
 import { Org, OrgEnvironment, OwnerReleaseUpdate, OwnerUpdate } from './models';
 import { EnvInfo } from './models/envInfo';
 import { OtherService } from './models/otherService';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Injectable()
 export class EnvironmentsService {
-  constructor(private afs: AngularFirestore) {}
+  constructor(
+    private afs: AngularFirestore,
+    private fns: AngularFireFunctions,
+  ) {}
 
   queryEnvironmentsByOrg(orgName: string): Observable<OrgEnvironment[]> {
     return this.afs
@@ -136,5 +140,11 @@ export class EnvironmentsService {
         .collection<Org>('orgs', ref => ref.where('__name__', 'in', user.orgs))
         .valueChanges({ idField: 'id' });
     }
+  }
+
+  async refreshEnvironmentsStatus(): Promise<void> {
+    const callable = this.fns.httpsCallable('pingEnvironmentsCallable');
+    const pingEnvironments = callable({}).toPromise();
+    await pingEnvironments;
   }
 }

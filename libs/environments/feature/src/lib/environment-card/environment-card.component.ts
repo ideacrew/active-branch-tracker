@@ -40,6 +40,10 @@ export class EnvironmentCardComponent {
 
   constructor(private userService: UserService) {}
 
+  @HostBinding('class.is-reachable') get isReachable(): boolean {
+    return this.environment.reachable;
+  }
+
   @HostBinding('class.is-admin') get isAnAdmin(): boolean {
     return this.isAdmin;
   }

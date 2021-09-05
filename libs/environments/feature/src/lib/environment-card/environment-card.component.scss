@@ -1,14 +1,20 @@
 :host {
+  --background-color: hsl(0, 11%, 55%);
+  --text-color: hsl(0, 37%, 9%);
   display: inline-flex;
   flex-direction: column;
   gap: 0.75rem;
-  background-color: hsl(0, 0%, 33%);
+  background-color: var(--background-color);
   padding: 1rem;
   border-radius: 5px;
-  color: #fff;
+  color: var(--text-color);
   transition: all 150ms ease-in-out;
   position: relative;
   cursor: pointer;
+}
+
+:host(.is-reachable) {
+  --background-color: hsl(120, 8%, 62%);
 }
 
 :host:focus-within,
@@ -19,7 +25,7 @@
 }
 
 .env-link {
-  color: hsl(0, 0%, 85%);
+  color: var(--text-color);
   font-weight: 300;
   text-decoration: none;
 }
@@ -39,7 +45,7 @@
 }
 
 svg {
-  fill: hsl(0, 0%, 65%);
+  fill: var;
   margin-right: 0.5rem;
 }
 

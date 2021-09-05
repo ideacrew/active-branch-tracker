@@ -1,31 +1,41 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import { updateServiceStatus } from './updateServiceStatus';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const isUp = require('is-up');
 
 admin.initializeApp();
 
-// export const pingEnvironments = async (context: functions.EventContext) => {
-//   console.log(context);
-//   return null;
-// };
+export const pingEnvironmentsCron = async (
+  _context: functions.EventContext,
+): Promise<null> => {
+  await updateMaineEnvironments();
+  return null;
+};
 
-interface EnvironmentService {
-  environment: string;
-  url: string;
-  reachable?: boolean;
-}
-
-export const pingEnvironments = async (
+export const pingEnvironmentsHttp = async (
   _request: functions.https.Request,
   response: functions.Response<unknown>,
 ): Promise<void> => {
-  const environmentIds = await getMaineEnvironments();
-  await updateServiceStatus(environmentIds);
+  await updateMaineEnvironments();
 
   response.status(200).send('Ping complete');
   return Promise.resolve();
+};
+
+export const pingEnvironmentsCallable = async (
+  _data: unknown,
+  _context: functions.https.CallableContext,
+): Promise<null> => {
+  await updateMaineEnvironments();
+
+  return null;
+};
+
+const updateMaineEnvironments = async () => {
+  const db = admin.firestore();
+  const environmentIds = await getMaineEnvironments();
+  await updateServiceStatus(db, environmentIds);
 };
 
 const getMaineEnvironments = async () => {
@@ -35,21 +45,4 @@ const getMaineEnvironments = async () => {
   const environmentIds = environments.docs.map(doc => doc.id);
 
   return environmentIds;
-};
-
-const updateServiceStatus = async (environmentIds: string[]): Promise<void> => {
-  const db = admin.firestore();
-  environmentIds.forEach(async envId => {
-    const serviceRef = db
-      .collection(`orgs/maine/environments/${envId}/services`)
-      .doc('enroll');
-
-    const serviceSnapshot = await serviceRef.get();
-
-    const serviceDoc = serviceSnapshot.data() as EnvironmentService;
-
-    const reachable = await isUp(serviceDoc.url);
-
-    await serviceRef.update({ reachable });
-  });
 };

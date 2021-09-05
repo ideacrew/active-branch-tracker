@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { EnvironmentsService } from './environments.service';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, AngularFireFunctionsModule],
   providers: [EnvironmentsService],
 })
 export class EnvironmentsDataAccessModule {}

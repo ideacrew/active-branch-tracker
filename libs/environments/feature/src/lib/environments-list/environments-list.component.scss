@@ -3,6 +3,11 @@
   padding: 3rem;
 }
 
+h1 {
+  display: flex;
+  align-items: center;
+}
+
 h1,
 h2,
 h3,
@@ -32,4 +37,13 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.heading-button {
+  display: inline-flex;
+  background-color: hsl(120, 16%, 23%);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  color: hsl(120, 12%, 64%);
+  margin-left: 0.5rem;
 }

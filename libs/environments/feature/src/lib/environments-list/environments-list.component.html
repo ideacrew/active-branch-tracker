@@ -1,4 +1,13 @@
-<h1><a routerLink="../">Orgs</a> / {{ orgName$ | async }}</h1>
+<h1 *ngIf="orgName$ | async as orgName">
+  <a routerLink="../">Orgs</a> / {{ orgName }}
+  <button
+    (click)="refreshEnvironments()"
+    *ngIf="orgName === 'Maine'"
+    class="heading-button"
+  >
+    Refresh
+  </button>
+</h1>
 
 <h2>Prod-like Environments</h2>
 <ng-container *ngIf="prodLike$ | async as prodEnvs">

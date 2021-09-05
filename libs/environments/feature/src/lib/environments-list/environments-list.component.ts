@@ -21,6 +21,7 @@ import {
 })
 export class EnvironmentsListComponent {
   orgId = '';
+  refreshing = false;
 
   orgId$ = this.route.paramMap.pipe(
     filter((params: ParamMap) => params.has('orgId')),
@@ -72,5 +73,11 @@ export class EnvironmentsListComponent {
 
   trackByEnvironmentName(index: number, env: OrgEnvironment): string {
     return `${env.id}-${env.name}`;
+  }
+
+  async refreshEnvironments(): Promise<void> {
+    this.refreshing = true;
+    await this.envService.refreshEnvironmentsStatus();
+    this.refreshing = false;
   }
 }

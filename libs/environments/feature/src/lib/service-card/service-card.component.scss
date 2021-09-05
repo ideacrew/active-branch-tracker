@@ -1,19 +1,25 @@
 :host {
+  --border-color: hsl(0, 32%, 61%);
+  --text-color: hsl(0, 32%, 61%);
   display: inline-flex;
   flex-direction: column;
   gap: 0.75rem;
   background-color: transparent;
   padding: 0.75rem;
   border-radius: 3px;
-  border: 1px solid var(--font-color);
-  color: #fff;
+  border: 1px solid var(--border-color);
   transition: all 150ms ease-in-out;
   position: relative;
   cursor: pointer;
 }
 
+:host(.reachable) {
+  --border-color: hsl(120, 13%, 48%);
+  --text-color: hsl(120, 13%, 48%);
+}
+
 .env-link {
-  color: var(--font-color);
+  color: var(--text-color);
   font-weight: 300;
   text-decoration: none;
 }
@@ -34,6 +40,6 @@
 }
 
 .external-link {
-  fill: var(--font-color);
+  fill: var(--text-color);
   opacity: 0.5;
 }
