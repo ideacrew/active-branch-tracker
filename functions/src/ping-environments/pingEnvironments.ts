@@ -7,6 +7,7 @@ import { updateServiceStatus } from './updateServiceStatus';
 admin.initializeApp();
 
 export const pingEnvironmentsCron = async (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _context: functions.EventContext,
 ): Promise<null> => {
   await updateMaineEnvironments();
@@ -25,6 +26,7 @@ export const pingEnvironmentsHttp = async (
 
 export const pingEnvironmentsCallable = async (
   data: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _context: functions.https.CallableContext,
 ): Promise<unknown> => {
   await updateMaineEnvironments();
