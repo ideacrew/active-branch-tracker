@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase/compat/app';
 
 @Pipe({
   name: 'firestoreDate',

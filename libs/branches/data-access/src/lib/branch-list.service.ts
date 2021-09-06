@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
-} from '@angular/fire/firestore';
+} from '@angular/fire/compat/firestore';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

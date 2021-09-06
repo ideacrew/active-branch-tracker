@@ -1,3 +1,5 @@
+import firebase from 'firebase/compat/app';
+
 import { AppData } from './appData';
 import { LatestDeployment } from './latestDeployment';
 
@@ -11,7 +13,7 @@ export interface OrgEnvironment {
   architecture: Architecture;
   latestDeployment: LatestDeployment;
   owner: string;
-  ownerRelease: firebase.default.firestore.Timestamp;
+  ownerRelease: firebase.firestore.Timestamp;
   glue?: AppData;
   enroll?: AppData;
   reachable: boolean | undefined;

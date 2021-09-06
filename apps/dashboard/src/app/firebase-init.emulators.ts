@@ -1,6 +1,6 @@
 // Work around for https://github.com/firebase/firebase-js-sdk/issues/4110
 console.log('Initializing Firebase App');
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/functions';
