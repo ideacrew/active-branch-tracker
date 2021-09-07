@@ -1,27 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { isDevMode, NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { AngularFireModule } from '@angular/fire/compat';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 
 // Firebase imports
+import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
 import {
-  AngularFirestoreModule,
-  USE_EMULATOR as USE_FIRESTORE_EMULATOR,
-  SETTINGS as FIRESTORE_SETTINGS,
-} from '@angular/fire/compat/firestore';
+  connectFirestoreEmulator,
+  getFirestore,
+  provideFirestore,
+} from '@angular/fire/firestore';
+import {
+  provideAuth,
+  initializeAuth,
+  connectAuthEmulator,
+} from '@angular/fire/auth';
 import {
   USE_EMULATOR as USE_FUNCTIONS_EMULATOR,
   ORIGIN as FUNCTIONS_ORIGIN,
 } from '@angular/fire/compat/functions';
-import {
-  AngularFireAuthModule,
-  USE_EMULATOR as USE_AUTH_EMULATOR,
-} from '@angular/fire/compat/auth';
-
 import { AngularFireAuthGuardModule } from '@angular/fire/compat/auth-guard';
 
 import { DisplayConfigModule } from '@idc/display-config';
@@ -39,7 +39,7 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
@@ -60,27 +60,25 @@ import { AppRoutingModule } from './app-routing.module';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
     DisplayConfigModule,
-    AngularFirestoreModule,
-    AngularFireAuthModule,
+    provideFirestore(() => {
+      const firestore = getFirestore();
+      if (environment.useEmulators) {
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      }
+      return firestore;
+    }),
+    provideAuth(() => {
+      const auth = initializeAuth(getApp());
+      if (environment.useEmulators) {
+        connectAuthEmulator(auth, 'http://localhost:8080');
+      }
+      return auth;
+    }),
     AngularFireAuthGuardModule,
     AuthModule,
   ],
   bootstrap: [AppComponent],
   providers: [
-    {
-      provide: USE_FIRESTORE_EMULATOR,
-      useValue: environment.useEmulators ? ['localhost', 8080] : undefined,
-    },
-    {
-      provide: USE_AUTH_EMULATOR,
-      useValue: environment.useEmulators
-        ? ['http://localhost:9099']
-        : undefined,
-    },
-    {
-      provide: FIRESTORE_SETTINGS,
-      useValue: { ignoreUndefinedProperties: true },
-    },
     {
       provide: USE_FUNCTIONS_EMULATOR,
       useValue: environment.useEmulators ? ['localhost', 5001] : undefined,
