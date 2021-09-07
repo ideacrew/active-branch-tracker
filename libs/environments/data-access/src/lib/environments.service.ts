@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase/compat/app';
 
 import { YellrUser } from '@idc/user/data-access';
 import { filterNullish } from '@idc/util';
@@ -10,7 +11,6 @@ import { filterNullish } from '@idc/util';
 import { Org, OrgEnvironment, OwnerReleaseUpdate, OwnerUpdate } from './models';
 import { EnvInfo } from './models/envInfo';
 import { OtherService } from './models/otherService';
-import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Injectable()
 export class EnvironmentsService {

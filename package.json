@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "nx",
     "nx": "nx",
+    "ng:update": "cross-env FORCE_NG_UPDATE=true ng update",
     "seed:db": "cross-env FIRESTORE_EMULATOR_HOST=localhost:8080 node db/scripts/seedDb",
     "start:live": "ng serve",
     "start:emulators": "firebase emulators:start --project=demo-project --only=firestore,functions,auth --import=./db/exports --export-on-exit=./db/exports",
@@ -41,7 +42,7 @@
     "@angular/common": "12.1.0",
     "@angular/compiler": "12.1.0",
     "@angular/core": "12.1.0",
-    "@angular/fire": "^6.1.4",
+    "@angular/fire": "^7.0.3",
     "@angular/forms": "12.1.0",
     "@angular/platform-browser": "12.1.0",
     "@angular/platform-browser-dynamic": "12.1.0",
@@ -55,10 +56,11 @@
     "@nrwl/angular": "12.8.0",
     "core-js": "^2.5.4",
     "date-fns": "^2.16.1",
-    "firebase": "^8.7.0",
+    "firebase": "^9.0.0",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
-    "zone.js": "0.11.4"
+    "zone.js": "0.11.4",
+    "rxfire": "^6.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "12.1.3",
@@ -92,7 +94,7 @@
     "eslint-plugin-jsdoc": "latest",
     "eslint-plugin-prefer-arrow": "latest",
     "faker": "^5.5.2",
-    "firebase-tools": "^9.10.1",
+    "firebase-tools": "^9.0.0",
     "fuzzy": "^0.1.3",
     "inquirer": "^6.2.2",
     "inquirer-autocomplete-prompt": "^1.0.1",
@@ -103,6 +105,9 @@
     "rxjs-tslint-rules": "^4.34.3",
     "ts-jest": "27.0.3",
     "ts-node": "9.1.1",
-    "typescript": "4.3.5"
+    "typescript": "4.3.5",
+    "@angular-devkit/architect": "^0.1200.0",
+    "open": "^7.0.3",
+    "jsonc-parser": "^3.0.0"
   }
 }

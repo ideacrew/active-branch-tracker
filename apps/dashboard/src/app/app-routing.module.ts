@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import {
   AngularFireAuthGuard,
   redirectUnauthorizedTo,
-} from '@angular/fire/auth-guard';
+} from '@angular/fire/compat/auth-guard';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from '@idc/auth';
 import { AdminOnlyGuard } from '@idc/user/data-access';
