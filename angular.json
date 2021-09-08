@@ -36,7 +36,8 @@
               "libs/auth/src/**/*.ts",
               "libs/auth/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -66,7 +67,8 @@
               "libs/branches/data-access/src/**/*.ts",
               "libs/branches/data-access/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -96,7 +98,8 @@
               "libs/branches/feature/src/**/*.ts",
               "libs/branches/feature/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -126,7 +129,8 @@
               "libs/branches/ui-components/src/**/*.ts",
               "libs/branches/ui-components/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -250,7 +254,8 @@
               "apps/dashboard/src/**/*.ts",
               "apps/dashboard/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -291,7 +296,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/dashboard-e2e/**/*.{js,ts}"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -308,7 +314,8 @@
               "libs/display-config/src/**/*.ts",
               "libs/display-config/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -338,7 +345,8 @@
               "libs/environments/data-access/src/**/*.ts",
               "libs/environments/data-access/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -368,7 +376,8 @@
               "libs/environments/feature/src/**/*.ts",
               "libs/environments/feature/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -398,7 +407,8 @@
               "libs/pull-requests/data-access/src/**/*.ts",
               "libs/pull-requests/data-access/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -423,7 +433,8 @@
               "libs/pull-requests/feature/src/**/*.ts",
               "libs/pull-requests/feature/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -448,7 +459,8 @@
               "libs/testing/src/**/*.ts",
               "libs/testing/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -478,7 +490,8 @@
               "libs/user/data-access/src/**/*.ts",
               "libs/user/data-access/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -503,7 +516,8 @@
               "libs/util/src/**/*.ts",
               "libs/util/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
