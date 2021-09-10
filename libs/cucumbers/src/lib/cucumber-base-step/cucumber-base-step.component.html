@@ -1,0 +1,4 @@
+<span [ngClass]="longStep ? 'long-step' : ''">
+  {{ step.match.location }}:
+  {{ step.result.duration | convertNanoseconds: 'ms' }}
+</span>

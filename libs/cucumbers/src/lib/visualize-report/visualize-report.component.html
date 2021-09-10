@@ -1,0 +1,21 @@
+<h1>Visualize Cucumber Report</h1>
+
+<ng-container *ngIf="report$ | async as report; else fileUpload">
+  <idc-cucumber-feature
+    *ngFor="let feature of report; trackBy: trackByUri"
+    [feature]="feature"
+  ></idc-cucumber-feature>
+</ng-container>
+
+<ng-template #fileUpload>
+  <label for="file-upload" class="drop-zone">
+    <span>click to upload .json report file</span>
+    <input
+      #fileInput
+      id="file-upload"
+      name="file-upload"
+      (change)="handleFileUpload($event)"
+      type="file"
+    />
+  </label>
+</ng-template>

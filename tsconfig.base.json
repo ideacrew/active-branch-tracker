@@ -27,6 +27,7 @@
       "@idc/branches/ui-components": [
         "libs/branches/ui-components/src/index.ts"
       ],
+      "@idc/cucumbers": ["libs/cucumbers/src/index.ts"],
       "@idc/display-config": ["libs/display-config/src/index.ts"],
       "@idc/environments/data-access": [
         "libs/environments/data-access/src/index.ts"

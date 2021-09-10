@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  padding: 1rem;
+}
+
+.drop-zone {
+  border: 2px dashed var(--neutral-010);
+  width: max-content;
+  padding: 3rem 6rem;
+  margin-top: 2rem;
+  display: block;
+}
+
+input[type='file'] {
+  display: none;
+}

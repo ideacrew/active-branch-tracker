@@ -147,6 +147,31 @@
         }
       }
     },
+    "cucumbers": {
+      "projectType": "library",
+      "root": "libs/cucumbers",
+      "sourceRoot": "libs/cucumbers/src",
+      "prefix": "idc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/cucumbers"],
+          "options": {
+            "jestConfig": "libs/cucumbers/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/cucumbers/src/**/*.ts",
+              "libs/cucumbers/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "dashboard": {
       "projectType": "application",
       "schematics": {

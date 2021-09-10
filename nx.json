@@ -35,6 +35,9 @@
     "branches-ui-components": {
       "tags": ["scope:dashboard", "type:ui"]
     },
+    "cucumbers": {
+      "tags": []
+    },
     "dashboard": {
       "tags": []
     },

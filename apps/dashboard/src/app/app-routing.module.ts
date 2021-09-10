@@ -31,6 +31,11 @@ const routes = [
         module => module.EnvironmentsFeatureModule,
       ),
   },
+  {
+    path: 'cucumbers',
+    loadChildren: () =>
+      import('@idc/cucumbers').then(module => module.CucumbersModule),
+  },
 ];
 
 @NgModule({
