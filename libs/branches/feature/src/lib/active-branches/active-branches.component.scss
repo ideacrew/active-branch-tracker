@@ -17,7 +17,7 @@ pre {
 
 .branch-container-heading {
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid hsl(120, 10%, 45%);
+  border-bottom: 1px solid var(--green-050);
   display: flex;
   align-items: center;
 }
@@ -28,7 +28,7 @@ pre {
 }
 
 .branch-type-heading {
-  color: hsl(120, 13%, 48%);
+  color: var(--green-050);
 }
 
 .other-branches {
@@ -39,10 +39,10 @@ pre {
 .unfold-view {
   margin-left: 1rem;
   border: 0;
-  --icon-fill: hsl(120, 13%, 48%);
+  --icon-fill: var(--green-050);
 
   &:hover {
-    --icon-fill: hsl(120, 12%, 69%);
+    --icon-fill: var(--green-030);
   }
 }
 
@@ -64,13 +64,13 @@ pre {
   margin-left: 0.5rem;
   height: 2rem;
   background-color: transparent;
-  border: 2px solid hsl(120, 13%, 48%);
+  border: 2px solid var(--green-050);
   border-radius: 4px;
   background-color: hsla(120, 12%, 69%, 0.5);
   padding: 0 0.25rem;
   // box-shadow: 0 0 0 3px hsla(59, 93%, 45%, 0.8);
 
   &:focus {
-    background-color: hsl(120, 12%, 69%);
+    background-color: var(--green-030);
   }
 }

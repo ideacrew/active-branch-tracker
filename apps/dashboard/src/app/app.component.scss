@@ -1,6 +1,6 @@
 :host {
   --sidebar-width: 3rem;
-  --primary-green: hsl(120, 13%, 48%);
+  --primary-green: var(--green-050);
   display: grid;
   position: fixed;
   width: 100%;
@@ -35,7 +35,7 @@
   }
 
   svg {
-    fill: hsl(120, 6%, 33%);
+    fill: var(--green-070);
   }
 }
 

@@ -17,7 +17,7 @@ h1,
 h2,
 h3,
 a {
-  color: hsl(120, 13%, 90%);
+  color: var(--green-010);
   font-weight: 300;
 }
 
@@ -46,9 +46,9 @@ h3 {
 
 .heading-button {
   display: inline-flex;
-  background-color: hsl(120, 16%, 23%);
+  background-color: var(--green-080);
   padding: 0.5rem 0.75rem;
   border-radius: 0.25rem;
-  color: hsl(120, 12%, 64%);
+  color: var(--green-040);
   margin-left: 0.5rem;
 }

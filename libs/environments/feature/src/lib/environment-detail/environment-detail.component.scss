@@ -1,7 +1,7 @@
 :host {
   display: block;
   padding: 3rem;
-  --label-color: hsl(120, 0%, 70%);
+  --label-color: var(--green-030);
 }
 
 h2 {
@@ -13,7 +13,7 @@ h1,
 h2,
 h3,
 a {
-  color: hsl(120, 13%, 90%);
+  color: var(--green-010);
   font-weight: 300;
 }
 
@@ -59,8 +59,8 @@ form {
     font-size: 1rem;
     line-height: 1;
     padding: 0 0.5rem;
-    background-color: hsl(120, 13%, 20%);
-    color: hsl(120, 3%, 80%);
+    background-color: var(--green-080);
+    color: var(--green-020);
     border-radius: 2px;
   }
 
@@ -72,8 +72,8 @@ form {
 .button {
   padding: 0.5rem 0.75rem;
   border-radius: 2px;
-  color: hsl(120, 3%, 50%);
-  border: 1px solid hsl(120, 13%, 20%);
+  color: var(--green-050);
+  border: 1px solid var(--green-080);
   text-transform: uppercase;
 }
 
@@ -96,10 +96,10 @@ form {
   display: inline-flex;
   flex-direction: column;
   gap: 0.75rem;
-  background-color: hsl(0, 0%, 33%);
+  background-color: var(--neutral-070);
   padding: 1rem;
   border-radius: 5px;
-  color: hsl(0, 0%, 90%);
+  color: var(--neutral-010);
 }
 
 .card + .card {
@@ -112,7 +112,7 @@ form {
 
 svg {
   margin-right: 0.5rem;
-  fill: hsl(0, 0%, 65%);
+  fill: var(--neutral-040);
 }
 
 .svg-value {
@@ -136,6 +136,6 @@ svg {
   gap: 0.5rem;
 
   svg {
-    fill: hsl(120, 13%, 20%);
+    fill: var(--green-080);
   }
 }

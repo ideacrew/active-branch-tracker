@@ -1,18 +1,18 @@
 :host {
-  background-color: hsl(0, 0%, 33%);
-  color: hsl(0, 0%, 90%);
+  background-color: var(--neutral-070);
+  color: var(--neutral-010);
   cursor: pointer;
 }
 
 .heading {
-  background-color: #000;
+  background-color: var(--neutral-090);
   .branch-name {
-    color: hsl(0, 0%, 65%);
+    color: var(--neutral-040);
   }
 }
 
 .repo-name {
-  color: hsl(0, 0%, 46%);
+  color: var(--neutral-050);
 }
 
 .svg-icon {

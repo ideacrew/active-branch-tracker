@@ -8,10 +8,10 @@
 }
 
 .org-link {
-  background-color: hsl(120, 13%, 48%);
+  background-color: var(--green-050);
   padding: 1rem 2rem;
   text-decoration: none;
-  color: hsl(120, 79%, 2%);
+  color: var(--green-100);
   border-radius: 0.25rem;
   font-size: 2rem;
 

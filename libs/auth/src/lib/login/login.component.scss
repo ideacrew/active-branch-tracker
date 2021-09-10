@@ -25,19 +25,19 @@ input {
 }
 
 .login-button {
-  border: 1px solid white;
-  color: white;
+  border: 1px solid var(--neutral-010);
+  color: var(--neutral-010);
   padding: 1rem 3rem;
 }
 
 .logout-button {
   padding: 0.5rem 1rem;
   border: 1px solid currentColor;
-  color: white;
+  color: var(--neutral-010);
 }
 
 span {
-  color: #fff;
+  color: var(--neutral-010);
   margin-left: 0.25rem;
 }
 

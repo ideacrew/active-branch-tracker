@@ -1,7 +1,7 @@
 .branch {
-  --card-color: hsl(120, 13%, 48%);
-  --card-text-color: hsl(120, 79%, 2%);
-  --card-color-dark: hsl(120, 22%, 20%);
+  --card-color: var(--green-050);
+  --card-text-color: var(--green-100);
+  --card-color-dark: var(--green-080);
 
   --light-bulb-color: var(--card-color-dark);
 
@@ -12,8 +12,8 @@
 
   &.collapsed {
     padding: 0;
-    --card-text-color: hsl(120, 13%, 48%);
-    --card-color: hsl(120, 79%, 2%);
+    --card-text-color: var(--green-050);
+    --card-color: var(--green-100);
 
     idc-branch-status {
       display: none;
@@ -22,30 +22,30 @@
 
   &.neutral,
   &.cancelled {
-    --card-color: hsl(0, 0%, 63%);
-    --card-text-color: hsl(0, 0%, 9%);
-    --card-color-dark: hsl(0, 0%, 20%);
+    --card-color: var(--neutral-040);
+    --card-text-color: var(--neutral-090);
+    --card-color-dark: var(--neutra-080);
   }
 
   &.neutral.collapsed,
   &.cancelled.collapsed {
-    --card-text-color: hsl(0, 0%, 63%);
-    --card-color: hsl(0, 0%, 9%);
+    --card-text-color: var(--neutral-040);
+    --card-color: var(--neutral-090);
   }
 
   &.failure {
-    --card-color: hsl(0, 11%, 55%);
-    --card-text-color: hsl(0, 37%, 9%);
-    --card-color-dark: hsl(0, 22%, 20%);
+    --card-color: var(--red-050);
+    --card-text-color: var(--red-090);
+    --card-color-dark: var(--red-080);
   }
 
   &.failure.collapsed {
-    --card-text-color: hsl(0, 11%, 55%);
-    --card-color: hsl(0, 37%, 9%);
+    --card-text-color: var(--red-050);
+    --card-color: var(--red-090);
   }
 
   &.tracked {
-    --light-bulb-color: hsl(59, 93%, 45%);
+    --light-bulb-color: var(--yellow-050);
 
     .light-bulb-button:hover {
       --light-bulb-color: var(--card-color-dark);
@@ -125,7 +125,7 @@
   }
 
   &:hover {
-    --light-bulb-color: hsl(59, 93%, 45%);
+    --light-bulb-color: var(--yellow-050);
   }
 }
 
@@ -238,7 +238,7 @@ a {
 }
 
 .failure-percentage {
-  color: hsl(120, 9%, 42%);
+  color: var(--green-060);
 
   &:hover {
     text-decoration: none;
@@ -246,7 +246,7 @@ a {
 }
 
 .branch.failure .failure-percentage {
-  color: hsl(0, 9%, 42%);
+  color: var(--red-060);
 }
 
 .branch.cancelled .failure-percentage {

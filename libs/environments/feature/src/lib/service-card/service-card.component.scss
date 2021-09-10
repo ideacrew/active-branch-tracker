@@ -1,6 +1,6 @@
 :host {
-  --border-color: hsl(0, 32%, 61%);
-  --text-color: hsl(0, 32%, 61%);
+  --border-color: var(--red-040);
+  --text-color: var(--red-040);
   display: inline-flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -14,8 +14,8 @@
 }
 
 :host(.reachable) {
-  --border-color: hsl(120, 13%, 48%);
-  --text-color: hsl(120, 13%, 48%);
+  --border-color: var(--green-050);
+  --text-color: var(--green-050);
 }
 
 .env-link {
