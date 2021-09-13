@@ -8,6 +8,6 @@ import { BrakemanOutput } from './brakeman.interface';
 export async function handleBrakemanOutput(
   output: BrakemanOutput,
 ): Promise<void> {
-  console.log({ output });
+  // console.log({ output });
   return Promise.resolve();
 }

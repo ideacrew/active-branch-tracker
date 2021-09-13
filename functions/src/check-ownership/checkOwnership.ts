@@ -19,7 +19,7 @@ export const checkOwnership = async ({
 
   if (envDoc.exists) {
     const { owner } = envDoc.data() as DeploymentEnvironment;
-    console.log('Owner is', owner !== 'Open');
+    // console.log('Owner is', owner !== 'Open');
     return owner !== 'Open' || owner === undefined;
   } else {
     return false;

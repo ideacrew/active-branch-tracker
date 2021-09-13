@@ -10,7 +10,6 @@ export const calculateFeatureRuntime = (feature: CucumberFeature): number => {
 
   const backgroundElements: BackgroundElement[] =
     feature.elements.filter(isBackground);
-  console.log(backgroundElements);
 
   const scenarioElementsRuntimes: number[] = scenarioElements.map(
     calculateScenarioRuntime,
