@@ -15,18 +15,19 @@ export interface BackgroundElement {
   name: string;
   description: string;
   line: number;
-  steps: ElementStep[] | undefined;
+  steps?: ElementStep[];
 }
 
 export interface ScenarioElement {
   id: string;
   keyword: 'Scenario';
   type: 'scenario';
+  before?: BaseStep[];
   after: BaseStep[];
   name: string;
   description: string;
   line: number;
-  steps: ElementStep[] | undefined;
+  steps?: ElementStep[];
 }
 
 export interface ElementStep extends BaseStep {

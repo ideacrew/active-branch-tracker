@@ -5,48 +5,26 @@
     *ngFor="let step of element.before; trackBy: trackByFn"
     [step]="step"
   >
-    {{ step.match.location }}:
-    {{ step.result.duration | convertNanoseconds: 'ms' }}
   </idc-cucumber-base-step>
   <h4>Steps:</h4>
-  <idc-cucumber-base-step
+  <idc-cucumber-element-step
     *ngFor="let step of element.steps; trackBy: trackByFn"
     [step]="step"
   >
-    {{ step.match.location }}:
-    {{ step.result.duration | convertNanoseconds: 'ms' }}
-    <idc-cucumber-base-step
-      *ngFor="let afterStep of step.after; trackBy: trackByFn"
-      [step]="step"
-    >
-      {{ afterStep.match.location }}:
-      {{ afterStep.result.duration | convertNanoseconds: 'ms' }}
-    </idc-cucumber-base-step>
-  </idc-cucumber-base-step>
+  </idc-cucumber-element-step>
 </ng-container>
 
 <ng-container *ngIf="element.keyword === 'Scenario'">
   <h4>Steps:</h4>
-  <idc-cucumber-base-step
+  <idc-cucumber-element-step
     *ngFor="let step of element.steps; trackBy: trackByFn"
     [step]="step"
   >
-    {{ step.match.location }}:
-    {{ step.result.duration | convertNanoseconds: 'ms' }}
-    <idc-cucumber-base-step
-      *ngFor="let afterStep of step.after; trackBy: trackByFn"
-      [step]="step"
-    >
-      {{ afterStep.match.location }}:
-      {{ afterStep.result.duration | convertNanoseconds: 'ms' }}
-    </idc-cucumber-base-step>
-  </idc-cucumber-base-step>
+  </idc-cucumber-element-step>
   <h4>After:</h4>
   <idc-cucumber-base-step
     *ngFor="let step of element.after; trackBy: trackByFn"
     [step]="step"
   >
-    {{ step.match.location }}:
-    {{ step.result.duration | convertNanoseconds: 'ms' }}
   </idc-cucumber-base-step>
 </ng-container>

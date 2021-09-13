@@ -1,10 +1,8 @@
-<details>
-  <summary>
-    <span>{{ feature.keyword }}: {{ feature.uri }}</span>
-  </summary>
-  <p>{{ feature.description }}</p>
-  <idc-cucumber-element
-    *ngFor="let element of feature.elements; trackBy: trackByFn"
-    [element]="element"
-  ></idc-cucumber-element>
-</details>
+<h2 class="feature-title">{{ feature.keyword }}: {{ feature.name }}</h2>
+<p class="feature-description">{{ feature.description }}</p>
+<div
+  class="element-container"
+  *ngFor="let element of feature.elements; trackBy: trackByFn"
+>
+  <h3>{{ element.keyword }}: {{ element.name }}</h3>
+</div>

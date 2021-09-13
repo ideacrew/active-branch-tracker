@@ -7,6 +7,7 @@ import { CucumberElementComponent } from './cucumber-element/cucumber-element.co
 import { NanosecondsToSecondsPipe } from './pipes/nanoseconds-to-seconds.pipe';
 import { ConvertNanosecondsPipe } from './pipes/convert-nanoseconds.pipe';
 import { CucumberBaseStepComponent } from './cucumber-base-step/cucumber-base-step.component';
+import { ElementStepComponent } from './element-step/element-step.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { CucumberBaseStepComponent } from './cucumber-base-step/cucumber-base-st
     NanosecondsToSecondsPipe,
     ConvertNanosecondsPipe,
     CucumberBaseStepComponent,
+    ElementStepComponent,
   ],
 })
 export class CucumbersModule {}

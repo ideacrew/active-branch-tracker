@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+
 import { BaseStep } from '../models';
 
 const oneSecondInNanoseconds = 1000000000;

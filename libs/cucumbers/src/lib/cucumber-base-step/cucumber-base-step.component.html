@@ -1,4 +1,10 @@
-<span [ngClass]="longStep ? 'long-step' : ''">
-  {{ step.match.location }}:
+<!-- <span class="name">After</span> -->
+<span class="location" [ngClass]="longStep ? 'long-step' : ''">
+  <!-- <pre>{{ step | json }}</pre> -->
+  {{ step.match.location }}
+</span>
+
+<span class="duration" [ngClass]="longStep ? 'long-step' : ''">
+  <!-- <pre>{{ step | json }}</pre> -->
   {{ step.result.duration | convertNanoseconds: 'ms' }}
 </span>

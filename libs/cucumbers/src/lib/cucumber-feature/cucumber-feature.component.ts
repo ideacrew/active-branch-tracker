@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { BackgroundElement, CucumberFeature, ScenarioElement } from '../models';
+import { CucumberFeature } from '../models';
 
 @Component({
   selector: 'idc-cucumber-feature',
