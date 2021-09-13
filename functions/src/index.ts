@@ -46,8 +46,9 @@ export const defaultBranchFailure = functions.firestore
     ).defaultBranchFailure(change);
   });
 
-export const pingEnvironmentsCron = functions.pubsub
-  .schedule('every 1 hours')
+export const pingEnvironmentsCron = functions
+  .runWith({ timeoutSeconds: 300 })
+  .pubsub.schedule('every 1 hours')
   .onRun(async context => {
     await (await import('./ping-environments')).pingEnvironmentsCron(context);
   });

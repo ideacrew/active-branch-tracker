@@ -21,7 +21,6 @@ export const pingEnvironmentsHttp = async (
   await updateMaineEnvironments();
 
   response.status(200).send('Ping complete');
-  return Promise.resolve();
 };
 
 export const pingEnvironmentsCallable = async (
