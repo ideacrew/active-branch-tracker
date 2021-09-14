@@ -4,5 +4,8 @@
   class="element-container"
   *ngFor="let element of feature.elements; trackBy: trackByFn"
 >
-  <h3>{{ element.keyword }}: {{ element.name }}</h3>
+  <h3>
+    {{ element.keyword }}: {{ element.name }}
+    {{ element | elementRuntime: 'ms' }}
+  </h3>
 </div>
