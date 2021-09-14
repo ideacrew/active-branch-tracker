@@ -1,11 +1,12 @@
-<h2 class="feature-title">{{ feature.keyword }}: {{ feature.name }}</h2>
-<p class="feature-description">{{ feature.description }}</p>
-<div
-  class="element-container"
-  *ngFor="let element of feature.elements; trackBy: trackByFn"
->
-  <h3>
-    {{ element.keyword }}: {{ element.name }}
-    {{ element | elementRuntime: 'ms' }}
-  </h3>
-</div>
+<h2 class="feature-title">{{ feature.name }} {{ feature | featureRuntime }}</h2>
+<ng-container *ngIf="detailedReport">
+  <div
+    class="element-container"
+    *ngFor="let element of feature.elements; trackBy: trackByFn"
+  >
+    <h3>
+      {{ element.keyword }}: {{ element.name }}
+      {{ element | elementRuntime }}
+    </h3>
+  </div>
+</ng-container>

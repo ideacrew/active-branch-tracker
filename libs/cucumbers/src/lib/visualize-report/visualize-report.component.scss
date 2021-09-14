@@ -14,3 +14,11 @@
 input[type='file'] {
   display: none;
 }
+
+.button {
+  padding: 0.5rem 0.75rem;
+  border-radius: 2px;
+  color: var(--green-050);
+  border: 1px solid var(--green-080);
+  text-transform: uppercase;
+}

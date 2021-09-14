@@ -13,6 +13,9 @@ export class VisualizeReportComponent {
   report = new BehaviorSubject<CucumberFeature[] | null>(null);
   report$ = this.report.asObservable();
 
+  detailedReport = new BehaviorSubject<boolean>(false);
+  detailedReport$ = this.detailedReport.asObservable();
+
   handleFileUpload(event: Event) {
     const target = event.target as HTMLInputElement;
     const { files } = target;
@@ -31,5 +34,9 @@ export class VisualizeReportComponent {
 
   trackByUri(index: number, feature: CucumberFeature): string {
     return feature.uri;
+  }
+
+  toggleDetailedReport() {
+    this.detailedReport.next(!this.detailedReport.value);
   }
 }

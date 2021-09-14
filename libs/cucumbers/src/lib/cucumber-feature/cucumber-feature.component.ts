@@ -8,6 +8,8 @@ import { CucumberFeature } from '../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CucumberFeatureComponent {
+  @Input() detailedReport: boolean | null = false;
+
   @Input() feature!: CucumberFeature;
 
   trackByFn(index: number) {
