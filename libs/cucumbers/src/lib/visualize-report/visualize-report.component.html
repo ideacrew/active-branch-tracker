@@ -1,5 +1,11 @@
 <h1>Visualize Cucumber Report</h1>
-<button class="button" (click)="toggleDetailedReport()">Detailed Report</button>
+<button
+  class="button"
+  [ngClass]="currentClasses"
+  (click)="toggleDetailedReport()"
+>
+  Detailed Report
+</button>
 
 <ng-container *ngIf="report$ | async as report; else fileUpload">
   <idc-cucumber-feature

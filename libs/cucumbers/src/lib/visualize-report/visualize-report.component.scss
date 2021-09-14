@@ -1,10 +1,11 @@
 :host {
   display: block;
   padding: 1rem;
+  --border-color: var(--neutral-010);
 }
 
 .drop-zone {
-  border: 2px dashed var(--neutral-010);
+  border: 2px dashed var(--border-color);
   width: max-content;
   padding: 3rem 6rem;
   margin-top: 2rem;
@@ -21,4 +22,8 @@ input[type='file'] {
   color: var(--green-050);
   border: 1px solid var(--green-080);
   text-transform: uppercase;
+}
+
+.button.detailed {
+  border-color: var(--yellow-050);
 }

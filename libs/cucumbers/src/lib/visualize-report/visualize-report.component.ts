@@ -16,6 +16,12 @@ export class VisualizeReportComponent {
   detailedReport = new BehaviorSubject<boolean>(false);
   detailedReport$ = this.detailedReport.asObservable();
 
+  get currentClasses(): { [key: string]: boolean } {
+    return {
+      detailed: this.detailedReport.value,
+    };
+  }
+
   handleFileUpload(event: Event) {
     const target = event.target as HTMLInputElement;
     const { files } = target;
@@ -38,5 +44,6 @@ export class VisualizeReportComponent {
 
   toggleDetailedReport() {
     this.detailedReport.next(!this.detailedReport.value);
+    console.log('Toggled to', this.detailedReport.value);
   }
 }
