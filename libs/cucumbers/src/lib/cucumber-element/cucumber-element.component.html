@@ -1,5 +1,5 @@
 <h3>{{ element.keyword }}</h3>
-<ng-container *ngIf="element.keyword === 'Background'">
+<ng-container *ngIf="element.type === 'background'">
   <h4>Before:</h4>
   <idc-cucumber-base-step
     *ngFor="let step of element.before; trackBy: trackByFn"
@@ -14,7 +14,15 @@
   </idc-cucumber-element-step>
 </ng-container>
 
-<ng-container *ngIf="element.keyword === 'Scenario'">
+<ng-container *ngIf="element.type === 'scenario'">
+  <ng-container *ngIf="element.before">
+    <h4>Before:</h4>
+    <idc-cucumber-base-step
+      *ngFor="let step of element.before; trackBy: trackByFn"
+      [step]="step"
+    >
+    </idc-cucumber-base-step>
+  </ng-container>
   <h4>Steps:</h4>
   <idc-cucumber-element-step
     *ngFor="let step of element.steps; trackBy: trackByFn"

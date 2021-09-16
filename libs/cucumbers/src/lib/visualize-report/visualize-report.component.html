@@ -1,19 +1,27 @@
 <h1>Visualize Cucumber Report</h1>
-<button
-  class="button"
-  [ngClass]="currentClasses"
-  (click)="toggleDetailedReport()"
->
-  Detailed Report
-</button>
+<div class="button-group">
+  <button
+    class="button"
+    [ngClass]="currentClasses"
+    (click)="toggleDetailedReport()"
+  >
+    Detailed Report
+  </button>
 
-<ng-container *ngIf="report$ | async as report; else fileUpload">
+  <button class="button" (click)="clearReport()">Clear Report</button>
+</div>
+
+<h2 class="file-name" *ngIf="fileName$ | async as fileName">
+  File Name: {{ fileName }}
+</h2>
+
+<div class="feature-list" *ngIf="report$ | async as report; else fileUpload">
   <idc-cucumber-feature
     *ngFor="let feature of report; trackBy: trackByUri"
     [feature]="feature"
     [detailedReport]="detailedReport$ | async"
   ></idc-cucumber-feature>
-</ng-container>
+</div>
 
 <ng-template #fileUpload>
   <label for="file-upload" class="drop-zone">

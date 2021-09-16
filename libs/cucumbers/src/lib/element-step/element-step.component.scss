@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 80ch 70ch 20ch;
   grid-template-areas: 'name location duration';
-  gap: 1rem;
+  column-gap: 1rem;
 }
 
 .name {

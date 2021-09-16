@@ -1,5 +1,9 @@
-:root {
+:host {
   display: block;
+  padding: 0.5rem;
+  background-color: var(--green-090);
+  border: 1px solid var(--green-080);
+  border-radius: 0.25em;
 }
 
 h2 {

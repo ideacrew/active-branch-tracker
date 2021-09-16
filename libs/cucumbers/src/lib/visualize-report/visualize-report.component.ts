@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { CucumberFeature } from '../models';
 
@@ -12,6 +13,9 @@ import { CucumberFeature } from '../models';
 export class VisualizeReportComponent {
   report = new BehaviorSubject<CucumberFeature[] | null>(null);
   report$ = this.report.asObservable();
+
+  fileName = new Subject<string>();
+  fileName$ = this.fileName.asObservable();
 
   detailedReport = new BehaviorSubject<boolean>(false);
   detailedReport$ = this.detailedReport.asObservable();
@@ -34,6 +38,8 @@ export class VisualizeReportComponent {
     };
 
     if (files) {
+      this.fileName.next(files[0].name);
+
       reader.readAsText(files[0]);
     }
   }
@@ -44,6 +50,10 @@ export class VisualizeReportComponent {
 
   toggleDetailedReport() {
     this.detailedReport.next(!this.detailedReport.value);
-    console.log('Toggled to', this.detailedReport.value);
+  }
+
+  clearReport() {
+    this.report.next(null);
+    this.fileName.next(undefined);
   }
 }

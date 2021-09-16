@@ -4,7 +4,6 @@ import { calculateScenarioRuntime } from './calculateScenarioRuntime';
 import { isBackground, isScenario } from './elementType';
 
 export const calculateFeatureRuntime = (feature: CucumberFeature): number => {
-  console.info('Calculating runtime for', feature.uri);
   const scenarioElements: ScenarioElement[] =
     feature.elements.filter(isScenario);
 
