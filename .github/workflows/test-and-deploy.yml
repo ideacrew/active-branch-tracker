@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
-      - run: npm ci
+      - run: npm install
       - name: Lint Application
         run: npm run affected:lint
   test:
@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
-      - run: npm ci
+      - run: npm install
       - name: Test Application
         run: npm run test
   build:
@@ -45,7 +45,7 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
-      - run: npm ci
+      - run: npm install
       - name: Build Application
         run: npm run build
       - name: Upload build artifact
@@ -63,7 +63,7 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
-      - run: npm ci
+      - run: npm install
       - name: Download artifact
         id: download-artifact
         uses: actions/download-artifact@v2
