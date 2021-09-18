@@ -2,16 +2,13 @@
   "cSpell.words": [
     "Artboard",
     "Chainable",
-    "GCLOUD",
-    "RGHM",
-    "Unprovisioned",
-    "Yellr",
     "cyclomatic",
     "dcbhx",
     "dchbx",
     "demoproject",
     "eqeqeq",
     "firestore",
+    "GCLOUD",
     "gluedb",
     "googleg",
     "kvootla",
@@ -20,9 +17,13 @@
     "pubsub",
     "repos",
     "rerequested",
+    "RGHM",
+    "rspecs",
     "sendgrid",
+    "Unprovisioned",
     "untrack",
     "untracked",
-    "willhelm"
+    "willhelm",
+    "Yellr"
   ]
 }

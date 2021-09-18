@@ -471,6 +471,31 @@
         }
       }
     },
+    "rspecs": {
+      "projectType": "library",
+      "root": "libs/rspecs",
+      "sourceRoot": "libs/rspecs/src",
+      "prefix": "idc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/rspecs"],
+          "options": {
+            "jestConfig": "libs/rspecs/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/rspecs/src/**/*.ts",
+              "libs/rspecs/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "testing": {
       "projectType": "library",
       "root": "libs/testing",

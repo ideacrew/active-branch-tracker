@@ -60,6 +60,9 @@
     "pull-requests-feature": {
       "tags": []
     },
+    "rspecs": {
+      "tags": []
+    },
     "testing": {
       "tags": []
     },
