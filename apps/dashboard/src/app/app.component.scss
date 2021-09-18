@@ -1,6 +1,8 @@
 :host {
   --sidebar-width: 3rem;
   --primary-green: var(--green-050);
+  --svg-fill: var(--primary-green);
+  --svg-transition: fill 500ms ease, stroke 500ms ease;
   display: grid;
   position: fixed;
   width: 100%;
@@ -12,7 +14,6 @@
   position: fixed;
   left: 0;
   top: 0;
-  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +25,9 @@
 
   ul {
     list-style: none;
+    text-align: center;
+    margin-top: 1rem;
+    width: 100%;
   }
 
   li a {
@@ -35,7 +39,12 @@
   }
 
   svg {
-    fill: var(--green-070);
+    fill: var(--svg-fill);
+    transition: var(--svg-transition);
+  }
+
+  svg path {
+    transition: var(--svg-transition);
   }
 }
 
@@ -53,4 +62,16 @@ main {
 
 .claims {
   color: white;
+}
+
+.nav-link {
+  border-right: 3px solid var(--green-100);
+}
+
+.nav-link:hover {
+  --svg-fill: var(--green-010);
+}
+
+.active {
+  border-right-color: var(--green-070);
 }

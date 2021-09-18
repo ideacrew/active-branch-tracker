@@ -36,11 +36,11 @@ const routes = [
     loadChildren: () =>
       import('@idc/cucumbers').then(module => module.CucumbersModule),
   },
-  // {
-  //   path: 'rspecs',
-  //   loadChildren: () =>
-  //     import('@idc/rspecs').then(module => module.RspecsModule),
-  // },
+  {
+    path: 'rspecs',
+    loadChildren: () =>
+      import('@idc/rspecs').then(module => module.RspecsModule),
+  },
 ];
 
 @NgModule({
