@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import * as functions from 'firebase-functions';
 
 import { BranchInfo } from '../models';
@@ -8,14 +9,17 @@ export const defaultBranchFailure = async (
 ): Promise<null> => {
   if (change.after.exists) {
     const {
-      defaultBranch,
       checkSuiteStatus,
       branchName,
       repositoryName,
       organizationName,
+      head_commit,
     } = change.after.data() as BranchInfo;
 
-    if (checkSuiteStatus === 'failure' && defaultBranch) {
+    if (
+      checkSuiteStatus === 'failure' &&
+      branchesToBeAlertedOn(change.after.data() as BranchInfo)
+    ) {
       functions.logger.info(
         `${organizationName}/${repositoryName}/${branchName} just failed in GitHub Actions`,
       );
@@ -24,7 +28,7 @@ export const defaultBranchFailure = async (
         branchName,
       )}`;
 
-      const text = `⚠ <!channel> *${repositoryName}/${branchName}* just failed on <${ghaLink}|*GitHub Actions*> ⚠`;
+      const text = `⚠ <!channel> *${repositoryName}/${branchName}* just failed on <${ghaLink}|*GitHub Actions*> last commit merged by ${head_commit?.author.name} ⚠`;
       const channel = 'all_devs';
 
       try {
@@ -40,3 +44,6 @@ export const defaultBranchFailure = async (
 
   return null;
 };
+
+const branchesToBeAlertedOn = (branch: BranchInfo) =>
+  branch.defaultBranch || branch.branchName.startsWith('release_');
