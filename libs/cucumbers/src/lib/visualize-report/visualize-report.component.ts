@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 import { CucumberFeature } from '../models';
 
@@ -32,7 +31,6 @@ export class VisualizeReportComponent {
 
     const reader = new FileReader();
     reader.onload = () => {
-      localStorage.setItem('report', reader.result as string);
       const parsedReport = JSON.parse(reader.result as string);
       this.report.next(parsedReport);
     };
