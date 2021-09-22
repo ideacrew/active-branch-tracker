@@ -3,7 +3,7 @@ import {
   FileWithRuntimeDictionary,
   RspecExample,
 } from '../models';
-import { rspecRuntimeDictionary } from './rspecReportFilesWithRuntime';
+import { rspecRuntimeDictionary } from './rspecReportFileRuntimeDictionary';
 
 export const createFilesWithRuntime = (
   examples: RspecExample[],
@@ -11,16 +11,18 @@ export const createFilesWithRuntime = (
   const runtimeDictionary: FileWithRuntimeDictionary =
     rspecRuntimeDictionary(examples);
 
-  return Object.entries(runtimeDictionary)
-    .map(([key, value]) => {
-      const { runTime } = value;
-      return {
-        // filePath: removeLeadingDotSlash(key),
-        filePath: key,
-        runTime: runTime * 1000,
-      };
-    })
-    .sort((a, b) => (a.runTime < b.runTime ? 1 : -1));
+  const filesWithRuntime: FileWithRuntime[] = Object.entries(
+    runtimeDictionary,
+  ).map(([key, value]) => {
+    const { runTime } = value;
+    return {
+      // filePath: removeLeadingDotSlash(key),
+      filePath: key,
+      runTime: runTime,
+    };
+  });
+
+  return filesWithRuntime.sort((a, b) => (a.runTime < b.runTime ? 1 : -1));
 };
 
 // const removeLeadingDotSlash = (filePath: string) =>
