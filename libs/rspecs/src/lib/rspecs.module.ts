@@ -5,6 +5,7 @@ import { ReportVisualizerComponent } from './report-visualizer/report-visualizer
 import { RspecReportRuntimePipe } from './pipes/rspec-report-runtime.pipe';
 import { RspecRuntimeDictionaryPipe } from './pipes/rspec-runtime-dictionary.pipe';
 import { RspecReportFileListPipe } from './pipes/rspec-report-file-list.pipe';
+import { RspecReportChartComponent } from './rspec-report-chart/rspec-report-chart.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { RspecReportFileListPipe } from './pipes/rspec-report-file-list.pipe';
     RspecReportRuntimePipe,
     RspecRuntimeDictionaryPipe,
     RspecReportFileListPipe,
+    RspecReportChartComponent,
   ],
 })
 export class RspecsModule {}

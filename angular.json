@@ -198,7 +198,14 @@
               "apps/dashboard/src/assets",
               "apps/dashboard/src/manifest.webmanifest"
             ],
-            "styles": ["apps/dashboard/src/styles.scss"],
+            "styles": [
+              {
+                "input": "node_modules/c3/c3.min.css"
+              },
+              {
+                "input": "apps/dashboard/src/styles.scss"
+              }
+            ],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,

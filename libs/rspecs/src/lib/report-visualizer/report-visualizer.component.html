@@ -23,12 +23,15 @@
   </pre>
 </div> -->
 
-<ng-container *ngIf="report$ | async as examples; else fileUpload">
+<!-- <ng-container *ngIf="report$ | async as examples; else fileUpload">
   <div *ngFor="let example of examples; trackBy: trackByIndex">
     <pre>{{ example | json }}</pre>
   </div>
-</ng-container>
+</ng-container> -->
 
+<ng-container *ngIf="report$ | async as report; else fileUpload">
+  <idc-rspec-report-chart [report]="report"></idc-rspec-report-chart>
+</ng-container>
 <ng-template #fileUpload>
   <label for="file-upload" class="drop-zone">
     <span>click to upload .json report file</span>
