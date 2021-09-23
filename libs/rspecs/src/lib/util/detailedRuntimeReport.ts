@@ -1,4 +1,4 @@
-import { FileWithRuntime, RspecExample } from '../models';
+import { FileWithRuntime, RspecExample, RspecReport } from '../models';
 import { createFilesWithRuntime } from './rspecRuntimeFileList';
 
 export interface DetailedRuntime extends FileWithRuntime {
@@ -6,8 +6,14 @@ export interface DetailedRuntime extends FileWithRuntime {
 }
 
 export const createDetailedRuntimeReport = (
-  examples: RspecExample[],
-): DetailedRuntime[] => {
+  report: RspecReport | null,
+): DetailedRuntime[] | null => {
+  if (!report) {
+    return null;
+  }
+
+  const { examples } = report;
+
   const filesWithRuntime: FileWithRuntime[] = createFilesWithRuntime(examples);
 
   const detailedReport = filesWithRuntime.map(file => {

@@ -18,7 +18,7 @@ export const createFilesWithRuntime = (
     return {
       // filePath: removeLeadingDotSlash(key),
       filePath: key,
-      runTime: runTime,
+      runTime, // in seconds
     };
   });
 
