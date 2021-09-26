@@ -1,11 +1,15 @@
-import * as slack from 'slack';
+import { WebClient } from '@slack/web-api';
 import * as functions from 'firebase-functions';
 
+const slackConfig = functions.config().slack;
+const token: string = slackConfig.token;
+
+const slack = new WebClient(token);
+
 export const sendSlackMessage = async (text: string): Promise<void> => {
-  const slackConfig = functions.config().slack;
   try {
     await slack.chat.postMessage({
-      token: slackConfig.token,
+      token,
       channel: 'environment-management',
       text,
     });
@@ -22,10 +26,9 @@ export const sendSlackMessageToChannel = async ({
   text: string;
   channel: string;
 }): Promise<void> => {
-  const slackConfig = functions.config().slack;
   try {
     await slack.chat.postMessage({
-      token: slackConfig.token,
+      token,
       channel,
       text,
     });
