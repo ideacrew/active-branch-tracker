@@ -9,7 +9,6 @@ const slack = new WebClient(token);
 export const sendSlackMessage = async (text: string): Promise<void> => {
   try {
     await slack.chat.postMessage({
-      token,
       channel: 'environment-management',
       text,
     });
@@ -27,11 +26,12 @@ export const sendSlackMessageToChannel = async ({
   channel: string;
 }): Promise<void> => {
   try {
-    await slack.chat.postMessage({
-      token,
+    const response = await slack.chat.postMessage({
       channel,
       text,
     });
+
+    functions.logger.log('Message sent', response);
   } catch (e) {
     functions.logger.error('Could not send slack message', e);
     return Promise.resolve();
