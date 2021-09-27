@@ -4,9 +4,12 @@ import { after } from 'mocha';
 const axios = require('axios').default;
 import * as admin from 'firebase-admin';
 import * as qs from 'qs';
+
 const test = require('firebase-functions-test')({
   projectId: process.env.GCLOUD_PROJECT,
 });
+
+test.mockConfig({ slack: { token: 1234 } });
 
 if (admin.apps.length === 0) {
   admin.initializeApp();
@@ -41,6 +44,7 @@ describe('Branch deployment payload', () => {
       // Make the http request
       responsePayload = await axios(config);
     } catch (e) {
+      console.error('=====================================');
       console.error('ERROR:', e);
     }
 
@@ -96,8 +100,7 @@ describe('Branch deployment payload', () => {
     const snap = await envRef.get();
     expect(snap.data()).to.deep.eq({
       architecture: 'e2e',
-      name: 'Bob',
-      // name: 'QA',
+      name: 'QA',
       owner: 'Open',
       prodlike: true,
     });
