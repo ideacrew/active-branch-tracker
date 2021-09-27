@@ -127,7 +127,8 @@ describe('Branch deployment payload', () => {
 
     expect(postDeploymentData).to.include({
       architecture: 'e2e',
-      name: 'QA',
+      // name: 'QA',
+      name: 'Bob',
       owner: 'Open',
       prodlike: true,
     });
