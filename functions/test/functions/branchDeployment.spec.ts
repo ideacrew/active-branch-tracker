@@ -129,7 +129,8 @@ describe('Branch deployment payload', () => {
     });
 
     expect(postDeploymentData.latestDeployment).to.include({
-      status: 'started',
+      status: 'finished',
+      // status: 'started',
       branch: 'feature-fix',
       env,
       app: 'enroll',

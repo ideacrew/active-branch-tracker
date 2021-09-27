@@ -11,17 +11,22 @@ export const defaultBranchFailure = async (
   change: functions.Change<functions.firestore.DocumentSnapshot>,
 ): Promise<null> => {
   if (change.after.exists) {
+    const beforeBranchInfo = change.before.data() as BranchInfo;
+
+    const afterBranchInfo = change.after.data() as BranchInfo;
+
     const {
-      checkSuiteStatus,
+      checkSuiteStatus: afterCheckSuiteStatus,
       branchName,
       repositoryName,
       organizationName,
       head_commit,
-    } = change.after.data() as BranchInfo;
+    } = afterBranchInfo;
 
     if (
-      checkSuiteStatus === 'failure' &&
-      branchesToBeAlertedOn(change.after.data() as BranchInfo)
+      afterCheckSuiteStatus === 'failure' &&
+      branchesToBeAlertedOn(afterBranchInfo) &&
+      commitsAreDifferent(beforeBranchInfo, afterBranchInfo)
     ) {
       functions.logger.info(
         `${organizationName}/${repositoryName}/${branchName} just failed in GitHub Actions`,
@@ -35,6 +40,7 @@ export const defaultBranchFailure = async (
 
       let failureMessageTimestamp;
 
+      // Send failure message to slack channel
       try {
         failureMessageTimestamp = await sendSlackMessageToChannel({
           text,
@@ -69,3 +75,6 @@ export const defaultBranchFailure = async (
 
 const branchesToBeAlertedOn = (branch: BranchInfo) =>
   branch.defaultBranch || branch.branchName.startsWith('release_');
+
+const commitsAreDifferent = (before: BranchInfo, after: BranchInfo) =>
+  before.head_commit?.id !== after.head_commit?.id;
