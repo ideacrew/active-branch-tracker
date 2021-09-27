@@ -96,7 +96,8 @@ describe('Branch deployment payload', () => {
     const snap = await envRef.get();
     expect(snap.data()).to.deep.eq({
       architecture: 'e2e',
-      name: 'QA',
+      name: 'Bob',
+      // name: 'QA',
       owner: 'Open',
       prodlike: true,
     });
@@ -129,8 +130,7 @@ describe('Branch deployment payload', () => {
     });
 
     expect(postDeploymentData.latestDeployment).to.include({
-      status: 'finished',
-      // status: 'started',
+      status: 'started',
       branch: 'feature-fix',
       env,
       app: 'enroll',
