@@ -1,8 +1,5 @@
 ## Compiled JavaScript files
-lib/**/*.js
-lib/**/*.js.map
-lib/**/*.json
-lib/webhook/check-suite/mocks/completed-success.json
+lib
 
 # Typescript v1 declaration files
 typings/
