@@ -46,6 +46,14 @@ export const defaultBranchFailure = functions.firestore
     ).defaultBranchFailure(change);
   });
 
+// export const defaultBranchSuccess = functions.firestore
+//   .document('branches/{docId}')
+//   .onUpdate(async change => {
+//     await (
+//       await import('./default-branch-success')
+//     ).defaultBranchSuccess(change);
+//   });
+
 export const pingEnvironmentsHttp = functions.https.onRequest(
   async (request, response) => {
     await (

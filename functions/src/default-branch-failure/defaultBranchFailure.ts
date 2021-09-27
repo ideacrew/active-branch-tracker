@@ -2,7 +2,10 @@
 import * as functions from 'firebase-functions';
 
 import { BranchInfo } from '../models';
-import { sendSlackMessageToChannel } from '../slack-notifications/slackNotification';
+import {
+  sendSlackMessageToChannel,
+  yellrChannel,
+} from '../slack-notifications/slackNotification';
 
 export const defaultBranchFailure = async (
   change: functions.Change<functions.firestore.DocumentSnapshot>,
@@ -29,13 +32,32 @@ export const defaultBranchFailure = async (
       )}`;
 
       const text = `⚠ <!channel> *${repositoryName}/${branchName}* just failed on <${ghaLink}|*GitHub Actions*> last commit merged by ${head_commit?.author.name} ⚠`;
-      const channel = 'all_devs';
+
+      let failureMessageTimestamp;
 
       try {
-        await sendSlackMessageToChannel({ text, channel });
+        failureMessageTimestamp = await sendSlackMessageToChannel({
+          text,
+          channel: yellrChannel,
+        });
       } catch (e) {
         functions.logger.error(
           'Could not send branch failure message to Slack',
+          e,
+        );
+      }
+
+      // Set the timestamp of the failure message in the branch info document
+      try {
+        await change.after.ref.set(
+          {
+            failureMessageTimestamp,
+          },
+          { merge: true },
+        );
+      } catch (e) {
+        functions.logger.error(
+          'Could not update branch failure message timestamp',
           e,
         );
       }

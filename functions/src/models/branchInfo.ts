@@ -21,4 +21,6 @@ export interface BranchInfo {
   createdByUsername?: string;
   releaseDate?: number;
   pullRequestNumber?: number;
+
+  failureMessageTimestamp?: string;
 }
