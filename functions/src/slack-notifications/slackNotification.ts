@@ -3,7 +3,7 @@
 import { WebClient } from '@slack/web-api';
 import * as functions from 'firebase-functions';
 
-export const yellrChannel = 'yellr-announcements';
+export const yellrChannel = 'all_devs';
 
 const slackConfig = functions.config().slack ?? { token: 'fake-token' };
 const token: string = slackConfig.token;
