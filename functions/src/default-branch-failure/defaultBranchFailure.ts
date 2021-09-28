@@ -26,7 +26,7 @@ export const defaultBranchFailure = async (
     if (
       afterCheckSuiteStatus === 'failure' &&
       branchesToBeAlertedOn(afterBranchInfo) &&
-      commitsAreDifferent(beforeBranchInfo, afterBranchInfo)
+      differentCompletionTimes(beforeBranchInfo, afterBranchInfo)
     ) {
       functions.logger.info(
         `${organizationName}/${repositoryName}/${branchName} just failed in GitHub Actions`,
@@ -76,5 +76,5 @@ export const defaultBranchFailure = async (
 const branchesToBeAlertedOn = (branch: BranchInfo) =>
   branch.defaultBranch || branch.branchName.startsWith('release_');
 
-const commitsAreDifferent = (before: BranchInfo, after: BranchInfo) =>
-  before.head_commit?.id !== after.head_commit?.id;
+const differentCompletionTimes = (before: BranchInfo, after: BranchInfo) =>
+  before.updated_at !== after.updated_at;
