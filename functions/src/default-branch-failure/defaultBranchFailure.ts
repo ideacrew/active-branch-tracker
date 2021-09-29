@@ -32,7 +32,7 @@ export const defaultBranchFailure = async (
         `${organizationName}/${repositoryName}/${branchName} just failed in GitHub Actions`,
       );
 
-      const ghaLink = `https://github.com/${organizationName}/${repositoryName}/actions?query=${encodeURI(
+      const ghaLink = `https://github.com/${organizationName}/${repositoryName}/actions?query=branch%3A${encodeURI(
         branchName,
       )}`;
 
