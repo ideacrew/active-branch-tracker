@@ -74,7 +74,9 @@ export const defaultBranchFailure = async (
 };
 
 const branchesToBeAlertedOn = (branch: BranchInfo) =>
-  branch.defaultBranch || branch.branchName.startsWith('release_');
+  branch.defaultBranch ||
+  branch.branchName.startsWith('release_') ||
+  branch.branchName.startsWith('development_');
 
 const differentCompletionTimes = (before: BranchInfo, after: BranchInfo) =>
   before.updated_at !== after.updated_at;
