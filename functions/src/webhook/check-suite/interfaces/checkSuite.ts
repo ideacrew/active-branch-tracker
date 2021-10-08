@@ -1,6 +1,6 @@
 import { App } from '../../interfaces/app';
 import { WebhookPayload } from '../../interfaces/basePayload';
-import { CheckConclusion } from '../../interfaces/checkConclusion';
+import { CheckSuiteConclusion } from '../../interfaces/checkConclusion';
 import { HeadCommit } from '../../interfaces/headCommit';
 
 export type CheckSuiteAction = 'completed' | 'requested' | 'rerequested';
@@ -20,7 +20,7 @@ export interface CheckSuite {
   head_branch: string;
   head_sha: string;
   status: CheckSuiteStatus;
-  conclusion: CheckConclusion;
+  conclusion: CheckSuiteConclusion;
   url: string;
   before: string;
   after: string;

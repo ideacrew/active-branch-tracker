@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { CheckConclusion, HeadCommit } from '../webhook/interfaces';
+import { CheckSuiteConclusion, HeadCommit } from '../webhook/interfaces';
 
 export interface BranchInfo {
   repositoryName: string;
@@ -16,7 +16,7 @@ export interface BranchInfo {
   created_at?: string;
   createdAt?: FirebaseFirestore.Timestamp;
   updated_at?: string;
-  checkSuiteStatus?: CheckConclusion;
+  checkSuiteStatus?: CheckSuiteConclusion;
   createdBy?: string;
   createdByUsername?: string;
   releaseDate?: number;

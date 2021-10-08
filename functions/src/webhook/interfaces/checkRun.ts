@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { App } from './app';
 import { WebhookPayload } from './basePayload';
-import { CheckConclusion } from './checkConclusion';
+import { CheckSuiteConclusion } from './checkConclusion';
 
 export interface CheckRunPayload extends WebhookPayload {
   action: 'created' | 'completed' | 'rerequested' | 'requested_action';
@@ -19,7 +19,7 @@ export interface CheckRun {
   html_url: string;
   details_url: string;
   status: CheckRunStatus;
-  conclusion: CheckConclusion;
+  conclusion: CheckSuiteConclusion;
   started_at: string;
   completed_at: string;
   output: {

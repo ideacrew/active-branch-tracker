@@ -10,6 +10,8 @@ import { handleDeleteEvent } from './delete/deleteEvent';
 import { handleIssueCommentEvent, IssueCommentPayload } from './issue-comment';
 import { CheckSuitePayload } from './check-suite';
 import { DeleteEventPayload } from './delete';
+import { handleWorkflowRunEvent } from './workflow-run/workflowRun.completed';
+import { WorkflowRunPayload } from './workflow-run/models';
 
 /**
  * Handles the incoming webhook from GitHub Actions
@@ -39,6 +41,10 @@ export async function handleWebhook(
 
     case 'issue_comment':
       await handleIssueCommentEvent(request.body as IssueCommentPayload);
+      break;
+
+    case 'workflow_run':
+      await handleWorkflowRunEvent(request.body as WorkflowRunPayload);
       break;
 
     default:

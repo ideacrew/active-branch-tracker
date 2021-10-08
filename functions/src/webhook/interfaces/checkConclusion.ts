@@ -1,4 +1,4 @@
-export type CheckConclusion =
+export type CheckSuiteConclusion =
   | 'success'
   | 'failure'
   | 'neutral'
