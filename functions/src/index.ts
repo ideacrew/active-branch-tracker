@@ -70,3 +70,11 @@ export const pingEnvironmentsCallable = functions.https.onCall(
     );
   },
 );
+
+export const githubStatusWebhook = functions.https.onRequest(
+  async (req, res) => {
+    await (
+      await import('./github-status-webhook')
+    ).handleGitHubStatusWebhook(req, res);
+  },
+);
