@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
-import { CheckSuiteStatus } from '../../check-suite';
 import {
   CheckSuiteConclusion,
   HeadCommit,
   Owner,
   WebhookPayload,
+  CheckSuiteStatus,
+  PullRequestSummary,
 } from '../../interfaces';
-import { PullRequestSummary } from '../../interfaces/pullRequestSummary';
 
 export interface WorkflowRunPayload extends WebhookPayload {
   action: 'requested' | 'completed';

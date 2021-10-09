@@ -41,6 +41,9 @@ export const handleWorkflowRunEvent = async (
     await branchRef.get()
   ).data() as BranchInfo;
 
+  // Create branchRef via separate utility function
+  // const branchRef = workflowRunBranchRef(payload);
+
   const newFailureCount = checkSuiteFailures
     ? checkSuiteFailures + statusIncrement[checkSuiteStatus]
     : 1;
@@ -52,7 +55,7 @@ export const handleWorkflowRunEvent = async (
       {
         checkSuiteFailures: newFailureCount,
         checkSuiteRuns: newRunCount,
-        updatedAt: updated_at,
+        updated_at,
         checkSuiteStatus,
         timestamp,
       },
