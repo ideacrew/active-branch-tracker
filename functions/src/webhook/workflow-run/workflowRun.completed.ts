@@ -19,6 +19,10 @@ const statusIncrement: { [status: string]: number } = {
 export const handleWorkflowRunEvent = async (
   payload: WorkflowRunPayload,
 ): Promise<void> => {
+  if (payload.workflow_run.conclusion === null) {
+    return Promise.resolve();
+  }
+
   const { workflow_run, repository, organization } = payload;
 
   const { name: repositoryName } = repository;
