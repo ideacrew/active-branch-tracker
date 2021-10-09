@@ -14,6 +14,7 @@ export interface WorkflowRunPayload extends WebhookPayload {
   workflow: Workflow;
 }
 
+// The good stuff
 export interface WorkflowRun {
   id: number;
   name: string; // Name of the workflow
