@@ -3,12 +3,9 @@ import * as admin from 'firebase-admin';
 
 admin.initializeApp();
 
-import { handleCheckSuiteEvent } from './check-suite/checkSuite';
 import { handleCreateEvent, CreateEventPayload } from './create';
 import { handleDeleteEvent } from './delete/deleteEvent';
-
 import { handleIssueCommentEvent, IssueCommentPayload } from './issue-comment';
-import { CheckSuitePayload } from './check-suite';
 import { DeleteEventPayload } from './delete';
 import { handleWorkflowRunEvent } from './workflow-run/workflowRun.completed';
 import { WorkflowRunPayload } from './workflow-run/models';
@@ -31,12 +28,6 @@ export async function handleWebhook(
 
     case 'delete':
       await handleDeleteEvent(request.body as DeleteEventPayload);
-      break;
-
-    case 'check_suite':
-      await handleCheckSuiteEvent(
-        request.body as CheckSuitePayload<'completed'>,
-      );
       break;
 
     case 'issue_comment':

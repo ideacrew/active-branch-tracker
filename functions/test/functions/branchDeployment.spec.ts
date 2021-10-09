@@ -15,7 +15,7 @@ if (admin.apps.length === 0) {
   admin.initializeApp();
 }
 
-const axiosConfig = (functionName, data) => {
+const axiosConfig = (functionName: string, data: unknown) => {
   return {
     method: 'post',
     url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/${functionName}`,
@@ -68,7 +68,7 @@ describe('Branch deployment payload', () => {
       .doc('hotfix-2')
       .get();
 
-    expect(envSnap.data().latestDeployment).to.include({
+    expect(envSnap.data()?.latestDeployment).to.include({
       status: 'started',
       branch: 'feature-fix',
       env: 'hotfix-2',
@@ -132,7 +132,7 @@ describe('Branch deployment payload', () => {
       prodlike: true,
     });
 
-    expect(postDeploymentData.latestDeployment).to.include({
+    expect(postDeploymentData?.latestDeployment).to.include({
       status: 'started',
       branch: 'feature-fix',
       env,

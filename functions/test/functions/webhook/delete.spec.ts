@@ -8,8 +8,10 @@ import { mockDeletePayload } from '../../../src/webhook/delete';
 import { createSafeBranchName } from '../../../src/safeBranchName';
 import { WebhookPayload } from '../../../src/webhook/interfaces';
 
+const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
+
 const admin = firebase.initializeAdminApp({
-  projectId: process.env.GCLOUD_PROJECT,
+  projectId,
 });
 
 const getBranchRef = (
@@ -33,7 +35,7 @@ describe('Delete event tests', () => {
   afterEach(async () => {
     // test.cleanup();
     await firebase.clearFirestoreData({
-      projectId: process.env.GCLOUD_PROJECT,
+      projectId,
     });
   });
 

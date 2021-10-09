@@ -3,10 +3,14 @@ import { describe, it, afterEach } from 'mocha';
 import * as firebase from '@firebase/rules-unit-testing';
 // https://github.com/axios/axios#note-commonjs-usage
 import axios, { AxiosRequestConfig } from 'axios';
-import * as faker from 'faker/locale/en_US';
+import * as faker from 'faker';
+
 import { BranchInfo } from '../../src/models/branchInfo';
+
+const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
+
 const admin = firebase.initializeAdminApp({
-  projectId: process.env.GCLOUD_PROJECT,
+  projectId,
 });
 
 const axiosConfig: AxiosRequestConfig = {
@@ -17,7 +21,7 @@ const axiosConfig: AxiosRequestConfig = {
 describe('Delete old branches', () => {
   afterEach(async () => {
     await firebase.clearFirestoreData({
-      projectId: process.env.GCLOUD_PROJECT,
+      projectId,
     });
   });
 
@@ -56,8 +60,8 @@ describe('Delete old branches', () => {
       ...fakeOldBranches,
       ...fakeCurrentBranches,
       ...fakeDefaultBranches,
-    ].forEach(branch => {
-      admin
+    ].forEach(async branch => {
+      await admin
         .firestore()
         .collection('branches')
         .doc(faker.random.alpha({ count: 10 }))
@@ -70,18 +74,19 @@ describe('Delete old branches', () => {
     } catch (e) {
       console.error('ERROR:', e);
     }
-    const branchesRef = admin.firestore().collection('branches');
-    const snapshot = await branchesRef.get();
+    const branchesCollection = admin.firestore().collection('branches');
+    const snapshot = await branchesCollection.get();
 
+    console.log({ snapshot: snapshot.docs.map(doc => doc.data()) });
     expect(snapshot.size).to.equal(7);
 
     // Wait for the promise to be resolved and then check the sent text
-    expect(responsePayload.data).to.equal('5 branches successfully deleted');
+    expect(responsePayload?.data).to.equal('5 branches successfully deleted');
   }).timeout(5000);
 
   it('tests deleting old branches when there are no old branches', async () => {
-    const today = new Date();
-    const ninetyDaysAgo = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000);
+    // const today = new Date();
+    // const ninetyDaysAgo = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000);
 
     [...fakeCurrentBranches, ...fakeDefaultBranches].forEach(branch => {
       admin
@@ -104,7 +109,7 @@ describe('Delete old branches', () => {
     expect(snapshot.size).to.equal(7);
 
     // Wait for the promise to be resolved and then check the sent text
-    expect(responsePayload.data).to.equal('No branches to delete');
+    expect(responsePayload?.data).to.equal('No branches to delete');
   }).timeout(5000);
 
   it.skip('tests deleting a LOT old branches', async () => {
@@ -142,6 +147,6 @@ describe('Delete old branches', () => {
     expect(snapshot.size).to.equal(3);
 
     // Wait for the promise to be resolved and then check the sent text
-    expect(responsePayload.data).to.equal('100 branches successfully deleted');
+    expect(responsePayload?.data).to.equal('100 branches successfully deleted');
   }).timeout(10000);
 });

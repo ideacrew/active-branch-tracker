@@ -12,14 +12,16 @@ import {
   mockSynchronizedPayload,
 } from '../../../src/webhook/pull-request';
 
+const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
+
 const admin = firebase.initializeAdminApp({
-  projectId: process.env.GCLOUD_PROJECT,
+  projectId,
 });
 
 describe.skip('Pull Request tests', () => {
   afterEach(async () => {
     await firebase.clearFirestoreData({
-      projectId: process.env.GCLOUD_PROJECT,
+      projectId,
     });
   });
 

@@ -6,21 +6,28 @@ const DEMO_FIREBASE_PROJECT_ID = 'demo-project';
 const port = require('../../firebase.json').emulators.firestore.port || 8080;
 const coverageUrl = `http://localhost:${port}/emulator/v1/projects/${DEMO_FIREBASE_PROJECT_ID}:ruleCoverage.html`;
 
-const testUser1 = {
+interface TestUser {
+  uid: string;
+  email: string;
+  orgs: string[];
+  role: 'admin' | 'external';
+}
+
+const testUser1: TestUser = {
   uid: 'test-user',
   email: 'test-user@example.com',
   orgs: ['org1', 'org2'],
   role: 'external',
 };
 
-const ideaCrewUser = {
+const ideaCrewUser: TestUser = {
   uid: 'ideacrew',
   email: 'user@ideacrew.com',
   orgs: ['ideacrew'],
   role: 'admin',
 };
 
-const getFirestore = ({ uid, email }) =>
+const getFirestore = ({ uid, email }: TestUser) =>
   firebase
     .initializeTestApp({
       projectId: DEMO_FIREBASE_PROJECT_ID,
@@ -34,7 +41,7 @@ const admin = firebase
   })
   .firestore();
 
-const addUser = user => admin.doc(`users/${user.uid}`).set(user);
+const addUser = (user: TestUser) => admin.doc(`users/${user.uid}`).set(user);
 
 before(async () => {
   const rulesContent = fs.readFileSync(
@@ -79,8 +86,6 @@ describe('testing assertions', () => {
   it(`should allow members of org or admins to read org doc`, async () => {
     const orgDoc = `orgs/${testUserOrg}`;
     await admin.doc(orgDoc).set({ content: 'before' });
-
-    const orgDocData = (await ideaCrewDb.doc(orgDoc).get()).data();
 
     await firebase.assertSucceeds(ideaCrewDb.doc(orgDoc).get());
     await firebase.assertSucceeds(
