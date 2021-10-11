@@ -19,7 +19,12 @@ const statusIncrement: { [status: string]: number } = {
 export const handleWorkflowRunEvent = async (
   payload: WorkflowRunPayload,
 ): Promise<void> => {
-  if (payload.workflow_run.conclusion === null) {
+  // If the workflow run doesn't have a conclusion (it was requested)
+  // or it's been explicitly cancelled, don't update the document
+  if (
+    payload.workflow_run.conclusion === null ||
+    payload.workflow_run.conclusion === 'cancelled'
+  ) {
     return Promise.resolve();
   }
 
