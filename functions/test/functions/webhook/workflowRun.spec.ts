@@ -42,6 +42,7 @@ describe('Workflow run tests', () => {
     expect(updatedBranchInfo).to.include({
       checkSuiteRuns: 211,
       checkSuiteFailures: 28,
+      head_sha: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
     });
 
     expect(updatedBranchInfo.head_commit).to.include({
@@ -65,6 +66,7 @@ describe('Workflow run tests', () => {
     expect(updatedBranchInfo).to.include({
       checkSuiteRuns: 211,
       checkSuiteFailures: 29,
+      head_sha: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
     });
 
     expect(updatedBranchInfo.head_commit).to.include({

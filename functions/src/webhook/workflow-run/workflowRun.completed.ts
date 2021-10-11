@@ -33,6 +33,7 @@ export const handleWorkflowRunEvent = async (
     updated_at,
     conclusion: checkSuiteStatus,
     head_commit,
+    head_sha,
   } = workflow_run;
 
   const safeBranchName = createSafeBranchName(branchName);
@@ -66,6 +67,7 @@ export const handleWorkflowRunEvent = async (
           checkSuiteStatus,
           timestamp,
           head_commit,
+          head_sha,
         },
         { merge: true },
       );
