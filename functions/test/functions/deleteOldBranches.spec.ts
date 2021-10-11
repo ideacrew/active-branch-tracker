@@ -77,7 +77,6 @@ describe('Delete old branches', () => {
     const branchesCollection = admin.firestore().collection('branches');
     const snapshot = await branchesCollection.get();
 
-    console.log({ snapshot: snapshot.docs.map(doc => doc.data()) });
     expect(snapshot.size).to.equal(7);
 
     // Wait for the promise to be resolved and then check the sent text

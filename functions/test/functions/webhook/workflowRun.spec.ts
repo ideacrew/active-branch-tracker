@@ -43,6 +43,13 @@ describe('Workflow run tests', () => {
       checkSuiteRuns: 211,
       checkSuiteFailures: 28,
     });
+
+    expect(updatedBranchInfo.head_commit).to.include({
+      id: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
+      message: 'add workflow run event to webhook handler',
+      timestamp: '2021-10-08T18:57:35Z',
+      tree_id: '66089ea129a82bdca7327f0d6d3eaaf40b8b2e3e',
+    });
   });
 
   it('tests a first-time failed check suite result', async () => {
@@ -59,6 +66,18 @@ describe('Workflow run tests', () => {
       checkSuiteRuns: 211,
       checkSuiteFailures: 29,
     });
+
+    expect(updatedBranchInfo.head_commit).to.include({
+      id: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
+      message: 'add workflow run event to webhook handler',
+      timestamp: '2021-10-08T18:57:35Z',
+      tree_id: '66089ea129a82bdca7327f0d6d3eaaf40b8b2e3e',
+    });
+
+    expect(updatedBranchInfo.head_commit.author).to.include({
+      name: 'Mark Goho',
+      email: 'markgoho@gmail.com',
+    });
   });
 });
 
@@ -71,14 +90,14 @@ const initialBranch: BranchInfo = {
   created_at: '2021-0315T16:10:07:745Z',
   defaultBranch: true,
   head_commit: {
-    author: { name: 'Mark Goho', email: 'markgoho@gmail.com' },
-    committer: { name: 'Mark Goho', email: 'markgoho@gmail.com' },
-    id: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
-    message: 'add workflow run event to webhook handler',
-    timestamp: '2021-10-08T18:57:35Z',
-    tree_id: '66089ea129a82bdca7327f0d6d3eaaf40b8b2e3e',
+    author: { name: 'bob johnson', email: 'bob@example.com' },
+    committer: { name: 'bob johnson', email: 'bob@example.com' },
+    id: 'abcd1234',
+    message: 'fake commit',
+    timestamp: '2021-10-01T18:57:35Z',
+    tree_id: 'xyz9876',
   },
-  head_sha: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
+  head_sha: 'abcd1234',
   organizationName: 'ideacrew',
   repositoryName: 'active-branch-tracker',
   timestamp: 1633719533000,
