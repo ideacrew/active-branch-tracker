@@ -61,4 +61,6 @@ export const defaultBranchSuccess = async (
 };
 
 const branchesToBeAlertedOn = (branch: BranchInfo) =>
-  branch.defaultBranch || branch.branchName.startsWith('release_');
+  branch.defaultBranch ||
+  branch.branchName.startsWith('release_') ||
+  branch.branchName.startsWith('development_');
