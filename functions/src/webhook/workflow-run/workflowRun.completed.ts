@@ -23,7 +23,7 @@ export const handleWorkflowRunEvent = async (
     return Promise.resolve();
   }
 
-  const { workflow_run, repository, organization } = payload;
+  const { workflow_run, repository, organization, head_commit } = payload;
 
   const { name: repositoryName } = repository;
   const { login: organizationName } = organization;
@@ -64,6 +64,7 @@ export const handleWorkflowRunEvent = async (
           updated_at,
           checkSuiteStatus,
           timestamp,
+          head_commit,
         },
         { merge: true },
       );
