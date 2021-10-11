@@ -36,37 +36,42 @@ export const handleWorkflowRunEvent = async (
 
   const safeBranchName = createSafeBranchName(branchName);
 
+  // Create branchRef via separate utility function
+  // const branchRef = workflowRunBranchRef(payload);
   const branchRef = admin
     .firestore()
     .collection('branches')
     .doc(`${organizationName}-${repositoryName}-${safeBranchName}`);
 
-  const { checkSuiteFailures, checkSuiteRuns } = (
-    await branchRef.get()
-  ).data() as BranchInfo;
+  const branchDocumentSnapshot = await branchRef.get();
 
-  // Create branchRef via separate utility function
-  // const branchRef = workflowRunBranchRef(payload);
+  if (branchDocumentSnapshot.exists) {
+    const { checkSuiteFailures, checkSuiteRuns } = (
+      await branchRef.get()
+    ).data() as BranchInfo;
 
-  const newFailureCount = checkSuiteFailures
-    ? checkSuiteFailures + statusIncrement[checkSuiteStatus]
-    : 1;
-  const newRunCount = checkSuiteRuns ? checkSuiteRuns + 1 : 1;
-  const timestamp = new Date(updated_at).getTime();
+    const newFailureCount = checkSuiteFailures
+      ? checkSuiteFailures + statusIncrement[checkSuiteStatus]
+      : 1;
+    const newRunCount = checkSuiteRuns ? checkSuiteRuns + 1 : 1;
+    const timestamp = new Date(updated_at).getTime();
 
-  try {
-    await branchRef.set(
-      {
-        checkSuiteFailures: newFailureCount,
-        checkSuiteRuns: newRunCount,
-        updated_at,
-        checkSuiteStatus,
-        timestamp,
-      },
-      { merge: true },
-    );
-  } catch (e) {
-    functions.logger.error(e);
+    try {
+      await branchRef.set(
+        {
+          checkSuiteFailures: newFailureCount,
+          checkSuiteRuns: newRunCount,
+          updated_at,
+          checkSuiteStatus,
+          timestamp,
+        },
+        { merge: true },
+      );
+    } catch (e) {
+      functions.logger.error(e);
+      return Promise.resolve();
+    }
+  } else {
     return Promise.resolve();
   }
 };
