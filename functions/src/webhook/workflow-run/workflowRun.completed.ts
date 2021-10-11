@@ -23,7 +23,7 @@ export const handleWorkflowRunEvent = async (
     return Promise.resolve();
   }
 
-  const { workflow_run, repository, organization, head_commit } = payload;
+  const { workflow_run, repository, organization } = payload;
 
   const { name: repositoryName } = repository;
   const { login: organizationName } = organization;
@@ -32,6 +32,7 @@ export const handleWorkflowRunEvent = async (
     head_branch: branchName,
     updated_at,
     conclusion: checkSuiteStatus,
+    head_commit,
   } = workflow_run;
 
   const safeBranchName = createSafeBranchName(branchName);
