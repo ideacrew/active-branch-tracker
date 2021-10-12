@@ -4,11 +4,8 @@ import * as admin from 'firebase-admin';
 admin.initializeApp();
 
 import { handleCreateEvent, CreateEventPayload } from './create';
-import { handleDeleteEvent } from './delete/deleteEvent';
-import { handleIssueCommentEvent, IssueCommentPayload } from './issue-comment';
-import { DeleteEventPayload } from './delete';
-import { handleWorkflowRunEvent } from './workflow-run/workflowRun.completed';
-import { WorkflowRunPayload } from './workflow-run/models';
+import { DeleteEventPayload, handleDeleteEvent } from './delete';
+import { handleWorkflowRunEvent, WorkflowRunPayload } from './workflow-run';
 
 /**
  * Handles the incoming webhook from GitHub Actions
@@ -30,9 +27,9 @@ export async function handleWebhook(
       await handleDeleteEvent(request.body as DeleteEventPayload);
       break;
 
-    case 'issue_comment':
-      await handleIssueCommentEvent(request.body as IssueCommentPayload);
-      break;
+    // case 'issue_comment':
+    //   await handleIssueCommentEvent(request.body as IssueCommentPayload);
+    //   break;
 
     case 'workflow_run':
       await handleWorkflowRunEvent(request.body as WorkflowRunPayload);
