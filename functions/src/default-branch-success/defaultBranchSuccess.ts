@@ -54,6 +54,13 @@ export const defaultBranchSuccess = async (
           e,
         );
       }
+    } else {
+      functions.logger.info('Some part of the logic failed', {
+        beforeCheckSuiteStatus: beforeCheckSuiteStatus === 'failure',
+        checkSuiteStatus: checkSuiteStatus === 'success',
+        failureMessageTimestamp: failureMessageTimestamp,
+        branch: branchesToBeAlertedOn(change.after.data() as BranchInfo),
+      });
     }
   }
 
