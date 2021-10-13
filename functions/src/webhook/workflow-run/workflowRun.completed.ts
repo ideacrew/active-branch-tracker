@@ -53,13 +53,13 @@ export const handleWorkflowRunEvent = async (
   const branchDocumentSnapshot = await branchRef.get();
 
   if (branchDocumentSnapshot.exists) {
-    const { checkSuiteFailures, checkSuiteRuns } = (
+    const { checkSuiteFailures: currentFailureCount, checkSuiteRuns } = (
       await branchRef.get()
     ).data() as BranchInfo;
 
-    const newFailureCount = checkSuiteFailures
-      ? checkSuiteFailures + statusIncrement[checkSuiteStatus]
-      : 1;
+    const newFailureCount = currentFailureCount
+      ? currentFailureCount + statusIncrement[checkSuiteStatus]
+      : statusIncrement[checkSuiteStatus];
     const newRunCount = checkSuiteRuns ? checkSuiteRuns + 1 : 1;
     const timestamp = new Date(updated_at).getTime();
 
