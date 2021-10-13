@@ -69,6 +69,7 @@ describe('Branch deployment payload', () => {
       .get();
 
     expect(envSnap.data()?.latestDeployment).to.include({
+      // status: 'started',
       status: 'started',
       branch: 'feature-fix',
       env: 'hotfix-2',
