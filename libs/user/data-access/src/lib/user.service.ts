@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
-import firebase from 'firebase/compat/app';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 import { AuthService } from '@idc/auth';
+import { filterNullish } from '@idc/util';
+
 import { YellrUser } from './models/yellrUser';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   uid$ = this.auth.user$.pipe(
-    filter<firebase.User | null>(Boolean),
+    filterNullish(),
     map(user => user?.uid),
   );
 
