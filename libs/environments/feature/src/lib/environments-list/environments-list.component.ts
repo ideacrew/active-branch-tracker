@@ -76,13 +76,13 @@ export class EnvironmentsListComponent {
     return `${env.id}-${env.name}`;
   }
 
-  async refreshEnvironments(): Promise<void> {
-    if (this.refreshing.value === true) {
-      return;
-    } else {
-      this.refreshing.next(true);
-      await this.envService.refreshEnvironmentsStatus();
-      this.refreshing.next(false);
-    }
-  }
+  // async refreshEnvironments(): Promise<void> {
+  //   if (this.refreshing.value === true) {
+  //     return;
+  //   } else {
+  //     this.refreshing.next(true);
+  //     await this.envService.refreshEnvironmentsStatus();
+  //     this.refreshing.next(false);
+  //   }
+  // }
 }
