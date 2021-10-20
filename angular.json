@@ -1,27 +1,5 @@
 {
   "version": 1,
-  "cli": {
-    "defaultCollection": "@nrwl/angular",
-    "analytics": "7e4627d4-e13f-48b3-b9e5-80ae4f3f0032"
-  },
-  "defaultProject": "dashboard",
-  "schematics": {
-    "@nrwl/angular:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "strict": true
-    },
-    "@nrwl/angular:component": {
-      "style": "scss"
-    }
-  },
   "projects": {
     "auth": {
       "projectType": "library",
@@ -52,7 +30,8 @@
         "@nrwl/angular:component": {
           "style": "scss"
         }
-      }
+      },
+      "tags": []
     },
     "branches-data-access": {
       "projectType": "library",
@@ -83,7 +62,8 @@
         "@nrwl/angular:component": {
           "style": "scss"
         }
-      }
+      },
+      "tags": ["scope:dashboard", "type:data-access"]
     },
     "branches-feature": {
       "projectType": "library",
@@ -114,7 +94,8 @@
         "@nrwl/angular:component": {
           "style": "scss"
         }
-      }
+      },
+      "tags": ["scope:dashboard", "type:feature"]
     },
     "branches-ui-components": {
       "projectType": "library",
@@ -145,7 +126,8 @@
         "@nrwl/angular:component": {
           "style": "scss"
         }
-      }
+      },
+      "tags": ["scope:dashboard", "type:ui"]
     },
     "cucumbers": {
       "projectType": "library",
@@ -170,7 +152,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": []
     },
     "dashboard": {
       "projectType": "application",
@@ -301,7 +284,8 @@
           "builder": "@angular/fire:deploy",
           "options": {}
         }
-      }
+      },
+      "tags": []
     },
     "dashboard-e2e": {
       "root": "apps/dashboard-e2e",
@@ -331,7 +315,9 @@
           },
           "outputs": ["{options.outputFile}"]
         }
-      }
+      },
+      "tags": [],
+      "implicitDependencies": ["dashboard"]
     },
     "display-config": {
       "projectType": "library",
@@ -362,7 +348,8 @@
         "@nrwl/angular:component": {
           "style": "scss"
         }
-      }
+      },
+      "tags": ["scope:dashboard", "type:util"]
     },
     "environments-data-access": {
       "projectType": "library",
@@ -393,7 +380,8 @@
         "@nrwl/angular:component": {
           "style": "scss"
         }
-      }
+      },
+      "tags": []
     },
     "environments-feature": {
       "projectType": "library",
@@ -424,7 +412,8 @@
         "@nrwl/angular:component": {
           "style": "scss"
         }
-      }
+      },
+      "tags": []
     },
     "pull-requests-data-access": {
       "projectType": "library",
@@ -450,7 +439,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "pull-requests-feature": {
       "projectType": "library",
@@ -476,7 +466,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "rspecs": {
       "projectType": "library",
@@ -501,7 +492,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": []
     },
     "testing": {
       "projectType": "library",
@@ -532,7 +524,8 @@
         "@nrwl/angular:component": {
           "style": "scss"
         }
-      }
+      },
+      "tags": []
     },
     "user-data-access": {
       "projectType": "library",
@@ -558,7 +551,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "util": {
       "projectType": "library",
@@ -589,7 +583,8 @@
         "@nrwl/angular:component": {
           "style": "scss"
         }
-      }
+      },
+      "tags": []
     }
   }
 }

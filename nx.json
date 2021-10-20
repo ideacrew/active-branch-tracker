@@ -22,57 +22,6 @@
       }
     }
   },
-  "projects": {
-    "auth": {
-      "tags": []
-    },
-    "branches-data-access": {
-      "tags": ["scope:dashboard", "type:data-access"]
-    },
-    "branches-feature": {
-      "tags": ["scope:dashboard", "type:feature"]
-    },
-    "branches-ui-components": {
-      "tags": ["scope:dashboard", "type:ui"]
-    },
-    "cucumbers": {
-      "tags": []
-    },
-    "dashboard": {
-      "tags": []
-    },
-    "dashboard-e2e": {
-      "tags": [],
-      "implicitDependencies": ["dashboard"]
-    },
-    "display-config": {
-      "tags": ["scope:dashboard", "type:util"]
-    },
-    "environments-data-access": {
-      "tags": []
-    },
-    "environments-feature": {
-      "tags": []
-    },
-    "pull-requests-data-access": {
-      "tags": []
-    },
-    "pull-requests-feature": {
-      "tags": []
-    },
-    "rspecs": {
-      "tags": []
-    },
-    "testing": {
-      "tags": []
-    },
-    "user-data-access": {
-      "tags": []
-    },
-    "util": {
-      "tags": []
-    }
-  },
   "targetDependencies": {
     "build": [
       {
@@ -80,5 +29,27 @@
         "projects": "dependencies"
       }
     ]
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": "7e4627d4-e13f-48b3-b9e5-80ae4f3f0032"
+  },
+  "defaultProject": "dashboard",
+  "generators": {
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "strict": true
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
   }
 }
