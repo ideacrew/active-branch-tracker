@@ -13,7 +13,7 @@ export class VisualizeReportComponent {
   report = new BehaviorSubject<CucumberFeature[] | null>(null);
   report$ = this.report.asObservable();
 
-  fileName = new Subject<string>();
+  fileName = new Subject<string | undefined>();
   fileName$ = this.fileName.asObservable();
 
   detailedReport = new BehaviorSubject<boolean>(false);

@@ -19,7 +19,7 @@ export class ReportVisualizerComponent {
   report = new BehaviorSubject<RspecReport | null>(null);
   report$ = this.report.asObservable().pipe(map(createDetailedRuntimeReport));
 
-  fileName = new Subject<string>();
+  fileName = new Subject<string | undefined>();
   fileName$ = this.fileName.asObservable();
 
   detailedReport = new BehaviorSubject<boolean>(false);

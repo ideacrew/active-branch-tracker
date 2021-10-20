@@ -34,7 +34,7 @@ export class EnvironmentsService {
       .valueChanges()
       .pipe(
         filterNullish(),
-        map(org => org.name),
+        map((org: Org) => org.name),
         take(1),
       );
   }
