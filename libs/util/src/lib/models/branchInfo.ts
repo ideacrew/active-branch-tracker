@@ -30,7 +30,6 @@ export interface BranchInfo {
   checkSuiteRuns: number;
   checkSuiteFailures: number;
   createdBy?: string;
-  createdByUserName?: string;
   tracked: boolean;
   timestamp: number;
   releaseDate?: number;
