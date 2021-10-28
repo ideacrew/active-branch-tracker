@@ -20,7 +20,7 @@ export const loginWithEmailPasswordSuccess = createAction(
 );
 export const loginWithEmailPasswordFailure = createAction(
   '[Auth] Login Failure',
-  props<{ error: { code: string; message: string; } }>(),
+  props<{ error: { code: string; message: string } }>(),
 );
 
 export const setCurrentUser = createAction(

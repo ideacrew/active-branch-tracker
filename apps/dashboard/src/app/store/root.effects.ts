@@ -19,9 +19,8 @@ export class RootEffects {
     this.actions$.pipe(
       ofType(ROOT_EFFECTS_INIT),
       map(() => {
-        const displayConfig: DisplayConfig = this.localStorageService.getSavedState(
-          'config',
-        );
+        const displayConfig: DisplayConfig =
+          this.localStorageService.getSavedState('config');
 
         return DisplayConfigActions.loadDisplayConfigSuccess({
           displayConfig,

@@ -7,7 +7,7 @@ describe('Create Date object from date string', () => {
     const dateStringWithTimezone = new Date(2020, 4, 1).toISOString();
 
     expect(convertReleaseDate(dateString).toISOString()).toEqual(
-      dateStringWithTimezone
+      dateStringWithTimezone,
     );
   });
 });

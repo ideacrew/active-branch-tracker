@@ -29,8 +29,8 @@ export class ActiveBranchesComponent implements OnDestroy {
     )
     .subscribe();
 
-  allBranches$: Observable<BranchInfo[]> = this.branchesService
-    .filteredBranches$;
+  allBranches$: Observable<BranchInfo[]> =
+    this.branchesService.filteredBranches$;
 
   defaultBranches$ = this.allBranches$.pipe(
     map(branches => branches?.filter(branchInfo => branchInfo.defaultBranch)),
