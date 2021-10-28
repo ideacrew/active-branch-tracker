@@ -19,13 +19,15 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version: '16'
       - name: Cache npm
         id: npm-cache
         uses: actions/cache@v2
         with:
           path: ./functions/node_modules
-          key: v2-${{ runner.os }}-node14-${{ hashFiles('**/functions/package-lock.json') }}
+          key: ${{ runner.os }}-node16-functions-${{ hashFiles('**/functions/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node16-functions-
       - name: Cache firebase emulators
         id: firebase-emulators-cache
         uses: actions/cache@v2
