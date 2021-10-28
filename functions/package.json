@@ -19,7 +19,7 @@
     "emulators:demoproject": "cross-env GCLOUD_PROJECT=demo-project firebase emulators:start --only=firestore,functions,auth --project=demo-project"
   },
   "engines": {
-    "node": "16"
+    "node": "14"
   },
   "main": "lib/index.js",
   "dependencies": {
