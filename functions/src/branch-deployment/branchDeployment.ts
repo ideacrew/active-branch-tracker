@@ -8,7 +8,6 @@ import { BranchDeploymentPayload } from './branchDeployment.interface';
 import { checkOwnership } from '../check-ownership/checkOwnership';
 import { sendSlackMessage } from '../slack-notifications/slackNotification';
 import { yellrEnvLink } from '../util/yellrEnvLink';
-import { getRealName } from '../util/getRealName';
 
 /**
  * Handles a new branch deployment
@@ -60,14 +59,12 @@ async function updateEnvironmentWithBranchInfo(
     .collection('environments')
     .doc(env.toLowerCase());
 
-  const realName = await getRealName(user_name);
-
   try {
     await environmentRef.set(
       {
         latestDeployment: {
           ...deployment,
-          user_name: realName,
+          user_name,
           [status]: FieldValue.serverTimestamp(),
         },
       },

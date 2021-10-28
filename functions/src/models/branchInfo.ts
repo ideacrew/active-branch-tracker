@@ -18,7 +18,6 @@ export interface BranchInfo {
   updated_at?: string;
   checkSuiteStatus?: CheckSuiteConclusion;
   createdBy?: string;
-  createdByUsername?: string;
   releaseDate?: number;
   pullRequestNumber?: number;
 

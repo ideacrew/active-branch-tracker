@@ -6,7 +6,6 @@ import * as functions from 'firebase-functions';
 import { BranchInfo } from '../../models/branchInfo';
 import { createSafeBranchName } from '../../safeBranchName';
 import { firestoreTimestamp } from '../../util';
-import { getRealName } from '../../util/getRealName';
 import { CreateEventPayload } from './interfaces/createEvent';
 
 /**
@@ -46,8 +45,7 @@ export async function handleCreateEvent(
     checkSuiteRuns: 0,
     checkSuiteFailures: 0,
     checkSuiteStatus: 'neutral',
-    createdBy: await getRealName(createdBy),
-    createdByUsername: createdBy,
+    createdBy,
     tracked: false,
   };
 
