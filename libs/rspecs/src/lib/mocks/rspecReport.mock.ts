@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { RspecReport } from '../models';
+import { RspecReport } from 'rspec-report-analyzer';
 
 export const rspecReport: RspecReport = {
   version: '3.9.2',

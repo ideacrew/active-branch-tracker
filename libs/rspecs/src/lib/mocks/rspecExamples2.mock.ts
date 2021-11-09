@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { RspecExample } from '../models';
+import { RspecExample } from 'rspec-report-analyzer';
 
 export const rspecExamples2: RspecExample[] = [
   {

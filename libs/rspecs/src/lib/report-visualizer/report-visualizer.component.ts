@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { RspecReport } from 'rspec-report-analyzer';
 
-import { RspecReport } from '../models';
 import { createDetailedRuntimeReport } from '../util/detailedRuntimeReport';
 
 @Component({

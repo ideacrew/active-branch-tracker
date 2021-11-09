@@ -19,5 +19,7 @@ export const mockDefaultBranchInfo = (): BranchInfo => {
     checkSuiteStatus: 'success',
     tracked: true,
     timestamp: today.getTime(),
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    created_at: today.toISOString(),
   };
 };

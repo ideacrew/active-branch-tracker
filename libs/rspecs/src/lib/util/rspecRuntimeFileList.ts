@@ -1,8 +1,6 @@
-import {
-  FileWithRuntime,
-  FileWithRuntimeDictionary,
-  RspecExample,
-} from '../models';
+import { RspecExample } from 'rspec-report-analyzer';
+
+import { FileWithRuntime, FileWithRuntimeDictionary } from '../models';
 import { rspecRuntimeDictionary } from './rspecReportFileRuntimeDictionary';
 
 export const createFilesWithRuntime = (

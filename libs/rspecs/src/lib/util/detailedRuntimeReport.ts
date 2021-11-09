@@ -1,4 +1,6 @@
-import { FileWithRuntime, RspecExample, RspecReport } from '../models';
+import { RspecExample, RspecReport } from 'rspec-report-analyzer';
+
+import { FileWithRuntime } from '../models';
 import { createFilesWithRuntime } from './rspecRuntimeFileList';
 
 export interface DetailedRuntime extends FileWithRuntime {

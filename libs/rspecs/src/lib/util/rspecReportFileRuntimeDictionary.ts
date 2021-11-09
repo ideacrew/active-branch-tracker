@@ -1,4 +1,6 @@
-import { RspecExample, FileWithRuntimeDictionary } from '../models';
+import { RspecExample } from 'rspec-report-analyzer';
+
+import { FileWithRuntimeDictionary } from '../models';
 
 export const rspecRuntimeDictionary = (
   examples: RspecExample[],

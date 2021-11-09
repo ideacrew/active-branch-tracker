@@ -1,5 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FileWithRuntime, RspecExample } from '../models';
+import { RspecExample } from 'rspec-report-analyzer';
+
+import { FileWithRuntime } from '../models';
 import { createFilesWithRuntime } from '../util/rspecRuntimeFileList';
 
 @Pipe({
