@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { ElementStep } from '../models';
+import { ElementStep } from 'cucumber-report-analyzer';
 
 const oneSecondInNanoseconds = 1000000000;
 
@@ -10,18 +10,18 @@ const oneSecondInNanoseconds = 1000000000;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ElementStepComponent {
-  private _step!: ElementStep;
+  private elementStep!: ElementStep;
   longStep = false;
 
   @Input() set step(elementStep: ElementStep) {
-    this._step = elementStep;
+    this.elementStep = elementStep;
     if (elementStep.result.duration) {
       this.longStep = elementStep.result.duration > oneSecondInNanoseconds;
     }
   }
 
   get step(): ElementStep {
-    return this._step;
+    return this.elementStep;
   }
 
   trackByFn(index: number): number {

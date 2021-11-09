@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { RspecExample } from '../models';
 
 export const rspecExamplesShort: RspecExample[] = [
@@ -50,3 +51,16 @@ export const rspecExamplesShort: RspecExample[] = [
     pending_message: null,
   },
 ];
+
+export const shortRspecReport = {
+  version: '',
+  examples: rspecExamplesShort,
+  summary: {
+    duration: 1,
+    example_count: 4,
+    failure_count: 0,
+    pending_count: 0,
+    errors_outside_of_examples_count: 0,
+  },
+  summary_line: '',
+};

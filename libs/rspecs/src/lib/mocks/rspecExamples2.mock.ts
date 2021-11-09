@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { RspecExample } from '../models';
 
 export const rspecExamples2: RspecExample[] = [

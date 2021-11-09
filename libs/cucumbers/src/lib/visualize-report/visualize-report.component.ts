@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-
-import { CucumberFeature } from '../models';
+import { CucumberFeature } from 'cucumber-report-analyzer';
 
 @Component({
   selector: 'idc-visualize-report',
@@ -25,13 +24,15 @@ export class VisualizeReportComponent {
     };
   }
 
-  handleFileUpload(event: Event) {
+  handleFileUpload(event: Event): void {
     const target = event.target as HTMLInputElement;
     const { files } = target;
 
     const reader = new FileReader();
     reader.onload = () => {
-      const parsedReport = JSON.parse(reader.result as string);
+      const parsedReport = JSON.parse(
+        reader.result as string,
+      ) as CucumberFeature[];
       this.report.next(parsedReport);
     };
 
@@ -46,11 +47,11 @@ export class VisualizeReportComponent {
     return feature.uri;
   }
 
-  toggleDetailedReport() {
+  toggleDetailedReport(): void {
     this.detailedReport.next(!this.detailedReport.value);
   }
 
-  clearReport() {
+  clearReport(): void {
     this.report.next(null);
     this.fileName.next(undefined);
   }

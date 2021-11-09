@@ -7,7 +7,6 @@ import { FailurePercentPipe } from './failure-percent.pipe';
 import { IsOldPipe } from './is-old.pipe';
 import { BranchLinkPipe } from './branch-link.pipe';
 import { ActionsLinkPipe } from './actions-link.pipe';
-import { PrLinkPipeFromPR } from './pr-link-from-pr.pipe';
 import { RelativeDatePipe } from './relative-date.pipe';
 import { FirestoreDatePipe } from './firestore-date.pipe';
 import { TimeLeftPipe } from './time-left.pipe';
@@ -18,7 +17,6 @@ import { DaysLeftPipe } from './days-left.pipe';
   declarations: [
     CommitLinkPipe,
     PrLinkPipe,
-    PrLinkPipeFromPR,
     FailurePercentPipe,
     IsOldPipe,
     BranchLinkPipe,
@@ -31,7 +29,6 @@ import { DaysLeftPipe } from './days-left.pipe';
   exports: [
     CommitLinkPipe,
     PrLinkPipe,
-    PrLinkPipeFromPR,
     FailurePercentPipe,
     IsOldPipe,
     BranchLinkPipe,

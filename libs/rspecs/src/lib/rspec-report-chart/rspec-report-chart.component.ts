@@ -25,6 +25,7 @@ export class RspecReportChartComponent implements OnChanges {
   }
 
   get filesWithRuntime(): FileWithRuntime[] {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const runtimes: FileWithRuntime[] = this.report!.map(file => {
       const { runTime, filePath } = file;
 
@@ -52,6 +53,6 @@ export class RspecReportChartComponent implements OnChanges {
       },
     };
 
-    const chart: c3.ChartAPI = c3.generate(config);
+    c3.generate(config);
   }
 }

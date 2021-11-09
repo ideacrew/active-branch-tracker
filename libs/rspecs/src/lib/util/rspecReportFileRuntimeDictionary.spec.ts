@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { rspecExamplesShort } from '../mocks';
 import { rspecRuntimeDictionary } from './rspecReportFileRuntimeDictionary';
 

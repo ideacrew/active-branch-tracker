@@ -33,10 +33,6 @@
         "libs/environments/data-access/src/index.ts"
       ],
       "@idc/environments/feature": ["libs/environments/feature/src/index.ts"],
-      "@idc/pull-requests/data-access": [
-        "libs/pull-requests/data-access/src/index.ts"
-      ],
-      "@idc/pull-requests/feature": ["libs/pull-requests/feature/src/index.ts"],
       "@idc/rspecs": ["libs/rspecs/src/index.ts"],
       "@idc/testing": ["libs/testing/src/index.ts"],
       "@idc/user/data-access": ["libs/user/data-access/src/index.ts"],

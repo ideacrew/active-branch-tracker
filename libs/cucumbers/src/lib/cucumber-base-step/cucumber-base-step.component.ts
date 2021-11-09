@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-
-import { BaseStep } from '../models';
+import { BaseStep } from 'cucumber-report-analyzer';
 
 const oneSecondInNanoseconds = 1000000000;
 
@@ -11,16 +10,16 @@ const oneSecondInNanoseconds = 1000000000;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CucumberBaseStepComponent {
-  private _step!: BaseStep;
+  private baseStep!: BaseStep;
   longStep = false;
 
   @Input() set step(baseStep: BaseStep) {
-    this._step = baseStep;
+    this.baseStep = baseStep;
     if (baseStep.result.duration) {
       this.longStep = baseStep.result.duration > oneSecondInNanoseconds;
     }
   }
   get step(): BaseStep {
-    return this._step;
+    return this.baseStep;
   }
 }

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { nanoSecondsToSeconds } from '../util/nanosecondsToSeconds';
+import { nanoSecondsToSeconds } from 'cucumber-report-analyzer';
 
 @Pipe({
   name: 'nanoToSeconds',

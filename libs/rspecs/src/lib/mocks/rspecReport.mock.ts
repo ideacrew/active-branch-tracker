@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { RspecReport } from '../models';
 
 export const rspecReport: RspecReport = {

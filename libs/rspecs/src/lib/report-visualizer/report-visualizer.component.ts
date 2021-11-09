@@ -2,13 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { filterNullish } from '@idc/util';
-
-import { RspecExample, RspecReport } from '../models';
-import {
-  createDetailedRuntimeReport,
-  DetailedRuntime,
-} from '../util/detailedRuntimeReport';
+import { RspecReport } from '../models';
+import { createDetailedRuntimeReport } from '../util/detailedRuntimeReport';
 
 @Component({
   templateUrl: './report-visualizer.component.html',
@@ -31,13 +26,13 @@ export class ReportVisualizerComponent {
     };
   }
 
-  handleFileUpload(event: Event) {
+  handleFileUpload(event: Event): void {
     const target = event.target as HTMLInputElement;
     const { files } = target;
 
     const reader = new FileReader();
     reader.onload = () => {
-      const parsedReport = JSON.parse(reader.result as string);
+      const parsedReport = JSON.parse(reader.result as string) as RspecReport;
       this.report.next(parsedReport);
     };
 
@@ -48,15 +43,15 @@ export class ReportVisualizerComponent {
     }
   }
 
-  trackByIndex(index: number, feature: DetailedRuntime): number {
+  trackByIndex(index: number): number {
     return index;
   }
 
-  toggleDetailedReport() {
+  toggleDetailedReport(): void {
     this.detailedReport.next(!this.detailedReport.value);
   }
 
-  clearReport() {
+  clearReport(): void {
     this.report.next(null);
     this.fileName.next(undefined);
   }

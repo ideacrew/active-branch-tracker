@@ -415,60 +415,6 @@
       },
       "tags": []
     },
-    "pull-requests-data-access": {
-      "projectType": "library",
-      "root": "libs/pull-requests/data-access",
-      "sourceRoot": "libs/pull-requests/data-access/src",
-      "prefix": "idc",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/pull-requests/data-access/src/**/*.ts",
-              "libs/pull-requests/data-access/src/**/*.html"
-            ]
-          },
-          "outputs": ["{options.outputFile}"]
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/pull-requests/data-access"],
-          "options": {
-            "jestConfig": "libs/pull-requests/data-access/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
-    "pull-requests-feature": {
-      "projectType": "library",
-      "root": "libs/pull-requests/feature",
-      "sourceRoot": "libs/pull-requests/feature/src",
-      "prefix": "idc",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/pull-requests/feature/src/**/*.ts",
-              "libs/pull-requests/feature/src/**/*.html"
-            ]
-          },
-          "outputs": ["{options.outputFile}"]
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/pull-requests/feature"],
-          "options": {
-            "jestConfig": "libs/pull-requests/feature/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
     "rspecs": {
       "projectType": "library",
       "root": "libs/rspecs",

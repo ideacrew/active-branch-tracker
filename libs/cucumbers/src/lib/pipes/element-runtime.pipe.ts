@@ -1,8 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { BackgroundElement, ScenarioElement } from '../models';
-import { calculateBackgroundRuntime } from '../util/calculateBackgroundRuntime';
-import { calculateScenarioRuntime } from '../util/calculateScenarioRuntime';
-import { isBackground } from '../util/elementType';
+import {
+  BackgroundElement,
+  ScenarioElement,
+  calculateBackgroundRuntime,
+  calculateScenarioRuntime,
+  isBackground,
+} from 'cucumber-report-analyzer';
 
 @Pipe({
   name: 'elementRuntime',

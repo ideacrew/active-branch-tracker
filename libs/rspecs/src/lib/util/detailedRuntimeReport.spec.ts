@@ -1,10 +1,10 @@
-import { rspecExamplesShort } from '../mocks';
+/* eslint-disable @typescript-eslint/naming-convention */
+import { shortRspecReport } from '../mocks';
 import { createDetailedRuntimeReport } from './detailedRuntimeReport';
 
 describe('The detailed runtime report', () => {
   it('should create a detailed runtime report from a list of examples', () => {
-    expect(true).toBeTruthy();
-    expect(createDetailedRuntimeReport(rspecExamplesShort)).toEqual([
+    expect(createDetailedRuntimeReport(shortRspecReport)).toEqual([
       {
         filePath:
           './components/benefit_sponsors/spec/controllers/benefit_sponsors/benefit_packages/benefit_packages_controller_spec.rb',

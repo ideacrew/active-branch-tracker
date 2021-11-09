@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export interface RspecReport {
   version: string;
   examples: RspecExample[];

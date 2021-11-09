@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { BackgroundElement, ScenarioElement } from '../models';
+import { BackgroundElement, ScenarioElement } from 'cucumber-report-analyzer';
 
 @Component({
   selector: 'idc-cucumber-element',
@@ -10,7 +10,7 @@ import { BackgroundElement, ScenarioElement } from '../models';
 export class CucumberElementComponent {
   @Input() element!: BackgroundElement | ScenarioElement;
 
-  trackByFn(index: number) {
+  trackByFn(index: number): number {
     return index;
   }
 }

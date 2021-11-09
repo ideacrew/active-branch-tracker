@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { CucumberFeature } from '../models';
+import { CucumberFeature } from 'cucumber-report-analyzer';
 
 @Component({
   selector: 'idc-cucumber-feature',
@@ -12,7 +12,7 @@ export class CucumberFeatureComponent {
 
   @Input() feature!: CucumberFeature;
 
-  trackByFn(index: number) {
+  trackByFn(index: number): number {
     return index;
   }
 }
