@@ -6,7 +6,7 @@ import { filter, map, switchMap, tap } from 'rxjs/operators';
 import {
   EnvironmentsService,
   OrgEnvironment,
-  OtherService,
+  EnvironmentService,
 } from '@idc/environments/data-access';
 import { UserService } from '@idc/user/data-access';
 import { filterNullish } from '@idc/util';
@@ -57,7 +57,7 @@ export class EnvironmentDetailComponent {
     ),
   );
 
-  services$: Observable<OtherService[]> = this.orgEnvIds$.pipe(
+  services$: Observable<EnvironmentService[]> = this.orgEnvIds$.pipe(
     switchMap(({ orgId, envId }) =>
       this.envService.getServices({ orgId, envId }),
     ),
@@ -90,7 +90,7 @@ export class EnvironmentDetailComponent {
     this.changingOwnership = false;
   }
 
-  trackByServiceName(index: number, service: OtherService): string {
+  trackByServiceName(index: number, service: EnvironmentService): string {
     return `${service.name}`;
   }
 }

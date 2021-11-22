@@ -1,6 +1,6 @@
 :host {
-  --background-color: var(--red-050);
-  --text-color: var(--red-090);
+  --background-color: var(--green-040);
+  --text-color: var(--green-100);
   display: inline-flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -13,9 +13,9 @@
   cursor: pointer;
 }
 
-:host(.is-reachable) {
-  --background-color: var(--green-040);
-}
+// :host(.is-reachable) {
+//   --background-color: var(--green-040);
+// }
 
 :host:focus-within,
 :host:hover {
@@ -45,7 +45,7 @@
 }
 
 svg {
-  fill: var;
+  fill: var(--text-color);
   margin-right: 0.5rem;
 }
 
@@ -53,10 +53,4 @@ input {
   padding: 0.25rem;
   border: 0;
   height: 25px;
-}
-
-.owner-value,
-.owner-release-value {
-  height: 25px;
-  line-height: 1.5;
 }

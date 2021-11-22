@@ -20,24 +20,30 @@ const axiosConfig = (functionName: string, data: unknown) => {
     method: 'post',
     url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/${functionName}`,
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     },
     data,
   };
 };
 
-describe('DCHBX deployment payload', () => {
+describe('Service deployment payload', () => {
   after(() => {
     test.cleanup();
   });
 
   it('tests a new deployment', async () => {
-    const data = qs.stringify({
-      payload:
-        '{"status": "started", "branch": "feature-fix", "env": "hotfix-2", "app": "enroll", "user_name": "kvootla", "org": "maine", "repo": "enroll", "commit_sha": "abc1234" }',
-    });
+    const data = {
+      status: 'completed',
+      branch: 'trunk',
+      env: 'hotfix-2',
+      app: 'enroll',
+      user_name: 'kvootla',
+      org: 'maine',
+      repo: 'enroll',
+      commit_sha: '48132c8',
+    };
 
-    const config = axiosConfig('branchDeployment', data);
+    const config = axiosConfig('serviceDeployment', data);
 
     try {
       // Make the http request
@@ -52,7 +58,7 @@ describe('DCHBX deployment payload', () => {
       .collection('orgs')
       .doc('maine')
       .collection('environments')
-      .doc('hotfix-2')
+      .doc(data.env)
       .get();
 
     const serviceSnap = await admin
@@ -60,20 +66,20 @@ describe('DCHBX deployment payload', () => {
       .collection('orgs')
       .doc('maine')
       .collection('environments')
-      .doc('hotfix-2')
+      .doc(data.env)
       .collection('services')
       .doc('enroll')
       .get();
 
     expect(envSnap.data()).to.include({
-      enrollBranch: 'feature-fix',
+      enrollBranch: data.branch,
     });
 
     expect(serviceSnap.data()?.latestDeployment).to.include({
-      status: 'started',
-      branch: 'feature-fix',
-      user_name: 'kvootla',
-      commit_sha: 'abc1234',
+      status: data.status,
+      branch: data.branch,
+      user_name: data.user_name,
+      commit_sha: '48132c8',
     });
   }).timeout(5000);
 });

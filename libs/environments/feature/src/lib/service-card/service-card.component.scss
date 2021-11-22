@@ -1,36 +1,27 @@
 :host {
-  --border-color: var(--red-040);
-  --text-color: var(--red-040);
+  --background-color: var(--green-040);
+  --text-color: var(--green-100);
   display: inline-flex;
   flex-direction: column;
   gap: 0.75rem;
-  background-color: transparent;
+  background-color: var(--background-color);
   padding: 0.75rem;
   border-radius: 3px;
   border: 1px solid var(--border-color);
   transition: all 150ms ease-in-out;
   position: relative;
-  cursor: pointer;
+  color: var(--text-color);
 }
 
-:host(.reachable) {
-  --border-color: var(--green-050);
-  --text-color: var(--green-050);
-}
+// :host(.reachable) {
+//   --border-color: var(--green-050);
+//   --text-color: var(--green-050);
+// }
 
 .env-link {
   color: var(--text-color);
-  font-weight: 300;
+  font-weight: 400;
   text-decoration: none;
-}
-
-.env-link::after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  content: '';
 }
 
 .application-header {
@@ -42,4 +33,14 @@
 .external-link {
   fill: var(--text-color);
   opacity: 0.5;
+}
+
+.svg-value {
+  display: flex;
+  align-items: center;
+}
+
+svg {
+  fill: var(--text-color);
+  margin-right: 0.5rem;
 }
