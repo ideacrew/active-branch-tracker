@@ -10,7 +10,7 @@ import { filterNullish } from '@idc/util';
 
 import { Org, OrgEnvironment, OwnerReleaseUpdate, OwnerUpdate } from './models';
 import { EnvInfo } from './models/envInfo';
-import { OtherService } from './models/otherService';
+import { EnvironmentService } from './models/environmentService';
 
 @Injectable()
 export class EnvironmentsService {
@@ -51,35 +51,15 @@ export class EnvironmentsService {
       .valueChanges({ idField: 'id' });
   }
 
-  getServices({ orgId, envId }: EnvInfo): Observable<OtherService[]> {
+  getServices({ orgId, envId }: EnvInfo): Observable<EnvironmentService[]> {
     return this.afs
       .collection('orgs')
       .doc(orgId)
       .collection('environments')
       .doc(envId)
-      .collection<OtherService>('services')
+      .collection<EnvironmentService>('services')
       .valueChanges({ idField: 'id' })
       .pipe(filterNullish());
-  }
-
-  async addService(
-    { orgId, envId }: EnvInfo,
-    { name, url }: OtherService,
-  ): Promise<void> {
-    const serviceId = name
-      .toLocaleLowerCase()
-      .trim()
-      .replace(/ /g, '-')
-      .replace(/[^\w-]+/g, '');
-
-    const serviceRef = this.afs.doc<OtherService>(
-      `orgs/${orgId}/environments/${envId}/services/${serviceId}`,
-    );
-
-    await serviceRef.set({
-      name,
-      url,
-    });
   }
 
   async updateEnvironmentOwner({

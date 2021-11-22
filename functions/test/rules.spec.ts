@@ -65,7 +65,7 @@ describe('testing assertions', () => {
     await addUser(ideaCrewUser);
   });
 
-  it(`should only allow admins to read and update branches`, async () => {
+  it.only(`should only allow admins to read and update branches`, async () => {
     const branchDoc = 'branches/branch1';
     await admin.doc(branchDoc).set({ content: 'before' });
 

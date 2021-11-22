@@ -8,6 +8,8 @@ import { BranchDeploymentPayload } from './branchDeployment.interface';
 import { checkOwnership } from '../check-ownership/checkOwnership';
 import { sendSlackMessage } from '../slack-notifications/slackNotification';
 import { yellrEnvLink } from '../util/yellrEnvLink';
+import { updateServiceWithBranchInfo } from './updateServiceWithBranchInfo';
+import { updateEnvironment } from './updateEnvironment';
 
 /**
  * Handles a new branch deployment
@@ -20,11 +22,27 @@ export async function handleBranchDeployment(
   response: functions.Response<unknown>,
 ): Promise<void> {
   const deployment: BranchDeploymentPayload = JSON.parse(request.body.payload);
-  functions.logger.info('Incoming branch deployment payload', deployment);
+  await checkEnvironmentOwnership(deployment);
+  await updateEnvironment(deployment);
+  await updateServiceWithBranchInfo(deployment);
+  response.send(deployment);
+}
 
-  const { org, env, branch, status } = deployment;
+export const handleBranchDeploymentV2 = async (
+  request: functions.https.Request,
+  response: functions.Response<unknown>,
+): Promise<void> => {
+  const deployment: BranchDeploymentPayload = request.body;
+  await checkEnvironmentOwnership(deployment);
+  await updateEnvironment(deployment);
+  await updateServiceWithBranchInfo(deployment);
+  response.send(deployment);
+};
 
-  // Could this be a separate function?
+const checkEnvironmentOwnership = async (
+  deployment: BranchDeploymentPayload,
+): Promise<void> => {
+  const { org, env, status, branch } = deployment;
   const ownedEnvironment = await checkOwnership({ org, env });
 
   if (!ownedEnvironment && status === 'started') {
@@ -34,46 +52,4 @@ export async function handleBranchDeployment(
       `⚠ <!channel> *${branch}* is being deployed to <${yellrLink}|*${org}-${env}*> with _no current owner_! ⚠`,
     );
   }
-
-  await updateEnvironmentWithBranchInfo(deployment);
-
-  response.send(deployment);
-}
-
-/**
- *
- * @param {BranchDeploymentPayload} deployment
- * @return {Promise<void>}
- */
-async function updateEnvironmentWithBranchInfo(
-  deployment: BranchDeploymentPayload,
-): Promise<void> {
-  const { org, env, status, user_name } = deployment;
-
-  const FieldValue = admin.firestore.FieldValue;
-
-  const environmentRef = admin
-    .firestore()
-    .collection('orgs')
-    .doc(org)
-    .collection('environments')
-    .doc(env.toLowerCase());
-
-  try {
-    await environmentRef.set(
-      {
-        latestDeployment: {
-          ...deployment,
-          user_name,
-          [status]: FieldValue.serverTimestamp(),
-        },
-      },
-      { merge: true },
-    );
-  } catch (e) {
-    functions.logger.error(
-      'Could not set environment with latest deployment',
-      e,
-    );
-  }
-}
+};
