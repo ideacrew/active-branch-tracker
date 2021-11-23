@@ -86,3 +86,7 @@ export const githubStatusWebhook = functions.https.onRequest(
     ).handleGitHubStatusWebhook(req, res);
   },
 );
+
+export const api = functions.https.onRequest(async (req, res) => {
+  await (await import('./api')).app(req, res);
+});
