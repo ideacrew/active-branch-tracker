@@ -32,11 +32,7 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
-        "source": "/pingEnvironmentsCallable",
-        "function": "pingEnvironmentsCallable"
-      },
-      {
-        "source": "/api",
+        "source": "/api/**",
         "function": "api"
       },
       {
