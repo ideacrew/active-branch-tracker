@@ -11,6 +11,10 @@ const token: string = slackConfig.token;
 const slack = new WebClient(token);
 
 export const sendSlackMessage = async (text: string): Promise<void> => {
+  if (process.env.FUNCTIONS_EMULATOR) {
+    return Promise.resolve();
+  }
+
   try {
     await slack.chat.postMessage({
       channel: 'environment-management',

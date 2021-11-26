@@ -24,35 +24,28 @@ export const updateServiceData = async (
     .collection('services')
     .doc(app);
 
-  if (status === 'started') {
-    const ownedEnvironment = await checkOwnership({ org, env });
-    const yellrLink = yellrEnvLink({ org, env });
-    if (!ownedEnvironment) {
-      await sendSlackMessage(
-        `⚠ <!channel> <${yellrLink}|*${org}-${env.toLowerCase()}*> is having its data refreshed with _no current owner_! ⚠`,
-      );
-    }
-
-    const FieldValue = admin.firestore.FieldValue;
-
-    try {
-      await serviceRef.set(
-        {
-          data: {
-            status,
-            user_name,
-            dataTimestamp: FieldValue.serverTimestamp(),
-          },
-        },
-        { merge: true },
-      );
-    } catch (e) {
-      functions.logger.error('Could not set data refresh information', e);
-    }
-  } else {
-    functions.logger.error(
-      'There was an error in the payload',
-      dataRefreshPayload,
+  const ownedEnvironment = await checkOwnership({ org, env });
+  const yellrLink = yellrEnvLink({ org, env });
+  if (!ownedEnvironment) {
+    await sendSlackMessage(
+      `⚠ <!channel> <${yellrLink}|*${org}-${env.toLowerCase()}*> is having its data refreshed with _no current owner_! ⚠`,
     );
+  }
+
+  const FieldValue = admin.firestore.FieldValue;
+
+  try {
+    await serviceRef.set(
+      {
+        data: {
+          status,
+          user_name,
+          dataTimestamp: FieldValue.serverTimestamp(),
+        },
+      },
+      { merge: true },
+    );
+  } catch (e) {
+    functions.logger.error('Could not set data refresh information', e);
   }
 };

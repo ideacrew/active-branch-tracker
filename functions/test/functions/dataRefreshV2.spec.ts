@@ -25,24 +25,21 @@ const axiosConfig = (functionName: string, data: unknown) => {
   };
 };
 
-describe('Service deployment payload', () => {
+describe('Data refresh payload v2', () => {
   after(() => {
     test.cleanup();
   });
 
-  it('tests a new deployment', async () => {
+  it('tests a started data refresh', async () => {
     const data = {
-      status: 'completed',
-      branch: 'trunk',
+      status: 'started',
       env: 'hotfix-2',
       app: 'enroll',
       user_name: 'kvootla',
       org: 'maine',
-      repo: 'enroll',
-      commit_sha: '48132c8',
     };
 
-    const config = axiosConfig('serviceDeployment', data);
+    const config = axiosConfig('dataRefreshV2', data);
 
     try {
       // Make the http request
@@ -52,33 +49,54 @@ describe('Service deployment payload', () => {
       console.error('ERROR:', e);
     }
 
-    const envSnap = await admin
+    const serviceSnap = await admin
       .firestore()
       .collection('orgs')
       .doc('maine')
       .collection('environments')
-      .doc(data.env)
+      .doc('hotfix-2')
+      .collection('services')
+      .doc('enroll')
       .get();
+
+    expect(serviceSnap.data()?.data).to.include({
+      status: 'started',
+      user_name: 'kvootla',
+    });
+  }).timeout(5000);
+
+  it('tests a completed data refresh', async () => {
+    const data = {
+      status: 'completed',
+      env: 'hotfix-2',
+      app: 'enroll',
+      user_name: 'kvootla',
+      org: 'maine',
+    };
+
+    const config = axiosConfig('dataRefreshV2', data);
+
+    try {
+      // Make the http request
+      await axios(config);
+    } catch (e) {
+      console.error('=====================================');
+      console.error('ERROR:', e);
+    }
 
     const serviceSnap = await admin
       .firestore()
       .collection('orgs')
       .doc('maine')
       .collection('environments')
-      .doc(data.env)
+      .doc('hotfix-2')
       .collection('services')
       .doc('enroll')
       .get();
 
-    expect(envSnap.data()).to.include({
-      enrollBranch: data.branch,
-    });
-
-    expect(serviceSnap.data()?.latestDeployment).to.include({
-      status: data.status,
-      branch: data.branch,
-      user_name: data.user_name,
-      commit_sha: '48132c8',
+    expect(serviceSnap.data()?.data).to.include({
+      status: 'completed',
+      user_name: 'kvootla',
     });
   }).timeout(5000);
 });
