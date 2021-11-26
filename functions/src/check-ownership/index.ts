@@ -1,0 +1,1 @@
+export { checkOwnership } from './checkOwnership';

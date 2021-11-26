@@ -1,5 +1,6 @@
 import * as admin from 'firebase-admin';
-import { DeploymentEnvironment } from '../deployment-environment';
+
+import { OrgEnvironment } from '../models';
 
 export const checkOwnership = async ({
   org,
@@ -18,7 +19,7 @@ export const checkOwnership = async ({
   const envDoc = await envRef.get();
 
   if (envDoc.exists) {
-    const { owner } = envDoc.data() as DeploymentEnvironment;
+    const { owner } = envDoc.data() as OrgEnvironment;
     // console.log('Owner is', owner !== 'Open');
     return owner !== 'Open' || owner === undefined;
   } else {

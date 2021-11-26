@@ -1,29 +1,8 @@
 /* eslint-disable camelcase */
 import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
 
-import { checkOwnership } from '../check-ownership/checkOwnership';
-import { sendSlackMessage } from '../slack-notifications/slackNotification';
-import { yellrEnvLink } from '../util/yellrEnvLink';
-
-admin.initializeApp();
-
-export type AppName = 'enroll' | 'glue';
-export type DataRefreshStatus = 'started' | 'completed' | 'error';
-
-export interface DataRefreshPayload {
-  app: AppName;
-  status: DataRefreshStatus;
-  env: string;
-  org: string;
-  user_name: string;
-}
-
-export interface AppData {
-  status: DataRefreshStatus;
-  user_name: string;
-  dataTimestamp: FirebaseFirestore.Timestamp;
-}
+import { DataRefreshPayload } from './models';
+import { updateServiceData } from './updateServiceData';
 
 /**
  * Handles a data refresh
@@ -39,54 +18,18 @@ export async function handleDataRefresh(
     request.body.payload,
   );
 
-  const { app, status, env, org, user_name } = dataRefreshPayload;
-
-  const envRef = admin
-    .firestore()
-    .collection('orgs')
-    .doc(org)
-    .collection('environments')
-    .doc(env.toLowerCase());
-
-  if (status === 'started') {
-    const ownedEnvironment = await checkOwnership({ org, env });
-    const yellrLink = yellrEnvLink({ org, env });
-    if (!ownedEnvironment) {
-      await sendSlackMessage(
-        `⚠ <!channel> <${yellrLink}|*${org}-${env.toLowerCase()}*> is having its data refreshed with _no current owner_! ⚠`,
-      );
-    }
-
-    try {
-      const FieldValue = admin.firestore.FieldValue;
-      await envRef.set(
-        {
-          [app]: {
-            status,
-            user_name,
-            dataTimestamp: FieldValue.serverTimestamp(),
-          },
-        },
-        { merge: true },
-      );
-    } catch (e) {
-      functions.logger.error('Could not set data refresh information', e);
-    }
-  } else if (status === 'completed') {
-    try {
-      // Dot notation for updating a nested object
-      await envRef.update({
-        [`${app}.status`]: status,
-      });
-    } catch (e) {
-      functions.logger.error('Could not set data refresh information', e);
-    }
-  } else {
-    functions.logger.error(
-      'There was an error in the payload',
-      dataRefreshPayload,
-    );
-  }
+  await updateServiceData(dataRefreshPayload);
 
   response.status(200).send(dataRefreshPayload);
 }
+
+export const handleDataRefreshV2 = async (
+  request: functions.https.Request,
+  response: functions.Response<unknown>,
+): Promise<void> => {
+  const dataRefreshPayload: DataRefreshPayload = request.body;
+
+  await updateServiceData(dataRefreshPayload);
+
+  response.status(200).send(dataRefreshPayload);
+};

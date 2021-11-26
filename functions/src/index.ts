@@ -22,9 +22,15 @@ export const serviceDeployment = functions.https.onRequest(
 
 export const dataRefresh = functions.https.onRequest(
   async (request, response) => {
+    await (await import('./data-refresh')).handleDataRefresh(request, response);
+  },
+);
+
+export const dataRefreshV2 = functions.https.onRequest(
+  async (request, response) => {
     await (
-      await import('./data-refresh/dataRefresh')
-    ).handleDataRefresh(request, response);
+      await import('./data-refresh')
+    ).handleDataRefreshV2(request, response);
   },
 );
 
