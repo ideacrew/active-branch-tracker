@@ -68,12 +68,23 @@
   </div>
 </ng-container>
 
+<div class="svg-value" *ngIf="service.data">
+  <svg *ngIf="service.data.status === 'completed'; else spinner" class="svg-icon" width="16px" height="16px">
+    <use href="assets/icons.svg#database"></use>
+  </svg>
+  {{ service.data.dataTimestamp | firestoreDate | relativeDate }}
+</div>
+
 <ng-template #deploying>
   <div class="svg-value">
     <idc-loading-spinner></idc-loading-spinner>
     started
     {{ service.latestDeployment.started! | firestoreDate | relativeDate }}
   </div>
+</ng-template>
+
+<ng-template #spinner>
+  <idc-loading-spinner></idc-loading-spinner>
 </ng-template>
 
 <ng-template #noDeployment>
