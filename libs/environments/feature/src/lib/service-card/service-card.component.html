@@ -69,7 +69,12 @@
 </ng-container>
 
 <div class="svg-value" *ngIf="service.data">
-  <svg *ngIf="service.data.status === 'completed'; else spinner" class="svg-icon" width="16px" height="16px">
+  <svg
+    *ngIf="service.data.status === 'completed'; else spinner"
+    class="svg-icon"
+    width="16px"
+    height="16px"
+  >
     <use href="assets/icons.svg#database"></use>
   </svg>
   {{ service.data.dataTimestamp | firestoreDate | relativeDate }}
