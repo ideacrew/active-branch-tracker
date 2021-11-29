@@ -1,5 +1,8 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { EnvironmentService } from '@idc/environments/data-access';
+import {
+  EnvironmentService,
+  OrgEnvironment,
+} from '@idc/environments/data-access';
 
 @Component({
   selector: 'idc-service-card',
@@ -9,6 +12,8 @@ import { EnvironmentService } from '@idc/environments/data-access';
 })
 export class ServiceCardComponent {
   @Input() service!: EnvironmentService;
+  @Input() environment!: OrgEnvironment;
+  @Input() orgId!: string | null;
 
   //   @HostBinding('class.reachable') get isReachable(): boolean {
   //     return this.service.reachable !== undefined ? this.service.reachable : true;

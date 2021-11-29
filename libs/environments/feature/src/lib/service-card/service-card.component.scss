@@ -11,6 +11,18 @@
   transition: all 150ms ease-in-out;
   position: relative;
   color: var(--text-color);
+  position: relative;
+}
+
+.edit-link {
+  position: absolute;
+  top: 1rem;
+  right: 0.5rem;
+  transition: transform 150ms ease-in-out;
+}
+
+.edit-link:hover {
+  transform: scale(1.3);
 }
 
 // :host(.reachable) {

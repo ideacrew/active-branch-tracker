@@ -1,0 +1,15 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <h1>
+    <a routerLink="../../../">Orgs</a> /
+    <a routerLink="../../">{{ vm.orgName }}</a> /
+    <a routerLink="../">{{ vm.envName }}</a> /
+    {{ vm.service.name }}
+  </h1>
+
+  <idc-edit-service-info
+    [service]="vm.service"
+    (updateServiceInfo)="updateServiceInfo($event)"
+  ></idc-edit-service-info>
+</ng-container>
+
+<!-- <pre>{{ service$ | async | json }}</pre> -->

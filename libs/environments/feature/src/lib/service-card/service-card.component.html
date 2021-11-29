@@ -95,3 +95,12 @@
 <ng-template #noDeployment>
   <span>Waiting for deployment</span>
 </ng-template>
+
+<a
+  [routerLink]="['/environments', orgId, environment.id, service.id]"
+  class="edit-link"
+>
+  <svg class="svg-icon branch-icon" width="16px" height="16px">
+    <use href="assets/icons.svg#pencil"></use>
+  </svg>
+</a>

@@ -104,6 +104,8 @@
     <idc-service-card
       *ngFor="let service of services$ | async; trackBy: trackByServiceName"
       [service]="service"
+      [environment]="env"
+      [orgId]="orgId"
     ></idc-service-card>
   </div>
 </ng-container>

@@ -14,6 +14,8 @@ import { EnvironmentDetailComponent } from './environment-detail/environment-det
 import { OrgAccessGuard } from './org-access.guard';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { ServiceCardComponent } from './service-card/service-card.component';
+import { ServiceDetailComponent } from './service-detail/service-detail.component';
+import { EditServiceInfoComponent } from './edit-service-info/edit-service-info.component';
 
 @NgModule({
   imports: [
@@ -21,6 +23,11 @@ import { ServiceCardComponent } from './service-card/service-card.component';
     FormsModule,
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: OrgListComponent },
+      {
+        path: ':orgId/:envId/:serviceId',
+        component: ServiceDetailComponent,
+        canActivate: [OrgAccessGuard],
+      },
       {
         path: ':orgId/:envId',
         component: EnvironmentDetailComponent,
@@ -43,6 +50,8 @@ import { ServiceCardComponent } from './service-card/service-card.component';
     EnvironmentDetailComponent,
     LoadingSpinnerComponent,
     ServiceCardComponent,
+    ServiceDetailComponent,
+    EditServiceInfoComponent,
   ],
 })
 export class EnvironmentsFeatureModule {}

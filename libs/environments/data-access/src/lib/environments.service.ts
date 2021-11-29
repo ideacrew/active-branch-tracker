@@ -8,9 +8,15 @@ import * as firebase from 'firebase/compat/app';
 import { YellrUser } from '@idc/user/data-access';
 import { filterNullish } from '@idc/util';
 
-import { Org, OrgEnvironment, OwnerReleaseUpdate, OwnerUpdate } from './models';
-import { EnvInfo } from './models/envInfo';
-import { EnvironmentService } from './models/environmentService';
+import {
+  Org,
+  OrgEnvironment,
+  OwnerReleaseUpdate,
+  OwnerUpdate,
+  ServiceInfo,
+  EnvInfo,
+  EnvironmentService,
+} from './models';
 
 @Injectable()
 export class EnvironmentsService {
@@ -60,6 +66,39 @@ export class EnvironmentsService {
       .collection<EnvironmentService>('services')
       .valueChanges({ idField: 'id' })
       .pipe(filterNullish());
+  }
+
+  getService({
+    orgId,
+    envId,
+    serviceId,
+  }: ServiceInfo): Observable<EnvironmentService> {
+    return this.afs
+      .collection('orgs')
+      .doc(orgId)
+      .collection('environments')
+      .doc(envId)
+      .collection<EnvironmentService>('services')
+      .doc(serviceId)
+      .valueChanges({ idField: 'id' })
+      .pipe(filterNullish());
+  }
+
+  async updateService(
+    serviceInfo: ServiceInfo,
+    { name, url }: { name: string; url: string },
+  ): Promise<void> {
+    const { orgId, envId, serviceId } = serviceInfo;
+
+    const serviceRef = this.afs
+      .collection('orgs')
+      .doc(orgId)
+      .collection('environments')
+      .doc(envId)
+      .collection<EnvironmentService>('services')
+      .doc(serviceId);
+
+    await serviceRef.update({ name, url });
   }
 
   async updateEnvironmentOwner({

@@ -1,0 +1,17 @@
+<form class="change-ownership-form" (ngSubmit)="updateInfo()">
+  <div class="input-group">
+    <label for="service-name">Name</label>
+    <input
+      [(ngModel)]="name"
+      type="text"
+      name="service-name"
+      id="service-name"
+    />
+  </div>
+  <div class="input-group">
+    <label for="service-url">URL</label>
+    <input [(ngModel)]="url" type="text" name="service-url" id="service-url" />
+  </div>
+
+  <button class="button" type="submit">Save</button>
+</form>

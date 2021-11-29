@@ -1,0 +1,20 @@
+:host {
+  display: block;
+  padding: 3rem;
+}
+
+h1,
+h2,
+h3,
+a {
+  color: var(--green-010);
+  font-weight: 300;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
