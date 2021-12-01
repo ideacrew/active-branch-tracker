@@ -1,19 +1,13 @@
 import { expect } from 'chai';
-import { after } from 'mocha';
+import { before } from 'mocha';
 // https://github.com/axios/axios#note-commonjs-usage
 const axios = require('axios').default;
-import * as admin from 'firebase-admin';
 import * as qs from 'qs';
-
-const test = require('firebase-functions-test')({
-  projectId: process.env.GCLOUD_PROJECT,
-});
-
-test.mockConfig({ slack: { token: 1234 } });
-
-if (admin.apps.length === 0) {
-  admin.initializeApp();
-}
+import { doc, getDoc, setLogLevel } from 'firebase/firestore';
+import {
+  initializeTestEnvironment,
+  RulesTestEnvironment,
+} from '@firebase/rules-unit-testing';
 
 const axiosConfig = (functionName: string, data: unknown) => {
   return {
@@ -26,9 +20,32 @@ const axiosConfig = (functionName: string, data: unknown) => {
   };
 };
 
+const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
+let testEnv: RulesTestEnvironment;
+
+before(async () => {
+  // Silence expected rules rejections from Firestore SDK. Unexpected rejections
+  // will still bubble up and will be thrown as an error (failing the tests).
+  setLogLevel('error');
+
+  testEnv = await initializeTestEnvironment({
+    firestore: {
+      port: 8080,
+      host: 'localhost',
+    },
+    projectId,
+  });
+});
+
+after(async () => {
+  // Delete all the FirebaseApp instances created during testing.
+  // Note: this does not affect or clear any data.
+  await testEnv.cleanup();
+});
+
 describe('DCHBX deployment payload', () => {
-  after(() => {
-    test.cleanup();
+  beforeEach(async () => {
+    await testEnv.clearFirestore();
   });
 
   it('tests a new deployment', async () => {
@@ -47,33 +64,29 @@ describe('DCHBX deployment payload', () => {
       console.error('ERROR:', e);
     }
 
-    const envSnap = await admin
-      .firestore()
-      .collection('orgs')
-      .doc('maine')
-      .collection('environments')
-      .doc('hotfix-2')
-      .get();
-
-    const serviceSnap = await admin
-      .firestore()
-      .collection('orgs')
-      .doc('maine')
-      .collection('environments')
-      .doc('hotfix-2')
-      .collection('services')
-      .doc('enroll')
-      .get();
-
-    expect(envSnap.data()).to.include({
-      enrollBranch: 'feature-fix',
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const envRef = doc(
+        context.firestore(),
+        `orgs/maine/environments/hotfix-2`,
+      );
+      const envSnap = await getDoc(envRef);
+      expect(envSnap.data()).to.include({
+        enrollBranch: 'feature-fix',
+      });
     });
 
-    expect(serviceSnap.data()?.latestDeployment).to.include({
-      status: 'started',
-      branch: 'feature-fix',
-      user_name: 'kvootla',
-      commit_sha: 'abc1234',
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const serviceRef = doc(
+        context.firestore(),
+        'orgs/maine/environments/hotfix-2/services/enroll',
+      );
+      const serviceSnap = await getDoc(serviceRef);
+      expect(serviceSnap.data()?.latestDeployment).to.include({
+        status: 'started',
+        branch: 'feature-fix',
+        user_name: 'kvootla',
+        commit_sha: 'abc1234',
+      });
     });
   }).timeout(5000);
 });

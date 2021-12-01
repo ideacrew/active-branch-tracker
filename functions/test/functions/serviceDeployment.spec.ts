@@ -1,33 +1,41 @@
 import { expect } from 'chai';
-import { after } from 'mocha';
+
+import {
+  initializeTestEnvironment,
+  RulesTestEnvironment,
+} from '@firebase/rules-unit-testing';
 // https://github.com/axios/axios#note-commonjs-usage
 const axios = require('axios').default;
-import * as admin from 'firebase-admin';
+import { doc, getDoc, setLogLevel } from 'firebase/firestore';
 
-const test = require('firebase-functions-test')({
-  projectId: process.env.GCLOUD_PROJECT,
+import { axiosConfig } from '../util';
+
+const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
+let testEnv: RulesTestEnvironment;
+
+before(async () => {
+  // Silence expected rules rejections from Firestore SDK. Unexpected rejections
+  // will still bubble up and will be thrown as an error (failing the tests).
+  setLogLevel('error');
+
+  testEnv = await initializeTestEnvironment({
+    firestore: {
+      port: 8080,
+      host: 'localhost',
+    },
+    projectId,
+  });
 });
 
-test.mockConfig({ slack: { token: 1234 } });
-
-if (admin.apps.length === 0) {
-  admin.initializeApp();
-}
-
-const axiosConfig = (functionName: string, data: unknown) => {
-  return {
-    method: 'post',
-    url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/${functionName}`,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data,
-  };
-};
+after(async () => {
+  // Delete all the FirebaseApp instances created during testing.
+  // Note: this does not affect or clear any data.
+  await testEnv.cleanup();
+});
 
 describe('Service deployment payload', () => {
-  after(() => {
-    test.cleanup();
+  beforeEach(async () => {
+    await testEnv.clearFirestore();
   });
 
   it('tests a new deployment', async () => {
@@ -52,33 +60,27 @@ describe('Service deployment payload', () => {
       console.error('ERROR:', e);
     }
 
-    const envSnap = await admin
-      .firestore()
-      .collection('orgs')
-      .doc('maine')
-      .collection('environments')
-      .doc(data.env)
-      .get();
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const db = context.firestore();
+      const envRef = doc(db, `orgs/maine/environments/${data.env}`);
+      const envSnap = await getDoc(envRef);
 
-    const serviceSnap = await admin
-      .firestore()
-      .collection('orgs')
-      .doc('maine')
-      .collection('environments')
-      .doc(data.env)
-      .collection('services')
-      .doc('enroll')
-      .get();
+      expect(envSnap.data()).to.include({
+        enrollBranch: data.branch,
+      });
 
-    expect(envSnap.data()).to.include({
-      enrollBranch: data.branch,
-    });
+      const serviceRef = doc(
+        db,
+        `orgs/maine/environments/${data.env}/services/enroll`,
+      );
+      const serviceSnap = await getDoc(serviceRef);
 
-    expect(serviceSnap.data()?.latestDeployment).to.include({
-      status: data.status,
-      branch: data.branch,
-      user_name: data.user_name,
-      commit_sha: '48132c8',
+      expect(serviceSnap.data()?.latestDeployment).to.include({
+        status: data.status,
+        branch: data.branch,
+        user_name: data.user_name,
+        commit_sha: '48132c8',
+      });
     });
   }).timeout(5000);
 });

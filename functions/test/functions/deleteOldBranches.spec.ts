@@ -1,28 +1,52 @@
 import { expect } from 'chai';
-import { describe, it, afterEach } from 'mocha';
-import * as firebase from '@firebase/rules-unit-testing';
-// https://github.com/axios/axios#note-commonjs-usage
+import { describe, it, beforeEach } from 'mocha';
+import {
+  initializeTestEnvironment,
+  RulesTestEnvironment,
+} from '@firebase/rules-unit-testing';
 import axios, { AxiosRequestConfig } from 'axios';
 import * as faker from 'faker';
+import {
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+  setLogLevel,
+} from 'firebase/firestore';
 
 import { BranchInfo } from '../../src/models/branchInfo';
-
-const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
-
-const admin = firebase.initializeAdminApp({
-  projectId,
-});
 
 const axiosConfig: AxiosRequestConfig = {
   method: 'post',
   url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/deleteOldBranchDocuments`,
 };
 
+const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
+let testEnv: RulesTestEnvironment;
+
+before(async () => {
+  // Silence expected rules rejections from Firestore SDK. Unexpected rejections
+  // will still bubble up and will be thrown as an error (failing the tests).
+  setLogLevel('error');
+
+  testEnv = await initializeTestEnvironment({
+    firestore: {
+      port: 8080,
+      host: 'localhost',
+    },
+    projectId,
+  });
+});
+
+after(async () => {
+  // Delete all the FirebaseApp instances created during testing.
+  // Note: this does not affect or clear any data.
+  await testEnv.cleanup();
+});
+
 describe('Delete old branches', () => {
-  afterEach(async () => {
-    await firebase.clearFirestoreData({
-      projectId,
-    });
+  beforeEach(async () => {
+    await testEnv.clearFirestore();
   });
 
   const today = new Date();
@@ -61,11 +85,13 @@ describe('Delete old branches', () => {
       ...fakeCurrentBranches,
       ...fakeDefaultBranches,
     ].forEach(async branch => {
-      await admin
-        .firestore()
-        .collection('branches')
-        .doc(faker.random.alpha({ count: 10 }))
-        .set(branch);
+      const docId = faker.random.alpha({ count: 10 });
+
+      await testEnv.withSecurityRulesDisabled(async context => {
+        const docRef = doc(context.firestore(), `branches/${docId}`);
+
+        await setDoc(docRef, branch);
+      });
     });
 
     let responsePayload;
@@ -74,25 +100,28 @@ describe('Delete old branches', () => {
     } catch (e) {
       console.error('ERROR:', e);
     }
-    const branchesCollection = admin.firestore().collection('branches');
-    const snapshot = await branchesCollection.get();
 
-    expect(snapshot.size).to.equal(7);
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const collectionRef = collection(context.firestore(), `branches`);
+
+      const branchesSnapshot = await getDocs(collectionRef);
+
+      expect(branchesSnapshot.size).to.equal(7);
+    });
 
     // Wait for the promise to be resolved and then check the sent text
     expect(responsePayload?.data).to.equal('5 branches successfully deleted');
   }).timeout(5000);
 
   it('tests deleting old branches when there are no old branches', async () => {
-    // const today = new Date();
-    // const ninetyDaysAgo = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000);
+    [...fakeCurrentBranches, ...fakeDefaultBranches].forEach(async branch => {
+      const docId = faker.random.alpha({ count: 10 });
 
-    [...fakeCurrentBranches, ...fakeDefaultBranches].forEach(branch => {
-      admin
-        .firestore()
-        .collection('branches')
-        .doc(faker.random.alpha({ count: 10 }))
-        .set(branch);
+      await testEnv.withSecurityRulesDisabled(async context => {
+        const docRef = doc(context.firestore(), `branches/${docId}`);
+
+        await setDoc(docRef, branch);
+      });
     });
 
     let responsePayload;
@@ -102,10 +131,14 @@ describe('Delete old branches', () => {
     } catch (e) {
       console.error('ERROR:', e);
     }
-    const branchesRef = admin.firestore().collection('branches');
-    const snapshot = await branchesRef.get();
 
-    expect(snapshot.size).to.equal(7);
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const collectionRef = collection(context.firestore(), `branches`);
+
+      const branchesSnapshot = await getDocs(collectionRef);
+
+      expect(branchesSnapshot.size).to.equal(7);
+    });
 
     // Wait for the promise to be resolved and then check the sent text
     expect(responsePayload?.data).to.equal('No branches to delete');
@@ -125,12 +158,14 @@ describe('Delete old branches', () => {
       },
     );
 
-    [...moreFakeBranches, ...fakeDefaultBranches].forEach(branch => {
-      admin
-        .firestore()
-        .collection('branches')
-        .doc(faker.random.alpha({ count: 10 }))
-        .set(branch);
+    [...moreFakeBranches, ...fakeDefaultBranches].forEach(async branch => {
+      const docId = faker.random.alpha({ count: 10 });
+
+      await testEnv.withSecurityRulesDisabled(async context => {
+        const docRef = doc(context.firestore(), `branches/${docId}`);
+
+        await setDoc(docRef, branch);
+      });
     });
 
     let responsePayload;
@@ -140,10 +175,14 @@ describe('Delete old branches', () => {
     } catch (e) {
       console.error('ERROR:', e);
     }
-    const branchesRef = admin.firestore().collection('branches');
-    const snapshot = await branchesRef.get();
 
-    expect(snapshot.size).to.equal(3);
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const collectionRef = collection(context.firestore(), `branches`);
+
+      const branchesSnapshot = await getDocs(collectionRef);
+
+      expect(branchesSnapshot.size).to.equal(3);
+    });
 
     // Wait for the promise to be resolved and then check the sent text
     expect(responsePayload?.data).to.equal('100 branches successfully deleted');

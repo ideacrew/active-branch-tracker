@@ -1,6 +1,10 @@
 import { expect } from 'chai';
-import { describe, it, afterEach } from 'mocha';
-import * as firebase from '@firebase/rules-unit-testing';
+import { describe, it } from 'mocha';
+import {
+  initializeTestEnvironment,
+  RulesTestEnvironment,
+} from '@firebase/rules-unit-testing';
+import { doc, getDoc, setDoc, setLogLevel } from 'firebase/firestore';
 
 import { mockWebhookPayload } from '../mockHttpFunction';
 
@@ -8,25 +12,39 @@ import { WorkflowRunPayload } from '../../../src/webhook/workflow-run';
 import { BranchInfo } from '../../../src/models';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
+let testEnv: RulesTestEnvironment;
 
-const admin = firebase.initializeAdminApp({
-  projectId,
+before(async () => {
+  // Silence expected rules rejections from Firestore SDK. Unexpected rejections
+  // will still bubble up and will be thrown as an error (failing the tests).
+  setLogLevel('error');
+
+  testEnv = await initializeTestEnvironment({
+    firestore: {
+      port: 8080,
+      host: 'localhost',
+    },
+    projectId,
+  });
+});
+
+after(async () => {
+  // Delete all the FirebaseApp instances created during testing.
+  // Note: this does not affect or clear any data.
+  await testEnv.cleanup();
 });
 
 describe('Workflow run tests', () => {
-  const branchRef = admin
-    .firestore()
-    .collection('branches')
-    .doc(`ideacrew-active-branch-tracker-trunk`);
-
-  afterEach(async () => {
-    await firebase.clearFirestoreData({
-      projectId,
-    });
-  });
+  const branchPath = 'branches/ideacrew-active-branch-tracker-trunk';
 
   beforeEach(async () => {
-    await branchRef.set(initialBranch);
+    await testEnv.clearFirestore();
+
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const branchRef = doc(context.firestore(), branchPath);
+
+      await setDoc(branchRef, initialBranch);
+    });
   });
 
   it('tests a first-time successful workflow result', async () => {
@@ -36,20 +54,24 @@ describe('Workflow run tests', () => {
       console.error('ERROR:', e);
     }
 
-    const updatedBranchDoc = await branchRef.get();
-    const updatedBranchInfo = updatedBranchDoc.data();
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const branchRef = doc(context.firestore(), branchPath);
 
-    expect(updatedBranchInfo).to.include({
-      checkSuiteRuns: 211,
-      checkSuiteFailures: 28,
-      head_sha: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
-    });
+      const branchSnapshot = await getDoc(branchRef);
+      const updatedBranchInfo = branchSnapshot.data();
 
-    expect(updatedBranchInfo.head_commit).to.include({
-      id: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
-      message: 'add workflow run event to webhook handler',
-      timestamp: '2021-10-08T18:57:35Z',
-      tree_id: '66089ea129a82bdca7327f0d6d3eaaf40b8b2e3e',
+      expect(updatedBranchInfo).to.include({
+        checkSuiteRuns: 211,
+        checkSuiteFailures: 28,
+        head_sha: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
+      });
+
+      expect(updatedBranchInfo.head_commit).to.include({
+        id: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
+        message: 'add workflow run event to webhook handler',
+        timestamp: '2021-10-08T18:57:35Z',
+        tree_id: '66089ea129a82bdca7327f0d6d3eaaf40b8b2e3e',
+      });
     });
   });
 
@@ -60,25 +82,29 @@ describe('Workflow run tests', () => {
       console.error('ERROR:', e);
     }
 
-    const updatedBranchDoc = await branchRef.get();
-    const updatedBranchInfo = updatedBranchDoc.data();
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const branchRef = doc(context.firestore(), branchPath);
 
-    expect(updatedBranchInfo).to.include({
-      checkSuiteRuns: 211,
-      checkSuiteFailures: 29,
-      head_sha: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
-    });
+      const branchSnapshot = await getDoc(branchRef);
+      const updatedBranchInfo = branchSnapshot.data();
 
-    expect(updatedBranchInfo.head_commit).to.include({
-      id: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
-      message: 'add workflow run event to webhook handler',
-      timestamp: '2021-10-08T18:57:35Z',
-      tree_id: '66089ea129a82bdca7327f0d6d3eaaf40b8b2e3e',
-    });
+      expect(updatedBranchInfo).to.include({
+        checkSuiteRuns: 211,
+        checkSuiteFailures: 29,
+        head_sha: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
+      });
 
-    expect(updatedBranchInfo.head_commit.author).to.include({
-      name: 'Mark Goho',
-      email: 'markgoho@gmail.com',
+      expect(updatedBranchInfo.head_commit).to.include({
+        id: 'b440c373712f27d84aa428703e55cdc95ef41ea3',
+        message: 'add workflow run event to webhook handler',
+        timestamp: '2021-10-08T18:57:35Z',
+        tree_id: '66089ea129a82bdca7327f0d6d3eaaf40b8b2e3e',
+      });
+
+      expect(updatedBranchInfo.head_commit.author).to.include({
+        name: 'Mark Goho',
+        email: 'markgoho@gmail.com',
+      });
     });
   });
 });
