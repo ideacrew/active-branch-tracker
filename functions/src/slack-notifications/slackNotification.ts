@@ -5,7 +5,9 @@ import * as functions from 'firebase-functions';
 
 export const yellrChannel = 'all_devs';
 
-const slackConfig = functions.config().slack ?? { token: 'fake-token' };
+const slackConfig = process.env.FUNCTIONS_EMULATOR
+  ? { token: 'fake-token' }
+  : functions.config().slack;
 const token: string = slackConfig.token;
 
 const slack = new WebClient(token);

@@ -41,3 +41,4 @@ Thumbs.db
 # Firebase
 *-debug.log
 *-debug.*.log
+*-coverage.html

@@ -1,33 +1,39 @@
 import { expect } from 'chai';
-import { after } from 'mocha';
+import { axiosConfig } from '../util';
+import { doc, getDoc, setLogLevel } from 'firebase/firestore';
+import {
+  initializeTestEnvironment,
+  RulesTestEnvironment,
+} from '@firebase/rules-unit-testing';
 // https://github.com/axios/axios#note-commonjs-usage
 const axios = require('axios').default;
-import * as admin from 'firebase-admin';
 
-const test = require('firebase-functions-test')({
-  projectId: process.env.GCLOUD_PROJECT,
+const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
+let testEnv: RulesTestEnvironment;
+
+before(async () => {
+  // Silence expected rules rejections from Firestore SDK. Unexpected rejections
+  // will still bubble up and will be thrown as an error (failing the tests).
+  setLogLevel('error');
+
+  testEnv = await initializeTestEnvironment({
+    firestore: {
+      port: 8080,
+      host: 'localhost',
+    },
+    projectId,
+  });
 });
 
-test.mockConfig({ slack: { token: 1234 } });
-
-if (admin.apps.length === 0) {
-  admin.initializeApp();
-}
-
-const axiosConfig = (functionName: string, data: unknown) => {
-  return {
-    method: 'post',
-    url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/${functionName}`,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data,
-  };
-};
+after(async () => {
+  // Delete all the FirebaseApp instances created during testing.
+  // Note: this does not affect or clear any data.
+  await testEnv.cleanup();
+});
 
 describe('Data refresh payload v2', () => {
-  after(() => {
-    test.cleanup();
+  beforeEach(async () => {
+    await testEnv.clearFirestore();
   });
 
   it('tests a started data refresh', async () => {
@@ -49,19 +55,18 @@ describe('Data refresh payload v2', () => {
       console.error('ERROR:', e);
     }
 
-    const serviceSnap = await admin
-      .firestore()
-      .collection('orgs')
-      .doc('maine')
-      .collection('environments')
-      .doc('hotfix-2')
-      .collection('services')
-      .doc('enroll')
-      .get();
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const serviceRef = doc(
+        context.firestore(),
+        'orgs/maine/environments/hotfix-2/services/enroll',
+      );
 
-    expect(serviceSnap.data()?.data).to.include({
-      status: 'started',
-      user_name: 'kvootla',
+      const serviceSnap = await getDoc(serviceRef);
+
+      expect(serviceSnap.data()?.data).to.include({
+        status: 'started',
+        user_name: 'kvootla',
+      });
     });
   }).timeout(5000);
 
@@ -84,19 +89,18 @@ describe('Data refresh payload v2', () => {
       console.error('ERROR:', e);
     }
 
-    const serviceSnap = await admin
-      .firestore()
-      .collection('orgs')
-      .doc('maine')
-      .collection('environments')
-      .doc('hotfix-2')
-      .collection('services')
-      .doc('enroll')
-      .get();
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const serviceRef = doc(
+        context.firestore(),
+        'orgs/maine/environments/hotfix-2/services/enroll',
+      );
 
-    expect(serviceSnap.data()?.data).to.include({
-      status: 'completed',
-      user_name: 'kvootla',
+      const serviceSnap = await getDoc(serviceRef);
+
+      expect(serviceSnap.data()?.data).to.include({
+        status: 'completed',
+        user_name: 'kvootla',
+      });
     });
   }).timeout(5000);
 });
