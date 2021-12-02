@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {
-  calculateFeatureRuntime,
-  CucumberFeature,
-} from 'cucumber-report-analyzer';
+import { CucumberFeature } from 'cucumber-report-analyzer';
+
+import { calculateFeatureRuntime } from '../util';
 
 @Pipe({
   name: 'featureRuntime',
