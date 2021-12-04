@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { before, after } from 'mocha';
 
 import {
   initializeTestEnvironment,
@@ -8,10 +9,19 @@ import {
 const axios = require('axios').default;
 import { doc, getDoc, setLogLevel } from 'firebase/firestore';
 
-import { axiosConfig } from '../util';
-
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
+
+export const axiosConfig = (route: string, data: unknown) => {
+  return {
+    method: 'post',
+    url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/api/${route}`,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data,
+  };
+};
 
 before(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
@@ -50,7 +60,7 @@ describe('Service deployment payload', () => {
       commit_sha: '48132c8',
     };
 
-    const config = axiosConfig('serviceDeployment', data);
+    const config = axiosConfig('service-deployment', data);
 
     try {
       // Make the http request

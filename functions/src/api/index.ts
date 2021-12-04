@@ -1,7 +1,7 @@
 import express from 'express';
 import * as functions from 'firebase-functions';
 
-import { testRoute } from './controllers';
+import { serviceDeployment, testRoute } from './controllers';
 
 const apiPrefix = 'api';
 export const app = express();
@@ -17,3 +17,5 @@ app.use((req, res, next) => {
 });
 
 app.get('/test-route', testRoute);
+
+app.post('/service-deployment', serviceDeployment);
