@@ -1,4 +1,4 @@
-name: Deploy Service
+name: Deploy ${{ github.event.inputs.service }} to ${{ github.event.inputs.environment }}
 
 on:
   workflow_dispatch:
