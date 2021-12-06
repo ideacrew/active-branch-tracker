@@ -29,12 +29,14 @@ jobs:
       ENVIRONMENT: ${{ github.event.inputs.environment }}
       ORG: 'maine'
       REPO: ${{ github.event.inputs.repository }}
-      USER: ${{ github.event.actor.login }}
+      USER: ${{ github.actor }}
     steps:
       - uses: actions/checkout@v2
         with:
           repository: 'ideacrew/${{ github.event.inputs.repository }}'
           ref: ${{ github.event.inputs.ref }}
+      - name: Add commit sha to ENV variable
+        run: COMMIT_SHA=$(git log -n 1 --pretty=format:"%H" 2>&1)
       # - name: Post to Yellr
       #   id: yellr
       #   uses: fjogeleit/http-request-action@master
@@ -45,7 +47,7 @@ jobs:
       #       {
       #         "app": "$APP",
       #         "branch": "$REF",
-      #         "commit_sha": "${{ github.event.head_commit.id }}",
+      #         "commit_sha": "$COMMIT_SHA",
       #         "env": "$ENVIRONMENT",
       #         "org": "$ORG",
       #         "repo": "$REPO"
@@ -56,6 +58,6 @@ jobs:
         run: |
           echo "Deploying $APP to $ENVIRONMENT"
           echo "Ref: $REF"
-          COMMIT_SHA=$(git log -n 1 --pretty=format:"%H" 2>&1)
+
           echo "Commit SHA: $COMMIT_SHA"
           echo "Deployment started by $USER"
