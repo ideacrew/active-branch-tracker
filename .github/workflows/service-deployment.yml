@@ -40,16 +40,16 @@ jobs:
         run: echo "COMMIT_SHA=$(git log -n 1 --pretty=format:'%H')" >> $GITHUB_ENV
       - name: Post to Yellr
         run: |
-          curl --location --request POST 'https://yellr.app/api/service-deployment' \
-          --header 'Content-Type: application/json' \
-          --data-raw '{
+          curl -L -X POST 'https://yellr.app/api/service-deployment' \
+          -H 'Content-Type: application/json' \
+          -d '{
               "app": "${{ env.APP }}",
               "branch": "${{ env.REF }}",
               "commit_sha": "${{ env.COMMIT_SHA }}",
               "env": "${{ env.ENVIRONMENT }}",
               "org": "${{ env.ORG }}",
-              "repo": "${{ env.REPO }}"
-              "status": "started"
+              "repo": "${{ env.REPO }}",
+              "status": "started",
               "user_name": "${{ env.USER }}"
           }'
         # id: yellrStart
