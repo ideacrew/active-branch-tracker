@@ -36,7 +36,6 @@ jobs:
         with:
           repository: 'ideacrew/${{ github.event.inputs.repository }}'
           ref: ${{ github.event.inputs.ref }}
-          fetch-depth: 0
       - name: Set commit sha to env variable
         run: echo "COMMIT_SHA=$(git log -n 1 --pretty=format:'%H')" >> $GITHUB_ENV
       # - name: Post to Yellr
