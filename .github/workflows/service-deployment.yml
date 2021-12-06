@@ -46,14 +46,14 @@ jobs:
           method: POST
           data: >-
             {
-              "app": "$APP",
-              "branch": "$REF",
+              "app": "${{ env.APP }}",
+              "branch": "{{ env.$REF }}",
               "commit_sha": "${{ env.COMMIT_SHA }}",
-              "env": "$ENVIRONMENT",
-              "org": "$ORG",
-              "repo": "$REPO"
+              "env": "${{ env.ENVIRONMENT }}",
+              "org": "${{ env.ORG }}",
+              "repo": "${{ env.REPO }}"
               "status": "started"
-              "user_name": "$USER"
+              "user_name": "${{ env.USER }}"
             }
       - name: Do some deployment stuff
         run: |
