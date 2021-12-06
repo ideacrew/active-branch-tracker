@@ -38,34 +38,26 @@ jobs:
           ref: ${{ github.event.inputs.ref }}
       - name: Set commit sha to env variable
         run: echo "COMMIT_SHA=$(git log -n 1 --pretty=format:'%H')" >> $GITHUB_ENV
-      # - name: Post to Yellr
-      #   id: yellr
-      #   uses: fjogeleit/http-request-action@master
-      #   with:
-      #     url: 'https://yellr.app/api/service-deployment'
-      #     method: POST
-      #     data: >-
-      #       {
-      #         "app": "$APP",
-      #         "branch": "$REF",
-      #         "commit_sha": "${{ env.COMMIT_SHA }}",
-      #         "env": "$ENVIRONMENT",
-      #         "org": "$ORG",
-      #         "repo": "$REPO"
-      #         "status": "started"
-      #         "user_name": "$USER"
-      #       }
+      - name: Post to Yellr
+        id: yellrStart
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: 'https://yellr.app/api/service-deployment'
+          method: POST
+          data: >-
+            {
+              "app": "$APP",
+              "branch": "$REF",
+              "commit_sha": "${{ env.COMMIT_SHA }}",
+              "env": "$ENVIRONMENT",
+              "org": "$ORG",
+              "repo": "$REPO"
+              "status": "started"
+              "user_name": "$USER"
+            }
       - name: Do some deployment stuff
         run: |
           echo "Deploying $APP to $ENVIRONMENT"
           echo "Ref: $REF"
           echo "Commit SHA: ${{ env.COMMIT_SHA }}"
           echo "Deployment started by $USER"
-
-      # - name: Try a bunch of variations on environment variable setting
-      #   run: |
-      #     echo "COMMIT_SHA=$(git log -n 1 --pretty=format:'%H')" >> $GITHUB_ENV
-      #     echo "${{ env.COMMIT_SHA }}"
-      #     echo "COMMIT_SHA $COMMIT_SHA }}"
-      # - name: Checkout Step outputs
-      #   run: echo "${{ steps.checkoutStep.outputs }}"
