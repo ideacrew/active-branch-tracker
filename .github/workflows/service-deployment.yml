@@ -58,3 +58,4 @@ jobs:
           echo "Ref: $REF"
           COMMIT_SHA=$(git log -n 1 --pretty=format:"%H" 2>&1)
           echo "Commit SHA: $COMMIT_SHA"
+          echo "Deployment started by $USER"
