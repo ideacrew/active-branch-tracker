@@ -47,7 +47,7 @@ jobs:
           data: >-
             {
               "app": "${{ env.APP }}",
-              "branch": "{{ env.$REF }}",
+              "branch": "{{ env.REF }}",
               "commit_sha": "${{ env.COMMIT_SHA }}",
               "env": "${{ env.ENVIRONMENT }}",
               "org": "${{ env.ORG }}",
