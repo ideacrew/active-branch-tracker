@@ -36,6 +36,9 @@ jobs:
         with:
           repository: 'ideacrew/${{ github.event.inputs.repository }}'
           ref: ${{ github.event.inputs.ref }}
+          fetch-depth: 0
+      - name: Set commit sha to env variable
+        run: echo "COMMIT_SHA=$(git log -n 1 --pretty=format:'%H')" >> $GITHUB_ENV
       # - name: Post to Yellr
       #   id: yellr
       #   uses: fjogeleit/http-request-action@master
@@ -53,20 +56,18 @@ jobs:
       #         "status": "started"
       #         "user_name": "$USER"
       #       }
-      # - name: Do some deployment stuff
+      - name: Do some deployment stuff
+        run: |
+          echo "Deploying $APP to $ENVIRONMENT"
+          echo "Ref: $REF"
+          echo "GitHub SHA: $GITHUB_SHA"
+          echo "Commit SHA: ${{ env.COMMIT_SHA }}"
+          echo "Deployment started by $USER"
+
+      # - name: Try a bunch of variations on environment variable setting
       #   run: |
       #     echo "COMMIT_SHA=$(git log -n 1 --pretty=format:'%H')" >> $GITHUB_ENV
-      #     echo "Deploying $APP to $ENVIRONMENT"
-      #     echo "Ref: $REF"
-      #     echo "GitHub SHA: $GITHUB_SHA"
-      #     echo "Commit SHA: ${{ env.COMMIT_SHA }}"
-      #     echo "Deployment started by $USER"
-
-      - name: Try a bunch of variations on environment variable setting
-        run: |
-          echo "git log -n 1 --pretty=format:'%H'"
-          echo "COMMIT_SHA=$(git log -n 1 --pretty=format:'%H')" >> $GITHUB_ENV
-          echo "COMMIT_SHA ${{ env.COMMIT_SHA }}"
-          echo "COMMIT_SHA $COMMIT_SHA }}"
-      - name: Checkout Step outputs
-        run: echo "${{ steps.checkoutStep.outputs }}"
+      #     echo "${{ env.COMMIT_SHA }}"
+      #     echo "COMMIT_SHA $COMMIT_SHA }}"
+      # - name: Checkout Step outputs
+      #   run: echo "${{ steps.checkoutStep.outputs }}"
