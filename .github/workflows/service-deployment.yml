@@ -39,13 +39,10 @@ jobs:
       - name: Set commit sha to env variable
         run: echo "COMMIT_SHA=$(git log -n 1 --pretty=format:'%H')" >> $GITHUB_ENV
       - name: Post to Yellr
-        id: yellrStart
-        uses: fjogeleit/http-request-action@master
-        with:
-          url: 'https://yellr.app/api/service-deployment'
-          method: POST
-          data: >-
-            {
+        run: |
+          curl --location --request POST 'https://yellr.app/api/service-deployment' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
               "app": "${{ env.APP }}",
               "branch": "${{ env.REF }}",
               "commit_sha": "${{ env.COMMIT_SHA }}",
@@ -54,7 +51,23 @@ jobs:
               "repo": "${{ env.REPO }}"
               "status": "started"
               "user_name": "${{ env.USER }}"
-            }
+          }'
+        # id: yellrStart
+        # uses: fjogeleit/http-request-action@master
+        # with:
+        #   url: 'https://yellr.app/api/service-deployment'
+        #   method: POST
+        #   data: >-
+        #     {
+        #       "app": "${{ env.APP }}",
+        #       "branch": "${{ env.REF }}",
+        #       "commit_sha": "${{ env.COMMIT_SHA }}",
+        #       "env": "${{ env.ENVIRONMENT }}",
+        #       "org": "${{ env.ORG }}",
+        #       "repo": "${{ env.REPO }}"
+        #       "status": "started"
+        #       "user_name": "${{ env.USER }}"
+        #     }
       - name: Do some deployment stuff
         run: |
           echo "Deploying $APP to $ENVIRONMENT"
