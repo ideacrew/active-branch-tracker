@@ -69,7 +69,6 @@ jobs:
           echo "LAST_GIT_HASH=$(env - i git log --pretty=format:'%h' -n 1)" >> $GITHUB_ENV
           echo "$LAST_GIT_HASH"
           echo "${{ env.LAST_GIT_HASH }}"
-          echo ${{ github.}}
       - name: Checkout Step outputs
         run: echo "$CHECKOUT_OUTPUTS"
         env:
