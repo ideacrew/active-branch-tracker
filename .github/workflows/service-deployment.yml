@@ -64,12 +64,9 @@ jobs:
 
       - name: Try a bunch of variations on environment variable setting
         run: |
-          echo "git log -n 1 --pretty=format:'%H')"
+          echo "git log -n 1 --pretty=format:'%H'"
           echo "COMMIT_SHA=$(git log -n 1 --pretty=format:'%H')" >> $GITHUB_ENV
-          echo "LAST_GIT_HASH=$(env - i git log --pretty=format:'%h' -n 1)" >> $GITHUB_ENV
-          echo "$LAST_GIT_HASH"
-          echo "${{ env.LAST_GIT_HASH }}"
+          echo "COMMIT_SHA ${{ env.COMMIT_SHA }}"
+          echo "COMMIT_SHA $COMMIT_SHA }}"
       - name: Checkout Step outputs
-        run: echo "$CHECKOUT_OUTPUTS"
-        env:
-          CHECKOUT_OUTPUTS: ${{ join(steps.checkoutStep.outputs.*, '\n') }}
+        run: echo "${{ steps.checkoutStep.outputs }}"
