@@ -54,7 +54,7 @@ jobs:
       #       }
       - name: Do some deployment stuff
         run: |
-          echo "COMMIT_SHA=$(git log -n 1 --pretty=format:"%H" 2>&1)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(git log -n 1 --pretty=format:"%H")" >> $GITHUB_ENV
           echo "Deploying $APP to $ENVIRONMENT"
           echo "Ref: $REF"
           echo "Commit SHA: $COMMIT_SHA"
