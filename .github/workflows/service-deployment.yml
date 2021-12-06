@@ -1,0 +1,60 @@
+name: Deploy Service
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        default: 'enroll'
+        description: 'GitHub repository name'
+        required: true
+      service:
+        default: 'enroll'
+        description: The service to deploy
+        required: true
+      ref:
+        default: 'trunk'
+        description: The reference to deploy, could be a branch, tag or commit hash
+        required: true
+      environment:
+        default: 'pvt3'
+        description: Target environment for deployment
+        required: true
+
+jobs:
+  deploy-service:
+    runs-on: ubuntu-latest
+    env:
+      APP: ${{ github.event.inputs.service }}
+      REF: ${{ github.event.inputs.ref }}
+      ENVIRONMENT: ${{ github.event.inputs.environment }}
+      ORG: 'maine'
+      REPO: ${{ github.event.inputs.repository }}
+      USER: ${{ github.event.actor.login }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: 'ideacrew/${{ github.event.inputs.repository }}'
+          ref: ${{ github.event.inputs.ref }}
+      # - name: Post to Yellr
+      #   id: yellr
+      #   uses: fjogeleit/http-request-action@master
+      #   with:
+      #     url: 'https://yellr.app/api/service-deployment'
+      #     method: POST
+      #     data: >-
+      #       {
+      #         "app": "$APP",
+      #         "branch": "$REF",
+      #         "commit_sha": "${{ github.event.head_commit.id }}",
+      #         "env": "$ENVIRONMENT",
+      #         "org": "$ORG",
+      #         "repo": "$REPO"
+      #         "status": "started"
+      #         "user_name": "$USER"
+      #       }
+      - name: Do some deployment stuff
+        run: |
+          echo "Deploying $APP to $ENVIRONMENT"
+          echo "Ref: $REF"
+          COMMIT_SHA=$(git log -n 1 --pretty=format:"%H" 2>&1)
+          echo "Commit SHA: $COMMIT_SHA"
