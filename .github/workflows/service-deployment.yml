@@ -35,8 +35,6 @@ jobs:
         with:
           repository: 'ideacrew/${{ github.event.inputs.repository }}'
           ref: ${{ github.event.inputs.ref }}
-      - name: Add commit sha to ENV variable
-        run: export COMMIT_SHA=$(git log -n 1 --pretty=format:"%H" 2>&1)
       # - name: Post to Yellr
       #   id: yellr
       #   uses: fjogeleit/http-request-action@master
@@ -56,8 +54,8 @@ jobs:
       #       }
       - name: Do some deployment stuff
         run: |
+          echo "COMMIT_SHA=$(git log -n 1 --pretty=format:"%H" 2>&1)" >> $GITHUB_ENV
           echo "Deploying $APP to $ENVIRONMENT"
           echo "Ref: $REF"
-
           echo "Commit SHA: $COMMIT_SHA"
           echo "Deployment started by $USER"
