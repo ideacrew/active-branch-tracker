@@ -39,7 +39,6 @@ jobs:
       ORG: 'maine'
       REPO: ${{ github.event.inputs.repository }}
       USER: ${{ github.actor }}
-    if: contains(${{ env.ENVIRONMENT }}, 'prod') || contains(${{ env.ENVIRONMENT }}, 'production')
     steps:
       - uses: actions/checkout@v2
         id: checkoutStep
