@@ -20,16 +20,27 @@ on:
         description: Target environment for deployment
         required: true
 
+env:
+  APP: ${{ github.event.inputs.service }}
+  REF: ${{ github.event.inputs.ref }}
+  ENVIRONMENT: ${{ github.event.inputs.environment }}
+  ORG: 'maine'
+  REPO: ${{ github.event.inputs.repository }}
+  USER: ${{ github.actor }}
+
 jobs:
+  # prod-check:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: |
+  #         if [ $ENVIRONMENT = 'prod' ]; then
+  #           echo "Deployment to production is not allowed"
+  #           exit 1
+  #         fi
+
   deploy-service:
     runs-on: ubuntu-latest
-    env:
-      APP: ${{ github.event.inputs.service }}
-      REF: ${{ github.event.inputs.ref }}
-      ENVIRONMENT: ${{ github.event.inputs.environment }}
-      ORG: 'maine'
-      REPO: ${{ github.event.inputs.repository }}
-      USER: ${{ github.actor }}
+    if: env.ENVIRONMENT != 'prod' && env.ENVIRONMENT != 'production'
     steps:
       - uses: actions/checkout@v2
         id: checkoutStep
