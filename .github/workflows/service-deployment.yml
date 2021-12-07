@@ -40,7 +40,7 @@ jobs:
 
   deploy-service:
     runs-on: ubuntu-latest
-    if: env.ENVIRONMENT != 'prod' && env.ENVIRONMENT != 'production'
+    if: contains(env.ENVIRONMENT, 'prod') || contains(env.ENVIRONMENT, 'production')
     steps:
       - uses: actions/checkout@v2
         id: checkoutStep
