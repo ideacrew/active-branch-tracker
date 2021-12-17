@@ -1,23 +1,20 @@
 version: 2
 updates:
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: daily
-
-  ignore:
-  - dependency-name: "@angular/*"
-    versions:
-    - ">= 0"
-  - dependency-name: "@angular-devkit/*"
-    versions:
-    - ">= 0"
-  - dependency-name: "@nrwl/*"
-    versions:
-    - ">= 0"
-
- - package-ecosystem: github-actions
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: daily
+    ignore:
+      - dependency-name: '@angular/*'
+        versions:
+          - '>= 0'
+      - dependency-name: '@angular-devkit/*'
+        versions:
+          - '>= 0'
+      - dependency-name: '@nrwl/*'
+        versions:
+          - '>= 0'
+  - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: daily
-
