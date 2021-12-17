@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { map, tap, switchMapTo } from 'rxjs/operators';
+import { map, tap, switchMap } from 'rxjs/operators';
 
 import * as DisplayConfigActions from './display-config.actions';
 import { DisplayConfigFacade } from './display-config.facade';
@@ -29,7 +29,7 @@ export class DisplayConfigEffects {
           DisplayConfigActions.expandUntrackedBranches,
           DisplayConfigActions.collapseUntrackedBranches,
         ),
-        switchMapTo(this.displayConfigFacade.fullConfig$),
+        switchMap(() => this.displayConfigFacade.fullConfig$),
         tap((config: DisplayConfig) =>
           this.localStorageService.setSavedState(config, 'config'),
         ),
