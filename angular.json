@@ -129,32 +129,6 @@
       },
       "tags": ["scope:dashboard", "type:ui"]
     },
-    "cucumbers": {
-      "projectType": "library",
-      "root": "libs/cucumbers",
-      "sourceRoot": "libs/cucumbers/src",
-      "prefix": "idc",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/cucumbers"],
-          "options": {
-            "jestConfig": "libs/cucumbers/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/cucumbers/src/**/*.ts",
-              "libs/cucumbers/src/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": []
-    },
     "dashboard": {
       "projectType": "application",
       "schematics": {
@@ -182,9 +156,6 @@
               "apps/dashboard/src/manifest.webmanifest"
             ],
             "styles": [
-              {
-                "input": "node_modules/c3/c3.min.css"
-              },
               {
                 "input": "apps/dashboard/src/styles.scss"
               }
@@ -411,32 +382,6 @@
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
-        }
-      },
-      "tags": []
-    },
-    "rspecs": {
-      "projectType": "library",
-      "root": "libs/rspecs",
-      "sourceRoot": "libs/rspecs/src",
-      "prefix": "idc",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/rspecs"],
-          "options": {
-            "jestConfig": "libs/rspecs/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/rspecs/src/**/*.ts",
-              "libs/rspecs/src/**/*.html"
-            ]
-          }
         }
       },
       "tags": []

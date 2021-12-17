@@ -1,8 +1,0 @@
-<h2 class="feature-title">{{ feature.name }} {{ feature | featureRuntime }}</h2>
-<ng-container *ngIf="detailedReport">
-  <idc-cucumber-element
-    *ngFor="let element of feature.elements; trackBy: trackByFn"
-    [element]="element"
-  >
-  </idc-cucumber-element>
-</ng-container>
