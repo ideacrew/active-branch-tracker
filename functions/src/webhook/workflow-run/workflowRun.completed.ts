@@ -5,6 +5,7 @@ import * as admin from 'firebase-admin';
 import { BranchInfo } from '../../models';
 import { createSafeBranchName } from '../../safeBranchName';
 import { WorkflowRunPayload } from './models';
+import { recordWorkflowRun } from './recordWorkflowRun';
 
 const statusIncrement: { [status: string]: number } = {
   failure: 1,
@@ -19,15 +20,6 @@ const statusIncrement: { [status: string]: number } = {
 export const handleWorkflowRunEvent = async (
   payload: WorkflowRunPayload,
 ): Promise<void> => {
-  // If the workflow run doesn't have a conclusion (it was requested)
-  // or it's been explicitly cancelled, don't update the document
-  if (
-    payload.workflow_run.conclusion === null ||
-    payload.workflow_run.conclusion === 'cancelled'
-  ) {
-    return Promise.resolve();
-  }
-
   const { workflow_run, repository, organization } = payload;
 
   const { name: repositoryName } = repository;
@@ -40,6 +32,14 @@ export const handleWorkflowRunEvent = async (
     head_commit,
     head_sha,
   } = workflow_run;
+
+  if (branchName === 'trunk' && checkSuiteStatus === 'success') {
+    try {
+      await recordWorkflowRun(payload);
+    } catch (e) {
+      functions.logger.error('Could not save workflow run', e);
+    }
+  }
 
   const safeBranchName = createSafeBranchName(branchName);
 

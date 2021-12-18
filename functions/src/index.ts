@@ -96,3 +96,11 @@ export const githubStatusWebhook = functions.https.onRequest(
 export const api = functions.https.onRequest(async (req, res) => {
   await (await import('./api')).app(req, res);
 });
+
+export const checkWorkflowRuntime = functions.firestore
+  .document('workflows/{workflowId}/runs/{runId}')
+  .onCreate(async (snapshot, context) => {
+    await (
+      await import('./check-workflow-runtime')
+    ).checkWorkflowRuntime(snapshot, context);
+  });

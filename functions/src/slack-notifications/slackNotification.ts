@@ -35,6 +35,10 @@ export const sendSlackMessageToChannel = async ({
   text: string;
   channel: string;
 }): Promise<string> => {
+  if (process.env.FUNCTIONS_EMULATOR) {
+    return '';
+  }
+
   try {
     const response = await slack.chat.postMessage({
       channel,
