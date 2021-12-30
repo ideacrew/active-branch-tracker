@@ -35,7 +35,7 @@ export async function handleWebhook(
       {
         const payload = request.body as WorkflowRunPayload;
 
-        if (payload.workflow_run.conclusion === 'success') {
+        if (payload.action === 'completed') {
           await handleWorkflowRunEvent(payload);
         }
       }
