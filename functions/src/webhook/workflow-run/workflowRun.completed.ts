@@ -52,10 +52,16 @@ export const handleWorkflowRunEvent = async (
 
   const branchDocumentSnapshot = await branchRef.get();
 
+  console.log('====================');
+  console.log('Hello');
+  console.log('====================');
+
   if (branchDocumentSnapshot.exists) {
-    const { checkSuiteFailures: currentFailureCount, checkSuiteRuns } = (
-      await branchRef.get()
-    ).data() as BranchInfo;
+    const branchDoc = branchDocumentSnapshot.data() as BranchInfo;
+
+    const currentFailureCount = branchDoc.checkSuiteFailures ?? 0;
+
+    const { checkSuiteRuns } = branchDoc;
 
     const newFailureCount = currentFailureCount
       ? currentFailureCount + statusIncrement[checkSuiteStatus]
@@ -77,7 +83,10 @@ export const handleWorkflowRunEvent = async (
         { merge: true },
       );
     } catch (e) {
-      functions.logger.error(e);
+      functions.logger.error('Could not save workflow run to branch', {
+        branch: safeBranchName,
+        error: e,
+      });
       return Promise.resolve();
     }
   } else {
