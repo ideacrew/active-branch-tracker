@@ -6,11 +6,19 @@ import { BranchInfo } from '../../models';
 import { createSafeBranchName } from '../../safeBranchName';
 import { WorkflowRunPayload } from './models';
 import { recordWorkflowRun } from './recordWorkflowRun';
+import { CheckSuiteConclusion } from '../interfaces';
 
-const statusIncrement: { [status: string]: number } = {
+const statusIncrement: StatusIncrement = {
   failure: 1,
   success: 0,
+  neutral: 0,
+  cancelled: 0,
+  timed_out: 0,
+  action_required: 0,
+  stale: 0,
 };
+
+type StatusIncrement = Record<CheckSuiteConclusion, number>;
 
 /**
  * Handles the workflow run payload
