@@ -8,11 +8,11 @@ export const app = express();
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  functions.logger.info('Request:', req.body);
+app.use((request, _response, next) => {
+  functions.logger.info('Request:', request.body);
 
-  if (req.url.indexOf(`/${apiPrefix}/`) === 0) {
-    req.url = req.url.substring(apiPrefix.length + 1);
+  if (request.url.indexOf(`/${apiPrefix}/`) === 0) {
+    request.url = request.url.slice(Math.max(0, apiPrefix.length + 1));
   }
 
   next();

@@ -1,2 +1,2 @@
 export * from './models';
-export * from './workflowRun.completed';
+export * from './workflow-run.completed';

@@ -1,1 +1,1 @@
-export * from './deleteOldBranchDocs';
+export * from './delete-old-branch-documents';

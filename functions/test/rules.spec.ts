@@ -14,13 +14,15 @@ import {
 } from 'firebase/firestore';
 import { before, after, beforeEach } from 'mocha';
 import * as http from 'http';
+import { FirebaseFirestore } from '@firebase/firestore-types';
+import firebase from 'firebase/compat';
 
 const firestorePort =
   require('../../firebase.json').emulators.firestore.port || 8080;
 
 let testEnv: RulesTestEnvironment;
-let testUserDb;
-let ideaCrewDb;
+let testUserDb: firebase.firestore.Firestore | FirebaseFirestore;
+let ideaCrewDb: firebase.firestore.Firestore | FirebaseFirestore;
 
 interface TestUser {
   uid: string;

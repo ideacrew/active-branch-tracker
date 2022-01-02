@@ -1,1 +1,1 @@
-export * from './createEvent';
+export * from './create-event-payload';

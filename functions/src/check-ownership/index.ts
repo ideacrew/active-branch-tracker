@@ -1,2 +1,2 @@
-export { checkOwnership } from './checkOwnership';
-export { checkEnvironmentOwnership } from './checkEnvironmentOwnership';
+export { checkOwnership } from './check-ownership';
+export { checkEnvironmentOwnership } from './check-environment-ownership';

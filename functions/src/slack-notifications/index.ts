@@ -1,4 +1,4 @@
 export {
   sendSlackMessage,
   sendSlackMessageToChannel,
-} from './slackNotification';
+} from './slack-notification';

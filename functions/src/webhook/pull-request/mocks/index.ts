@@ -1,4 +1,4 @@
-import { PullRequestEventPayload } from '../interfaces/pullRequestPayload';
+import { PullRequestEventPayload } from '../interfaces/pull-request-payload';
 
 import openedPayload from './opened.json';
 import synchronizedPayload from './synchronize.json';

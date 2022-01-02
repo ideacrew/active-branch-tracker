@@ -1,36 +1,35 @@
 import * as functions from 'firebase-functions';
 
-export const webhook = functions.https.onRequest(async (req, res) => {
-  await (await import('./webhook/webhook')).handleWebhook(req, res);
+export const webhook = functions.https.onRequest(async (request, response) => {
+  const { handleWebhook } = await import('./webhook/webhook');
+  await handleWebhook(request, response);
 });
 
 export const branchDeployment = functions.https.onRequest(
   async (request, response) => {
-    await (
-      await import('./branch-deployment/')
-    ).handleBranchDeployment(request, response);
+    const { handleBranchDeployment } = await import('./branch-deployment/');
+    await handleBranchDeployment(request, response);
   },
 );
 
 export const serviceDeployment = functions.https.onRequest(
   async (request, response) => {
-    await (
-      await import('./branch-deployment/')
-    ).handleBranchDeploymentV2(request, response);
+    const { handleBranchDeploymentV2 } = await import('./branch-deployment/');
+    await handleBranchDeploymentV2(request, response);
   },
 );
 
 export const dataRefresh = functions.https.onRequest(
   async (request, response) => {
-    await (await import('./data-refresh')).handleDataRefresh(request, response);
+    const { handleDataRefresh } = await import('./data-refresh');
+    await handleDataRefresh(request, response);
   },
 );
 
 export const dataRefreshV2 = functions.https.onRequest(
   async (request, response) => {
-    await (
-      await import('./data-refresh')
-    ).handleDataRefreshV2(request, response);
+    const { handleDataRefreshV2 } = await import('./data-refresh');
+    await handleDataRefreshV2(request, response);
   },
 );
 
@@ -46,61 +45,46 @@ export const secretWebService = functions.https.onRequest(
 
 export const deleteOldBranchDocuments = functions.https.onRequest(
   async (request, response) => {
-    await (
-      await import('./delete-old-branch-docs')
-    ).deleteOldBranchDocs(request, response);
+    const { deleteOldBranchDocuments } = await import(
+      './delete-old-branch-docs'
+    );
+    await deleteOldBranchDocuments(request, response);
   },
 );
 
 export const defaultBranchFailure = functions.firestore
   .document('branches/{docId}')
   .onUpdate(async change => {
-    await (
-      await import('./default-branch-failure')
-    ).defaultBranchFailure(change);
+    const { defaultBranchFailure } = await import('./default-branch-failure');
+    await defaultBranchFailure(change);
   });
 
 export const defaultBranchSuccess = functions.firestore
   .document('branches/{docId}')
   .onUpdate(async change => {
-    await (
-      await import('./default-branch-success')
-    ).defaultBranchSuccess(change);
+    const { defaultBranchSuccess } = await import('./default-branch-success');
+
+    await defaultBranchSuccess(change);
   });
 
-export const pingEnvironmentsHttp = functions.https.onRequest(
-  async (request, response) => {
-    await (
-      await import('./ping-environments')
-    ).pingEnvironmentsHttp(request, response);
-  },
-);
-
-export const pingEnvironmentsCallable = functions.https.onCall(
-  async (data, context) => {
-    return (await import('./ping-environments')).pingEnvironmentsCallable(
-      data,
-      context,
-    );
-  },
-);
-
 export const githubStatusWebhook = functions.https.onRequest(
-  async (req, res) => {
-    await (
-      await import('./github-status-webhook')
-    ).handleGitHubStatusWebhook(req, res);
+  async (request, response) => {
+    const { handleGitHubStatusWebhook } = await import(
+      './github-status-webhook'
+    );
+    await handleGitHubStatusWebhook(request, response);
   },
 );
 
-export const api = functions.https.onRequest(async (req, res) => {
-  await (await import('./api')).app(req, res);
+export const api = functions.https.onRequest(async (request, response) => {
+  const { app } = await import('./api');
+
+  await app(request, response);
 });
 
 export const checkWorkflowRuntime = functions.firestore
   .document('workflows/{workflowId}/runs/{runId}')
   .onCreate(async (snapshot, context) => {
-    await (
-      await import('./check-workflow-runtime')
-    ).checkWorkflowRuntime(snapshot, context);
+    const { checkWorkflowRuntime } = await import('./check-workflow-runtime');
+    await checkWorkflowRuntime(snapshot, context);
   });

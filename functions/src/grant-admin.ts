@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
 
-import { grantAdminRole } from './util/grantAdmin';
+import { grantAdminRole } from './util/grant-admin';
 
 /**
  *

@@ -1,1 +1,1 @@
-export * from './githubStatusWebhook';
+export * from './handle-github-status-webhook';

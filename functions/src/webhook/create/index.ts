@@ -1,3 +1,3 @@
 export * from './mocks';
 export * from './interfaces';
-export * from './createEvent';
+export * from './create-event';

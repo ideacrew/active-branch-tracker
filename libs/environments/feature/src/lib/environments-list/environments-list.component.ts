@@ -82,14 +82,4 @@ export class EnvironmentsListComponent {
   trackByEnvironmentName(index: number, environment: OrgEnvironment): string {
     return `${environment.id}-${environment.name}`;
   }
-
-  // async refreshEnvironments(): Promise<void> {
-  //   if (this.refreshing.value === true) {
-  //     return;
-  //   } else {
-  //     this.refreshing.next(true);
-  //     await this.environmentService.refreshEnvironmentsStatus();
-  //     this.refreshing.next(false);
-  //   }
-  // }
 }

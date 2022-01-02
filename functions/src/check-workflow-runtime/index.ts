@@ -1,1 +1,1 @@
-export * from './checkWorkflowRuntime';
+export * from './check-workflow-runtime';

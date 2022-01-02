@@ -1,1 +1,1 @@
-export { handleDataRefresh, handleDataRefreshV2 } from './dataRefresh';
+export { handleDataRefresh, handleDataRefreshV2 } from './data-refresh';

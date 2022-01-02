@@ -1,1 +1,1 @@
-export * from './deleteEvent';
+export * from './delete-event-payload';

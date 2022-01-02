@@ -1,3 +1,3 @@
-export * from './interfaces/issueComment';
+export * from './interfaces/issue-comment-payload';
 export * from './mocks';
-export * from './issueCommentEvent';
+export * from './handle-issue-comment-event';

@@ -1,1 +1,1 @@
-export * from './workflowRun';
+export * from './workflow-run';

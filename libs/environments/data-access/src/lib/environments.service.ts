@@ -162,10 +162,4 @@ export class EnvironmentsService {
           )
           .valueChanges({ idField: 'id' });
   }
-
-  async refreshEnvironmentsStatus(): Promise<void> {
-    const callable = this.fns.httpsCallable('pingEnvironmentsCallable');
-    const pingEnvironments = callable({ data: 'anything' }).toPromise();
-    await pingEnvironments;
-  }
 }

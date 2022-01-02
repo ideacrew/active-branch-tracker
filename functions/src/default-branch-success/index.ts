@@ -1,1 +1,1 @@
-export * from './defaultBranchSuccess';
+export * from './default-branch-success';

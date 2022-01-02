@@ -1,3 +1,3 @@
 export * from './mocks';
 export * from './interfaces';
-export * from './deleteEvent';
+export * from './handle-delete-event';
