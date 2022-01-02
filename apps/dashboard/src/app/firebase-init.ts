@@ -1,1 +1,1 @@
-// left intentionally blank
+/* eslint-disable unicorn/no-empty-file */

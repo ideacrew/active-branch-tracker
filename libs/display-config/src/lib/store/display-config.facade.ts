@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import * as fromDisplayConfig from './display-config.reducer';
 import * as DisplayConfigSelectors from './display-config.selectors';
-import { DisplayConfig, DisplayType } from '../displayConfig';
+import { DisplayConfig, DisplayType } from '../display-config';
 import {
   collapseUntrackedBranches,
   expandUntrackedBranches,

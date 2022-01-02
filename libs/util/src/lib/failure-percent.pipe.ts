@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 import { BranchInfo } from './models';
-import { getFailurePercentage } from './branchVM.util';
+import { getFailurePercentage } from './branch-vm.util';
 
 @Pipe({
   name: 'failurePercent',

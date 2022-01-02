@@ -26,15 +26,13 @@ export class AdminOnlyGuard implements CanActivate, CanLoad {
 
   canAccess(): Observable<boolean> {
     return this.authService.user$.pipe(
-      switchMap(user => {
-        if (user === undefined || user === null) {
-          return of(false);
-        } else {
-          return this.userService.user$.pipe(
-            map(serviceUser => serviceUser?.role === 'admin'),
-          );
-        }
-      }),
+      switchMap(user =>
+        user === undefined || user === null
+          ? of(false)
+          : this.userService.user$.pipe(
+              map(serviceUser => serviceUser?.role === 'admin'),
+            ),
+      ),
       tap(access => {
         if (!access) {
           void this.router.navigate(['/login']);

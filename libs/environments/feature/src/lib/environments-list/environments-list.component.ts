@@ -25,20 +25,20 @@ export class EnvironmentsListComponent {
   refreshing$ = this.refreshing.asObservable();
 
   orgId$ = this.route.paramMap.pipe(
-    filter((params: ParamMap) => params.has('orgId')),
-    map((params: ParamMap) => params.get('orgId') ?? ''),
+    filter((parameters: ParamMap) => parameters.has('orgId')),
+    map((parameters: ParamMap) => parameters.get('orgId') ?? ''),
     tap((orgId: string) => (this.orgId = orgId)),
   );
 
   orgName$ = this.orgId$.pipe(
-    switchMap(orgId => this.envService.getOrgName(orgId)),
+    switchMap(orgId => this.environmentService.getOrgName(orgId)),
   );
 
   allEnvironments$ = this.orgId$.pipe(
     switchMap(orgName =>
-      this.envService.queryEnvironmentsByOrg(orgName).pipe(
-        catchError(e => {
-          console.error('ERROR LOADING ENVIRONMENTS', e);
+      this.environmentService.queryEnvironmentsByOrg(orgName).pipe(
+        catchError(error => {
+          console.error('ERROR LOADING ENVIRONMENTS', error);
           return EMPTY;
         }),
       ),
@@ -52,11 +52,16 @@ export class EnvironmentsListComponent {
     e2e: OrgEnvironment[];
     standalone: OrgEnvironment[];
   }> = this.allEnvironments$.pipe(
-    map(environments => environments.filter(env => env.prodlike === true)),
-    map(prodLikeEnvs => {
-      const e2e = prodLikeEnvs.filter(env => env.architecture === 'e2e');
-      const standalone = prodLikeEnvs.filter(
-        env => env.architecture === 'standalone',
+    map(environments =>
+      environments.filter(environment => environment.prodlike === true),
+    ),
+    map(productionLikeEnvironments => {
+      // eslint-disable-next-line unicorn/prevent-abbreviations
+      const e2e = productionLikeEnvironments.filter(
+        environment => environment.architecture === 'e2e',
+      );
+      const standalone = productionLikeEnvironments.filter(
+        environment => environment.architecture === 'standalone',
       );
 
       return { e2e, standalone };
@@ -64,16 +69,18 @@ export class EnvironmentsListComponent {
   );
 
   nonProd$ = this.allEnvironments$.pipe(
-    map(environments => environments.filter(env => env.prodlike === false)),
+    map(environments =>
+      environments.filter(environment => environment.prodlike === false),
+    ),
   );
 
   constructor(
     private route: ActivatedRoute,
-    private envService: EnvironmentsService,
+    private environmentService: EnvironmentsService,
   ) {}
 
-  trackByEnvironmentName(index: number, env: OrgEnvironment): string {
-    return `${env.id}-${env.name}`;
+  trackByEnvironmentName(index: number, environment: OrgEnvironment): string {
+    return `${environment.id}-${environment.name}`;
   }
 
   // async refreshEnvironments(): Promise<void> {
@@ -81,7 +88,7 @@ export class EnvironmentsListComponent {
   //     return;
   //   } else {
   //     this.refreshing.next(true);
-  //     await this.envService.refreshEnvironmentsStatus();
+  //     await this.environmentService.refreshEnvironmentsStatus();
   //     this.refreshing.next(false);
   //   }
   // }

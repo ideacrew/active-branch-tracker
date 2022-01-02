@@ -14,7 +14,7 @@ import {
   OwnerReleaseUpdate,
   OwnerUpdate,
 } from '@idc/environments/data-access';
-import { convertDateInputToLocalDate } from '../convertDate';
+import { convertDateInputToLocalDate } from '../convert-date';
 import { UserService } from '@idc/user/data-access';
 
 @Component({

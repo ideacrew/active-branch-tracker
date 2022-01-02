@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { CheckSuiteConclusion } from './checkSuiteConclusion';
+import { CheckSuiteConclusion } from './check-suite-conclusion';
 
 export interface BranchInfo {
   id?: string;

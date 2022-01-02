@@ -1,4 +1,4 @@
-import { convertReleaseDate } from './convertReleaseDate';
+import { convertReleaseDate } from './convert-release-date';
 
 describe('Create Date object from date string', () => {
   it('should create a date in the appropriate time zone', () => {

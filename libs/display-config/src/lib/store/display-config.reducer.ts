@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as DisplayConfigActions from './display-config.actions';
-import { DisplayConfig } from '../displayConfig';
+import { DisplayConfig } from '../display-config';
 
 export const DISPLAYCONFIG_FEATURE_KEY = 'displayConfig';
 

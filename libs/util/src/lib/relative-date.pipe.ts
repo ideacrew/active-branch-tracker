@@ -9,7 +9,7 @@ export class RelativeDatePipe implements PipeTransform {
     if (d instanceof Date) {
       return formatRelative(d, new Date());
     } else {
-      throw new Error('The Relative Date pipe needs a Date object');
+      throw new TypeError('The Relative Date pipe needs a Date object');
     }
   }
 }

@@ -1,4 +1,4 @@
-export interface EnvInfo {
+export interface EnvironmentInfo {
   orgId: string;
   envId: string;
 }

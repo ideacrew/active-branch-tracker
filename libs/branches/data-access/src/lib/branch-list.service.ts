@@ -8,10 +8,10 @@ import { map } from 'rxjs/operators';
 
 import { BranchInfo } from '@idc/util';
 
-import { searchBranches } from './searchBranches';
+import { searchBranches } from './search-branches';
 
 const oneMonthInMs = 1000 * 60 * 60 * 24 * 30;
-const today = new Date().getTime();
+const today = Date.now();
 const oneMonthAgo = today - oneMonthInMs;
 
 @Injectable({
@@ -24,11 +24,11 @@ export class BranchListService {
   constructor(private afs: AngularFirestore) {}
 
   queryBranches(): Observable<BranchInfo[]> {
-    const branchesRef = this.afs.collection<BranchInfo>('branches', ref =>
-      ref.where('timestamp', '>=', oneMonthAgo).orderBy('timestamp'),
+    const branchesReference = this.afs.collection<BranchInfo>('branches', reference =>
+      reference.where('timestamp', '>=', oneMonthAgo).orderBy('timestamp'),
     );
 
-    return branchesRef
+    return branchesReference
       .valueChanges({ idField: 'id' })
       .pipe(map(branches => branches.sort(sortByTime)));
     // tap(async (docChange: DocumentChangeAction<BranchInfo>[]) => {

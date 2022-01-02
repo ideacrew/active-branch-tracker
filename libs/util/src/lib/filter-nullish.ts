@@ -7,6 +7,6 @@ export function filterNullish<T>(): UnaryFunction<
   Observable<T>
 > {
   return pipe(
-    filter(x => x != null) as OperatorFunction<T | null | undefined, T>,
+    filter(x => x !== undefined) as OperatorFunction<T | null | undefined, T>,
   );
 }

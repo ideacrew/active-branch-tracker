@@ -14,7 +14,7 @@ import {
   OwnerReleaseUpdate,
   OwnerUpdate,
   ServiceInfo,
-  EnvInfo,
+  EnvironmentInfo,
   EnvironmentService,
 } from './models';
 
@@ -48,7 +48,7 @@ export class EnvironmentsService {
   getEnvironmentDetail({
     orgId,
     envId,
-  }: EnvInfo): Observable<OrgEnvironment | undefined> {
+  }: EnvironmentInfo): Observable<OrgEnvironment | undefined> {
     return this.afs
       .collection('orgs')
       .doc(orgId)
@@ -57,7 +57,10 @@ export class EnvironmentsService {
       .valueChanges({ idField: 'id' });
   }
 
-  getServices({ orgId, envId }: EnvInfo): Observable<EnvironmentService[]> {
+  getServices({
+    orgId,
+    envId,
+  }: EnvironmentInfo): Observable<EnvironmentService[]> {
     return this.afs
       .collection('orgs')
       .doc(orgId)
@@ -90,7 +93,7 @@ export class EnvironmentsService {
   ): Promise<void> {
     const { orgId, envId, serviceId } = serviceInfo;
 
-    const serviceRef = this.afs
+    const serviceReference = this.afs
       .collection('orgs')
       .doc(orgId)
       .collection('environments')
@@ -98,7 +101,7 @@ export class EnvironmentsService {
       .collection<EnvironmentService>('services')
       .doc(serviceId);
 
-    await serviceRef.update({ name, url });
+    await serviceReference.update({ name, url });
   }
 
   async updateEnvironmentOwner({
@@ -106,11 +109,11 @@ export class EnvironmentsService {
     envId,
     owner,
   }: OwnerUpdate): Promise<void> {
-    const docRef = this.afs.doc<OrgEnvironment>(
+    const documentReference = this.afs.doc<OrgEnvironment>(
       `orgs/${orgId}/environments/${envId}`,
     );
 
-    await docRef.update({ owner });
+    await documentReference.update({ owner });
   }
 
   async updateEnvironmentReleaseDate({
@@ -118,11 +121,11 @@ export class EnvironmentsService {
     envId,
     ownerRelease,
   }: OwnerReleaseUpdate): Promise<void> {
-    const docRef = this.afs.doc<OrgEnvironment>(
+    const documentReference = this.afs.doc<OrgEnvironment>(
       `orgs/${orgId}/environments/${envId}`,
     );
 
-    await docRef.update({
+    await documentReference.update({
       ownerRelease: firebase.default.firestore.Timestamp.fromDate(ownerRelease),
     });
   }
@@ -133,11 +136,11 @@ export class EnvironmentsService {
     owner,
     ownerRelease,
   }: OwnerUpdate): Promise<void> {
-    const docRef = this.afs.doc<OrgEnvironment>(
+    const documentReference = this.afs.doc<OrgEnvironment>(
       `orgs/${orgId}/environments/${envId}`,
     );
 
-    await docRef.update({
+    await documentReference.update({
       owner,
       ownerRelease: firebase.default.firestore.Timestamp.fromDate(ownerRelease),
     });
@@ -151,14 +154,13 @@ export class EnvironmentsService {
   }
 
   getOrgList(user: YellrUser): Observable<Org[]> {
-    if (user.role === 'admin') {
-      return this.afs.collection<Org>('orgs').valueChanges({ idField: 'id' });
-    } else {
-      // Here __name__ is equivalent to the document id
-      return this.afs
-        .collection<Org>('orgs', ref => ref.where('__name__', 'in', user.orgs))
-        .valueChanges({ idField: 'id' });
-    }
+    return user.role === 'admin'
+      ? this.afs.collection<Org>('orgs').valueChanges({ idField: 'id' })
+      : this.afs
+          .collection<Org>('orgs', reference =>
+            reference.where('__name__', 'in', user.orgs),
+          )
+          .valueChanges({ idField: 'id' });
   }
 
   async refreshEnvironmentsStatus(): Promise<void> {

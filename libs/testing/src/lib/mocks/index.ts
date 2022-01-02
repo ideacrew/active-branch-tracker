@@ -1,1 +1,1 @@
-export * from './branchInfo.mock';
+export * from './branch-info.mock';

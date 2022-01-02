@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { AuthError } from '../authError.interface';
+import { AuthError } from '../auth-error.interface';
 
 @Component({
   templateUrl: './login.component.html',

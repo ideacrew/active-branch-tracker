@@ -14,27 +14,28 @@ import { filterNullish } from '@idc/util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServiceDetailComponent {
+  // eslint-disable-next-line unicorn/no-null
   private serviceInfo = new BehaviorSubject<ServiceInfo | null>(null);
   serviceInfo$ = this.serviceInfo.asObservable();
 
   urlParams$ = this.route.paramMap.pipe(
-    map((params: ParamMap) => ({
-      orgId: params.get('orgId') ?? 'no-org-id',
-      envId: params.get('envId') ?? 'no-env-id',
-      serviceId: params.get('serviceId') ?? 'no-service-id',
+    map((parameters: ParamMap) => ({
+      orgId: parameters.get('orgId') ?? 'no-org-id',
+      envId: parameters.get('envId') ?? 'no-env-id',
+      serviceId: parameters.get('serviceId') ?? 'no-service-id',
     })),
     tap((serviceInfo: ServiceInfo) => this.serviceInfo.next(serviceInfo)),
   );
 
   orgName$ = this.serviceInfo$.pipe(
     filterNullish(),
-    switchMap(({ orgId }) => this.envService.getOrgName(orgId)),
+    switchMap(({ orgId }) => this.environmentService.getOrgName(orgId)),
   );
 
   envName$ = this.serviceInfo$.pipe(
     filterNullish(),
     switchMap(({ orgId, envId }) =>
-      this.envService.getEnvironmentDetail({ orgId, envId }),
+      this.environmentService.getEnvironmentDetail({ orgId, envId }),
     ),
     filterNullish(),
     map(({ name }) => name),
@@ -42,7 +43,7 @@ export class ServiceDetailComponent {
 
   service$ = this.urlParams$.pipe(
     switchMap(({ orgId, envId, serviceId }: ServiceInfo) =>
-      this.envService.getService({ orgId, envId, serviceId }),
+      this.environmentService.getService({ orgId, envId, serviceId }),
     ),
   );
 
@@ -55,7 +56,7 @@ export class ServiceDetailComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private envService: EnvironmentsService,
+    private environmentService: EnvironmentsService,
   ) {}
 
   async updateServiceInfo({
@@ -71,7 +72,7 @@ export class ServiceDetailComponent {
       envId: 'no-env-id',
     };
 
-    await this.envService.updateService(serviceInfo, {
+    await this.environmentService.updateService(serviceInfo, {
       name,
       url,
     });

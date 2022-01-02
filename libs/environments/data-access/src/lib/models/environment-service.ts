@@ -1,5 +1,5 @@
-import { AppData } from './appData';
-import { LatestDeployment } from './latestDeployment';
+import { AppData } from './app-data';
+import { LatestDeployment } from './latest-deployment';
 
 export interface EnvironmentService {
   id?: string;

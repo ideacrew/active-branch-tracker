@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 import { BranchInfo } from './models';
-import { getPullRequestLink } from './branchVM.util';
+import { getPullRequestLink } from './branch-vm.util';
 
 @Pipe({
   name: 'prLink',

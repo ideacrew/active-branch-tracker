@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '@idc/auth';
 import { filterNullish } from '@idc/util';
 
-import { YellrUser } from './models/yellrUser';
+import { YellrUser } from './models/yellr-user';
 
 @Injectable({
   providedIn: 'root',

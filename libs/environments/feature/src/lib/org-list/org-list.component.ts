@@ -12,18 +12,16 @@ import { UserService } from '@idc/user/data-access';
 })
 export class OrgListComponent {
   orgList$: Observable<Org[]> = this.userService.user$.pipe(
-    switchMap(user => {
-      if (user !== undefined) {
-        return this.envService.getOrgList(user);
-      } else {
-        return of([] as Org[]);
-      }
-    }),
+    switchMap(user =>
+      user !== undefined
+        ? this.environmentService.getOrgList(user)
+        : of([] as Org[]),
+    ),
   );
 
   constructor(
     public userService: UserService,
-    public envService: EnvironmentsService,
+    public environmentService: EnvironmentsService,
   ) {}
 
   trackByOrgId(index: number, org: Org): string {

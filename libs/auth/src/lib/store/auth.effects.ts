@@ -14,7 +14,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.loginWithGoogle),
       switchMap(() =>
-        this.authService.login().catch(e => console.log('CATCH', e)),
+        this.authService.login().catch(error => console.log('CATCH', error)),
       ),
       map(() => AuthActions.loginWithGoogleSuccess()),
       catchError((error: unknown) => {

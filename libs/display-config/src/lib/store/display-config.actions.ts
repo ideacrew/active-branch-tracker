@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { DisplayConfig } from '../displayConfig';
+import { DisplayConfig } from '../display-config';
 
 export const loadDisplayConfig = createAction(
   '[DisplayConfig] Load Display Config',

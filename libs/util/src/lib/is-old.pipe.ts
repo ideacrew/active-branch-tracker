@@ -7,7 +7,7 @@ import { BranchInfo } from './models';
 })
 export class IsOldPipe implements PipeTransform {
   transform(branch: BranchInfo): boolean {
-    const today = new Date().getTime();
+    const today = Date.now();
 
     const oneDayInMs = 1000 * 60 * 60 * 24;
     const tenDaysInMs = 10 * oneDayInMs;

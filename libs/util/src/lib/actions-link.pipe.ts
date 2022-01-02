@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { getActionsLink } from './branchVM.util';
+import { getActionsLink } from './branch-vm.util';
 import { BranchInfo } from './models';
 
 @Pipe({

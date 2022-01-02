@@ -222,18 +222,28 @@
         "prefer-const": "error",
         "radix": "error",
         "use-isnan": "error",
-        "valid-typeof": "off"
+        "valid-typeof": "off",
+
+        // Unicorn rules
+        "unicorn/consistent-function-scoping": [
+          "error",
+          {
+            "checkArrowFunctions": false
+          }
+        ]
       },
       "plugins": [
         "eslint-plugin-jsdoc",
         "eslint-plugin-prefer-arrow",
         "@angular-eslint/eslint-plugin",
         "eslint-plugin-import",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "unicorn"
       ],
       "extends": [
         "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:unicorn/recommended"
       ]
     },
     {

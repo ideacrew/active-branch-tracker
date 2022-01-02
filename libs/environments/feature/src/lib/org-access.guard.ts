@@ -15,11 +15,7 @@ export class OrgAccessGuard implements CanActivate {
       map(user => {
         const orgId = route.paramMap.get('orgId');
 
-        if (user !== undefined && orgId !== null) {
-          return user.orgs.includes(orgId) || user.role === 'admin';
-        } else {
-          return false;
-        }
+        return user !== undefined && orgId !== null ? user.orgs.includes(orgId) || user.role === 'admin' : false;
       }),
       tap(allowedAccess => {
         if (!allowedAccess) {

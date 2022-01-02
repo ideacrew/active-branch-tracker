@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { getCommitLink } from './branchVM.util';
+import { getCommitLink } from './branch-vm.util';
 import { BranchInfo } from './models';
 
 @Pipe({

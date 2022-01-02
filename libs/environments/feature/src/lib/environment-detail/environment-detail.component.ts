@@ -11,7 +11,7 @@ import {
 import { UserService } from '@idc/user/data-access';
 import { filterNullish } from '@idc/util';
 
-import { convertDateInputToLocalDate } from '../convertDate';
+import { convertDateInputToLocalDate } from '../convert-date';
 
 @Component({
   templateUrl: './environment-detail.component.html',
@@ -27,10 +27,13 @@ export class EnvironmentDetailComponent {
   isAdmin = this.userService.isAdmin.value;
 
   orgEnvIds$ = this.route.paramMap.pipe(
-    filter((params: ParamMap) => params.has('orgId') && params.has('envId')),
-    map((params: ParamMap) => ({
-      orgId: params.get('orgId') ?? 'no-org-id',
-      envId: params.get('envId') ?? 'no-env-id',
+    filter(
+      (parameters: ParamMap) =>
+        parameters.has('orgId') && parameters.has('envId'),
+    ),
+    map((parameters: ParamMap) => ({
+      orgId: parameters.get('orgId') ?? 'no-org-id',
+      envId: parameters.get('envId') ?? 'no-env-id',
     })),
     tap(({ orgId, envId }) => {
       this.orgId = orgId;
@@ -39,16 +42,16 @@ export class EnvironmentDetailComponent {
   );
 
   orgName$ = this.orgEnvIds$.pipe(
-    switchMap(({ orgId }) => this.envService.getOrgName(orgId)),
+    switchMap(({ orgId }) => this.environmentService.getOrgName(orgId)),
   );
 
   environmentDetail$: Observable<OrgEnvironment> = this.orgEnvIds$.pipe(
     switchMap(({ orgId, envId }) =>
-      this.envService.getEnvironmentDetail({ orgId, envId }).pipe(
+      this.environmentService.getEnvironmentDetail({ orgId, envId }).pipe(
         filterNullish(),
-        tap(env => {
-          this.newOwner = env.owner;
-          this.newReleaseDate = env.ownerRelease
+        tap(environment => {
+          this.newOwner = environment.owner;
+          this.newReleaseDate = environment.ownerRelease
             ?.toDate()
             .toISOString()
             .slice(0, 10);
@@ -59,7 +62,7 @@ export class EnvironmentDetailComponent {
 
   services$: Observable<EnvironmentService[]> = this.orgEnvIds$.pipe(
     switchMap(({ orgId, envId }) =>
-      this.envService.getServices({ orgId, envId }),
+      this.environmentService.getServices({ orgId, envId }),
     ),
   );
 
@@ -69,7 +72,7 @@ export class EnvironmentDetailComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private envService: EnvironmentsService,
+    private environmentService: EnvironmentsService,
     private userService: UserService,
   ) {}
 
@@ -80,7 +83,7 @@ export class EnvironmentDetailComponent {
         ? convertDateInputToLocalDate('2030-01-01')
         : convertDateInputToLocalDate(this.newReleaseDate);
 
-    await this.envService.updateOwnerInformation({
+    await this.environmentService.updateOwnerInformation({
       orgId: this.orgId,
       envId: this.envId,
       owner,

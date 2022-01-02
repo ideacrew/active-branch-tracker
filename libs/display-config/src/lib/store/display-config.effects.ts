@@ -5,7 +5,7 @@ import { map, tap, switchMap } from 'rxjs/operators';
 import * as DisplayConfigActions from './display-config.actions';
 import { DisplayConfigFacade } from './display-config.facade';
 import { LocalStorageService } from '../local-storage.service';
-import { DisplayConfig } from '../displayConfig';
+import { DisplayConfig } from '../display-config';
 
 @Injectable()
 export class DisplayConfigEffects {

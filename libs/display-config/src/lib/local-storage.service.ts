@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DisplayConfig } from './displayConfig';
+import { DisplayConfig } from './display-config';
 import { defaultConfig } from './store/display-config.reducer';
 
 @Injectable({ providedIn: 'root' })
