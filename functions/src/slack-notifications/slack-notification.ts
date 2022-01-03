@@ -2,10 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { WebClient } from '@slack/web-api';
 import * as functions from 'firebase-functions';
+import { demoEnvironment } from '../util';
 
 export const yellrChannel = 'all_devs';
 
-const slackConfig = process.env.FUNCTIONS_EMULATOR
+const slackConfig = demoEnvironment()
   ? { token: 'fake-token' }
   : functions.config().slack;
 const token: string = slackConfig.token;
@@ -13,7 +14,7 @@ const token: string = slackConfig.token;
 const slack = new WebClient(token);
 
 export const sendSlackMessage = async (text: string): Promise<void> => {
-  if (process.env.FUNCTIONS_EMULATOR) {
+  if (demoEnvironment()) {
     return;
   }
 
@@ -35,7 +36,7 @@ export const sendSlackMessageToChannel = async ({
   text: string;
   channel: string;
 }): Promise<string> => {
-  if (process.env.FUNCTIONS_EMULATOR) {
+  if (demoEnvironment()) {
     return '';
   }
 

@@ -60,10 +60,6 @@ export const handleWorkflowRunEvent = async (
 
   const branchDocumentSnapshot = await branchReference.get();
 
-  console.log('====================');
-  console.log('Hello');
-  console.log('====================');
-
   if (branchDocumentSnapshot.exists) {
     const branchDocument = branchDocumentSnapshot.data() as BranchInfo;
 

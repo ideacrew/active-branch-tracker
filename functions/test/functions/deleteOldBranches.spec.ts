@@ -14,7 +14,7 @@ import {
   setLogLevel,
 } from 'firebase/firestore';
 
-import { BranchInfo } from '../../src/models/branchInfo';
+import { BranchInfo } from '../../src/models/branch-info';
 
 const axiosConfig: AxiosRequestConfig = {
   method: 'post',

@@ -107,6 +107,60 @@ describe('Workflow run tests', () => {
       });
     });
   });
+
+  it('records workflow name on a first-time successful workflow run', async () => {
+    try {
+      await mockWebhookPayload('workflow_run', successPayload);
+    } catch (error) {
+      console.error('ERROR:', error);
+    }
+
+    const { repository, workflow_run } = successPayload;
+
+    const workflowPath = `workflows/${repository.name}-${workflow_run.workflow_id}`;
+
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const workflowRef = doc(context.firestore(), workflowPath);
+
+      const workflowSnapshot = await getDoc(workflowRef);
+      const workflowDocument = workflowSnapshot.data();
+      const expected = { name: workflow_run.name };
+
+      expect(workflowDocument).to.deep.equal(expected);
+    });
+  });
+
+  it('records a workflow run', async () => {
+    try {
+      await mockWebhookPayload('workflow_run', successPayload);
+    } catch (error) {
+      console.error('ERROR:', error);
+    }
+
+    const { repository, workflow_run } = successPayload;
+
+    const workflowRunPath = `workflows/${repository.name}-${workflow_run.workflow_id}/runs/${workflow_run.id}`;
+
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const workflowRef = doc(context.firestore(), workflowRunPath);
+
+      const workflowSnapshot = await getDoc(workflowRef);
+      const workflowDocument = workflowSnapshot.data();
+      const expected = {
+        htmlUrl:
+          'https://github.com/ideacrew/active-branch-tracker/actions/runs/1321542128',
+        repositoryName: 'active-branch-tracker',
+        runId: '1321542128',
+        runStartedAt: '2021-10-08T18:58:09Z',
+        runtime: 44000,
+        updatedAt: '2021-10-08T18:58:53Z',
+        workflowId: '8539638',
+        workflowName: 'test cloud functions',
+      };
+
+      expect(workflowDocument).to.deep.equal(expected);
+    });
+  });
 });
 
 const initialBranch: BranchInfo = {

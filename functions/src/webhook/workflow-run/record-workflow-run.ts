@@ -14,11 +14,23 @@ export const recordWorkflowRun = async (
   const { updated_at, workflow_id, id, html_url, run_started_at, name } =
     workflow_run;
 
-  // Using this as a Firestore Document ID and needs to be a string
-  const workflowRunId = id.toString();
-
   const workflowDocumentName = `${repositoryName}-${workflow_id}`;
 
+  // Save workflow meta information if none exists
+  const workflowDocumentReference = admin
+    .firestore()
+    .collection('workflows')
+    .doc(workflowDocumentName);
+
+  const workflowDocumentSnap = await workflowDocumentReference.get();
+
+  if (!workflowDocumentSnap.exists) {
+    await workflowDocumentReference.set({
+      name,
+    });
+  }
+
+  // Save workflow run to collection
   const workflowCollectionReference = admin
     .firestore()
     .collection('workflows')
@@ -28,9 +40,11 @@ export const recordWorkflowRun = async (
   const runtime =
     new Date(updated_at).getTime() - new Date(run_started_at).getTime();
 
+  // Using this as a Firestore Document ID and needs to be a string
+
   const workflowRunDocument: FSWorkflowRun = {
-    runId: workflowRunId,
-    workflowId: workflow_id.toString(),
+    runId: `${id}`,
+    workflowId: `${workflow_id}`,
     htmlUrl: html_url,
     runStartedAt: run_started_at,
     updatedAt: updated_at,
@@ -40,5 +54,5 @@ export const recordWorkflowRun = async (
   };
 
   // Save the workflow run as a new document
-  await workflowCollectionReference.doc(workflowRunId).set(workflowRunDocument);
+  await workflowCollectionReference.doc(`${id}`).set(workflowRunDocument);
 };

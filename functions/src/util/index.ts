@@ -1,4 +1,5 @@
 export * from './branch-reference';
+export * from './demo-environment';
 export * from './grant-admin';
 export * from './yellr-environment-link';
 export * from './firestore-timestamp';

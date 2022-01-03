@@ -14,8 +14,6 @@ export const checkWorkflowRuntime = async (
 ): Promise<null> => {
   const { workflowId, runId } = context.params;
 
-  console.log({ workflowId, runId });
-
   const workflowRunDocument = snapshot.data() as FSWorkflowRun;
 
   const { runtime, repositoryName, workflowName } = workflowRunDocument;
@@ -38,9 +36,6 @@ export const checkWorkflowRuntime = async (
   }
 
   if (workflowDocument.fastestRun.runtime > runtime) {
-    // New fastest runtime
-    console.log('New fastest run, setting it now');
-
     const newFastestRun = {
       runtime,
       runId,
