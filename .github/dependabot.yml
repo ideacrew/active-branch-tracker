@@ -14,6 +14,18 @@ updates:
       - dependency-name: '@nrwl/*'
         versions:
           - '>= 0'
+      - dependency-name: '@types/*'
+        versions:
+          - '>= 0'
+      - dependency-name: 'core-js'
+        versions:
+          - '>= 0'
+      - dependency-name: 'ts-jest'
+        versions:
+          - '>= 0'
+      - dependency-name: 'cypress'
+        versions:
+          - '>= 0'
   - package-ecosystem: github-actions
     directory: /
     schedule:
@@ -22,3 +34,7 @@ updates:
     directory: '/functions'
     schedule:
       interval: daily
+    ignore:
+      - dependency-name: 'axios'
+        versions:
+          - '>= 0'
