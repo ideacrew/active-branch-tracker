@@ -17,6 +17,9 @@ updates:
       - dependency-name: '@types/*'
         versions:
           - '>= 0'
+      - dependency-name: 'jest*'
+        versions:
+          - '>= 0'
       - dependency-name: 'core-js'
         versions:
           - '>= 0'
@@ -24,6 +27,9 @@ updates:
         versions:
           - '>= 0'
       - dependency-name: 'cypress'
+        versions:
+          - '>= 0'
+      - dependency-name: 'ts-node'
         versions:
           - '>= 0'
   - package-ecosystem: github-actions
