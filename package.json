@@ -54,7 +54,7 @@
     "@ngrx/router-store": "13.0.2",
     "@ngrx/store": "13.0.2",
     "@nrwl/angular": "13.4.2",
-    "core-js": "^2.5.4",
+    "core-js": "^3.20.2",
     "date-fns": "^2.27.0",
     "firebase": "^9.6.1",
     "rxjs": "^7.5.1",
