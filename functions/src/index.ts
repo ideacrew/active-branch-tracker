@@ -12,13 +12,6 @@ export const branchDeployment = functions.https.onRequest(
   },
 );
 
-export const serviceDeployment = functions.https.onRequest(
-  async (request, response) => {
-    const { handleBranchDeploymentV2 } = await import('./branch-deployment/');
-    await handleBranchDeploymentV2(request, response);
-  },
-);
-
 export const dataRefresh = functions.https.onRequest(
   async (request, response) => {
     const { handleDataRefresh } = await import('./data-refresh');

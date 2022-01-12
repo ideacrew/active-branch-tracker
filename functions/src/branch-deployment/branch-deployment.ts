@@ -25,14 +25,3 @@ export async function handleBranchDeployment(
   await updateServiceWithBranchInfo(deployment);
   response.send(deployment);
 }
-
-export const handleBranchDeploymentV2 = async (
-  request: functions.https.Request,
-  response: functions.Response<unknown>,
-): Promise<void> => {
-  const deployment: BranchDeploymentPayload = request.body;
-  await checkEnvironmentOwnership(deployment);
-  await updateEnvironment(deployment);
-  await updateServiceWithBranchInfo(deployment);
-  response.send(deployment);
-};
