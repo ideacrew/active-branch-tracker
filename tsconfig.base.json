@@ -33,7 +33,6 @@
         "libs/environments/data-access/src/index.ts"
       ],
       "@idc/environments/feature": ["libs/environments/feature/src/index.ts"],
-      "@idc/testing": ["libs/testing/src/index.ts"],
       "@idc/user/data-access": ["libs/user/data-access/src/index.ts"],
       "@idc/util": ["libs/util/src/index.ts"]
     }

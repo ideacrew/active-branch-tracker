@@ -386,38 +386,6 @@
       },
       "tags": []
     },
-    "testing": {
-      "projectType": "library",
-      "root": "libs/testing",
-      "sourceRoot": "libs/testing/src",
-      "prefix": "idc",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/testing/src/**/*.ts",
-              "libs/testing/src/**/*.html"
-            ]
-          },
-          "outputs": ["{options.outputFile}"]
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/testing/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/testing"]
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      },
-      "tags": []
-    },
     "user-data-access": {
       "projectType": "library",
       "root": "libs/user/data-access",
