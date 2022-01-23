@@ -1,7 +1,7 @@
 import express from 'express';
 import * as functions from 'firebase-functions';
 
-import { serviceDeployment, testRoute } from './controllers';
+import { serviceDeployment, dataRefresh, testRoute } from './controllers';
 
 const apiPrefix = 'api';
 export const app = express();
@@ -21,3 +21,4 @@ app.use((request, _response, next) => {
 app.get('/test-route', testRoute);
 
 app.post('/service-deployment', serviceDeployment);
+app.post('/data-refresh', dataRefresh);

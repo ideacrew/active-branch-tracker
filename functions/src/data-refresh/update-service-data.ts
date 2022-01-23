@@ -8,7 +8,9 @@ import { sendSlackMessage } from '../slack-notifications';
 import { yellrEnvironmentLink as yellrEnvironmentLink } from '../util';
 import { DataRefreshPayload } from './models';
 
-admin.initializeApp();
+if (admin.apps.length === 0) {
+  admin.initializeApp();
+}
 
 export const updateServiceData = async (
   dataRefreshPayload: DataRefreshPayload,
