@@ -5,7 +5,7 @@ import {
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
 import axios, { AxiosRequestConfig } from 'axios';
-import * as faker from 'faker';
+import * as faker from '@faker-js/faker';
 import {
   collection,
   doc,
@@ -50,7 +50,9 @@ describe('Delete old branches', () => {
   });
 
   const today = new Date();
-  const ninetyDaysAgo = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000);
+  const ninetyDaysAgo = new Date(
+    today.getTime() - 90 * 24 * 60 * 60 * 1000,
+  ).toISOString();
   const fakeOldBranches: Partial<BranchInfo>[] = Array.from(
     { length: 5 },
     () => {
@@ -65,7 +67,9 @@ describe('Delete old branches', () => {
     () => {
       return {
         defaultBranch: false,
-        timestamp: faker.date.between(ninetyDaysAgo, today).getTime(),
+        timestamp: faker.date
+          .between(ninetyDaysAgo, today.toISOString())
+          .getTime(),
       };
     },
   );
@@ -153,7 +157,9 @@ describe('Delete old branches', () => {
       () => {
         return {
           defaultBranch: false,
-          timestamp: faker.date.between('Jan 1, 2020', ninetyDaysAgo).getTime(),
+          timestamp: faker.date
+            .between('Jan 1, 2020', ninetyDaysAgo.toISOString())
+            .getTime(),
         };
       },
     );
