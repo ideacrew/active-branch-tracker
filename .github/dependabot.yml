@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: npm
     directory: '/'
     schedule:
-      interval: weekly
+      interval: monthly
     ignore:
       - dependency-name: '@angular/*'
         versions:
@@ -35,11 +35,11 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
   - package-ecosystem: npm
     directory: '/functions'
     schedule:
-      interval: weekly
+      interval: monthly
     ignore:
       - dependency-name: 'axios'
         versions:
