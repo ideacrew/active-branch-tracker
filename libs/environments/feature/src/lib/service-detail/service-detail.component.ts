@@ -1,12 +1,20 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { BehaviorSubject, combineLatest, map, switchMap, tap } from 'rxjs';
+import {
+  combineLatest,
+  EMPTY,
+  filter,
+  map,
+  of,
+  shareReplay,
+  switchMap,
+  tap,
+} from 'rxjs';
 
 import {
   EnvironmentsService,
   ServiceInfo,
 } from '@idc/environments/data-access';
-import { filterNullish } from '@idc/util';
 
 @Component({
   templateUrl: './service-detail.component.html',
@@ -14,34 +22,40 @@ import { filterNullish } from '@idc/util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServiceDetailComponent {
-  // eslint-disable-next-line unicorn/no-null
-  private serviceInfo = new BehaviorSubject<ServiceInfo | null>(null);
-  serviceInfo$ = this.serviceInfo.asObservable();
+  service: ServiceInfo | undefined = undefined;
 
   urlParams$ = this.route.paramMap.pipe(
-    map((parameters: ParamMap) => ({
-      orgId: parameters.get('orgId') ?? 'no-org-id',
-      envId: parameters.get('envId') ?? 'no-env-id',
-      serviceId: parameters.get('serviceId') ?? 'no-service-id',
-    })),
-    tap((serviceInfo: ServiceInfo) => this.serviceInfo.next(serviceInfo)),
+    map(
+      (parameters: ParamMap): ServiceInfo => ({
+        orgId: parameters.get('orgId') ?? 'no-org-id',
+        envId: parameters.get('envId') ?? 'no-env-id',
+        serviceId: parameters.get('serviceId') ?? 'no-service-id',
+      }),
+    ),
+    tap(console.log),
+    tap((serviceInfo: ServiceInfo) => (this.service = serviceInfo)),
+    shareReplay(),
   );
 
-  orgName$ = this.serviceInfo$.pipe(
-    filterNullish(),
-    switchMap(({ orgId }) => this.environmentService.getOrgName(orgId)),
+  orgName$ = this.urlParams$.pipe(
+    switchMap(serviceInfo =>
+      serviceInfo !== null
+        ? this.environmentService.getOrgName(serviceInfo.orgId)
+        : of(EMPTY),
+    ),
+    // tap(orgName => console.log({ orgName })),
   );
 
-  envName$ = this.serviceInfo$.pipe(
-    filterNullish(),
+  envName$ = this.urlParams$.pipe(
     switchMap(({ orgId, envId }) =>
       this.environmentService.getEnvironmentDetail({ orgId, envId }),
     ),
-    filterNullish(),
+    filter(Boolean),
     map(({ name }) => name),
   );
 
   service$ = this.urlParams$.pipe(
+    // tap(serviceInfo => console.log({ serviceInfo })),
     switchMap(({ orgId, envId, serviceId }: ServiceInfo) =>
       this.environmentService.getService({ orgId, envId, serviceId }),
     ),
@@ -49,7 +63,6 @@ export class ServiceDetailComponent {
 
   vm$ = combineLatest({
     orgName: this.orgName$,
-    serviceInfo: this.serviceInfo$,
     service: this.service$,
     envName: this.envName$,
   });
@@ -66,7 +79,7 @@ export class ServiceDetailComponent {
     name: string;
     url: string;
   }): Promise<void> {
-    const serviceInfo = this.serviceInfo.value ?? {
+    const serviceInfo = this.service ?? {
       orgId: 'no-org-id',
       serviceId: 'no-service-id',
       envId: 'no-env-id',
