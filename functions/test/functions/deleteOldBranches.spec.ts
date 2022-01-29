@@ -5,7 +5,7 @@ import {
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
 import axios, { AxiosRequestConfig } from 'axios';
-import * as faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import {
   collection,
   doc,
@@ -53,6 +53,7 @@ describe('Delete old branches', () => {
   const ninetyDaysAgo = new Date(
     today.getTime() - 90 * 24 * 60 * 60 * 1000,
   ).toISOString();
+
   const fakeOldBranches: Partial<BranchInfo>[] = Array.from(
     { length: 5 },
     () => {
