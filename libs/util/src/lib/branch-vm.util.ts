@@ -4,23 +4,15 @@ import { BranchInfo } from './models';
 
 export const getCommitLink = (branch: BranchInfo): string => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { repositoryName, organizationName, head_sha } = branch;
+  const { repositoryName, organizationName, head_commit } = branch;
 
-  return `//github.com/${organizationName}/${repositoryName}/commit/${head_sha}`;
+  return `//github.com/${organizationName}/${repositoryName}/commit/${head_commit?.id}`;
 };
 
 export const getPullRequestLink = (branch: BranchInfo): string => {
   const { repositoryName, organizationName, pullRequestNumber } = branch;
 
   return `//github.com/${organizationName}/${repositoryName}/pull/${pullRequestNumber}`;
-};
-
-export const getFailurePercentage = (branch: BranchInfo): number => {
-  const { checkSuiteRuns, checkSuiteFailures } = branch;
-
-  return Math.round(
-    ((checkSuiteRuns - checkSuiteFailures) / checkSuiteRuns) * 100,
-  );
 };
 
 export const getActionsLink = (branch: BranchInfo): string => {

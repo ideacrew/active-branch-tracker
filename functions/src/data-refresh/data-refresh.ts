@@ -22,14 +22,3 @@ export async function handleDataRefresh(
 
   response.status(200).send(dataRefreshPayload);
 }
-
-export const handleDataRefreshV2 = async (
-  request: functions.https.Request,
-  response: functions.Response<unknown>,
-): Promise<void> => {
-  const dataRefreshPayload: DataRefreshPayload = request.body;
-
-  await updateServiceData(dataRefreshPayload);
-
-  response.status(200).send(dataRefreshPayload);
-};

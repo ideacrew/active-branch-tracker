@@ -6,7 +6,7 @@ import {
 } from '@firebase/rules-unit-testing';
 import { doc, getDoc, setLogLevel } from 'firebase/firestore';
 
-import { mockWebhookPayload } from '../mockHttpFunction';
+import { mockWebhookPayload } from './mockHttpFunction';
 import { mockCreatePayload } from '../../../src/webhook/create';
 import { mockDeletePayload } from '../../../src/webhook/delete';
 import { getFullBranchName } from '../../util';

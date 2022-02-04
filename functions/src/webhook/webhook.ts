@@ -6,6 +6,7 @@ admin.initializeApp();
 import { handleCreateEvent, CreateEventPayload } from './create';
 import { DeleteEventPayload, handleDeleteEvent } from './delete';
 import { handleWorkflowRunEvent, WorkflowRunPayload } from './workflow-run';
+import { PushEventPayload, handlePushEvent } from './push';
 
 /**
  * Handles the incoming webhook from GitHub Actions
@@ -27,9 +28,9 @@ export async function handleWebhook(
       await handleDeleteEvent(request.body as DeleteEventPayload);
       break;
 
-    // case 'issue_comment':
-    //   await handleIssueCommentEvent(request.body as IssueCommentPayload);
-    //   break;
+    case 'push':
+      await handlePushEvent(request.body as PushEventPayload);
+      break;
 
     case 'workflow_run':
       {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { CheckSuiteConclusion } from './check-suite-conclusion';
+import firebase from 'firebase/compat/app';
 
 export interface BranchInfo {
   id?: string;
@@ -20,15 +20,8 @@ export interface BranchInfo {
     tree_id: string;
     message: string;
   };
-  // Why is this optional?
-  head_sha?: string;
-  // Is created_at ever not there?
-  created_at: string;
-  updated_at?: string;
-  checkSuiteStatus?: CheckSuiteConclusion;
+  createdAt: firebase.firestore.Timestamp;
   defaultBranch: boolean;
-  checkSuiteRuns: number;
-  checkSuiteFailures: number;
   createdBy?: string;
   tracked: boolean;
   timestamp: number;

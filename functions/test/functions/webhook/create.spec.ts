@@ -6,7 +6,7 @@ import {
 } from '@firebase/rules-unit-testing';
 import { doc, getDoc, setLogLevel } from 'firebase/firestore';
 
-import { mockWebhookPayload } from '../mockHttpFunction';
+import { mockWebhookPayload } from './mockHttpFunction';
 import { mockCreatePayload } from '../../../src/webhook/create';
 import { getFullBranchName } from '../../util';
 
@@ -37,7 +37,7 @@ describe('A branch creation payload is received', () => {
   beforeEach(async () => {
     await testEnv.clearFirestore();
   });
-  
+
   it('tests a new branch creation', async () => {
     try {
       await mockWebhookPayload('create', mockCreatePayload);
@@ -45,7 +45,12 @@ describe('A branch creation payload is received', () => {
       console.error('ERROR:', e);
     }
 
-    const { ref: branchName } = mockCreatePayload;
+    const {
+      ref: branchName,
+      sender,
+      organization,
+      repository,
+    } = mockCreatePayload;
 
     const fullBranchName = getFullBranchName(mockCreatePayload, branchName);
 
@@ -55,11 +60,12 @@ describe('A branch creation payload is received', () => {
       const branchSnapshot = await getDoc(branchRef);
 
       expect(branchSnapshot.data()).to.include({
-        checkSuiteRuns: 0,
-        checkSuiteFailures: 0,
-        checkSuiteStatus: 'neutral',
+        branchName,
+        createdBy: sender.login,
+        defaultBranch: false,
+        organizationName: organization.login,
+        repositoryName: repository.name,
         tracked: false,
-        // cannot test created at because it is always "now"
       });
     });
   });

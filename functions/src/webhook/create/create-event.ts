@@ -30,22 +30,13 @@ export async function handleCreateEvent(
     .doc(`${organizationName}-${repositoryName}-${safeBranchName}`);
 
   const branchInfo: BranchInfo = {
-    repositoryName,
-    organizationName,
     branchName,
-    defaultBranch: false,
-    // Created at is set by Firestore because the webhook payload
-    // doesn't include a timestamp. In theory, someone could have
-    // created a branch locally, and then pushed it some time later,
-    // but we'll just show the time when the branch was published.
-    created_at: new Date().toISOString(),
-    // Transition to using this property eventually
     createdAt: firestoreTimestamp(new Date().toISOString()),
-    timestamp: Date.now(),
-    checkSuiteRuns: 0,
-    checkSuiteFailures: 0,
-    checkSuiteStatus: 'neutral',
     createdBy,
+    defaultBranch: false,
+    organizationName,
+    repositoryName,
+    timestamp: Date.now(),
     tracked: false,
   };
 

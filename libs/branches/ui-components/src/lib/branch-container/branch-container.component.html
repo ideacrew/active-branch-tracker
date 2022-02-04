@@ -5,9 +5,7 @@
     collapsed: viewType === 'collapsed',
     tracked: branch.tracked,
     'has-pr': branch.pullRequestNumber,
-    'is-old': branch | isOld,
-    success: branch.checkSuiteStatus === 'success',
-    failure: branch.checkSuiteStatus === 'failure'
+    'is-old': branch | isOld
   }"
 >
   <!-- Container Heading -->
@@ -52,21 +50,6 @@
         ></idc-branch-status> -->
       </div>
     </div>
-    <svg
-      class="svg-icon"
-      [ngClass]="branch.checkSuiteStatus!"
-      width="32px"
-      height="32px"
-    >
-      <use
-        *ngIf="branch.checkSuiteStatus === 'failure'"
-        href="assets/icons.svg#x"
-      ></use>
-      <use
-        *ngIf="branch.checkSuiteStatus === 'success'"
-        href="assets/icons.svg#check"
-      ></use>
-    </svg>
   </div>
 
   <!-- Container Content -->
@@ -77,21 +60,21 @@
           <use href="assets/icons.svg#clock"></use>
         </svg>
         <span class="no-wrap"
-          ><ng-container *ngIf="branch.updated_at; else createdAt">
-            {{ branch.updated_at | date: 'MMM d, h:mm a' }}
+          ><ng-container *ngIf="branch.head_commit; else createdAt">
+            {{ branch.head_commit.timestamp | date: 'MMM d, h:mm a' }}
           </ng-container>
           <ng-template #createdAt>
-            {{ branch.created_at | date: 'MMM d, h:mm a' }}
+            {{ branch.createdAt | firestoreDate | relativeDate }}
           </ng-template></span
         >
       </div>
 
-      <div *ngIf="branch.head_sha" class="latest-sha">
+      <div *ngIf="branch.head_commit?.id" class="latest-sha">
         <svg class="svg-icon" width="16px" height="16px">
           <use href="assets/icons.svg#git-commit"></use>
         </svg>
         <a href="{{ branch | commitLink }}">{{
-          branch.head_sha | slice: 0:7
+          branch.head_commit?.id | slice: 0:7
         }}</a>
       </div>
 
@@ -114,30 +97,6 @@
         </ng-template>
       </div>
     </div>
-
-    <div class="right-column">
-      <a
-        *ngIf="branch.checkSuiteRuns > 0"
-        href="{{ branch | actionsLink }}"
-        class="failure-percentage"
-        target="__blank"
-      >
-        <span
-          attr.title="Failures: {{ branch.checkSuiteFailures }} / Runs: {{
-            branch.checkSuiteRuns
-          }}"
-          >{{ branch | failurePercent }}</span
-        >
-      </a>
-    </div>
-  </div>
-
-  <div class="time-left" *ngIf="branch.tracked">
-    <span class="time-info"
-      >{{ branch.created_at ? (branch.created_at | date) : 'Very old' }} -
-      {{ branch | daysLeft }} days to live</span
-    >
-    <div [style.width.%]="branch | timeLeft" class="time-indicator"></div>
   </div>
 </div>
 

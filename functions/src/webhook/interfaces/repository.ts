@@ -18,7 +18,7 @@ export interface Repository {
   compare_url: string;
   contents_url: string;
   contributors_url: string;
-  created_at: string;
+  created_at: number | string;
   default_branch: string;
   delete_branch_on_merge?: boolean;
   deployments_url: string;
@@ -53,6 +53,7 @@ export interface Repository {
   language: string;
   languages_url: string;
   license: unknown;
+  master_branch?: string;
   merges_url: string;
   milestones_url: string;
   mirror_url: unknown;
@@ -61,15 +62,17 @@ export interface Repository {
   notifications_url: string;
   open_issues_count: number;
   open_issues: number;
+  organization?: string;
   owner: Owner;
   private: boolean;
   pulls_url: string;
-  pushed_at: string;
+  pushed_at: string | number;
   releases_url: string;
   size: number;
   ssh_url: string;
   stargazers_count: number;
   stargazers_url: string;
+  stargazers?: number;
   statuses_url: string;
   subscribers_url: string;
   subscription_url: string;

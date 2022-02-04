@@ -19,13 +19,6 @@ export const dataRefresh = functions.https.onRequest(
   },
 );
 
-export const dataRefreshV2 = functions.https.onRequest(
-  async (request, response) => {
-    const { handleDataRefreshV2 } = await import('./data-refresh');
-    await handleDataRefreshV2(request, response);
-  },
-);
-
 export const secretWebService = functions.https.onRequest(
   async (request, response) => {
     if (request.query.apiKey === 'abc1234') {
@@ -44,21 +37,6 @@ export const deleteOldBranchDocuments = functions.https.onRequest(
     await deleteOldBranchDocuments(request, response);
   },
 );
-
-export const defaultBranchFailure = functions.firestore
-  .document('branches/{docId}')
-  .onUpdate(async change => {
-    const { defaultBranchFailure } = await import('./default-branch-failure');
-    await defaultBranchFailure(change);
-  });
-
-export const defaultBranchSuccess = functions.firestore
-  .document('branches/{docId}')
-  .onUpdate(async change => {
-    const { defaultBranchSuccess } = await import('./default-branch-success');
-
-    await defaultBranchSuccess(change);
-  });
 
 export const githubStatusWebhook = functions.https.onRequest(
   async (request, response) => {

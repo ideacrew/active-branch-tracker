@@ -3,6 +3,5 @@
  * @param {string} branchName
  * @return {string} safe branch name
  */
-export function createSafeBranchName(branchName: string): string {
-  return branchName.replace(/tags\//, '').replace(/\//g, '-');
-}
+export const createSafeBranchName = (branchName: string): string =>
+  branchName.replace(/tags\//, '').replace(/\//g, '-');

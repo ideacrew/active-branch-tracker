@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import {
   CheckSuiteConclusion,
-  HeadCommit,
+  Commit,
   Owner,
   WebhookPayload,
   CheckSuiteStatus,
@@ -43,7 +43,7 @@ export interface WorkflowRun {
   rerun_url: string;
   previous_attempt_url: string | null;
   workflow_url: string;
-  head_commit: HeadCommit;
+  head_commit: Commit;
   repository: Repository;
   head_repository: Repository;
 }

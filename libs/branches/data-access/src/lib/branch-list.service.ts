@@ -24,8 +24,10 @@ export class BranchListService {
   constructor(private afs: AngularFirestore) {}
 
   queryBranches(): Observable<BranchInfo[]> {
-    const branchesReference = this.afs.collection<BranchInfo>('branches', reference =>
-      reference.where('timestamp', '>=', oneMonthAgo).orderBy('timestamp'),
+    const branchesReference = this.afs.collection<BranchInfo>(
+      'branches',
+      reference =>
+        reference.where('timestamp', '>=', oneMonthAgo).orderBy('timestamp'),
     );
 
     return branchesReference
@@ -93,8 +95,8 @@ export class BranchListService {
 }
 
 const sortByTime = (branchA: BranchInfo, branchB: BranchInfo): number => {
-  const recentDateA = branchA.updated_at ?? branchA.created_at;
-  const recentDateB = branchB.updated_at ?? branchB.created_at;
+  const recentDateA = branchA.timestamp;
+  const recentDateB = branchB.timestamp;
 
   return new Date(recentDateA).getTime() > new Date(recentDateB).getTime()
     ? -1
