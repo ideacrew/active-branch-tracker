@@ -1,0 +1,10 @@
+import { WebhookPayload } from '../interfaces';
+import { mockOrganization } from './organization.mock';
+import { mockRepository } from './repository.mock';
+import { mockSender } from './sender.mock';
+
+export const mockWebhookPayload: WebhookPayload = {
+  sender: mockSender,
+  organization: mockOrganization,
+  repository: mockRepository,
+};

@@ -7,7 +7,7 @@ import {
 import { doc, getDoc, setLogLevel } from 'firebase/firestore';
 
 import { mockWebhookPayload } from './mockHttpFunction';
-import { mockCreatePayload } from '../../../src/webhook/create';
+import { mockCreateFeatureBranchPayload } from '../../../src/webhook/mocks';
 import { getFullBranchName } from '../../util';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
@@ -40,7 +40,7 @@ describe('A branch creation payload is received', () => {
 
   it('tests a new branch creation', async () => {
     try {
-      await mockWebhookPayload('create', mockCreatePayload);
+      await mockWebhookPayload('create', mockCreateFeatureBranchPayload);
     } catch (e) {
       console.error('ERROR:', e);
     }
@@ -50,9 +50,12 @@ describe('A branch creation payload is received', () => {
       sender,
       organization,
       repository,
-    } = mockCreatePayload;
+    } = mockCreateFeatureBranchPayload;
 
-    const fullBranchName = getFullBranchName(mockCreatePayload, branchName);
+    const fullBranchName = getFullBranchName(
+      mockCreateFeatureBranchPayload,
+      branchName,
+    );
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const branchRef = doc(context.firestore(), `branches/${fullBranchName}`);
@@ -60,7 +63,7 @@ describe('A branch creation payload is received', () => {
       const branchSnapshot = await getDoc(branchRef);
 
       expect(branchSnapshot.data()).to.include({
-        branchName,
+        branchName: 'feature-branch',
         createdBy: sender.login,
         defaultBranch: false,
         organizationName: organization.login,

@@ -12,8 +12,6 @@ export interface PushEventPayload extends WebhookPayload {
   created: boolean; // true if the ref was created with this commit
   deleted: boolean; // true if the ref was deleted with this commit
   forced: boolean; // true if the push was forced
-  base_ref: unknown; // not sure what this is
-  compare: string;
   commits: Commit[];
   head_commit: Commit;
 }

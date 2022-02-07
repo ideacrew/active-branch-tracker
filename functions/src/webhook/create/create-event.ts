@@ -20,6 +20,8 @@ export async function handleCreateEvent(
 
   const safeBranchName = createSafeBranchName(branchName);
 
+  console.log({ safeBranchName });
+
   const { login: createdBy } = sender;
   const { name: repositoryName } = repository;
   const { login: organizationName } = organization;

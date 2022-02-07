@@ -6,9 +6,12 @@ import {
 } from '@firebase/rules-unit-testing';
 import { doc, getDoc, setLogLevel } from 'firebase/firestore';
 
+import {
+  mockCreateFeatureBranchPayload,
+  mockDeleteEventPayload,
+} from '../../../src/webhook/mocks';
+
 import { mockWebhookPayload } from './mockHttpFunction';
-import { mockCreatePayload } from '../../../src/webhook/create';
-import { mockDeletePayload } from '../../../src/webhook/delete';
 import { getFullBranchName } from '../../util';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
@@ -41,15 +44,18 @@ describe('Delete event tests', () => {
 
   it('tests branch deletion', async () => {
     try {
-      await mockWebhookPayload('create', mockCreatePayload);
-      await mockWebhookPayload('delete', mockDeletePayload);
+      await mockWebhookPayload('create', mockCreateFeatureBranchPayload);
+      await mockWebhookPayload('delete', mockDeleteEventPayload);
     } catch (e) {
       console.error('ERROR:', e);
     }
 
-    const { ref: branchName } = mockDeletePayload;
+    const { ref: branchName } = mockDeleteEventPayload;
 
-    const fullBranchName = getFullBranchName(mockDeletePayload, branchName);
+    const fullBranchName = getFullBranchName(
+      mockDeleteEventPayload,
+      branchName,
+    );
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const branchRef = doc(context.firestore(), `branches/${fullBranchName}`);
