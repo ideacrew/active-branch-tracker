@@ -42,10 +42,11 @@ describe('A push payload is received', () => {
   });
 
   it('tests a new branch creation', async () => {
-    const { head_commit } = mockPushEventPayload;
+    const pushPayload = mockPushEventPayload();
+    const { head_commit } = pushPayload;
     try {
       await mockWebhookPayload('create', mockCreateFeatureBranchPayload);
-      await mockWebhookPayload('push', mockPushEventPayload);
+      await mockWebhookPayload('push', pushPayload);
     } catch (e) {
       console.error('ERROR:', e);
     }

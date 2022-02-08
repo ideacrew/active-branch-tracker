@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable unicorn/no-null */
-import { mockWebhookPayload } from '.';
+import { mockBaseWebhookPayload } from '.';
 import { WorkflowRun, WorkflowRunPayload } from '../workflow-run';
 
 export interface MockWorkflowRun {
@@ -31,7 +31,7 @@ export const mockWorkflowRun = (
   const requested: WorkflowRunPayload = {
     action: 'requested',
     workflow_run: { ...workflowRun, id: 2 },
-    ...mockWebhookPayload,
+    ...mockBaseWebhookPayload,
   };
   const success: WorkflowRunPayload = {
     action: 'completed',
@@ -40,7 +40,7 @@ export const mockWorkflowRun = (
       conclusion: 'success',
       updated_at: finishedAt,
     },
-    ...mockWebhookPayload,
+    ...mockBaseWebhookPayload,
   };
   const failure: WorkflowRunPayload = {
     action: 'completed',
@@ -50,7 +50,7 @@ export const mockWorkflowRun = (
       conclusion: 'failure',
       updated_at: finishedAt,
     },
-    ...mockWebhookPayload,
+    ...mockBaseWebhookPayload,
   };
 
   return {

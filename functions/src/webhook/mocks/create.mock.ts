@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/no-null */
-import { mockWebhookPayload } from './webhook.mock';
+import { mockBaseWebhookPayload } from './webhook.mock';
 import { CreateEventPayload } from '../create/interfaces';
 
 export const mockCreateDefaultBranchPayload: CreateEventPayload = {
@@ -8,7 +8,7 @@ export const mockCreateDefaultBranchPayload: CreateEventPayload = {
   master_branch: 'trunk',
   description: null,
   pusher_type: 'user',
-  ...mockWebhookPayload,
+  ...mockBaseWebhookPayload,
 };
 
 export const mockCreateFeatureBranchPayload: CreateEventPayload = {
@@ -17,5 +17,5 @@ export const mockCreateFeatureBranchPayload: CreateEventPayload = {
   master_branch: 'trunk',
   description: null,
   pusher_type: 'user',
-  ...mockWebhookPayload,
+  ...mockBaseWebhookPayload,
 };
