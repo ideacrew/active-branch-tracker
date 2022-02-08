@@ -57,9 +57,10 @@ describe('Workflow run tests', () => {
 
     beforeEach(async () => {
       await mockWebhookPayload('create', mockCreateFeatureBranchPayload);
-      await mockWebhookPayload('push', mockPushEventPayload);
+      await mockWebhookPayload('push', mockPushEventPayload());
       await mockWebhookPayload('workflow_run', requested);
     });
+
     it('tests a first-time requested workflow run', async () => {
       await testEnv.withSecurityRulesDisabled(async context => {
         const branchReference = doc(context.firestore(), branchPath);
@@ -151,7 +152,7 @@ describe('Workflow run tests', () => {
   describe('logic around updating results array', () => {
     beforeEach(async () => {
       await mockWebhookPayload('create', mockCreateFeatureBranchPayload);
-      await mockWebhookPayload('push', mockPushEventPayload);
+      await mockWebhookPayload('push', mockPushEventPayload());
     });
     const now = new Date();
     const runStartedAt = now.toISOString();
