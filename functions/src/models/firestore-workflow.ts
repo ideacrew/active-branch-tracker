@@ -1,7 +1,9 @@
 export interface FSWorkflow {
   name: string;
-  fastestRun: {
-    runtime: number;
-    runId: string;
-  };
+  fastestRun: FSFastestRun;
+}
+
+export interface FSFastestRun {
+  runtime: number;
+  runId: number;
 }

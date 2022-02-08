@@ -21,6 +21,7 @@ const axiosConfig = (functionName: string, data: unknown) => {
 };
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
+
 let testEnv: RulesTestEnvironment;
 
 before(async () => {

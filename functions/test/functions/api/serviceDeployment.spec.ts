@@ -44,7 +44,7 @@ after(async () => {
 });
 
 describe('Service deployment payload', () => {
-  beforeEach(async () => {
+  afterEach(async () => {
     await testEnv.clearFirestore();
   });
 

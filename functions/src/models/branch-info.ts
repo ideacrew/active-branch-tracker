@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { FSWorkflowRun } from '.';
 import { Commit } from '../webhook/interfaces';
 
 export interface BranchInfo {
@@ -13,4 +14,6 @@ export interface BranchInfo {
   createdAt?: FirebaseFirestore.Timestamp;
   createdBy?: string;
   pullRequestNumber?: number;
+
+  workflowResults: FSWorkflowRun[];
 }

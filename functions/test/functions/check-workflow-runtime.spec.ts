@@ -53,7 +53,7 @@ describe('Checks workflow runtime for fastest run', () => {
           htmlUrl:
             'https://github.com/ideacrew/active-branch-tracker/actions/runs/1321542128',
           repositoryName: 'active-branch-tracker',
-          runId: '1321542128',
+          runId: 1321542128,
           runStartedAt: '2021-10-08T18:58:09Z',
           runtime: 44000,
           updatedAt: '2021-10-08T18:58:53Z',
@@ -75,7 +75,7 @@ describe('Checks workflow runtime for fastest run', () => {
       expect(workflowSnap.data()).to.deep.eq({
         name: 'test cloud functions',
         fastestRun: {
-          runId: '1321542128',
+          runId: 1321542128,
           runtime: 44000,
         },
       });
@@ -90,7 +90,7 @@ describe('Checks workflow runtime for fastest run', () => {
       const workflowDocRef = doc(db, workflowDocPath);
       await setDoc(workflowDocRef, {
         name: 'test cloud functions',
-        fastestRun: { runId: '1234', runtime: 23423223 },
+        fastestRun: { runId: 1234, runtime: 23423223 },
       });
 
       const wrapped = functionsTest.wrap(checkWorkflowRuntime);
@@ -100,7 +100,7 @@ describe('Checks workflow runtime for fastest run', () => {
           htmlUrl:
             'https://github.com/ideacrew/active-branch-tracker/actions/runs/1321542128',
           repositoryName: 'active-branch-tracker',
-          runId: '1321542128',
+          runId: 1321542128,
           runStartedAt: '2021-10-08T18:58:09Z',
           runtime: 44000,
           updatedAt: '2021-10-08T18:58:53Z',
@@ -122,7 +122,7 @@ describe('Checks workflow runtime for fastest run', () => {
       expect(workflowSnap.data()).to.deep.eq({
         name: 'test cloud functions',
         fastestRun: {
-          runId: '1321542128',
+          runId: 1321542128,
           runtime: 44000,
         },
       });
@@ -137,7 +137,7 @@ describe('Checks workflow runtime for fastest run', () => {
       const workflowDocRef = doc(db, workflowDocPath);
       await setDoc(workflowDocRef, {
         name: 'test cloud functions',
-        fastestRun: { runId: '3454542128', runtime: 100 },
+        fastestRun: { runId: 3454542128, runtime: 100 },
       });
 
       const wrapped = functionsTest.wrap(checkWorkflowRuntime);
@@ -147,7 +147,7 @@ describe('Checks workflow runtime for fastest run', () => {
           htmlUrl:
             'https://github.com/ideacrew/active-branch-tracker/actions/runs/1321542128',
           repositoryName: 'active-branch-tracker',
-          runId: '1321542128',
+          runId: 1321542128,
           runStartedAt: '2021-10-08T18:58:09Z',
           runtime: 44000,
           updatedAt: '2021-10-08T18:58:53Z',
@@ -168,7 +168,7 @@ describe('Checks workflow runtime for fastest run', () => {
 
       expect(workflowSnap.data()).to.deep.eq({
         name: 'test cloud functions',
-        fastestRun: { runId: '3454542128', runtime: 100 },
+        fastestRun: { runId: 3454542128, runtime: 100 },
       });
     });
   });

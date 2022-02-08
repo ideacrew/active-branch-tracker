@@ -49,6 +49,10 @@ describe('Delete old branches', () => {
     await testEnv.clearFirestore();
   });
 
+  afterEach(async () => {
+    await testEnv.clearFirestore();
+  });
+
   const today = new Date();
   const ninetyDaysAgo = new Date(
     today.getTime() - 90 * 24 * 60 * 60 * 1000,

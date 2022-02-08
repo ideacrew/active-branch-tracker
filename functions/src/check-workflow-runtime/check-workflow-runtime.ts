@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { FSWorkflowRun, FSWorkflow } from '../models';
+import { FSWorkflowRun, FSWorkflow, FSFastestRun } from '../models';
 import { sendSlackMessageToChannel } from '../slack-notifications';
 import { msToMinutesAndSeconds } from '../util';
 
@@ -26,9 +26,9 @@ export const checkWorkflowRuntime = async (
   const workflowDocument = workflowDocumentSnap.data() as FSWorkflow;
 
   if (workflowDocument.fastestRun === undefined) {
-    const newFastestRun = {
+    const newFastestRun: FSFastestRun = {
       runtime,
-      runId,
+      runId: Number.parseInt(runId, 10),
     };
 
     await workflowReference.update({ fastestRun: newFastestRun });
@@ -36,9 +36,9 @@ export const checkWorkflowRuntime = async (
   }
 
   if (workflowDocument.fastestRun.runtime > runtime) {
-    const newFastestRun = {
+    const newFastestRun: FSFastestRun = {
       runtime,
-      runId,
+      runId: Number.parseInt(runId, 10),
     };
 
     await workflowReference.update({ fastestRun: newFastestRun });

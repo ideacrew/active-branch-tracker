@@ -16,11 +16,15 @@ import { CreateEventPayload } from './interfaces/create-event-payload';
 export async function handleCreateEvent(
   payload: CreateEventPayload,
 ): Promise<void> {
-  const { ref: branchName, repository, organization, sender } = payload;
+  const {
+    ref: unsafeBranchName,
+    repository,
+    organization,
+    sender,
+    master_branch,
+  } = payload;
 
-  const safeBranchName = createSafeBranchName(branchName);
-
-  console.log({ safeBranchName });
+  const branchName = createSafeBranchName(unsafeBranchName);
 
   const { login: createdBy } = sender;
   const { name: repositoryName } = repository;
@@ -29,17 +33,18 @@ export async function handleCreateEvent(
   const branchReference = admin
     .firestore()
     .collection('branches')
-    .doc(`${organizationName}-${repositoryName}-${safeBranchName}`);
+    .doc(`${organizationName}-${repositoryName}-${branchName}`);
 
   const branchInfo: BranchInfo = {
     branchName,
     createdAt: firestoreTimestamp(new Date().toISOString()),
     createdBy,
-    defaultBranch: false,
+    defaultBranch: branchName === master_branch,
     organizationName,
     repositoryName,
     timestamp: Date.now(),
     tracked: false,
+    workflowResults: [],
   };
 
   try {

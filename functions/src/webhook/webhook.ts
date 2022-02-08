@@ -33,14 +33,7 @@ export async function handleWebhook(
       break;
 
     case 'workflow_run':
-      {
-        const payload = request.body as WorkflowRunPayload;
-
-        if (payload.action === 'completed') {
-          await handleWorkflowRunEvent(payload);
-        }
-      }
-
+      await handleWorkflowRunEvent(request.body as WorkflowRunPayload);
       break;
 
     default:

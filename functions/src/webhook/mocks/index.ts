@@ -5,3 +5,4 @@ export * from './repository.mock';
 export * from './sender.mock';
 export * from './webhook.mock';
 export * from './push.mock';
+export * from './workflow-run.mock';
