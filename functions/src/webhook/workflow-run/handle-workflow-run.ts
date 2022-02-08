@@ -73,7 +73,10 @@ export const handleWorkflowRunEvent = async (
 
   if (branchSnapshot.exists) {
     // Grab the workflowResults array from the data
-    const { workflowResults } = branchSnapshot.data() as BranchInfo;
+    const branchDocument = branchSnapshot.data() as BranchInfo;
+
+    // Existing branches won't have this property
+    const workflowResults = branchDocument.workflowResults ?? [];
 
     const newWorkflowResults = updateWorkflowResults(
       workflowResults,
