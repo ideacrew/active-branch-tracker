@@ -7,6 +7,7 @@
     'has-pr': branch.pullRequestNumber,
     'is-old': branch | isOld
   }"
+  [class]="branch.workflowResults | workflowStatus"
 >
   <!-- Container Heading -->
   <div class="heading">
@@ -95,6 +96,25 @@
         <ng-template #sender>
           {{ branch.createdBy }}
         </ng-template>
+      </div>
+    </div>
+    <div *ngIf="branch.workflowResults" class="right-column">
+      <div
+        *ngFor="let result of branch.workflowResults; trackBy: trackByRunId"
+        class="workflow-result"
+        [class]="result.conclusion"
+      >
+        <idc-loading-spinner
+          *ngIf="result.action === 'requested'; else completed"
+        ></idc-loading-spinner>
+        <ng-template #completed>
+          <svg class="svg-icon" width="12px" height="12px">
+            <use [attr.href]="'assets/icons.svg#' + result.conclusion"></use>
+          </svg>
+        </ng-template>
+        <a class="workflow-link" target="__blank" [attr.href]="result.htmlUrl">
+          {{ result.workflowName }}
+        </a>
       </div>
     </div>
   </div>

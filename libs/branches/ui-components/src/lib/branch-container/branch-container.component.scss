@@ -182,8 +182,40 @@ a {
 }
 
 .card-content {
-  position: relative;
-  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.workflow-result {
+  font-size: 0.75rem;
+  background-color: var(--green-080);
+  color: var(--green-030);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+
+  padding: 0.25rem 0.35rem;
+  border-radius: 0.15rem;
+}
+
+.workflow-result.failure {
+  background-color: var(--red-090);
+  color: var(--red-030);
+}
+
+.workflow-result.cancelled {
+  color: var(--neutral-030);
+  background-color: var(--neutral-090);
+}
+
+idc-loading-spinner + .workflow-link {
+  margin-left: -0.5rem;
 }
 
 .collapsed .card-content {
