@@ -1,10 +1,5 @@
 import { Request, Response } from 'express';
 import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
-
-if (admin.apps.length === 0) {
-  admin.initializeApp();
-}
 
 import { ServiceDeploymentPayload } from '../models';
 import { handleServiceDeployment } from '../../service-deployment';
