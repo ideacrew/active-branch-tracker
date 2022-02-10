@@ -9,6 +9,8 @@ import {
 const axios = require('axios').default;
 import { doc, getDoc, setLogLevel } from 'firebase/firestore';
 
+import { ServiceDeploymentPayload } from '../../../src/api/models';
+
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
 
@@ -44,20 +46,17 @@ after(async () => {
 });
 
 describe('Service deployment payload', () => {
-  afterEach(async () => {
+  beforeEach(async () => {
     await testEnv.clearFirestore();
   });
 
   it('tests a new deployment', async () => {
-    const data = {
+    const data: ServiceDeploymentPayload = {
+      image: 'public.ecr.aws/ideacrew/enroll:trunk-48132c8',
       status: 'completed',
-      branch: 'trunk',
       env: 'hotfix-2',
-      app: 'enroll',
       user_name: 'kvootla',
       org: 'maine',
-      repo: 'enroll',
-      commit_sha: '48132c8',
     };
 
     const config = axiosConfig('service-deployment', data);
@@ -76,18 +75,20 @@ describe('Service deployment payload', () => {
       const envSnap = await getDoc(envRef);
 
       expect(envSnap.data()).to.include({
-        enrollBranch: data.branch,
+        enrollBranch: 'trunk',
       });
 
       const serviceRef = doc(
         db,
         `orgs/maine/environments/${data.env}/services/enroll`,
       );
-      const serviceSnap = await getDoc(serviceRef);
+      const serviceSnapshot = await getDoc(serviceRef);
 
-      expect(serviceSnap.data()?.latestDeployment).to.include({
+      const serviceDocument = serviceSnapshot.data();
+
+      expect(serviceDocument.latestDeployment).to.include({
         status: data.status,
-        branch: data.branch,
+        branch: 'trunk',
         user_name: data.user_name,
         commit_sha: '48132c8',
       });

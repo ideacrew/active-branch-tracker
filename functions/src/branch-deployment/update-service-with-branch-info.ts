@@ -3,9 +3,10 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
 import { BranchDeploymentPayload } from './branch-deployment.interface';
+import { ServiceDeployment } from '../service-deployment';
 
 export const updateServiceWithBranchInfo = async (
-  deployment: BranchDeploymentPayload,
+  deployment: BranchDeploymentPayload | ServiceDeployment,
 ): Promise<void> => {
   const { org, env, app, status, commit_sha, branch, user_name, repo } =
     deployment;

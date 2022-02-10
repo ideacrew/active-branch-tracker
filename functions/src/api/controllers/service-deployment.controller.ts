@@ -1,32 +1,29 @@
 import { Request, Response } from 'express';
 import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
 
-import {
-  BranchDeploymentPayload,
-  // updateEnvironment,
-  // updateServiceWithBranchInfo,
-} from '../../branch-deployment';
-// import { checkEnvironmentOwnership } from '../../check-ownership';
+if (admin.apps.length === 0) {
+  admin.initializeApp();
+}
+
+import { ServiceDeploymentPayload } from '../models';
+import { handleServiceDeployment } from '../../service-deployment';
 
 export const serviceDeployment = async (
   request: Request,
   response: Response,
 ): Promise<void> => {
-  const service: BranchDeploymentPayload = request.body;
+  const service: ServiceDeploymentPayload = request.body;
 
-  functions.logger.info('New service deployment', { service });
-
-  // try {
-  //   await checkEnvironmentOwnership(service);
-  //   await updateEnvironment(service);
-  //   await updateServiceWithBranchInfo(service);
-  // } catch {
-  //   response.status(500).send('Unable to update this service');
-  // }
-
-  response
-    .status(200)
-    .send(
-      `Successfully received payload to update ${service.org}-${service.env}`,
-    );
+  try {
+    await handleServiceDeployment(service);
+    response
+      .status(200)
+      .send(
+        `Successfully received payload to update ${service.org}-${service.env}`,
+      );
+  } catch (error) {
+    functions.logger.error('Unable to update service', { error, service });
+    response.status(500).send('Unable to update this service');
+  }
 };

@@ -1,12 +1,13 @@
 import * as functions from 'firebase-functions';
 
 import { BranchDeploymentPayload } from '../branch-deployment';
+import { ServiceDeployment } from '../service-deployment/interfaces';
 import { sendSlackMessage } from '../slack-notifications';
 import { yellrEnvironmentLink as yellrEnvironmentLink } from '../util';
 import { checkOwnership } from './check-ownership';
 
 export const checkEnvironmentOwnership = async (
-  deployment: BranchDeploymentPayload,
+  deployment: BranchDeploymentPayload | ServiceDeployment,
 ): Promise<void> => {
   const { org, env, status, branch } = deployment;
   const ownedEnvironment = await checkOwnership({ org, env });

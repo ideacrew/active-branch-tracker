@@ -2,12 +2,13 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
 import { BranchDeploymentPayload } from './branch-deployment.interface';
+import { ServiceDeployment } from '../service-deployment';
 
 export const updateEnvironment = async (
-  deployment: BranchDeploymentPayload,
+  deployment: BranchDeploymentPayload | ServiceDeployment,
 ): Promise<void> => {
   const { org, env, app, branch } = deployment;
-  const FieldValue = admin.firestore.FieldValue;
+  const { FieldValue } = admin.firestore;
 
   const environmentReference = admin
     .firestore()
