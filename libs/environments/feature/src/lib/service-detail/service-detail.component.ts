@@ -8,11 +8,11 @@ import {
   of,
   shareReplay,
   switchMap,
-  tap,
 } from 'rxjs';
 
 import {
   EnvironmentsService,
+  FSServiceDeployment,
   ServiceInfo,
 } from '@idc/environments/data-access';
 
@@ -32,8 +32,6 @@ export class ServiceDetailComponent {
         serviceId: parameters.get('serviceId') ?? 'no-service-id',
       }),
     ),
-    tap(console.log),
-    tap((serviceInfo: ServiceInfo) => (this.service = serviceInfo)),
     shareReplay(),
   );
 
@@ -43,7 +41,6 @@ export class ServiceDetailComponent {
         ? this.environmentService.getOrgName(serviceInfo.orgId)
         : of(EMPTY),
     ),
-    // tap(orgName => console.log({ orgName })),
   );
 
   envName$ = this.urlParams$.pipe(
@@ -55,9 +52,14 @@ export class ServiceDetailComponent {
   );
 
   service$ = this.urlParams$.pipe(
-    // tap(serviceInfo => console.log({ serviceInfo })),
     switchMap(({ orgId, envId, serviceId }: ServiceInfo) =>
       this.environmentService.getService({ orgId, envId, serviceId }),
+    ),
+  );
+
+  deployments$ = this.urlParams$.pipe(
+    switchMap(urlParameters =>
+      this.environmentService.getDeploymentHistory(urlParameters),
     ),
   );
 
@@ -65,6 +67,7 @@ export class ServiceDetailComponent {
     orgName: this.orgName$,
     service: this.service$,
     envName: this.envName$,
+    deployments: this.deployments$,
   });
 
   constructor(
@@ -89,5 +92,9 @@ export class ServiceDetailComponent {
       name,
       url,
     });
+  }
+
+  trackById(index: number, deployment: FSServiceDeployment): string {
+    return deployment.id;
   }
 }

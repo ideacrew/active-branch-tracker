@@ -10,4 +10,25 @@
     [service]="vm.service"
     (updateServiceInfo)="updateServiceInfo($event)"
   ></idc-edit-service-info>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Branch</th>
+        <th>Commit Sha</th>
+        <th>Completed</th>
+        <th>User</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let deployment of vm.deployments; trackBy: trackById">
+        <td>{{ deployment.branch }}</td>
+        <td>
+          <pre>{{ deployment.commit_sha }}</pre>
+        </td>
+        <td>{{ deployment.completed | firestoreDate | relativeDate }}</td>
+        <td>{{ deployment.user_name }}</td>
+      </tr>
+    </tbody>
+  </table>
 </ng-container>

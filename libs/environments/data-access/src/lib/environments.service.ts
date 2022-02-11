@@ -16,6 +16,7 @@ import {
   ServiceInfo,
   EnvironmentInfo,
   EnvironmentService,
+  FSServiceDeployment,
 } from './models';
 
 @Injectable()
@@ -144,6 +145,24 @@ export class EnvironmentsService {
       owner,
       ownerRelease: firebase.default.firestore.Timestamp.fromDate(ownerRelease),
     });
+  }
+
+  getDeploymentHistory({
+    orgId,
+    envId,
+    serviceId,
+  }: ServiceInfo): Observable<FSServiceDeployment[]> {
+    return this.afs
+      .collection('orgs')
+      .doc(orgId)
+      .collection('environments')
+      .doc(envId)
+      .collection('services')
+      .doc(serviceId)
+      .collection<FSServiceDeployment>('deployments', reference =>
+        reference.orderBy('completed', 'desc').limit(10),
+      )
+      .valueChanges({ idField: 'id' });
   }
 
   getSingleOrg(org: string): Observable<Org | undefined> {

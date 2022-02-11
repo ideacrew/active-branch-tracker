@@ -7,3 +7,4 @@ export * from './owner-update';
 export * from './environment-service';
 export * from './service-info';
 export * from './environment-info';
+export * from './service-deployment';

@@ -14,8 +14,4 @@ export class ServiceCardComponent {
   @Input() service!: EnvironmentService;
   @Input() environment!: OrgEnvironment;
   @Input() orgId!: string | null;
-
-  //   @HostBinding('class.reachable') get isReachable(): boolean {
-  //     return this.service.reachable !== undefined ? this.service.reachable : true;
-  //   }
 }
