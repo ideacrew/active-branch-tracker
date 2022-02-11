@@ -10,15 +10,17 @@ export const serviceDeployment = async (
 ): Promise<void> => {
   const service: ServiceDeploymentPayload = request.body;
 
-  try {
-    await handleServiceDeployment(service);
+  const { status, message } = await handleServiceDeployment(service);
+
+  if (status === 'success') {
     response
       .status(200)
       .send(
         `Successfully received payload to update ${service.org}-${service.env}`,
       );
-  } catch (error) {
-    functions.logger.error('Unable to update service', { error, service });
-    response.status(500).send('Unable to update this service');
+  } else {
+    functions.logger.error('Unable to update service', { message, service });
+    // response.status(500).send('Unable to update this service');
+    response.status(200).send('Unable to update this service');
   }
 };

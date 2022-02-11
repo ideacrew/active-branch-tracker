@@ -4,5 +4,4 @@ export interface ImageInfo {
   repo: string;
   branch: string;
   commit_sha: string;
-  client?: string;
 }

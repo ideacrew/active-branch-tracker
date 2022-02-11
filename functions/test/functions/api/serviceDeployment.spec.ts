@@ -7,7 +7,15 @@ import {
 } from '@firebase/rules-unit-testing';
 // https://github.com/axios/axios#note-commonjs-usage
 const axios = require('axios').default;
-import { doc, getDoc, setLogLevel } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  setLogLevel,
+  query,
+  limit,
+  getDocs,
+} from 'firebase/firestore';
 
 import { ServiceDeploymentPayload } from '../../../src/api/models';
 
@@ -91,6 +99,35 @@ describe('Service deployment payload', () => {
         branch: 'trunk',
         user_name: data.user_name,
         commit_sha: '48132c8',
+      });
+
+      // The document id isn't known, so a query is necessary here
+      const deploymentHistoryReference = collection(
+        db,
+        `orgs/maine/environments/${data.env}/services/enroll/deployments`,
+      );
+
+      // Limit to the first (and only) document in the collection
+      const q = query(deploymentHistoryReference, limit(1));
+
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.forEach(doc => {
+        const serviceDeployment = doc.data();
+
+        expect(serviceDeployment).to.include({
+          app: 'enroll',
+          branch: 'trunk',
+          commit_sha: '48132c8',
+          image: 'public.ecr.aws/ideacrew/enroll:trunk-48132c8',
+          status: 'completed',
+          env: 'hotfix-2',
+          user_name: 'kvootla',
+          org: 'maine',
+        });
+
+        // Timestamp of completion, check for existence
+        expect(serviceDeployment).to.have.property('completed');
       });
     });
   }).timeout(5000);

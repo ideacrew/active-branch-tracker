@@ -13,7 +13,7 @@ export const parseImage = (
   image = 'public.ecr.aws/ideacrew/fake:fake-abc1234',
 ): ImageInfo => {
   const regex =
-    /(?<registry>public.ecr.aws)\/(?<owner>ideacrew)\/(?<repo>[a-z]+):(?<branch>[\d_a-z-]+)-(?<commit_sha>[\da-f]{7})-?(?<client>[c-em]{2})?/gm;
+    /(?<registry>public.ecr.aws)\/(?<owner>ideacrew)\/(?<repo>[a-z]+):(?<branch>[\d_a-z-]+)-(?<commit_sha>[\da-f]{7})-?(?:[c-em]{2})?/gm;
 
   // Provide fallback in case image can't be matched
   const { groups } = regex.exec(image) ?? {
