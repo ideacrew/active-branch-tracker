@@ -17,7 +17,7 @@
     "resolveJsonModule": true,
     "outDir": "lib",
     "sourceMap": true,
-    "types": ["mocha"]
+    "types": ["jest"]
   },
   "compileOnSave": true,
   "include": ["src"],

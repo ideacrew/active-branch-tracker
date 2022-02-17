@@ -1,6 +1,3 @@
-import { expect } from 'chai';
-import { before, after } from 'mocha';
-
 import {
   initializeTestEnvironment,
   RulesTestEnvironment,
@@ -25,7 +22,7 @@ export const axiosConfig = (route: string, data: unknown) => {
   };
 };
 
-before(async () => {
+beforeAll(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
   // will still bubble up and will be thrown as an error (failing the tests).
   setLogLevel('error');
@@ -39,18 +36,14 @@ before(async () => {
   });
 });
 
-after(async () => {
+afterAll(async () => {
   // Delete all the FirebaseApp instances created during testing.
   // Note: this does not affect or clear any data.
   await testEnv.cleanup();
 });
 
 describe('Data refresh payload', () => {
-  beforeEach(async () => {
-    await testEnv.clearFirestore();
-  });
-
-  it('tests a started data refresh', async () => {
+   it('tests a started data refresh', async () => {
     const data: DataRefreshPayload = {
       status: 'started',
       env: 'hotfix-2',
@@ -77,12 +70,12 @@ describe('Data refresh payload', () => {
 
       const serviceSnap = await getDoc(serviceRef);
 
-      expect(serviceSnap.data()?.data).to.include({
+      expect(serviceSnap.data()?.data).toMatchObject({
         status: 'started',
         user_name: 'kvootla',
       });
     });
-  }).timeout(5000);
+  });
 
   it('tests a completed data refresh', async () => {
     const data: DataRefreshPayload = {
@@ -111,10 +104,10 @@ describe('Data refresh payload', () => {
 
       const serviceSnap = await getDoc(serviceRef);
 
-      expect(serviceSnap.data()?.data).to.include({
+      expect(serviceSnap.data()?.data).toMatchObject({
         status: 'completed',
         user_name: 'kvootla',
       });
     });
-  }).timeout(5000);
+  });
 });

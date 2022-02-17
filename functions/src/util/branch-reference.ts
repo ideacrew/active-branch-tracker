@@ -12,15 +12,15 @@ export interface BranchReference {
  * @param {BranchRef} branchRef
  * @return {FirebaseFirestore.DocumentReference} a doc reference
  */
-export function getBranchReference({
+export const getBranchReference = ({
   organizationName,
   repositoryName,
   branchName,
-}: BranchReference): FirebaseFirestore.DocumentReference {
+}: BranchReference): FirebaseFirestore.DocumentReference => {
   const safeBranchName = createSafeBranchName(branchName);
 
   return admin
     .firestore()
     .collection(`branches`)
     .doc(`${organizationName}-${repositoryName}-${safeBranchName}`);
-}
+};

@@ -5,9 +5,7 @@ import { mockBaseWebhookPayload } from './webhook.mock';
 import { Commit } from '../interfaces';
 
 // This represents a commit pushed to a feature branch
-export const mockPushEventPayload = (
-  branchName = 'feature-branch',
-): PushEventPayload => {
+export const mockPushEventPayload = (branchName: string): PushEventPayload => {
   const afterCommitSha = faker.git.commitSha();
   const person = {
     name: `${faker.name.firstName()} ${faker.name.lastName()}`,

@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import { after } from 'mocha';
 // https://github.com/axios/axios#note-commonjs-usage
 const axios = require('axios').default;
 import { stringify } from 'qs';
@@ -23,7 +21,7 @@ const axiosConfig = (functionName: string, data: unknown) => {
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
 
-before(async () => {
+beforeAll(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
   // will still bubble up and will be thrown as an error (failing the tests).
   setLogLevel('error');
@@ -37,17 +35,7 @@ before(async () => {
   });
 });
 
-after(async () => {
-  // Delete all the FirebaseApp instances created during testing.
-  // Note: this does not affect or clear any data.
-  await testEnv.cleanup();
-});
-
 describe('Data refresh payload v1', () => {
-  beforeEach(async () => {
-    await testEnv.clearFirestore();
-  });
-
   it('tests a started data refresh', async () => {
     const data = stringify({
       payload:
@@ -65,19 +53,21 @@ describe('Data refresh payload v1', () => {
     }
 
     await testEnv.withSecurityRulesDisabled(async context => {
-      const serviceRef = doc(
+      const serviceReference = doc(
         context.firestore(),
         'orgs/maine/environments/hotfix-2/services/enroll',
       );
 
-      const serviceSnap = await getDoc(serviceRef);
+      const serviceSnapshot = await getDoc(serviceReference);
 
-      expect(serviceSnap.data()?.data).to.include({
+      const serviceDocument = serviceSnapshot.data();
+
+      expect(serviceSnapshot.data()?.data).toMatchObject({
         status: 'started',
         user_name: 'kvootla',
       });
     });
-  }).timeout(5000);
+  });
 
   it('tests a completed data refresh', async () => {
     const data = stringify({
@@ -103,10 +93,10 @@ describe('Data refresh payload v1', () => {
 
       const serviceSnap = await getDoc(serviceRef);
 
-      expect(serviceSnap.data()?.data).to.include({
+      expect(serviceSnap.data()?.data).toMatchObject({
         status: 'completed',
         user_name: 'kvootla',
       });
     });
-  }).timeout(5000);
+  });
 });

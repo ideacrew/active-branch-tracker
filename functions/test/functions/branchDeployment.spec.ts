@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import { before } from 'mocha';
 // https://github.com/axios/axios#note-commonjs-usage
 const axios = require('axios').default;
 import * as qs from 'qs';
@@ -24,7 +22,7 @@ const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 
 let testEnv: RulesTestEnvironment;
 
-before(async () => {
+beforeAll(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
   // will still bubble up and will be thrown as an error (failing the tests).
   setLogLevel('error');
@@ -38,17 +36,7 @@ before(async () => {
   });
 });
 
-after(async () => {
-  // Delete all the FirebaseApp instances created during testing.
-  // Note: this does not affect or clear any data.
-  await testEnv.cleanup();
-});
-
 describe('DCHBX deployment payload', () => {
-  beforeEach(async () => {
-    await testEnv.clearFirestore();
-  });
-
   it('tests a new deployment', async () => {
     const data = qs.stringify({
       payload:
@@ -71,7 +59,9 @@ describe('DCHBX deployment payload', () => {
         `orgs/maine/environments/hotfix-2`,
       );
       const envSnap = await getDoc(envRef);
-      expect(envSnap.data()).to.include({
+
+      // .toMatchObject()
+      expect(envSnap.data()).toMatchObject({
         enrollBranch: 'feature-fix',
       });
     });
@@ -82,12 +72,12 @@ describe('DCHBX deployment payload', () => {
         'orgs/maine/environments/hotfix-2/services/enroll',
       );
       const serviceSnap = await getDoc(serviceRef);
-      expect(serviceSnap.data()?.latestDeployment).to.include({
+      expect(serviceSnap.data()?.latestDeployment).toMatchObject({
         status: 'started',
         branch: 'feature-fix',
         user_name: 'kvootla',
         commit_sha: 'abc1234',
       });
     });
-  }).timeout(5000);
+  });
 });

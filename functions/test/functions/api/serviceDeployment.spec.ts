@@ -1,6 +1,3 @@
-import { expect } from 'chai';
-import { before, after } from 'mocha';
-
 import {
   initializeTestEnvironment,
   RulesTestEnvironment,
@@ -16,6 +13,7 @@ import {
   limit,
   getDocs,
 } from 'firebase/firestore';
+import { faker } from '@faker-js/faker';
 
 import { ServiceDeploymentPayload } from '../../../src/api/models';
 
@@ -33,7 +31,7 @@ export const axiosConfig = (route: string, data: unknown) => {
   };
 };
 
-before(async () => {
+beforeAll(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
   // will still bubble up and will be thrown as an error (failing the tests).
   setLogLevel('error');
@@ -47,20 +45,12 @@ before(async () => {
   });
 });
 
-after(async () => {
-  // Delete all the FirebaseApp instances created during testing.
-  // Note: this does not affect or clear any data.
-  await testEnv.cleanup();
-});
-
 describe('Service deployment payload', () => {
-  beforeEach(async () => {
-    await testEnv.clearFirestore();
-  });
+  const branchName = faker.git.branch();
 
   it('tests a new deployment', async () => {
     const data: ServiceDeploymentPayload = {
-      image: 'public.ecr.aws/ideacrew/enroll:trunk-48132c8',
+      image: `public.ecr.aws/ideacrew/enroll:${branchName}-48132c8`,
       status: 'completed',
       env: 'hotfix-2',
       user_name: 'kvootla',
@@ -82,8 +72,8 @@ describe('Service deployment payload', () => {
       const envRef = doc(db, `orgs/maine/environments/${data.env}`);
       const envSnap = await getDoc(envRef);
 
-      expect(envSnap.data()).to.include({
-        enrollBranch: 'trunk',
+      expect(envSnap.data()).toMatchObject({
+        enrollBranch: branchName,
       });
 
       const serviceRef = doc(
@@ -94,9 +84,9 @@ describe('Service deployment payload', () => {
 
       const serviceDocument = serviceSnapshot.data();
 
-      expect(serviceDocument.latestDeployment).to.include({
+      expect(serviceDocument.latestDeployment).toMatchObject({
         status: data.status,
-        branch: 'trunk',
+        branch: branchName,
         user_name: data.user_name,
         commit_sha: '48132c8',
       });
@@ -115,11 +105,11 @@ describe('Service deployment payload', () => {
       querySnapshot.forEach(doc => {
         const serviceDeployment = doc.data();
 
-        expect(serviceDeployment).to.include({
+        expect(serviceDeployment).toMatchObject({
           app: 'enroll',
-          branch: 'trunk',
+          branch: branchName,
           commit_sha: '48132c8',
-          image: 'public.ecr.aws/ideacrew/enroll:trunk-48132c8',
+          image: `public.ecr.aws/ideacrew/enroll:${branchName}-48132c8`,
           status: 'completed',
           env: 'hotfix-2',
           user_name: 'kvootla',
@@ -127,8 +117,8 @@ describe('Service deployment payload', () => {
         });
 
         // Timestamp of completion, check for existence
-        expect(serviceDeployment).to.have.property('completed');
+        expect(serviceDeployment).toHaveProperty('completed');
       });
     });
-  }).timeout(5000);
+  });
 });
