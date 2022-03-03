@@ -9,7 +9,7 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test": "jest --runInBand",
+    "test": "jest",
     "test:watch": "cross-env GCLOUD_PROJECT=demo-project FIREBASE_FIRESTORE_EMULATOR_ADDRESS=localhost:8080 FIRESTORE_EMULATOR_HOST=localhost:8080 jest --watch",
     "test:ci": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test\"",
     "test:ci:rules": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test:rules\"",
