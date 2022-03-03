@@ -1,10 +1,25 @@
 import { WebhookPayload } from '../interfaces';
-import { mockOrganization } from './organization.mock';
-import { mockRepository } from './repository.mock';
-import { mockSender } from './sender.mock';
 
-export const mockBaseWebhookPayload: WebhookPayload = {
-  sender: mockSender,
-  organization: mockOrganization,
-  repository: mockRepository,
+export interface BaseDetails {
+  sender?: string;
+  organization?: string;
+  repository?: string;
+}
+
+export const mockBaseWebhookPayload = ({
+  sender = 'mockUser',
+  organization = 'mock-organization',
+  repository = 'mock-repository',
+}: BaseDetails = {}): WebhookPayload => {
+  return {
+    sender: {
+      login: sender,
+    },
+    organization: {
+      login: organization,
+    },
+    repository: {
+      name: repository,
+    },
+  };
 };

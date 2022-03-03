@@ -1,7 +1,7 @@
 export interface ServiceDeploymentPayload {
   image: string;
   env: string;
-  org: 'maine' | 'dchbx';
+  org: string; // maine, dchbx
   status: 'started' | 'completed';
   user_name: string;
 }

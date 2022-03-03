@@ -1,23 +1,18 @@
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
 import {
   initializeTestEnvironment,
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
-import { doc, getDoc, setLogLevel } from 'firebase/firestore';
+import { doc, getDoc, setDoc, setLogLevel } from 'firebase/firestore';
 
-import {
-  mockCreateFeatureBranchPayload,
-  mockDeleteEventPayload,
-} from '../../../src/webhook/mocks';
-
+import { allPayloads } from '../../../src/webhook/mocks';
 import { mockWebhookPayload } from './mockHttpFunction';
 import { getFullBranchName } from '../../util';
+import { BranchInfo } from '../../../src/models';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
 
-before(async () => {
+beforeAll(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
   // will still bubble up and will be thrown as an error (failing the tests).
   setLogLevel('error');
@@ -31,38 +26,25 @@ before(async () => {
   });
 });
 
-after(async () => {
-  // Delete all the FirebaseApp instances created during testing.
-  // Note: this does not affect or clear any data.
-  await testEnv.cleanup();
-});
-
 describe('Delete event tests', () => {
-  beforeEach(async () => {
-    await testEnv.clearFirestore();
-  });
-
   it('tests branch deletion', async () => {
-    try {
-      await mockWebhookPayload('create', mockCreateFeatureBranchPayload);
-      await mockWebhookPayload('delete', mockDeleteEventPayload);
-    } catch (e) {
-      console.error('ERROR:', e);
-    }
+    const { deleteBranchPayload, featureBranchName: branchName } =
+      allPayloads();
 
-    const { ref: branchName } = mockDeleteEventPayload;
-
-    const fullBranchName = getFullBranchName(
-      mockDeleteEventPayload,
+    const branchDoc: Partial<BranchInfo> = {
       branchName,
-    );
+      defaultBranch: false,
+    };
+
+    const fullBranchName = getFullBranchName(deleteBranchPayload, branchName);
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const branchRef = doc(context.firestore(), `branches/${fullBranchName}`);
-
+      await setDoc(branchRef, branchDoc);
+      await mockWebhookPayload('delete', deleteBranchPayload);
       const branchSnapshot = await getDoc(branchRef);
 
-      expect(branchSnapshot.data()).to.be.undefined;
+      expect(branchSnapshot.data()).toBeUndefined();
     });
   });
 });

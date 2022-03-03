@@ -1,9 +1,14 @@
 import { DeleteEventPayload } from '../delete/interfaces';
-import { mockBaseWebhookPayload } from './webhook.mock';
+import { BaseDetails, mockBaseWebhookPayload } from './webhook.mock';
 
-export const mockDeleteEventPayload: DeleteEventPayload = {
-  ref: `feature-branch`,
-  ref_type: 'branch',
-  pusher_type: 'user',
-  ...mockBaseWebhookPayload,
+export const mockDeleteEventPayload = (
+  branchName: string,
+  baseDetails?: BaseDetails,
+): DeleteEventPayload => {
+  return {
+    ref: branchName,
+    ref_type: 'branch',
+    pusher_type: 'user',
+    ...mockBaseWebhookPayload(baseDetails),
+  };
 };

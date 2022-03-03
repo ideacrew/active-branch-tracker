@@ -1,7 +1,4 @@
-import { expect } from 'chai';
-import { before, after } from 'mocha';
-
-import { doc, getDoc, setDoc, setLogLevel } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import {
   initializeTestEnvironment,
   RulesTestEnvironment,
@@ -15,10 +12,10 @@ import { checkWorkflowRuntime } from '../../src';
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
 
-before(async () => {
+beforeAll(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
   // will still bubble up and will be thrown as an error (failing the tests).
-  setLogLevel('error');
+  // setLogLevel('error');
 
   testEnv = await initializeTestEnvironment({
     firestore: {
@@ -29,15 +26,7 @@ before(async () => {
   });
 });
 
-after(async () => {
-  await testEnv.cleanup();
-});
-
 describe('Checks workflow runtime for fastest run', () => {
-  beforeEach(async () => {
-    await testEnv.clearFirestore();
-  });
-
   it('records very first runtime', async () => {
     await testEnv.withSecurityRulesDisabled(async context => {
       const db = context.firestore();
@@ -72,7 +61,7 @@ describe('Checks workflow runtime for fastest run', () => {
 
       const workflowSnap = await getDoc(workflowDocRef);
 
-      expect(workflowSnap.data()).to.deep.eq({
+      expect(workflowSnap.data()).toMatchObject({
         name: 'test cloud functions',
         fastestRun: {
           runId: 1321542128,
@@ -119,7 +108,7 @@ describe('Checks workflow runtime for fastest run', () => {
 
       const workflowSnap = await getDoc(workflowDocRef);
 
-      expect(workflowSnap.data()).to.deep.eq({
+      expect(workflowSnap.data()).toMatchObject({
         name: 'test cloud functions',
         fastestRun: {
           runId: 1321542128,
@@ -166,7 +155,7 @@ describe('Checks workflow runtime for fastest run', () => {
 
       const workflowSnap = await getDoc(workflowDocRef);
 
-      expect(workflowSnap.data()).to.deep.eq({
+      expect(workflowSnap.data()).toMatchObject({
         name: 'test cloud functions',
         fastestRun: { runId: 3454542128, runtime: 100 },
       });

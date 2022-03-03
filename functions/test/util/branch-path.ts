@@ -9,7 +9,6 @@ export const getFullBranchName = (
   const { login: organizationName } = organization;
   const { name: repositoryName } = repository;
   const safeBranchName = createSafeBranchName(branchName);
-
   const branchPath = `${organizationName}-${repositoryName}-${safeBranchName}`;
 
   return branchPath;

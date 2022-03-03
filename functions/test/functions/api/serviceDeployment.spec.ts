@@ -1,12 +1,8 @@
-import { expect } from 'chai';
-import { before, after } from 'mocha';
-
 import {
   initializeTestEnvironment,
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
-// https://github.com/axios/axios#note-commonjs-usage
-const axios = require('axios').default;
+import axios, { AxiosRequestConfig } from 'axios';
 import {
   collection,
   doc,
@@ -16,13 +12,17 @@ import {
   limit,
   getDocs,
 } from 'firebase/firestore';
+import { faker } from '@faker-js/faker';
 
 import { ServiceDeploymentPayload } from '../../../src/api/models';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
 
-export const axiosConfig = (route: string, data: unknown) => {
+export const axiosConfig = (
+  route: string,
+  data: unknown,
+): AxiosRequestConfig => {
   return {
     method: 'post',
     url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/api/${route}`,
@@ -33,7 +33,7 @@ export const axiosConfig = (route: string, data: unknown) => {
   };
 };
 
-before(async () => {
+beforeAll(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
   // will still bubble up and will be thrown as an error (failing the tests).
   setLogLevel('error');
@@ -47,56 +47,43 @@ before(async () => {
   });
 });
 
-after(async () => {
-  // Delete all the FirebaseApp instances created during testing.
-  // Note: this does not affect or clear any data.
-  await testEnv.cleanup();
-});
-
 describe('Service deployment payload', () => {
-  beforeEach(async () => {
-    await testEnv.clearFirestore();
-  });
+  const branchName = faker.git.branch();
 
   it('tests a new deployment', async () => {
+    const fakeOrg = faker.address.state().toLowerCase();
     const data: ServiceDeploymentPayload = {
-      image: 'public.ecr.aws/ideacrew/enroll:trunk-48132c8',
+      image: `public.ecr.aws/ideacrew/enroll:${branchName}-48132c8`,
       status: 'completed',
       env: 'hotfix-2',
       user_name: 'kvootla',
-      org: 'maine',
+      org: fakeOrg,
     };
 
     const config = axiosConfig('service-deployment', data);
 
-    try {
-      // Make the http request
-      await axios(config);
-    } catch (e) {
-      console.error('=====================================');
-      console.error('ERROR:', e);
-    }
+    await axios(config);
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const db = context.firestore();
-      const envRef = doc(db, `orgs/maine/environments/${data.env}`);
+      const envRef = doc(db, `orgs/${fakeOrg}/environments/${data.env}`);
       const envSnap = await getDoc(envRef);
 
-      expect(envSnap.data()).to.include({
-        enrollBranch: 'trunk',
+      expect(envSnap.data()).toMatchObject({
+        enrollBranch: branchName,
       });
 
       const serviceRef = doc(
         db,
-        `orgs/maine/environments/${data.env}/services/enroll`,
+        `orgs/${fakeOrg}/environments/${data.env}/services/enroll`,
       );
       const serviceSnapshot = await getDoc(serviceRef);
 
       const serviceDocument = serviceSnapshot.data();
 
-      expect(serviceDocument.latestDeployment).to.include({
+      expect(serviceDocument.latestDeployment).toMatchObject({
         status: data.status,
-        branch: 'trunk',
+        branch: branchName,
         user_name: data.user_name,
         commit_sha: '48132c8',
       });
@@ -104,7 +91,7 @@ describe('Service deployment payload', () => {
       // The document id isn't known, so a query is necessary here
       const deploymentHistoryReference = collection(
         db,
-        `orgs/maine/environments/${data.env}/services/enroll/deployments`,
+        `orgs/${fakeOrg}/environments/${data.env}/services/enroll/deployments`,
       );
 
       // Limit to the first (and only) document in the collection
@@ -115,20 +102,20 @@ describe('Service deployment payload', () => {
       querySnapshot.forEach(doc => {
         const serviceDeployment = doc.data();
 
-        expect(serviceDeployment).to.include({
+        expect(serviceDeployment).toMatchObject({
           app: 'enroll',
-          branch: 'trunk',
+          branch: branchName,
           commit_sha: '48132c8',
-          image: 'public.ecr.aws/ideacrew/enroll:trunk-48132c8',
+          image: `public.ecr.aws/ideacrew/enroll:${branchName}-48132c8`,
           status: 'completed',
           env: 'hotfix-2',
           user_name: 'kvootla',
-          org: 'maine',
+          org: fakeOrg,
         });
 
         // Timestamp of completion, check for existence
-        expect(serviceDeployment).to.have.property('completed');
+        expect(serviceDeployment).toHaveProperty('completed');
       });
     });
-  }).timeout(5000);
+  });
 });

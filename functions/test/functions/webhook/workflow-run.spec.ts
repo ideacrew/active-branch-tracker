@@ -1,26 +1,19 @@
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
 import {
   initializeTestEnvironment,
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
-import { doc, getDoc, setLogLevel } from 'firebase/firestore';
+import { doc, getDoc, setDoc, setLogLevel } from 'firebase/firestore';
 
 import { mockWebhookPayload } from './mockHttpFunction';
-
-import {
-  mockCreateDefaultBranchPayload,
-  mockCreateFeatureBranchPayload,
-  mockPushEventPayload,
-  mockWorkflowRun,
-} from '../../../src/webhook/mocks';
-import { FSWorkflowRun } from '../../../src/models';
+import { allPayloads } from '../../../src/webhook/mocks';
+import { BranchInfo, FSWorkflowRun } from '../../../src/models';
 import { updateWorkflowResults } from '../../../src/webhook/workflow-run/update-workflow-results';
+import { getFullBranchName } from '../../util';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
 
-before(async () => {
+beforeAll(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
   // will still bubble up and will be thrown as an error (failing the tests).
   setLogLevel('error');
@@ -34,115 +27,158 @@ before(async () => {
   });
 });
 
-after(async () => {
-  // Delete all the FirebaseApp instances created during testing.
-  // Note: this does not affect or clear any data.
-  await testEnv.cleanup();
-});
-
 describe('Workflow run tests', () => {
-  const branchPath =
-    'branches/mock-organization-mock-repository-feature-branch';
-
-  beforeEach(async () => {
-    await testEnv.clearFirestore();
-  });
-
-  afterEach(async () => {
-    await testEnv.clearFirestore();
-  });
-
   describe('updating workflow results list in branch document', () => {
-    const { requested, success, failure } = mockWorkflowRun();
-
-    beforeEach(async () => {
-      await mockWebhookPayload('create', mockCreateFeatureBranchPayload);
-      await mockWebhookPayload('push', mockPushEventPayload());
-      await mockWebhookPayload('workflow_run', requested);
-    });
-
     it('tests a first-time requested workflow run', async () => {
-      await testEnv.withSecurityRulesDisabled(async context => {
-        const branchReference = doc(context.firestore(), branchPath);
+      const {
+        createFeatureBranchPayload,
+        workflowRun1,
+        featureBranchName: branchName,
+      } = allPayloads();
+      const { requested } = workflowRun1;
+      const branchPath = getFullBranchName(
+        createFeatureBranchPayload,
+        branchName,
+      );
+      const branchDoc: Partial<BranchInfo> = {
+        branchName,
+        workflowResults: [],
+        defaultBranch: false,
+      };
 
+      await testEnv.withSecurityRulesDisabled(async context => {
+        const branchReference = doc(
+          context.firestore(),
+          `branches/${branchPath}`,
+        );
+        await setDoc(branchReference, branchDoc);
+        await mockWebhookPayload('workflow_run', requested);
         const branchSnapshot = await getDoc(branchReference);
         const { workflowResults } = branchSnapshot.data();
 
-        expect(workflowResults[0]).to.include({
-          htmlUrl: 'https://github.com',
+        expect(workflowResults[0]).toMatchObject({
           runtime: 0,
           conclusion: null,
-          repositoryName: 'mock-repository',
           action: 'requested',
         });
       });
     });
+
     it('tests a successful workflow run', async () => {
-      try {
-        await mockWebhookPayload('workflow_run', success);
-      } catch (error) {
-        console.error('ERROR:', error);
-      }
+      const {
+        createFeatureBranchPayload,
+        workflowRun1,
+        featureBranchName: branchName,
+      } = allPayloads();
+
+      const { success } = workflowRun1;
+
+      const branchPath = getFullBranchName(
+        createFeatureBranchPayload,
+        branchName,
+      );
+
+      const branchDoc: Partial<BranchInfo> = {
+        branchName,
+        workflowResults: [],
+        defaultBranch: false,
+      };
 
       await testEnv.withSecurityRulesDisabled(async context => {
-        const branchReference = doc(context.firestore(), branchPath);
+        const branchReference = doc(
+          context.firestore(),
+          `branches/${branchPath}`,
+        );
+
+        await setDoc(branchReference, branchDoc);
+        await mockWebhookPayload('workflow_run', success);
 
         const branchSnapshot = await getDoc(branchReference);
         const { workflowResults } = branchSnapshot.data();
 
-        expect(workflowResults[0]).to.include({
-          htmlUrl: 'https://github.com',
-          runtime: 100_000,
+        expect(workflowResults[0]).toMatchObject({
           conclusion: 'success',
-          repositoryName: 'mock-repository',
           action: 'completed',
         });
       });
     });
+
     it('tests a failed workflow run', async () => {
-      try {
-        await mockWebhookPayload('workflow_run', failure);
-      } catch (error) {
-        console.error('ERROR:', error);
-      }
+      const {
+        createFeatureBranchPayload,
+        workflowRun1,
+        featureBranchName: branchName,
+      } = allPayloads();
+
+      const { failure } = workflowRun1;
+
+      const branchPath = getFullBranchName(
+        createFeatureBranchPayload,
+        branchName,
+      );
+
+      const branchDoc: Partial<BranchInfo> = {
+        branchName,
+        workflowResults: [],
+        defaultBranch: false,
+      };
 
       await testEnv.withSecurityRulesDisabled(async context => {
-        const branchReference = doc(context.firestore(), branchPath);
+        const branchReference = doc(
+          context.firestore(),
+          `branches/${branchPath}`,
+        );
+
+        await setDoc(branchReference, branchDoc);
+        await mockWebhookPayload('workflow_run', failure);
 
         const branchSnapshot = await getDoc(branchReference);
         const { workflowResults } = branchSnapshot.data();
 
-        expect(workflowResults[0]).to.include({
-          htmlUrl: 'https://github.com',
-          runtime: 100_000,
+        expect(workflowResults[0]).toMatchObject({
           conclusion: 'failure',
-          repositoryName: 'mock-repository',
           action: 'completed',
         });
       });
     });
 
     it('tests a second workflow run being requested', async () => {
-      // First workflow run requested and completed
-      const { requested, success } = mockWorkflowRun();
-      await mockWebhookPayload('workflow_run', requested);
-      await mockWebhookPayload('workflow_run', success);
+      const {
+        createFeatureBranchPayload,
+        workflowRun1,
+        workflowRun2,
+        featureBranchName: branchName,
+      } = allPayloads();
 
-      // Second workflow run requested
-      const { requested: requested2, success: success2 } = mockWorkflowRun(
-        'build',
-        2,
+      const { success } = workflowRun1;
+
+      const branchPath = getFullBranchName(
+        createFeatureBranchPayload,
+        branchName,
       );
-      await mockWebhookPayload('workflow_run', requested2);
-      await mockWebhookPayload('workflow_run', success2);
+      const { success: success2 } = workflowRun2;
+
+      const branchDoc: Partial<BranchInfo> = {
+        branchName,
+        workflowResults: [],
+        defaultBranch: false,
+      };
 
       await testEnv.withSecurityRulesDisabled(async context => {
-        const branchReference = doc(context.firestore(), branchPath);
+        const branchReference = doc(
+          context.firestore(),
+          `branches/${branchPath}`,
+        );
+
+        await setDoc(branchReference, branchDoc);
+
+        await mockWebhookPayload('workflow_run', success);
+        await mockWebhookPayload('workflow_run', success2);
 
         const branchSnapshot = await getDoc(branchReference);
         const { workflowResults } = branchSnapshot.data();
 
-        expect(workflowResults).to.have.length(2);
+        expect(workflowResults).toHaveLength(2);
       });
     });
   });
@@ -150,16 +186,11 @@ describe('Workflow run tests', () => {
   // This spec should ideally exist inside the /src directory, but I only have
   // specs running out of the /test directory.
   describe('logic around updating results array', () => {
-    beforeEach(async () => {
-      await mockWebhookPayload('create', mockCreateFeatureBranchPayload);
-      await mockWebhookPayload('push', mockPushEventPayload());
-    });
     const now = new Date();
     const runStartedAt = now.toISOString();
     const updatedAt = new Date(now.getTime() + 100_000).toISOString();
-    it('tests adding a new workflow to an empty results list', () => {
+    it('tests adding a new workflow to an empty results list', async () => {
       const existingWorkflowResults: FSWorkflowRun[] = [];
-
       const newWorkflowRun: FSWorkflowRun = {
         htmlUrl: 'https://github.com',
         runtime: 100_000,
@@ -167,7 +198,7 @@ describe('Workflow run tests', () => {
         runId: 2,
         workflowId: 2,
         action: 'completed',
-        repositoryName: 'mock-repository',
+        repositoryName: 'fake-repository',
         runStartedAt,
         updatedAt,
         workflowName: 'build-workflow',
@@ -178,10 +209,10 @@ describe('Workflow run tests', () => {
         newWorkflowRun,
       );
 
-      expect(newWorkflowResults).to.have.length(1);
+      expect(newWorkflowResults).toHaveLength(1);
     });
 
-    it('tests updating a single workflow result in the array', () => {
+    it('tests updating a single workflow result in the array', async () => {
       const existingWorkflowResults: FSWorkflowRun[] = [
         {
           htmlUrl: 'https://github.com',
@@ -190,7 +221,7 @@ describe('Workflow run tests', () => {
           runId: 1,
           workflowId: 1,
           action: 'requested',
-          repositoryName: 'mock-repository',
+          repositoryName: 'fake-repo',
           runStartedAt,
           updatedAt: runStartedAt,
           workflowName: 'test-workflow',
@@ -204,7 +235,7 @@ describe('Workflow run tests', () => {
         runId: 2,
         workflowId: 1,
         action: 'completed',
-        repositoryName: 'mock-repository',
+        repositoryName: 'fake-repo',
         runStartedAt,
         updatedAt,
         workflowName: 'test-workflow',
@@ -215,10 +246,10 @@ describe('Workflow run tests', () => {
         newWorkflowRun,
       );
 
-      expect(newWorkflowResults).to.have.length(1);
+      expect(newWorkflowResults).toHaveLength(1);
     });
 
-    it('tests adding a new workflow result to an existing array', () => {
+    it('tests adding a new workflow result to an existing array', async () => {
       const existingWorkflowResults: FSWorkflowRun[] = [
         {
           htmlUrl: 'https://github.com',
@@ -227,7 +258,7 @@ describe('Workflow run tests', () => {
           runId: 1,
           workflowId: 1,
           action: 'completed',
-          repositoryName: 'mock-repository',
+          repositoryName: 'fake-repo',
           runStartedAt,
           updatedAt,
           workflowName: 'test-workflow',
@@ -241,7 +272,7 @@ describe('Workflow run tests', () => {
         runId: 2,
         workflowId: 2,
         action: 'completed',
-        repositoryName: 'mock-repository',
+        repositoryName: 'fake-repo',
         runStartedAt,
         updatedAt,
         workflowName: 'build-workflow',
@@ -252,68 +283,79 @@ describe('Workflow run tests', () => {
         newWorkflowRun,
       );
 
-      expect(newWorkflowResults).to.have.length(2);
+      expect(newWorkflowResults).toHaveLength(2);
     });
   });
 
-  describe('Recording workflow runtimes', () => {
-    beforeEach(async () => {
-      // need default branches to test workflow runtime recording
-      await mockWebhookPayload('create', mockCreateDefaultBranchPayload);
-    });
-
+  describe('Recording workflow runtimes on the default branch', () => {
     it('records workflow name on a first-time successful workflow run', async () => {
-      const { success } = mockWorkflowRun('test', 1, 'trunk');
-
-      try {
-        await mockWebhookPayload('workflow_run', success);
-      } catch (error) {
-        console.error('ERROR:', error);
-      }
-
+      const {
+        defaultWorkflowRun1,
+        defaultBranchName: branchName,
+      } = allPayloads();
+      const { success } = defaultWorkflowRun1;
       const { repository, workflow_run } = success;
-
       const workflowPath = `workflows/${repository.name}-${workflow_run.workflow_id}`;
 
-      await testEnv.withSecurityRulesDisabled(async context => {
-        const workflowRef = doc(context.firestore(), workflowPath);
+      const branchDoc: Partial<BranchInfo> = {
+        branchName,
+        workflowResults: [],
+        defaultBranch: true,
+      };
 
+      const branchPath = getFullBranchName(success, branchName);
+
+      await testEnv.withSecurityRulesDisabled(async context => {
+        const db = context.firestore();
+        const workflowRef = doc(db, workflowPath);
+        const branchRef = doc(db, `branches/${branchPath}`);
+        await setDoc(branchRef, branchDoc);
+        await mockWebhookPayload('workflow_run', success);
         const workflowSnapshot = await getDoc(workflowRef);
         const workflowDocument = workflowSnapshot.data();
 
-        expect(workflowDocument).to.include({
-          name: 'test',
+        expect(workflowDocument).toMatchObject({
+          name: workflow_run.name,
         });
       });
     });
 
     it('records a workflow run', async () => {
-      const { success } = mockWorkflowRun('test', 1, 'trunk');
-      try {
-        await mockWebhookPayload('workflow_run', success);
-      } catch (error) {
-        console.error('ERROR:', error);
-      }
+      const { defaultWorkflowRun1, defaultBranchName: branchName } =
+        allPayloads();
+      const { success } = defaultWorkflowRun1;
 
       const { repository, workflow_run } = success;
 
       const workflowRunPath = `workflows/${repository.name}-${workflow_run.workflow_id}/runs/${workflow_run.id}`;
 
-      await testEnv.withSecurityRulesDisabled(async context => {
-        const workflowRef = doc(context.firestore(), workflowRunPath);
+      const branchDoc: Partial<BranchInfo> = {
+        branchName,
+        workflowResults: [],
+        defaultBranch: true,
+      };
 
+      await testEnv.withSecurityRulesDisabled(async context => {
+        const db = context.firestore();
+        const branchRef = doc(
+          db,
+          `branches/${getFullBranchName(success, branchName)}`,
+        );
+        const workflowRef = doc(db, workflowRunPath);
+        await setDoc(branchRef, branchDoc);
+        await mockWebhookPayload('workflow_run', success);
         const workflowSnapshot = await getDoc(workflowRef);
         const workflowDocument = workflowSnapshot.data();
 
-        expect(workflowDocument).to.include({
+        expect(workflowDocument).toMatchObject({
           action: 'completed',
           conclusion: 'success',
           htmlUrl: 'https://github.com',
-          repositoryName: 'mock-repository',
+          repositoryName: repository.name,
           runId: 1,
           runtime: 100_000,
-          workflowId: 1,
-          workflowName: 'test',
+          workflowId: 3,
+          workflowName: workflow_run.name,
         });
       });
     });

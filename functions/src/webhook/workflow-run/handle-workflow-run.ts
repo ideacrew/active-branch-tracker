@@ -2,7 +2,7 @@
 import * as functions from 'firebase-functions';
 import { BranchInfo, FSWorkflowRun } from '../../models';
 import { createSafeBranchName } from '../../safe-branch-name';
-import { getBranchReference } from '../../util';
+import { getBranchReference, isDefaultBranch } from '../../util';
 import { calculateRuntime } from './calculate-runtime';
 
 import { WorkflowRunPayload } from './models';
@@ -17,14 +17,20 @@ import { updateWorkflowResults } from './update-workflow-results';
 export const handleWorkflowRunEvent = async (
   payload: WorkflowRunPayload,
 ): Promise<void> => {
-  const { workflow_run } = payload;
+  const { workflow_run, organization, repository } = payload;
 
   const { head_branch: unsafeBranchName, conclusion: checkSuiteStatus } =
     workflow_run;
 
   const branchName = createSafeBranchName(unsafeBranchName);
 
-  if (branchName === 'trunk' && checkSuiteStatus === 'success') {
+  const defaultBranch = await isDefaultBranch({
+    organizationName: organization.login,
+    repositoryName: repository.name,
+    branchName,
+  });
+
+  if (defaultBranch && checkSuiteStatus === 'success') {
     try {
       await recordWorkflowRun(payload);
     } catch (error) {
@@ -32,7 +38,7 @@ export const handleWorkflowRunEvent = async (
     }
   }
 
-  const { action, organization, repository } = payload;
+  const { action } = payload;
   const {
     html_url,
     id,

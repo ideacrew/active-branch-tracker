@@ -1,19 +1,21 @@
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
 import {
   initializeTestEnvironment,
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
 import { doc, getDoc, setLogLevel } from 'firebase/firestore';
+import { faker } from '@faker-js/faker';
 
 import { mockWebhookPayload } from './mockHttpFunction';
-import { mockCreateFeatureBranchPayload } from '../../../src/webhook/mocks';
+import {
+  allPayloads,
+  mockCreateFeatureBranchPayload,
+} from '../../../src/webhook/mocks';
 import { getFullBranchName } from '../../util';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
 
-before(async () => {
+beforeAll(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
   // will still bubble up and will be thrown as an error (failing the tests).
   setLogLevel('error');
@@ -27,33 +29,20 @@ before(async () => {
   });
 });
 
-after(async () => {
-  // Delete all the FirebaseApp instances created during testing.
-  // Note: this does not affect or clear any data.
-  await testEnv.cleanup();
-});
-
 describe('A branch creation payload is received', () => {
-  beforeEach(async () => {
-    await testEnv.clearFirestore();
-  });
-
-  it('tests a new branch creation', async () => {
-    try {
-      await mockWebhookPayload('create', mockCreateFeatureBranchPayload);
-    } catch (e) {
-      console.error('ERROR:', e);
-    }
+  it('tests a new default branch creation', async () => {
+    const { createDefaultBranchPayload } = allPayloads();
+    await mockWebhookPayload('create', createDefaultBranchPayload);
 
     const {
-      ref: branchName,
       sender,
       organization,
       repository,
-    } = mockCreateFeatureBranchPayload;
+      ref: branchName,
+    } = createDefaultBranchPayload;
 
     const fullBranchName = getFullBranchName(
-      mockCreateFeatureBranchPayload,
+      createDefaultBranchPayload,
       branchName,
     );
 
@@ -62,8 +51,39 @@ describe('A branch creation payload is received', () => {
 
       const branchSnapshot = await getDoc(branchRef);
 
-      expect(branchSnapshot.data()).to.include({
-        branchName: 'feature-branch',
+      expect(branchSnapshot.data()).toMatchObject({
+        branchName,
+        createdBy: sender.login,
+        defaultBranch: true,
+        organizationName: organization.login,
+        repositoryName: repository.name,
+        tracked: false,
+      });
+    });
+  });
+
+  it('tests a new feature branch creation', async () => {
+    const { createFeatureBranchPayload } = allPayloads();
+
+    const {
+      sender,
+      organization,
+      repository,
+      ref: branchName,
+    } = createFeatureBranchPayload;
+
+    const fullBranchName = getFullBranchName(
+      createFeatureBranchPayload,
+      branchName,
+    );
+
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const branchRef = doc(context.firestore(), `branches/${fullBranchName}`);
+      await mockWebhookPayload('create', createFeatureBranchPayload);
+      const branchSnapshot = await getDoc(branchRef);
+
+      expect(branchSnapshot.data()).toMatchObject({
+        branchName,
         createdBy: sender.login,
         defaultBranch: false,
         organizationName: organization.login,

@@ -12,7 +12,7 @@ import {
   setLogLevel,
   updateDoc,
 } from 'firebase/firestore';
-import { before, after, beforeEach } from 'mocha';
+
 import * as http from 'http';
 import { FirebaseFirestore } from '@firebase/firestore-types';
 import firebase from 'firebase/compat';
@@ -48,7 +48,7 @@ const ideaCrewUser: TestUser = {
 const getFirestore = ({ uid, email }: TestUser, env: RulesTestEnvironment) =>
   env.authenticatedContext(uid, { email }).firestore();
 
-before(async () => {
+beforeAll(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
   // will still bubble up and will be thrown as an error (failing the tests).
   setLogLevel('error');
@@ -63,7 +63,7 @@ before(async () => {
   });
 });
 
-after(async () => {
+afterAll(async () => {
   // Delete all the FirebaseApp instances created during testing.
   // Note: this does not affect or clear any data.
   await testEnv.cleanup();
@@ -87,8 +87,6 @@ after(async () => {
 });
 
 beforeEach(async () => {
-  await testEnv.clearFirestore();
-
   // Add TestUser1 to the db
   await testEnv.withSecurityRulesDisabled(async context => {
     await setDoc(doc(context.firestore(), `users/${testUser1.uid}`), testUser1);

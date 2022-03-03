@@ -8,12 +8,15 @@ import { mockWebhookPayload } from './test/functions/webhook/mockHttpFunction';
 
 const seedDatabase = async () => {
   // Default Branch
-  await mockWebhookPayload('create', mockCreateDefaultBranchPayload);
+  await mockWebhookPayload('create', mockCreateDefaultBranchPayload('trunk'));
   await mockWebhookPayload('push', mockPushEventPayload('trunk'));
 
   // Feature Branch
-  await mockWebhookPayload('create', mockCreateFeatureBranchPayload);
-  await mockWebhookPayload('push', mockPushEventPayload());
+  await mockWebhookPayload(
+    'create',
+    mockCreateFeatureBranchPayload('feature-branch'),
+  );
+  await mockWebhookPayload('push', mockPushEventPayload('feature-branch'));
 
   // Workflow Runs on feature branch
   const { requested, success } = mockWorkflowRun('test', 1, 'feature-branch');

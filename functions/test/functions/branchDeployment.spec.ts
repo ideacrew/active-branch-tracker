@@ -1,15 +1,16 @@
-import { expect } from 'chai';
-import { before } from 'mocha';
 // https://github.com/axios/axios#note-commonjs-usage
-const axios = require('axios').default;
-import * as qs from 'qs';
+import axios, { AxiosRequestConfig } from 'axios';
+import qs from 'qs';
 import { doc, getDoc, setLogLevel } from 'firebase/firestore';
 import {
   initializeTestEnvironment,
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
 
-const axiosConfig = (functionName: string, data: unknown) => {
+const axiosConfig = (
+  functionName: string,
+  data: unknown,
+): AxiosRequestConfig => {
   return {
     method: 'post',
     url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/${functionName}`,
@@ -24,7 +25,7 @@ const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 
 let testEnv: RulesTestEnvironment;
 
-before(async () => {
+beforeAll(async () => {
   // Silence expected rules rejections from Firestore SDK. Unexpected rejections
   // will still bubble up and will be thrown as an error (failing the tests).
   setLogLevel('error');
@@ -38,40 +39,25 @@ before(async () => {
   });
 });
 
-after(async () => {
-  // Delete all the FirebaseApp instances created during testing.
-  // Note: this does not affect or clear any data.
-  await testEnv.cleanup();
-});
-
 describe('DCHBX deployment payload', () => {
-  beforeEach(async () => {
-    await testEnv.clearFirestore();
-  });
-
   it('tests a new deployment', async () => {
     const data = qs.stringify({
-      payload:
-        '{"status": "started", "branch": "feature-fix", "env": "hotfix-2", "app": "enroll", "user_name": "kvootla", "org": "maine", "repo": "enroll", "commit_sha": "abc1234" }',
+      payload: `{"status": "started", "branch": "feature-fix", "env": "hotfix-2", "app": "enroll", "user_name": "kvootla", "org": "fake-org", "repo": "enroll", "commit_sha": "abc1234" }`,
     });
 
     const config = axiosConfig('branchDeployment', data);
 
-    try {
-      // Make the http request
-      await axios(config);
-    } catch (e) {
-      console.error('=====================================');
-      console.error('ERROR:', e);
-    }
+    await axios(config);
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const envRef = doc(
         context.firestore(),
-        `orgs/maine/environments/hotfix-2`,
+        `orgs/fake-org/environments/hotfix-2`,
       );
       const envSnap = await getDoc(envRef);
-      expect(envSnap.data()).to.include({
+
+      // .toMatchObject()
+      expect(envSnap.data()).toMatchObject({
         enrollBranch: 'feature-fix',
       });
     });
@@ -79,15 +65,15 @@ describe('DCHBX deployment payload', () => {
     await testEnv.withSecurityRulesDisabled(async context => {
       const serviceRef = doc(
         context.firestore(),
-        'orgs/maine/environments/hotfix-2/services/enroll',
+        'orgs/fake-org/environments/hotfix-2/services/enroll',
       );
       const serviceSnap = await getDoc(serviceRef);
-      expect(serviceSnap.data()?.latestDeployment).to.include({
+      expect(serviceSnap.data()?.latestDeployment).toMatchObject({
         status: 'started',
         branch: 'feature-fix',
         user_name: 'kvootla',
         commit_sha: 'abc1234',
       });
     });
-  }).timeout(5000);
+  });
 });
