@@ -87,8 +87,6 @@ afterAll(async () => {
 });
 
 beforeEach(async () => {
-  await testEnv.clearFirestore();
-
   // Add TestUser1 to the db
   await testEnv.withSecurityRulesDisabled(async context => {
     await setDoc(doc(context.firestore(), `users/${testUser1.uid}`), testUser1);

@@ -2,16 +2,19 @@ import {
   initializeTestEnvironment,
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
-// https://github.com/axios/axios#note-commonjs-usage
-const axios = require('axios').default;
+import axios, { AxiosRequestConfig } from 'axios';
 import { doc, getDoc, setLogLevel } from 'firebase/firestore';
+import { faker } from '@faker-js/faker';
 
 import { DataRefreshPayload } from '../../../src/data-refresh';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
 
-export const axiosConfig = (route: string, data: unknown) => {
+export const axiosConfig = (
+  route: string,
+  data: unknown,
+): AxiosRequestConfig<unknown> => {
   return {
     method: 'post',
     url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/api/${route}`,
@@ -43,29 +46,25 @@ afterAll(async () => {
 });
 
 describe('Data refresh payload', () => {
-   it('tests a started data refresh', async () => {
+  it('tests a started data refresh', async () => {
+    const fakeOrg = faker.address.state().toLowerCase();
+
     const data: DataRefreshPayload = {
       status: 'started',
       env: 'hotfix-2',
       app: 'enroll',
       user_name: 'kvootla',
-      org: 'maine',
+      org: fakeOrg,
     };
 
-    const config = axiosConfig('data-refresh', data);
+    const config: AxiosRequestConfig = axiosConfig('data-refresh', data);
 
-    try {
-      // Make the http request
-      await axios(config);
-    } catch (e) {
-      console.error('=====================================');
-      console.error('ERROR:', e);
-    }
+    await axios(config);
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const serviceRef = doc(
         context.firestore(),
-        'orgs/maine/environments/hotfix-2/services/enroll',
+        `orgs/${fakeOrg}/environments/hotfix-2/services/enroll`,
       );
 
       const serviceSnap = await getDoc(serviceRef);
@@ -78,28 +77,24 @@ describe('Data refresh payload', () => {
   });
 
   it('tests a completed data refresh', async () => {
+    const fakeOrg = faker.address.state().toLowerCase();
+
     const data: DataRefreshPayload = {
       status: 'completed',
       env: 'hotfix-2',
       app: 'enroll',
       user_name: 'kvootla',
-      org: 'maine',
+      org: fakeOrg,
     };
 
     const config = axiosConfig('data-refresh', data);
 
-    try {
-      // Make the http request
-      await axios(config);
-    } catch (e) {
-      console.error('=====================================');
-      console.error('ERROR:', e);
-    }
+    await axios(config);
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const serviceRef = doc(
         context.firestore(),
-        'orgs/maine/environments/hotfix-2/services/enroll',
+        `orgs/${fakeOrg}/environments/hotfix-2/services/enroll`,
       );
 
       const serviceSnap = await getDoc(serviceRef);

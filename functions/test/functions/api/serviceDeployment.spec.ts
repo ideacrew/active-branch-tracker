@@ -2,8 +2,7 @@ import {
   initializeTestEnvironment,
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
-// https://github.com/axios/axios#note-commonjs-usage
-const axios = require('axios').default;
+import axios, { AxiosRequestConfig } from 'axios';
 import {
   collection,
   doc,
@@ -20,7 +19,10 @@ import { ServiceDeploymentPayload } from '../../../src/api/models';
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
 
-export const axiosConfig = (route: string, data: unknown) => {
+export const axiosConfig = (
+  route: string,
+  data: unknown,
+): AxiosRequestConfig => {
   return {
     method: 'post',
     url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/api/${route}`,
@@ -49,27 +51,22 @@ describe('Service deployment payload', () => {
   const branchName = faker.git.branch();
 
   it('tests a new deployment', async () => {
+    const fakeOrg = faker.address.state().toLowerCase();
     const data: ServiceDeploymentPayload = {
       image: `public.ecr.aws/ideacrew/enroll:${branchName}-48132c8`,
       status: 'completed',
       env: 'hotfix-2',
       user_name: 'kvootla',
-      org: 'maine',
+      org: fakeOrg,
     };
 
     const config = axiosConfig('service-deployment', data);
 
-    try {
-      // Make the http request
-      await axios(config);
-    } catch (e) {
-      console.error('=====================================');
-      console.error('ERROR:', e);
-    }
+    await axios(config);
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const db = context.firestore();
-      const envRef = doc(db, `orgs/maine/environments/${data.env}`);
+      const envRef = doc(db, `orgs/${fakeOrg}/environments/${data.env}`);
       const envSnap = await getDoc(envRef);
 
       expect(envSnap.data()).toMatchObject({
@@ -78,7 +75,7 @@ describe('Service deployment payload', () => {
 
       const serviceRef = doc(
         db,
-        `orgs/maine/environments/${data.env}/services/enroll`,
+        `orgs/${fakeOrg}/environments/${data.env}/services/enroll`,
       );
       const serviceSnapshot = await getDoc(serviceRef);
 
@@ -94,7 +91,7 @@ describe('Service deployment payload', () => {
       // The document id isn't known, so a query is necessary here
       const deploymentHistoryReference = collection(
         db,
-        `orgs/maine/environments/${data.env}/services/enroll/deployments`,
+        `orgs/${fakeOrg}/environments/${data.env}/services/enroll/deployments`,
       );
 
       // Limit to the first (and only) document in the collection
@@ -113,7 +110,7 @@ describe('Service deployment payload', () => {
           status: 'completed',
           env: 'hotfix-2',
           user_name: 'kvootla',
-          org: 'maine',
+          org: fakeOrg,
         });
 
         // Timestamp of completion, check for existence

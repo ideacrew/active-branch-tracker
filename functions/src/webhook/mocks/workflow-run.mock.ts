@@ -2,7 +2,7 @@
 /* eslint-disable unicorn/no-null */
 import { faker } from '@faker-js/faker';
 
-import { mockBaseWebhookPayload } from './webhook.mock';
+import { BaseDetails, mockBaseWebhookPayload } from './webhook.mock';
 import { WorkflowRun, WorkflowRunPayload } from '../workflow-run';
 
 export interface MockWorkflowRun {
@@ -15,6 +15,7 @@ export const mockWorkflowRun = (
   workflowName = faker.hacker.verb(),
   workflowId = faker.datatype.number({ min: 100_000, max: 999_999 }),
   head_branch = faker.git.branch(),
+  baseDetails?: BaseDetails,
 ): MockWorkflowRun => {
   const startedAt = new Date();
   const finishedAt = new Date(startedAt.getTime() + 100_000).toISOString();
@@ -33,7 +34,7 @@ export const mockWorkflowRun = (
   const requested: WorkflowRunPayload = {
     action: 'requested',
     workflow_run: { ...workflowRun, id: 2 },
-    ...mockBaseWebhookPayload,
+    ...mockBaseWebhookPayload(baseDetails),
   };
   const success: WorkflowRunPayload = {
     action: 'completed',
@@ -42,7 +43,7 @@ export const mockWorkflowRun = (
       conclusion: 'success',
       updated_at: finishedAt,
     },
-    ...mockBaseWebhookPayload,
+    ...mockBaseWebhookPayload(baseDetails),
   };
   const failure: WorkflowRunPayload = {
     action: 'completed',
@@ -52,7 +53,7 @@ export const mockWorkflowRun = (
       conclusion: 'failure',
       updated_at: finishedAt,
     },
-    ...mockBaseWebhookPayload,
+    ...mockBaseWebhookPayload(baseDetails),
   };
 
   return {

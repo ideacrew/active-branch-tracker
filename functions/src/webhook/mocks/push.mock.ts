@@ -1,11 +1,14 @@
 /* eslint-disable unicorn/no-null */
 import { PushEventPayload } from '../push';
 import { faker } from '@faker-js/faker';
-import { mockBaseWebhookPayload } from './webhook.mock';
+import { BaseDetails, mockBaseWebhookPayload } from './webhook.mock';
 import { Commit } from '../interfaces';
 
 // This represents a commit pushed to a feature branch
-export const mockPushEventPayload = (branchName: string): PushEventPayload => {
+export const mockPushEventPayload = (
+  branchName: string,
+  baseDetails?: BaseDetails,
+): PushEventPayload => {
   const afterCommitSha = faker.git.commitSha();
   const person = {
     name: `${faker.name.firstName()} ${faker.name.lastName()}`,
@@ -30,6 +33,6 @@ export const mockPushEventPayload = (branchName: string): PushEventPayload => {
     forced: false,
     commits: [afterCommit],
     head_commit: afterCommit,
-    ...mockBaseWebhookPayload,
+    ...mockBaseWebhookPayload(baseDetails),
   };
 };

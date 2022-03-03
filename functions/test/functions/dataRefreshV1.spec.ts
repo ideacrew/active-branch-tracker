@@ -1,5 +1,5 @@
 // https://github.com/axios/axios#note-commonjs-usage
-const axios = require('axios').default;
+import axios, { AxiosRequestConfig } from 'axios';
 import { stringify } from 'qs';
 import { doc, getDoc, setLogLevel } from 'firebase/firestore';
 import {
@@ -7,7 +7,10 @@ import {
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
 
-const axiosConfig = (functionName: string, data: unknown) => {
+const axiosConfig = (
+  functionName: string,
+  data: unknown,
+): AxiosRequestConfig => {
   return {
     method: 'post',
     url: `http://localhost:5001/${process.env.GCLOUD_PROJECT}/us-central1/${functionName}`,
@@ -39,23 +42,17 @@ describe('Data refresh payload v1', () => {
   it('tests a started data refresh', async () => {
     const data = stringify({
       payload:
-        '{"status": "started", "env": "hotfix-2", "app": "enroll", "user_name": "kvootla", "org": "maine" }',
+        '{"status": "started", "env": "hotfix-2", "app": "enroll", "user_name": "kvootla", "org": "another-fake-org" }',
     });
 
     const config = axiosConfig('dataRefresh', data);
 
-    try {
-      // Make the http request
-      await axios(config);
-    } catch (e) {
-      console.error('=====================================');
-      console.error('ERROR:', e);
-    }
+    await axios(config);
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const serviceReference = doc(
         context.firestore(),
-        'orgs/maine/environments/hotfix-2/services/enroll',
+        'orgs/another-fake-org/environments/hotfix-2/services/enroll',
       );
 
       const serviceSnapshot = await getDoc(serviceReference);
@@ -72,23 +69,17 @@ describe('Data refresh payload v1', () => {
   it('tests a completed data refresh', async () => {
     const data = stringify({
       payload:
-        '{"status": "completed", "env": "hotfix-2", "app": "enroll", "user_name": "kvootla", "org": "maine" }',
+        '{"status": "completed", "env": "hotfix-2", "app": "enroll", "user_name": "kvootla", "org": "third-fake-org" }',
     });
 
     const config = axiosConfig('dataRefresh', data);
 
-    try {
-      // Make the http request
-      await axios(config);
-    } catch (e) {
-      console.error('=====================================');
-      console.error('ERROR:', e);
-    }
+    await axios(config);
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const serviceRef = doc(
         context.firestore(),
-        'orgs/maine/environments/hotfix-2/services/enroll',
+        'orgs/third-fake-org/environments/hotfix-2/services/enroll',
       );
 
       const serviceSnap = await getDoc(serviceRef);

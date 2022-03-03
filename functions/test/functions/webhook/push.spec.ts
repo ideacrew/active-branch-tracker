@@ -2,15 +2,12 @@ import {
   initializeTestEnvironment,
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
-import { doc, getDoc, setLogLevel } from 'firebase/firestore';
-import { faker } from '@faker-js/faker';
+import { doc, getDoc, setDoc, setLogLevel } from 'firebase/firestore';
 
 import { mockWebhookPayload } from './mockHttpFunction';
 import { getFullBranchName } from '../../util';
-import {
-  mockCreateFeatureBranchPayload,
-  mockPushEventPayload,
-} from '../../../src/webhook/mocks';
+import { allPayloads } from '../../../src/webhook/mocks';
+import { BranchInfo } from '../../../src/models';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
@@ -31,24 +28,20 @@ beforeAll(async () => {
 
 describe('A push payload is received', () => {
   it('tests a new branch creation', async () => {
-    const branchName = faker.git.branch();
-    const pushPayload = mockPushEventPayload(branchName);
+    const { pushPayload, featureBranchName: branchName } = allPayloads();
     const { head_commit } = pushPayload;
-    try {
-      await mockWebhookPayload(
-        'create',
-        mockCreateFeatureBranchPayload(branchName),
-      );
-      await mockWebhookPayload('push', pushPayload);
-    } catch (e) {
-      console.error('ERROR:', e);
-    }
 
     const fullBranchName = getFullBranchName(pushPayload, branchName);
 
+    const branchDoc: Partial<BranchInfo> = {
+      branchName,
+      defaultBranch: false,
+    };
+
     await testEnv.withSecurityRulesDisabled(async context => {
       const branchRef = doc(context.firestore(), `branches/${fullBranchName}`);
-
+      await setDoc(branchRef, branchDoc);
+      await mockWebhookPayload('push', pushPayload);
       const branchSnapshot = await getDoc(branchRef);
       const branchDocument = branchSnapshot.data();
 

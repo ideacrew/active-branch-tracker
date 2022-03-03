@@ -2,16 +2,12 @@ import {
   initializeTestEnvironment,
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
-import { doc, getDoc, setLogLevel } from 'firebase/firestore';
-import { faker } from '@faker-js/faker';
+import { doc, getDoc, setDoc, setLogLevel } from 'firebase/firestore';
 
-import {
-  mockCreateFeatureBranchPayload,
-  mockDeleteEventPayload,
-} from '../../../src/webhook/mocks';
-
+import { allPayloads } from '../../../src/webhook/mocks';
 import { mockWebhookPayload } from './mockHttpFunction';
 import { getFullBranchName } from '../../util';
+import { BranchInfo } from '../../../src/models';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
@@ -32,23 +28,20 @@ beforeAll(async () => {
 
 describe('Delete event tests', () => {
   it('tests branch deletion', async () => {
-    const branchName = faker.git.branch();
-    const mockDeletePayload = mockDeleteEventPayload(branchName);
-    try {
-      await mockWebhookPayload(
-        'create',
-        mockCreateFeatureBranchPayload(branchName),
-      );
-      await mockWebhookPayload('delete', mockDeletePayload);
-    } catch (e) {
-      console.error('ERROR:', e);
-    }
+    const { deleteBranchPayload, featureBranchName: branchName } =
+      allPayloads();
 
-    const fullBranchName = getFullBranchName(mockDeletePayload, branchName);
+    const branchDoc: Partial<BranchInfo> = {
+      branchName,
+      defaultBranch: false,
+    };
+
+    const fullBranchName = getFullBranchName(deleteBranchPayload, branchName);
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const branchRef = doc(context.firestore(), `branches/${fullBranchName}`);
-
+      await setDoc(branchRef, branchDoc);
+      await mockWebhookPayload('delete', deleteBranchPayload);
       const branchSnapshot = await getDoc(branchRef);
 
       expect(branchSnapshot.data()).toBeUndefined();

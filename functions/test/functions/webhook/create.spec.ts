@@ -6,7 +6,10 @@ import { doc, getDoc, setLogLevel } from 'firebase/firestore';
 import { faker } from '@faker-js/faker';
 
 import { mockWebhookPayload } from './mockHttpFunction';
-import { mockCreateFeatureBranchPayload } from '../../../src/webhook/mocks';
+import {
+  allPayloads,
+  mockCreateFeatureBranchPayload,
+} from '../../../src/webhook/mocks';
 import { getFullBranchName } from '../../util';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
@@ -27,23 +30,56 @@ beforeAll(async () => {
 });
 
 describe('A branch creation payload is received', () => {
-  it('tests a new branch creation', async () => {
-    const branchName = faker.git.branch();
-    const createPayload = mockCreateFeatureBranchPayload(branchName);
+  it('tests a new default branch creation', async () => {
+    const { createDefaultBranchPayload } = allPayloads();
+    await mockWebhookPayload('create', createDefaultBranchPayload);
 
-    try {
-      await mockWebhookPayload('create', createPayload);
-    } catch (e) {
-      console.error('ERROR:', e);
-    }
+    const {
+      sender,
+      organization,
+      repository,
+      ref: branchName,
+    } = createDefaultBranchPayload;
 
-    const { sender, organization, repository } = createPayload;
-
-    const fullBranchName = getFullBranchName(createPayload, branchName);
+    const fullBranchName = getFullBranchName(
+      createDefaultBranchPayload,
+      branchName,
+    );
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const branchRef = doc(context.firestore(), `branches/${fullBranchName}`);
 
+      const branchSnapshot = await getDoc(branchRef);
+
+      expect(branchSnapshot.data()).toMatchObject({
+        branchName,
+        createdBy: sender.login,
+        defaultBranch: true,
+        organizationName: organization.login,
+        repositoryName: repository.name,
+        tracked: false,
+      });
+    });
+  });
+
+  it('tests a new feature branch creation', async () => {
+    const { createFeatureBranchPayload } = allPayloads();
+
+    const {
+      sender,
+      organization,
+      repository,
+      ref: branchName,
+    } = createFeatureBranchPayload;
+
+    const fullBranchName = getFullBranchName(
+      createFeatureBranchPayload,
+      branchName,
+    );
+
+    await testEnv.withSecurityRulesDisabled(async context => {
+      const branchRef = doc(context.firestore(), `branches/${fullBranchName}`);
+      await mockWebhookPayload('create', createFeatureBranchPayload);
       const branchSnapshot = await getDoc(branchRef);
 
       expect(branchSnapshot.data()).toMatchObject({
