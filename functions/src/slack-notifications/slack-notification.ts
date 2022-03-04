@@ -11,7 +11,7 @@ const slackConfig = demoEnvironment()
   : functions.config().slack;
 const token: string = slackConfig.token;
 
-const slack = new WebClient(token);
+export const slack = new WebClient(token);
 
 export const sendSlackMessage = async (text: string): Promise<void> => {
   if (demoEnvironment()) {
