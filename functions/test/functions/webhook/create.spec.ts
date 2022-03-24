@@ -3,13 +3,9 @@ import {
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
 import { doc, getDoc, setLogLevel } from 'firebase/firestore';
-import { faker } from '@faker-js/faker';
 
 import { mockWebhookPayload } from './mockHttpFunction';
-import {
-  allPayloads,
-  mockCreateFeatureBranchPayload,
-} from '../../../src/webhook/mocks';
+import { allPayloads } from '../../../src/webhook/mocks';
 import { getFullBranchName } from '../../util';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
@@ -32,7 +28,6 @@ beforeAll(async () => {
 describe('A branch creation payload is received', () => {
   it('tests a new default branch creation', async () => {
     const { createDefaultBranchPayload } = allPayloads();
-    await mockWebhookPayload('create', createDefaultBranchPayload);
 
     const {
       sender,
@@ -47,6 +42,8 @@ describe('A branch creation payload is received', () => {
     );
 
     await testEnv.withSecurityRulesDisabled(async context => {
+      await mockWebhookPayload('create', createDefaultBranchPayload);
+
       const branchRef = doc(context.firestore(), `branches/${fullBranchName}`);
 
       const branchSnapshot = await getDoc(branchRef);
