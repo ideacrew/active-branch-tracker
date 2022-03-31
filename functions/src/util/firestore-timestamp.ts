@@ -1,9 +1,7 @@
 import * as admin from 'firebase-admin';
 
 export const firestoreTimestamp = (
-  date: string,
+  date: Date = new Date(),
 ): FirebaseFirestore.Timestamp => {
-  const d = new Date(date);
-
-  return admin.firestore.Timestamp.fromDate(d);
+  return admin.firestore.Timestamp.fromDate(date);
 };

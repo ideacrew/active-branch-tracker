@@ -37,7 +37,7 @@ export async function handleCreateEvent(
 
   const branchInfo: BranchInfo = {
     branchName,
-    createdAt: firestoreTimestamp(new Date().toISOString()),
+    createdAt: firestoreTimestamp(),
     createdBy,
     defaultBranch: branchName === master_branch,
     organizationName,
