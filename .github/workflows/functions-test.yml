@@ -22,7 +22,7 @@ jobs:
           node-version: '14'
       - name: Cache npm
         id: npm-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3.0.1
         with:
           path: ./functions/node_modules
           key: ${{ runner.os }}-node14-functions-${{ hashFiles('**/functions/package-lock.json') }}
@@ -30,7 +30,7 @@ jobs:
             ${{ runner.os }}-node14-functions-
       - name: Cache firebase emulators
         id: firebase-emulators-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3.0.1
         with:
           path: ${{ env.FIREBASE_EMULATORS_PATH }}
           key: ${{ runner.os }}-firebase-emulators-${{ hashFiles('emulator-cache/**') }}
