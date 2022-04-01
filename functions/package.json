@@ -32,7 +32,7 @@
   "devDependencies": {
     "@faker-js/faker": "^6.1.1",
     "@firebase/rules-unit-testing": "^2.0.2",
-    "@swc/core": "^1.2.161",
+    "@swc/core": "^1.2.162",
     "@swc/jest": "^0.2.20",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
