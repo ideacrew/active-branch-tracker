@@ -5,6 +5,7 @@
     "axios",
     "bindto",
     "Buildable",
+    "cacheable",
     "Chainable",
     "Codegen",
     "cond",
