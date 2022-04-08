@@ -33,7 +33,7 @@
   },
   "cli": {
     "defaultCollection": "@nrwl/angular",
-    "packageManager": "npm"
+    "analytics": "7e4627d4-e13f-48b3-b9e5-80ae4f3f0032"
   },
   "defaultProject": "dashboard",
   "generators": {
