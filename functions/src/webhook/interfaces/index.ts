@@ -7,6 +7,5 @@ export * from './head-commit';
 export * from './label';
 export * from './organization';
 export * from './owner';
-export * from './pull-request-summary';
 export * from './repository';
 export * from './sender';
