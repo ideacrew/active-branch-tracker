@@ -16,6 +16,8 @@ import { CreateEventPayload } from './interfaces/create-event-payload';
 export async function handleCreateEvent(
   payload: CreateEventPayload,
 ): Promise<void> {
+  const batch = admin.firestore().batch();
+
   const {
     ref: unsafeBranchName,
     repository,
@@ -30,7 +32,12 @@ export async function handleCreateEvent(
   const { name: repositoryName } = repository;
   const { login: organizationName } = organization;
 
-  const branchReference = admin
+  const randomBranchReference = admin
+    .firestore()
+    .collection('branches-v2')
+    .doc();
+
+  const namedBranchReference = admin
     .firestore()
     .collection('branches')
     .doc(`${organizationName}-${repositoryName}-${branchName}`);
@@ -47,8 +54,16 @@ export async function handleCreateEvent(
     workflowResults: [],
   };
 
+  const branchInfoV2 = {
+    branchName,
+    createdAt: firestoreTimestamp(),
+  };
+
+  batch.create(namedBranchReference, branchInfo);
+  batch.create(randomBranchReference, branchInfoV2);
+
   try {
-    await branchReference.create(branchInfo);
+    await batch.commit();
   } catch (error) {
     functions.logger.error('Could not create new branch document', error);
   }
