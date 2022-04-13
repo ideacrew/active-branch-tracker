@@ -79,6 +79,7 @@ jobs:
           path: dist/apps/dashboard
   deploy:
     name: deploy
+    environment: production
     needs: [lint, test, build]
     runs-on: ubuntu-latest
     steps:
