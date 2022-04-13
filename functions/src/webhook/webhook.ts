@@ -7,6 +7,7 @@ import { handleCreateEvent, CreateEventPayload } from './create';
 import { DeleteEventPayload, handleDeleteEvent } from './delete';
 import { handleWorkflowRunEvent, WorkflowRunPayload } from './workflow-run';
 import { PushEventPayload, handlePushEvent } from './push';
+import { handlePullRequestEvent, PullRequestPayload } from './pull-request';
 
 /**
  * Handles the incoming webhook from GitHub Actions
@@ -34,6 +35,10 @@ export async function handleWebhook(
 
     case 'workflow_run':
       await handleWorkflowRunEvent(request.body as WorkflowRunPayload);
+      break;
+
+    case 'pull_request':
+      await handlePullRequestEvent(request.body as PullRequestPayload);
       break;
 
     default:
