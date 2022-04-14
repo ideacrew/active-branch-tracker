@@ -57,6 +57,7 @@ export async function handleCreateEvent(
   const branchInfoV2 = {
     branchName,
     createdAt: firestoreTimestamp(),
+    pullRequests: [],
   };
 
   batch.create(namedBranchReference, branchInfo);
