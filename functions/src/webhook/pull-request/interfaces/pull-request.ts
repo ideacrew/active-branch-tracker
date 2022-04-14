@@ -29,7 +29,7 @@ export interface PullRequest {
   mergeable?: unknown | null;
   rebaseable?: unknown | null;
   mergeable_state?: string;
-  merged_by?: unknown | null;
+  merged_by?: { login: string } | null;
   comments?: number;
   review_comments?: number;
   commits?: number;
