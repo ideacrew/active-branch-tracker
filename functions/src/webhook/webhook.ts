@@ -8,6 +8,10 @@ import { DeleteEventPayload, handleDeleteEvent } from './delete';
 import { handleWorkflowRunEvent, WorkflowRunPayload } from './workflow-run';
 import { PushEventPayload, handlePushEvent } from './push';
 import { handlePullRequestEvent, PullRequestPayload } from './pull-request';
+import {
+  handlePullRequestReviewEvent,
+  PullRequestReviewPayload,
+} from './pull-request-review';
 
 /**
  * Handles the incoming webhook from GitHub Actions
@@ -42,7 +46,9 @@ export async function handleWebhook(
       break;
 
     case 'pull_request_review':
-      await handlePullRequestEvent(request.body as PullRequestPayload);
+      await handlePullRequestReviewEvent(
+        request.body as PullRequestReviewPayload,
+      );
       break;
 
     default:
