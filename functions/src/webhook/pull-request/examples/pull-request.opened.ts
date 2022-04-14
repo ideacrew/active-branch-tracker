@@ -44,7 +44,6 @@ export const prOpened: PullRequestPayload = {
       },
     },
     auto_merge: null,
-    active_lock_reason: null,
     merged: false,
     mergeable: null,
     rebaseable: null,

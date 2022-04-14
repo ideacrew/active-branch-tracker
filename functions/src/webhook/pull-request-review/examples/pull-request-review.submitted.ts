@@ -1,11 +1,20 @@
 /* eslint-disable unicorn/no-null */
-import { PullRequestPayload } from '../interfaces';
+import { PullRequestReviewPayload } from '../interfaces';
 
-export const prEdited: PullRequestPayload = {
-  action: 'edited',
-  number: 138,
+export const prReviewSubmitted: PullRequestReviewPayload = {
+  action: 'submitted',
+  review: {
+    user: {
+      login: 'mdkaraman',
+    },
+    body: '',
+    submitted_at: '2022-04-14T14:26:26Z',
+    state: 'approved',
+    html_url:
+      'https://github.com/ideacrew/active-branch-tracker/pull/138#pullrequestreview-942367903',
+  },
   pull_request: {
-    html_url: '',
+    html_url: 'https://github.com/ideacrew/active-branch-tracker/pull/138',
     number: 138,
     state: 'open',
     title: 'add pr property to new branch document',
@@ -14,10 +23,10 @@ export const prEdited: PullRequestPayload = {
     },
     body: 'Here are some comments in the body',
     created_at: '2022-04-13T19:17:03Z',
-    updated_at: '2022-04-13T20:00:11Z',
+    updated_at: '2022-04-14T14:26:26Z',
     closed_at: null,
     merged_at: null,
-    merge_commit_sha: 'b975f935ab008f75d9728005e39537daadd202da',
+    merge_commit_sha: 'e4976bb284f9c856c1c7494657fb3da8d19eb291',
     assignee: null,
     assignees: [],
     requested_reviewers: [],
@@ -25,7 +34,6 @@ export const prEdited: PullRequestPayload = {
     labels: [],
     milestone: null,
     draft: false,
-
     head: {
       ref: '29-track-branch-life-per-developer',
       user: {
@@ -44,21 +52,12 @@ export const prEdited: PullRequestPayload = {
         name: 'active-branch-tracker',
       },
     },
-
-    auto_merge: null,
-    merged: false,
-    mergeable: true,
-    rebaseable: true,
-    mergeable_state: 'clean',
-    merged_by: null,
-    comments: 0,
-    review_comments: 0,
-    commits: 1,
-    additions: 1,
-    deletions: 0,
-    changed_files: 1,
+    auto_merge: {
+      enabled_by: {
+        login: 'markgoho',
+      },
+    },
   },
-  changes: {},
   repository: {
     name: 'active-branch-tracker',
   },
@@ -66,6 +65,6 @@ export const prEdited: PullRequestPayload = {
     login: 'ideacrew',
   },
   sender: {
-    login: 'markgoho',
+    login: 'mdkaraman',
   },
 };

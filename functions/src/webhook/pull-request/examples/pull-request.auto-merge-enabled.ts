@@ -1,11 +1,11 @@
 /* eslint-disable unicorn/no-null */
 import { PullRequestPayload } from '../interfaces';
 
-export const prEdited: PullRequestPayload = {
-  action: 'edited',
+export const prAutoMergeEnabled: PullRequestPayload = {
+  action: 'auto_merge_enabled',
   number: 138,
   pull_request: {
-    html_url: '',
+    html_url: 'https://github.com/ideacrew/active-branch-tracker/pull/138',
     number: 138,
     state: 'open',
     title: 'add pr property to new branch document',
@@ -14,10 +14,10 @@ export const prEdited: PullRequestPayload = {
     },
     body: 'Here are some comments in the body',
     created_at: '2022-04-13T19:17:03Z',
-    updated_at: '2022-04-13T20:00:11Z',
+    updated_at: '2022-04-13T20:35:01Z',
     closed_at: null,
     merged_at: null,
-    merge_commit_sha: 'b975f935ab008f75d9728005e39537daadd202da',
+    merge_commit_sha: 'e4976bb284f9c856c1c7494657fb3da8d19eb291',
     assignee: null,
     assignees: [],
     requested_reviewers: [],
@@ -25,7 +25,6 @@ export const prEdited: PullRequestPayload = {
     labels: [],
     milestone: null,
     draft: false,
-
     head: {
       ref: '29-track-branch-life-per-developer',
       user: {
@@ -45,7 +44,11 @@ export const prEdited: PullRequestPayload = {
       },
     },
 
-    auto_merge: null,
+    auto_merge: {
+      enabled_by: {
+        login: 'markgoho',
+      },
+    },
     merged: false,
     mergeable: true,
     rebaseable: true,
@@ -53,12 +56,11 @@ export const prEdited: PullRequestPayload = {
     merged_by: null,
     comments: 0,
     review_comments: 0,
-    commits: 1,
-    additions: 1,
-    deletions: 0,
-    changed_files: 1,
+    commits: 3,
+    additions: 1222,
+    deletions: 10,
+    changed_files: 17,
   },
-  changes: {},
   repository: {
     name: 'active-branch-tracker',
   },

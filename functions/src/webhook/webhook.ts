@@ -41,6 +41,10 @@ export async function handleWebhook(
       await handlePullRequestEvent(request.body as PullRequestPayload);
       break;
 
+    case 'pull_request_review':
+      await handlePullRequestEvent(request.body as PullRequestPayload);
+      break;
+
     default:
       functions.logger.info('Fallthrough case in GitHub Event', eventType);
   }

@@ -1,3 +1,4 @@
+import { AutoMerge } from './auto-merge';
 import { PRBranchReference } from './branch-reference';
 
 export interface PullRequest {
@@ -11,8 +12,8 @@ export interface PullRequest {
   body: string | null;
   created_at: string; // 2022-04-13T19:17:03Z
   updated_at: string; // 2022-04-13T19:17:03Z
-  closed_at: string | null;
-  merged_at: string | null;
+  closed_at?: string | null;
+  merged_at?: string | null;
   merge_commit_sha: string | null;
   assignee: unknown;
   assignees: unknown[];
@@ -23,17 +24,16 @@ export interface PullRequest {
   draft: boolean;
   head: PRBranchReference;
   base: PRBranchReference;
-  auto_merge: unknown | null;
-  active_lock_reason: unknown | null;
-  merged: boolean;
-  mergeable: unknown | null;
-  rebaseable: unknown | null;
-  mergeable_state: string;
-  merged_by: unknown | null;
-  comments: number;
-  review_comments: number;
-  commits: number;
-  additions: number;
-  deletions: number;
-  changed_files: number;
+  auto_merge: AutoMerge | null;
+  merged?: boolean;
+  mergeable?: unknown | null;
+  rebaseable?: unknown | null;
+  mergeable_state?: string;
+  merged_by?: unknown | null;
+  comments?: number;
+  review_comments?: number;
+  commits?: number;
+  additions?: number;
+  deletions?: number;
+  changed_files?: number;
 }
