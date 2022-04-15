@@ -4,7 +4,7 @@ import {
   mockCreateDefaultBranchPayload,
   mockCreateFeatureBranchPayload,
 } from './create.mock';
-import { mockDeleteEventPayload } from './delete.mock';
+import { mockDeletePayload } from './delete.mock';
 import { mockPushEventPayload } from './push.mock';
 import { BaseDetails } from './webhook.mock';
 import { mockWorkflowRun } from './workflow-run.mock';
@@ -28,10 +28,7 @@ export const allPayloads = () => {
     baseDetails,
   );
 
-  const deleteBranchPayload = mockDeleteEventPayload(
-    featureBranchName,
-    baseDetails,
-  );
+  const deleteBranchPayload = mockDeletePayload(featureBranchName, baseDetails);
 
   const pushPayload = mockPushEventPayload(featureBranchName, baseDetails);
 

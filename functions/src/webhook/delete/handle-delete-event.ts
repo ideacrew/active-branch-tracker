@@ -3,16 +3,14 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
 import { createSafeBranchName } from '../../safe-branch-name';
-import { DeleteEventPayload } from './interfaces';
+import { DeletePayload } from './interfaces';
 
 /**
  * Handles the delete event from GitHub Actions
- * @param {DeleteEventPayload} payload
+ * @param {DeletePayload} payload
  * @return {Promise<void>} promise
  */
-export async function handleDeleteEvent(
-  payload: DeleteEventPayload,
-): Promise<void> {
+export async function handleDeleteEvent(payload: DeletePayload): Promise<void> {
   const { ref: branchName, repository, organization } = payload;
 
   const safeBranchName = createSafeBranchName(branchName);
