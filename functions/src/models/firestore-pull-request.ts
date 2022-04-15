@@ -13,4 +13,10 @@ export interface FSPullRequest {
   reviews?: FSPullRequestReview[];
   title: string;
   url: string;
+  stats?: {
+    commits: number;
+    additions: number;
+    deletions: number;
+    changed_files: number;
+  };
 }

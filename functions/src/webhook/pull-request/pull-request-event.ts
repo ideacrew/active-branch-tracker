@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import * as functions from 'firebase-functions';
+import { logger } from 'firebase-functions';
 import { firestore } from 'firebase-admin';
 
 import { PullRequest, PullRequestPayload } from './interfaces';
@@ -19,8 +19,6 @@ export const handlePullRequestEvent = async (
 
   const batch = firestore().batch();
 
-  functions.logger.info('THIS IS A PULL REQUEST EVENT', { action });
-
   switch (action) {
     case 'opened': {
       const pr = handleOpenedPullRequest(pull_request);
@@ -38,27 +36,38 @@ export const handlePullRequestEvent = async (
     }
 
     case 'closed': {
-      const { merged_by, merged_at } = pull_request;
+      const {
+        merged_by,
+        merged_at,
+        commits,
+        additions,
+        deletions,
+        changed_files,
+      } = pull_request;
+
       if (merged_by && merged_at) {
         batch.update(pullRequestReference, {
           mergedAt: firestoreTimestamp(new Date(merged_at)),
           mergedBy: merged_by?.login,
+          stats: {
+            commits,
+            additions,
+            deletions,
+            changed_files,
+          },
         });
       }
       break;
     }
 
     default:
-      functions.logger.info('Fallthrough case in Pull Request Event', action);
+      logger.info('Fallthrough case in Pull Request Event', action);
   }
 
   await batch.commit();
 };
 
-const handleOpenedPullRequest = (
-  pullRequest: PullRequest,
-  // batch: firestore.WriteBatch,
-): FSPullRequest => {
+const handleOpenedPullRequest = (pullRequest: PullRequest): FSPullRequest => {
   const { html_url, number, title, user, created_at } = pullRequest;
 
   const pr: FSPullRequest = {
@@ -72,5 +81,3 @@ const handleOpenedPullRequest = (
 
   return pr;
 };
-
-// const handleMergedPullRequest = (pullRequest: PullRequest): FSPullRequest => {};
