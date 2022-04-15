@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
-import { FSWorkflowRun } from '.';
+import { firestore } from 'firebase-admin';
+
+import { FSWorkflowRun } from './firestore-workflow-run';
 import { Commit } from '../webhook/interfaces';
 
 export interface BranchInfo {
@@ -9,11 +11,8 @@ export interface BranchInfo {
   defaultBranch: boolean;
   tracked: boolean;
   timestamp: number;
-
   head_commit?: Commit;
-  createdAt?: FirebaseFirestore.Timestamp;
+  createdAt?: firestore.Timestamp;
   createdBy?: string;
-  pullRequestNumber?: number;
-
   workflowResults: FSWorkflowRun[];
 }

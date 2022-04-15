@@ -3,7 +3,7 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
-import { BranchInfo } from '../../models/branch-info';
+import { BranchInfo } from '../../models';
 import { createSafeBranchName } from '../../safe-branch-name';
 import { firestoreTimestamp } from '../../util';
 import { CreateEventPayload } from './interfaces/create-event-payload';
@@ -32,11 +32,6 @@ export async function handleCreateEvent(
   const { name: repositoryName } = repository;
   const { login: organizationName } = organization;
 
-  const randomBranchReference = admin
-    .firestore()
-    .collection('branches-v2')
-    .doc();
-
   const namedBranchReference = admin
     .firestore()
     .collection('branches')
@@ -54,14 +49,7 @@ export async function handleCreateEvent(
     workflowResults: [],
   };
 
-  const branchInfoV2 = {
-    branchName,
-    createdAt: firestoreTimestamp(),
-    pullRequests: [],
-  };
-
   batch.create(namedBranchReference, branchInfo);
-  batch.create(randomBranchReference, branchInfoV2);
 
   try {
     await batch.commit();
