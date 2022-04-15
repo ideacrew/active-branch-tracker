@@ -4,7 +4,7 @@ import * as admin from 'firebase-admin';
 admin.initializeApp();
 
 import { handleCreateEvent, CreateEventPayload } from './create';
-import { DeleteEventPayload, handleDeleteEvent } from './delete';
+import { DeletePayload, handleDeleteEvent } from './delete';
 import { handleWorkflowRunEvent, WorkflowRunPayload } from './workflow-run';
 import { PushEventPayload, handlePushEvent } from './push';
 import { handlePullRequestEvent, PullRequestPayload } from './pull-request';
@@ -30,7 +30,7 @@ export async function handleWebhook(
       break;
 
     case 'delete':
-      await handleDeleteEvent(request.body as DeleteEventPayload);
+      await handleDeleteEvent(request.body as DeletePayload);
       break;
 
     case 'push':
