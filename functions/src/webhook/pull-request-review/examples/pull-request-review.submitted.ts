@@ -24,16 +24,7 @@ export const prReviewSubmitted: PullRequestReviewPayload = {
     body: 'Here are some comments in the body',
     created_at: '2022-04-13T19:17:03Z',
     updated_at: '2022-04-14T14:26:26Z',
-    closed_at: null,
-    merged_at: null,
     merge_commit_sha: 'e4976bb284f9c856c1c7494657fb3da8d19eb291',
-    assignee: null,
-    assignees: [],
-    requested_reviewers: [],
-    requested_teams: [],
-    labels: [],
-    milestone: null,
-    draft: false,
     head: {
       ref: '29-track-branch-life-per-developer',
       user: {
@@ -57,6 +48,7 @@ export const prReviewSubmitted: PullRequestReviewPayload = {
         login: 'markgoho',
       },
     },
+    merged: false,
   },
   repository: {
     name: 'active-branch-tracker',

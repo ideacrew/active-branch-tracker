@@ -14,18 +14,11 @@ export interface PullRequest {
   updated_at: string; // 2022-04-13T19:17:03Z
   closed_at?: string | null;
   merged_at?: string | null;
-  merge_commit_sha: string | null;
-  assignee: unknown;
-  assignees: unknown[];
-  requested_reviewers: unknown[];
-  requested_teams: unknown[];
-  labels: unknown[];
-  milestone: unknown;
-  draft: boolean;
+  merge_commit_sha?: string | null;
   head: PRBranchReference;
   base: PRBranchReference;
-  auto_merge: AutoMerge | null;
-  merged?: boolean;
+  auto_merge?: AutoMerge | null;
+  merged: boolean;
   mergeable?: unknown | null;
   rebaseable?: unknown | null;
   mergeable_state?: string;

@@ -18,13 +18,6 @@ export const prClosed: PullRequestPayload = {
     closed_at: '2022-04-14T14:26:27Z',
     merged_at: '2022-04-14T14:26:27Z',
     merge_commit_sha: '012a9ee916f4d45dfff6bcf134bad939bd220cf7',
-    assignee: null,
-    assignees: [],
-    requested_reviewers: [],
-    requested_teams: [],
-    labels: [],
-    milestone: null,
-    draft: false,
     head: {
       ref: '29-track-branch-life-per-developer',
       user: {
@@ -49,9 +42,6 @@ export const prClosed: PullRequestPayload = {
       },
     },
     merged: true,
-    mergeable: null,
-    rebaseable: null,
-    mergeable_state: 'unknown',
     merged_by: {
       login: 'markgoho',
     },

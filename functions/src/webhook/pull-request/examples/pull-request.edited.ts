@@ -18,14 +18,6 @@ export const prEdited: PullRequestPayload = {
     closed_at: null,
     merged_at: null,
     merge_commit_sha: 'b975f935ab008f75d9728005e39537daadd202da',
-    assignee: null,
-    assignees: [],
-    requested_reviewers: [],
-    requested_teams: [],
-    labels: [],
-    milestone: null,
-    draft: false,
-
     head: {
       ref: '29-track-branch-life-per-developer',
       user: {
@@ -44,19 +36,7 @@ export const prEdited: PullRequestPayload = {
         name: 'active-branch-tracker',
       },
     },
-
-    auto_merge: null,
     merged: false,
-    mergeable: true,
-    rebaseable: true,
-    mergeable_state: 'clean',
-    merged_by: null,
-    comments: 0,
-    review_comments: 0,
-    commits: 1,
-    additions: 1,
-    deletions: 0,
-    changed_files: 1,
   },
   changes: {},
   repository: {
