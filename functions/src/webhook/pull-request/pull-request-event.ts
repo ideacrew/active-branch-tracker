@@ -29,9 +29,13 @@ export const handlePullRequestEvent = async (
     case 'auto_merge_enabled': {
       const { updated_at } = pull_request;
 
-      batch.update(pullRequestReference, {
-        autoMergeEnabled: firestoreTimestamp(new Date(updated_at)),
-      });
+      batch.set(
+        pullRequestReference,
+        {
+          autoMergeEnabled: firestoreTimestamp(new Date(updated_at)),
+        },
+        { merge: true },
+      );
       break;
     }
 
@@ -46,16 +50,20 @@ export const handlePullRequestEvent = async (
       } = pull_request;
 
       if (merged_by && merged_at) {
-        batch.update(pullRequestReference, {
-          mergedAt: firestoreTimestamp(new Date(merged_at)),
-          mergedBy: merged_by?.login,
-          stats: {
-            commits,
-            additions,
-            deletions,
-            changed_files,
+        batch.set(
+          pullRequestReference,
+          {
+            mergedAt: firestoreTimestamp(new Date(merged_at)),
+            mergedBy: merged_by?.login,
+            stats: {
+              commits,
+              additions,
+              deletions,
+              changed_files,
+            },
           },
-        });
+          { merge: true },
+        );
       }
       break;
     }
