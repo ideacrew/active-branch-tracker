@@ -11,6 +11,11 @@ export const handlePullRequestEvent = async (
 ): Promise<void> => {
   const { pull_request, action, organization, repository } = payload;
 
+  // Don't save PRs from Dependabot
+  if (pull_request.user.login.includes('bot')) {
+    return;
+  }
+
   const pullRequestId = `${organization.login}-${repository.name}-${pull_request.number}`;
 
   const pullRequestReference = firestore()
@@ -47,9 +52,10 @@ export const handlePullRequestEvent = async (
         additions,
         deletions,
         changed_files,
+        base,
       } = pull_request;
 
-      if (merged_by && merged_at) {
+      if (merged_by && merged_at && base.ref === 'trunk') {
         batch.set(
           pullRequestReference,
           {
