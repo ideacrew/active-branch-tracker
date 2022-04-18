@@ -10,6 +10,8 @@ on:
       - 'libs/**'
       - 'firebase.json'
       - 'package.json'
+    branches-ignore:
+      - 'dependabot/**'
 
 jobs:
   tests:
