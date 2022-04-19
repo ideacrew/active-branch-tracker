@@ -32,12 +32,14 @@ export const handlePullRequestEvent = async (
     }
 
     case 'auto_merge_enabled': {
-      const { updated_at } = pull_request;
+      const { updated_at, head, base } = pull_request;
 
       batch.set(
         pullRequestReference,
         {
           autoMergeEnabled: firestoreTimestamp(new Date(updated_at)),
+          branchName: head.ref,
+          targetBranch: base.ref,
         },
         { merge: true },
       );
@@ -53,6 +55,7 @@ export const handlePullRequestEvent = async (
         deletions,
         changed_files,
         base,
+        head,
       } = pull_request;
 
       if (merged_by && merged_at && base.ref === 'trunk') {
@@ -67,6 +70,8 @@ export const handlePullRequestEvent = async (
               deletions,
               changed_files,
             },
+            branchName: head.ref,
+            targetBranch: base.ref,
           },
           { merge: true },
         );
@@ -82,7 +87,7 @@ export const handlePullRequestEvent = async (
 };
 
 const handleOpenedPullRequest = (pullRequest: PullRequest): FSPullRequest => {
-  const { html_url, number, title, user, created_at } = pullRequest;
+  const { html_url, number, title, user, created_at, head, base } = pullRequest;
 
   const pr: FSPullRequest = {
     url: html_url,
@@ -91,6 +96,8 @@ const handleOpenedPullRequest = (pullRequest: PullRequest): FSPullRequest => {
     author: user.login,
     autoMergeEnabled: false,
     createdAt: firestoreTimestamp(new Date(created_at)),
+    branchName: head.ref,
+    targetBranch: base.ref,
   };
 
   return pr;

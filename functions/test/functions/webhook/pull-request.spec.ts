@@ -26,8 +26,14 @@ beforeAll(async () => {
 
 describe('Pull Request Event Payload', () => {
   it('complete pr workflow', async () => {
-    const { opened, closedAndMerged, autoMergeEnabled, approved, prNumber } =
-      mockPullRequest();
+    const {
+      opened,
+      closedAndMerged,
+      autoMergeEnabled,
+      approved,
+      prNumber,
+      branchName,
+    } = mockPullRequest();
 
     const prDocumentPath = `pullRequests/mock-organization-mock-repository-${prNumber}`;
     await testEnv.withSecurityRulesDisabled(async context => {
@@ -53,6 +59,8 @@ describe('Pull Request Event Payload', () => {
           deletions: 10,
         },
         approvedBy: 'markgoho',
+        branchName,
+        targetBranch: 'trunk',
       });
 
       expect(prSnapshot.data()).toHaveProperty('mergedAt');

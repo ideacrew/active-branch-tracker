@@ -19,4 +19,6 @@ export interface FSPullRequest {
     deletions: number;
     changed_files: number;
   };
+  branchName: string;
+  targetBranch: string;
 }

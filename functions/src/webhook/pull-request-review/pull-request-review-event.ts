@@ -20,7 +20,7 @@ export const handlePullRequestReviewEvent = async (
 
   switch (action) {
     case 'submitted': {
-      const { review } = payload;
+      const { review, pull_request } = payload;
 
       const reviewInfo = {
         author: review.user.login,
@@ -30,15 +30,27 @@ export const handlePullRequestReviewEvent = async (
         url: review.html_url,
       };
 
-      batch.update(pullRequestReference, {
-        reviews: firestore.FieldValue.arrayUnion(reviewInfo),
-      });
+      batch.set(
+        pullRequestReference,
+        {
+          reviews: firestore.FieldValue.arrayUnion(reviewInfo),
+        },
+        { merge: true },
+      );
 
       if (review.state === 'approved') {
-        batch.update(pullRequestReference, {
-          approvedAt: firestoreTimestamp(new Date(review.submitted_at)),
-          approvedBy: review.user.login,
-        });
+        const { base, head } = pull_request;
+
+        batch.set(
+          pullRequestReference,
+          {
+            approvedAt: firestoreTimestamp(new Date(review.submitted_at)),
+            approvedBy: review.user.login,
+            branchName: head.ref,
+            targetBranch: base.ref,
+          },
+          { merge: true },
+        );
       }
 
       break;
