@@ -10,8 +10,11 @@ export const handlePullRequestReviewEvent = async (
 ): Promise<void> => {
   const { pull_request, action, organization, repository } = payload;
 
-  // Don't save PRs from Dependabot
-  if (pull_request.user.login.includes('bot')) {
+  // Don't save PRs from Dependabot or PRs that aren't against trunk
+  if (
+    pull_request.user.login.includes('bot') ||
+    pull_request.base.ref !== 'trunk'
+  ) {
     return;
   }
 
