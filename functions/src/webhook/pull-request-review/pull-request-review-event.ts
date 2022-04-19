@@ -10,6 +10,11 @@ export const handlePullRequestReviewEvent = async (
 ): Promise<void> => {
   const { pull_request, action, organization, repository } = payload;
 
+  // Don't save PRs from Dependabot
+  if (pull_request.user.login.includes('bot')) {
+    return;
+  }
+
   const pullRequestId = `${organization.login}-${repository.name}-${pull_request.number}`;
 
   const pullRequestReference = firestore()
