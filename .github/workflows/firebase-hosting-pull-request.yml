@@ -4,14 +4,14 @@
 name: Deploy to Firebase Hosting on PR
 on:
   pull_request:
+    branches-ignore:
+      - 'dependabot/**'
     paths:
       - 'firestore.rules'
       - 'apps/**'
       - 'libs/**'
       - 'firebase.json'
       - 'package.json'
-    branches-ignore:
-      - 'dependabot/**'
 
 jobs:
   tests:
