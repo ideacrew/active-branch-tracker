@@ -35,12 +35,13 @@ export const handlePullRequestEvent = async (
     }
 
     case 'auto_merge_enabled': {
-      const { updated_at, head, base } = pull_request;
+      const { updated_at, head, base, auto_merge } = pull_request;
 
       batch.set(
         pullRequestReference,
         {
-          autoMergeEnabled: firestoreTimestamp(new Date(updated_at)),
+          autoMergeEnabledAt: firestoreTimestamp(new Date(updated_at)),
+          autoMergeEnabledBy: auto_merge?.enabled_by?.login,
           branchName: head.ref,
           targetBranch: base.ref,
         },
@@ -97,7 +98,6 @@ const handleOpenedPullRequest = (pullRequest: PullRequest): FSPullRequest => {
     number,
     title,
     author: user.login,
-    autoMergeEnabled: false,
     createdAt: firestoreTimestamp(new Date(created_at)),
     branchName: head.ref,
     targetBranch: base.ref,

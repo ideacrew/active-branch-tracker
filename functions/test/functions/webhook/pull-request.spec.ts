@@ -39,8 +39,8 @@ describe('Pull Request Event Payload', () => {
     await testEnv.withSecurityRulesDisabled(async context => {
       await mockWebhookPayload('pull_request', opened);
       await mockWebhookPayload('pull_request', autoMergeEnabled);
-      await mockWebhookPayload('pull_request', closedAndMerged);
       await mockWebhookPayload('pull_request_review', approved);
+      await mockWebhookPayload('pull_request', closedAndMerged);
 
       const prRef = doc(context.firestore(), prDocumentPath);
 
@@ -61,10 +61,12 @@ describe('Pull Request Event Payload', () => {
         approvedBy: 'markgoho',
         branchName,
         targetBranch: 'trunk',
+        autoMergeEnabledBy: 'markgoho',
       });
 
+      // These are all timestamps, so just check that the property exists
       expect(prSnapshot.data()).toHaveProperty('mergedAt');
-      expect(prSnapshot.data()).toHaveProperty('autoMergeEnabled');
+      expect(prSnapshot.data()).toHaveProperty('autoMergeEnabledAt');
       expect(prSnapshot.data()).toHaveProperty('createdAt');
       expect(prSnapshot.data()).toHaveProperty('approvedAt');
     });
