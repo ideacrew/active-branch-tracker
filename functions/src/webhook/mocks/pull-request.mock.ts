@@ -6,6 +6,8 @@ import { mockBaseWebhookPayload } from './webhook.mock';
 
 export interface MockPullRequest {
   opened: PullRequestPayload;
+  convertedToDraft: PullRequestPayload;
+  readyForReview: PullRequestPayload;
   closedAndMerged: PullRequestPayload;
   autoMergeEnabled: PullRequestPayload;
   approved: PullRequestReviewPayload;
@@ -18,13 +20,15 @@ export const mockPullRequest = (): MockPullRequest => {
   const prNumber = faker.datatype.number({ min: 1, max: 1000 });
 
   const createdAt = '2020-01-01T00:00:00Z'; // Midnight UTC
-  const updatedAt = '2020-01-01T01:00:00Z'; // 1am UTC
-  const approvedAt = '2020-01-01T03:00:00Z'; // 2am UTC
+  const convertedToDraft = '2020-01-01T00:30:00Z'; // 30 minutes after midnight UTC
+
+  const readyForReview = '2020-01-01T01:00:00Z'; // 1am UTC
+  const autoMergeEnabledAt = '2020-01-01T01:30:00Z'; // 1:30am UTC
+  const approvedAt = '2020-01-01T02:00:00Z'; // 2am UTC
   const mergedAt = approvedAt; // also 2am UTC
   const closedAt = approvedAt; // also 2am UTC
 
   const basePayload: Omit<PullRequestPayload, 'action'> = {
-    // action: 'opened',
     number: prNumber,
     pull_request: {
       html_url: '',
@@ -36,7 +40,8 @@ export const mockPullRequest = (): MockPullRequest => {
       },
       body: null,
       created_at: createdAt,
-      updated_at: updatedAt,
+      updated_at: createdAt,
+      draft: false,
       head: {
         ref: branchName,
         user: {
@@ -69,16 +74,56 @@ export const mockPullRequest = (): MockPullRequest => {
       action: 'opened',
     },
 
+    convertedToDraft: {
+      ...basePayload,
+      action: 'converted_to_draft',
+      pull_request: {
+        ...basePayload.pull_request,
+        draft: true,
+        updated_at: convertedToDraft,
+      },
+    },
+
+    readyForReview: {
+      ...basePayload,
+      action: 'ready_for_review',
+      pull_request: {
+        ...basePayload.pull_request,
+        draft: false,
+        updated_at: readyForReview,
+      },
+    },
+
     autoMergeEnabled: {
       ...basePayload,
       action: 'auto_merge_enabled',
       pull_request: {
         ...basePayload.pull_request,
+        updated_at: autoMergeEnabledAt,
         auto_merge: {
           enabled_by: {
             login: 'markgoho',
           },
         },
+      },
+    },
+
+    approved: {
+      ...basePayload,
+      action: 'submitted',
+      pull_request: {
+        ...basePayload.pull_request,
+        updated_at: approvedAt,
+      },
+      review: {
+        user: {
+          login: 'markgoho',
+        },
+        body: '',
+        submitted_at: approvedAt,
+        state: 'approved',
+        html_url:
+          'https://github.com/ideacrew/active-branch-tracker/pull/138#pullrequestreview-942367903',
       },
     },
 
@@ -100,21 +145,6 @@ export const mockPullRequest = (): MockPullRequest => {
         additions: 1222,
         deletions: 10,
         changed_files: 17,
-      },
-    },
-
-    approved: {
-      ...basePayload,
-      action: 'submitted',
-      review: {
-        user: {
-          login: 'markgoho',
-        },
-        body: '',
-        submitted_at: approvedAt,
-        state: 'approved',
-        html_url:
-          'https://github.com/ideacrew/active-branch-tracker/pull/138#pullrequestreview-942367903',
       },
     },
   };

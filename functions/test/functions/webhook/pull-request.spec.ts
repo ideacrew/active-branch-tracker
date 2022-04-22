@@ -28,6 +28,8 @@ describe('Pull Request Event Payload', () => {
   it('complete pr workflow', async () => {
     const {
       opened,
+      convertedToDraft,
+      readyForReview,
       closedAndMerged,
       autoMergeEnabled,
       approved,
@@ -38,6 +40,8 @@ describe('Pull Request Event Payload', () => {
     const prDocumentPath = `pullRequests/mock-organization-mock-repository-${prNumber}`;
     await testEnv.withSecurityRulesDisabled(async context => {
       await mockWebhookPayload('pull_request', opened);
+      await mockWebhookPayload('pull_request', convertedToDraft);
+      await mockWebhookPayload('pull_request', readyForReview);
       await mockWebhookPayload('pull_request', autoMergeEnabled);
       await mockWebhookPayload('pull_request_review', approved);
       await mockWebhookPayload('pull_request', closedAndMerged);
@@ -69,6 +73,23 @@ describe('Pull Request Event Payload', () => {
       expect(prSnapshot.data()).toHaveProperty('autoMergeEnabledAt');
       expect(prSnapshot.data()).toHaveProperty('createdAt');
       expect(prSnapshot.data()).toHaveProperty('approvedAt');
+    });
+  });
+
+  it('pr opened and converted to draft', async () => {
+    const { opened, convertedToDraft, prNumber } = mockPullRequest();
+
+    const prDocumentPath = `pullRequests/mock-organization-mock-repository-${prNumber}`;
+
+    await testEnv.withSecurityRulesDisabled(async context => {
+      await mockWebhookPayload('pull_request', opened);
+      await mockWebhookPayload('pull_request', convertedToDraft);
+
+      const prRef = doc(context.firestore(), prDocumentPath);
+
+      const prSnapshot = await getDoc(prRef);
+
+      expect(prSnapshot.data()).toBeUndefined();
     });
   });
 });

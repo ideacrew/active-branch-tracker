@@ -28,7 +28,12 @@ export const handlePullRequestEvent = async (
   const batch = firestore().batch();
 
   switch (action) {
+    case 'ready_for_review':
     case 'opened': {
+      if (pull_request.draft === true) {
+        break;
+      }
+
       const pr = handleOpenedPullRequest(pull_request);
       batch.create(pullRequestReference, pr);
       break;
@@ -47,6 +52,11 @@ export const handlePullRequestEvent = async (
         },
         { merge: true },
       );
+      break;
+    }
+
+    case 'converted_to_draft': {
+      batch.delete(pullRequestReference);
       break;
     }
 
@@ -85,6 +95,7 @@ export const handlePullRequestEvent = async (
 
     default:
       logger.info('Fallthrough case in Pull Request Event', action);
+      break;
   }
 
   await batch.commit();

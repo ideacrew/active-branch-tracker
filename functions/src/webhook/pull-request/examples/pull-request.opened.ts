@@ -12,9 +12,11 @@ export const prOpened: PullRequestPayload = {
     user: {
       login: 'markgoho',
     },
+    draft: false,
     body: null,
     created_at: '2022-04-13T19:17:03Z',
     updated_at: '2022-04-13T19:17:03Z',
+    merged: false,
     head: {
       ref: '29-track-branch-life-per-developer',
       user: {
@@ -33,7 +35,6 @@ export const prOpened: PullRequestPayload = {
         name: 'active-branch-tracker',
       },
     },
-    merged: false,
   },
   repository: {
     name: 'active-branch-tracker',

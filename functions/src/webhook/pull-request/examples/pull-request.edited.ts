@@ -12,6 +12,7 @@ export const prEdited: PullRequestPayload = {
     user: {
       login: 'markgoho',
     },
+    draft: false,
     body: 'Here are some comments in the body',
     created_at: '2022-04-13T19:17:03Z',
     updated_at: '2022-04-13T20:00:11Z',

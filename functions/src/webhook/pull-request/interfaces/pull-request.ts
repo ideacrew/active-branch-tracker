@@ -10,6 +10,7 @@ export interface PullRequest {
     login: string; // markgoho
   };
   body: string | null;
+  draft: boolean;
   created_at: string; // 2022-04-13T19:17:03Z
   updated_at: string; // 2022-04-13T19:17:03Z
   closed_at?: string | null;

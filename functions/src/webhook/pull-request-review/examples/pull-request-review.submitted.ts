@@ -21,10 +21,10 @@ export const prReviewSubmitted: PullRequestReviewPayload = {
     user: {
       login: 'markgoho',
     },
+    draft: false,
     body: 'Here are some comments in the body',
     created_at: '2022-04-13T19:17:03Z',
     updated_at: '2022-04-14T14:26:26Z',
-    merge_commit_sha: 'e4976bb284f9c856c1c7494657fb3da8d19eb291',
     head: {
       ref: '29-track-branch-life-per-developer',
       user: {
