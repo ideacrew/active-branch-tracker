@@ -27,6 +27,10 @@ export const handlePullRequestEvent = async (
 
   const batch = firestore().batch();
 
+  logger.info('Handling pull request event', {
+    event: action,
+  });
+
   switch (action) {
     case 'ready_for_review':
     case 'opened': {
@@ -35,7 +39,7 @@ export const handlePullRequestEvent = async (
       }
 
       const pr = handleOpenedPullRequest(pull_request);
-      batch.create(pullRequestReference, pr);
+      batch.set(pullRequestReference, pr);
       break;
     }
 
