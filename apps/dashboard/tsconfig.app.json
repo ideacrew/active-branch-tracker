@@ -8,5 +8,6 @@
   "include": [
     "../../libs/cucumbers/src/index.ts",
     "../../libs/rspecs/src/index.ts"
-  ]
+  ],
+  "exclude": ["jest.config.ts"]
 }

@@ -1,5 +1,6 @@
 module.exports = {
-  preset: '../../../jest.preset.js',
+  displayName: 'user-data-access',
+
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,9 +9,7 @@ module.exports = {
       tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
-  coverageDirectory: '../../../coverage/libs/environments/data-access',
-
-  displayName: 'environments-data-access',
+  coverageDirectory: '../../../coverage/libs/user/data-access',
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',
@@ -20,4 +19,5 @@ module.exports = {
     '^.+.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
   transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
+  preset: '../../../jest.preset.ts',
 };
