@@ -25,6 +25,12 @@ export const handlePullRequestEvent = async (
     .collection('pullRequests')
     .doc(pullRequestId);
 
+  const authorReference = firestore()
+    .collection('authors')
+    .doc(pull_request.user.login)
+    .collection('pullRequests')
+    .doc(pullRequestId);
+
   const batch = firestore().batch();
 
   logger.info('Handling pull request event', {
@@ -40,27 +46,28 @@ export const handlePullRequestEvent = async (
 
       const pr = handleOpenedPullRequest(pull_request);
       batch.set(pullRequestReference, pr);
+      batch.set(authorReference, pr);
       break;
     }
 
     case 'auto_merge_enabled': {
       const { updated_at, head, base, auto_merge } = pull_request;
 
-      batch.set(
-        pullRequestReference,
-        {
-          autoMergeEnabledAt: firestoreTimestamp(new Date(updated_at)),
-          autoMergeEnabledBy: auto_merge?.enabled_by?.login,
-          branchName: head.ref,
-          targetBranch: base.ref,
-        },
-        { merge: true },
-      );
+      const updatedPR: Partial<FSPullRequest> = {
+        autoMergeEnabledAt: firestoreTimestamp(new Date(updated_at)),
+        autoMergeEnabledBy: auto_merge?.enabled_by?.login,
+        branchName: head.ref,
+        targetBranch: base.ref,
+      };
+
+      batch.set(pullRequestReference, updatedPR, { merge: true });
+      batch.set(authorReference, updatedPR, { merge: true });
       break;
     }
 
     case 'converted_to_draft': {
       batch.delete(pullRequestReference);
+      batch.delete(authorReference);
       break;
     }
 
@@ -77,22 +84,21 @@ export const handlePullRequestEvent = async (
       } = pull_request;
 
       if (merged_by && merged_at && base.ref === 'trunk') {
-        batch.set(
-          pullRequestReference,
-          {
-            mergedAt: firestoreTimestamp(new Date(merged_at)),
-            mergedBy: merged_by?.login,
-            stats: {
-              commits,
-              additions,
-              deletions,
-              changed_files,
-            },
-            branchName: head.ref,
-            targetBranch: base.ref,
+        const updatedPR: Partial<FSPullRequest> = {
+          mergedAt: firestoreTimestamp(new Date(merged_at)),
+          mergedBy: merged_by?.login,
+          stats: {
+            commits: commits ?? 0,
+            additions: additions ?? 0,
+            deletions: deletions ?? 0,
+            changed_files: changed_files ?? 0,
           },
-          { merge: true },
-        );
+          branchName: head.ref,
+          targetBranch: base.ref,
+        };
+
+        batch.set(pullRequestReference, updatedPR, { merge: true });
+        batch.set(authorReference, updatedPR, { merge: true });
       }
       break;
     }

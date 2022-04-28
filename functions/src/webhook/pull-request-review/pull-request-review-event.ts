@@ -24,6 +24,12 @@ export const handlePullRequestReviewEvent = async (
     .collection('pullRequests')
     .doc(pullRequestId);
 
+  const authorReference = firestore()
+    .collection('authors')
+    .doc(pull_request.user.login)
+    .collection('pullRequests')
+    .doc(pullRequestId);
+
   const batch = firestore().batch();
 
   switch (action) {
@@ -38,27 +44,25 @@ export const handlePullRequestReviewEvent = async (
         url: review.html_url,
       };
 
-      batch.set(
-        pullRequestReference,
-        {
-          reviews: firestore.FieldValue.arrayUnion(reviewInfo),
-        },
-        { merge: true },
-      );
+      const updatedPR = {
+        reviews: firestore.FieldValue.arrayUnion(reviewInfo),
+      };
+
+      batch.set(pullRequestReference, updatedPR, { merge: true });
+      batch.set(authorReference, updatedPR, { merge: true });
 
       if (review.state === 'approved') {
         const { base, head } = pull_request;
 
-        batch.set(
-          pullRequestReference,
-          {
-            approvedAt: firestoreTimestamp(new Date(review.submitted_at)),
-            approvedBy: review.user.login,
-            branchName: head.ref,
-            targetBranch: base.ref,
-          },
-          { merge: true },
-        );
+        const updatedPR = {
+          approvedAt: firestoreTimestamp(new Date(review.submitted_at)),
+          approvedBy: review.user.login,
+          branchName: head.ref,
+          targetBranch: base.ref,
+        };
+
+        batch.set(pullRequestReference, updatedPR, { merge: true });
+        batch.set(authorReference, updatedPR, { merge: true });
       }
 
       break;
