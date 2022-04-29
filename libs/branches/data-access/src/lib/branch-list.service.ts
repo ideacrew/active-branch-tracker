@@ -33,31 +33,6 @@ export class BranchListService {
     return branchesReference
       .valueChanges({ idField: 'id' })
       .pipe(map(branches => branches.sort(sortByTime)));
-    // tap(async (docChange: DocumentChangeAction<BranchInfo>[]) => {
-    //   const modified = docChange.filter(change => change.type === 'modified');
-    //   let newFailure = false;
-
-    //   for (const branch of modified) {
-    //     const { checkSuiteStatus, tracked } = branch.payload.doc.data();
-    //     if (
-    //       checkSuiteStatus === CheckSuiteConclusion.Failure &&
-    //       tracked === true
-    //     ) {
-    //       newFailure = true;
-    //       console.log({ newFailure: branch.payload.doc.data() });
-    //     }
-    //   }
-
-    //   if (newFailure === true) {
-    //     try {
-    //       console.log('Playing sound');
-    //       await this.playSound();
-    //       newFailure = false;
-    //     } catch (e) {
-    //       console.error('Could not play sound');
-    //     }
-    //   }
-    // }),
   }
 
   get filteredBranches$(): Observable<BranchInfo[]> {
