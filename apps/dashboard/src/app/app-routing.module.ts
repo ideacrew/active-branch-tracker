@@ -23,6 +23,14 @@ const routes = [
       import('@idc/branches/feature').then(m => m.BranchesFeatureModule),
   },
   {
+    path: 'pull-requests',
+    canLoad: [AdminOnlyGuard],
+    loadChildren: () =>
+      import('@idc/pull-requests/feature').then(
+        m => m.PullRequestsFeatureModule,
+      ),
+  },
+  {
     path: 'environments',
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },

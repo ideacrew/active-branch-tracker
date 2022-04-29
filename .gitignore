@@ -43,3 +43,5 @@ Thumbs.db
 *-debug.log
 *-debug.*.log
 *-coverage.html
+
+.angular

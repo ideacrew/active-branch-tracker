@@ -5,8 +5,5 @@
     "types": []
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
-  "include": [
-    "../../libs/cucumbers/src/index.ts",
-    "../../libs/rspecs/src/index.ts"
-  ]
+  "include": ["../../libs/pull-requests/feature/src/index.ts"]
 }
