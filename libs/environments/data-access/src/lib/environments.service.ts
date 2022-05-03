@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import * as firebase from 'firebase/compat/app';
@@ -21,10 +20,7 @@ import {
 
 @Injectable()
 export class EnvironmentsService {
-  constructor(
-    private afs: AngularFirestore,
-    private fns: AngularFireFunctions,
-  ) {}
+  constructor(private afs: AngularFirestore) {}
 
   queryEnvironmentsByOrg(orgName: string): Observable<OrgEnvironment[]> {
     return this.afs

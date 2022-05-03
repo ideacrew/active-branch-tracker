@@ -1,2 +1,6 @@
 <h1>Pull Requests</h1>
-<div class="pull-requests-container"></div>
+<div *ngIf="pullRequests$ | async as pullRequests">
+  <div *ngFor="let pr of pullRequests; trackBy: trackPrs">
+    <a [attr.href]="pr.url" target="__blank">{{ pr.number }}</a>
+  </div>
+</div>
