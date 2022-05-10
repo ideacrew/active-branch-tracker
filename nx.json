@@ -16,10 +16,11 @@
   "npmScope": "idc",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "parallel": 1
+        "parallel": 1,
+        "accessToken": "NjEyZmM3NGQtN2I4Zi00NmRjLTgxY2MtZTU2YzAyODAyZjdifHJlYWQtd3JpdGU="
       }
     }
   },

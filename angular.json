@@ -20,7 +20,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/auth/jest.config.js",
+            "jestConfig": "libs/auth/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/auth"]
@@ -52,7 +52,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/branches/data-access/jest.config.js",
+            "jestConfig": "libs/branches/data-access/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/branches/data-access"]
@@ -84,7 +84,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/branches/feature/jest.config.js",
+            "jestConfig": "libs/branches/feature/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/branches/feature"]
@@ -116,7 +116,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/branches/ui-components/jest.config.js",
+            "jestConfig": "libs/branches/ui-components/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/branches/ui-components"]
@@ -246,7 +246,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/dashboard/jest.config.js",
+            "jestConfig": "apps/dashboard/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": ["coverage/apps/dashboard"]
@@ -309,7 +309,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/display-config/jest.config.js",
+            "jestConfig": "libs/display-config/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/display-config"]
@@ -341,7 +341,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/environments/data-access/jest.config.js",
+            "jestConfig": "libs/environments/data-access/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/environments/data-access"]
@@ -373,7 +373,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/environments/feature/jest.config.js",
+            "jestConfig": "libs/environments/feature/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/environments/feature"]
@@ -396,7 +396,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/pull-requests/data-access"],
           "options": {
-            "jestConfig": "libs/pull-requests/data-access/jest.config.js",
+            "jestConfig": "libs/pull-requests/data-access/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -422,7 +422,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/pull-requests/feature"],
           "options": {
-            "jestConfig": "libs/pull-requests/feature/jest.config.js",
+            "jestConfig": "libs/pull-requests/feature/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -458,7 +458,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/user/data-access"],
           "options": {
-            "jestConfig": "libs/user/data-access/jest.config.js",
+            "jestConfig": "libs/user/data-access/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -484,7 +484,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/util/jest.config.js",
+            "jestConfig": "libs/util/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/util"]
