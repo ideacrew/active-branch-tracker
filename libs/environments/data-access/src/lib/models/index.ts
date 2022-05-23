@@ -8,3 +8,4 @@ export * from './environment-service';
 export * from './service-info';
 export * from './environment-info';
 export * from './service-deployment';
+export * from './environment-variable';

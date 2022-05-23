@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import * as firebase from 'firebase/compat/app';
@@ -16,11 +17,20 @@ import {
   EnvironmentInfo,
   EnvironmentService,
   FSServiceDeployment,
+  EnvironmentVariable,
 } from './models';
+
+interface EnvironmentIdentifier {
+  orgId: string;
+  envId: string;
+}
 
 @Injectable()
 export class EnvironmentsService {
-  constructor(private afs: AngularFirestore) {}
+  constructor(
+    private afs: AngularFirestore,
+    private fns: AngularFireFunctions,
+  ) {}
 
   queryEnvironmentsByOrg(orgName: string): Observable<OrgEnvironment[]> {
     return this.afs
@@ -66,6 +76,23 @@ export class EnvironmentsService {
       .collection<EnvironmentService>('services')
       .valueChanges({ idField: 'id' })
       .pipe(filterNullish());
+  }
+
+  getEnvironmentVariables({
+    orgId,
+    envId,
+  }: EnvironmentIdentifier): Observable<EnvironmentVariable[]> {
+    const callable = this.fns.httpsCallable<
+      EnvironmentIdentifier,
+      EnvironmentVariable[]
+    >('getEnvironmentVariables');
+
+    const environmentVariables$: Observable<EnvironmentVariable[]> = callable({
+      orgId,
+      envId,
+    });
+
+    return environmentVariables$;
   }
 
   getService({
