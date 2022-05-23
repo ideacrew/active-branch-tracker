@@ -59,3 +59,12 @@ export const checkWorkflowRuntime = functions.firestore
     const { checkWorkflowRuntime } = await import('./check-workflow-runtime');
     await checkWorkflowRuntime(snapshot, context);
   });
+
+export const getEnvironmentVariables = functions.https.onCall(
+  async (data, context) => {
+    const { getEnvironmentVariables } = await import(
+      './get-environment-variables'
+    );
+    await getEnvironmentVariables(data, context);
+  },
+);

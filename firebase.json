@@ -32,6 +32,10 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
+        "source": "/getEnvironmentVariables",
+        "function": "getEnvironmentVariables"
+      },
+      {
         "source": "/api/**",
         "function": "api"
       },
