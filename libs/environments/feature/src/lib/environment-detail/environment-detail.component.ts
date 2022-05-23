@@ -1,12 +1,13 @@
 import { Component, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap, tap, shareReplay } from 'rxjs/operators';
 
 import {
   EnvironmentsService,
   OrgEnvironment,
   EnvironmentService,
+  EnvironmentVariable,
 } from '@idc/environments/data-access';
 import { UserService } from '@idc/user/data-access';
 import { filterNullish } from '@idc/util';
@@ -39,6 +40,7 @@ export class EnvironmentDetailComponent {
       this.orgId = orgId;
       this.envId = envId;
     }),
+    shareReplay(),
   );
 
   orgName$ = this.orgEnvIds$.pipe(
@@ -59,6 +61,13 @@ export class EnvironmentDetailComponent {
       ),
     ),
   );
+
+  environmentVariables$: Observable<EnvironmentVariable[]> =
+    this.orgEnvIds$.pipe(
+      switchMap(({ orgId, envId }) =>
+        this.environmentService.getEnvironmentVariables({ orgId, envId }),
+      ),
+    );
 
   services$: Observable<EnvironmentService[]> = this.orgEnvIds$.pipe(
     switchMap(({ orgId, envId }) =>

@@ -10,10 +10,10 @@ interface EnvironmentVariable {
   value: string;
 }
 
-export const getEnvironmentVariables = async (
+export const getEnvironmentVariables = (
   { orgId, envId }: EnvironmentIdentifier,
   context: functions.https.CallableContext,
-): Promise<EnvironmentVariable[]> => {
+): EnvironmentVariable[] => {
   functions.logger.info('Callable function called', { orgId, envId, context });
 
   return [{ name: 'foo', value: 'bar' }];

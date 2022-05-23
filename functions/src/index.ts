@@ -65,6 +65,6 @@ export const getEnvironmentVariables = functions.https.onCall(
     const { getEnvironmentVariables } = await import(
       './get-environment-variables'
     );
-    await getEnvironmentVariables(data, context);
+    return getEnvironmentVariables(data, context);
   },
 );

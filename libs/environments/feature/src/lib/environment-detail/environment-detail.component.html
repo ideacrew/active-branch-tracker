@@ -65,6 +65,12 @@
   </div>
 </ng-container>
 
+<ng-container *ngIf="environmentVariables$ | async as envVars">
+  <div>
+    {{ envVars | json }}
+  </div>
+</ng-container>
+
 <ng-template #noDate>
   <span>indefinitely</span>
 </ng-template>
