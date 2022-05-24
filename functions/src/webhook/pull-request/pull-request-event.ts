@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-null */
 /* eslint-disable camelcase */
 import { logger } from 'firebase-functions';
 import { firestore } from 'firebase-admin';
@@ -118,6 +119,8 @@ const handleOpenedPullRequest = (pullRequest: PullRequest): FSPullRequest => {
     url: html_url,
     number,
     title,
+    mergedBy: null,
+    mergedAt: null,
     author: user.login,
     createdAt: firestoreTimestamp(new Date(created_at)),
     branchName: head.ref,

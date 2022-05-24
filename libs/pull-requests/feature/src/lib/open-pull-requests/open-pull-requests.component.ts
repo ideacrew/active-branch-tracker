@@ -3,7 +3,7 @@ import {
   FSPullRequest,
   PullRequestListService,
 } from '@idc/pull-requests/data-access';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   templateUrl: './open-pull-requests.component.html',
@@ -11,8 +11,13 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OpenPullRequestsComponent {
-  pullRequests$: Observable<FSPullRequest[]> =
-    this.prService.queryPullRequests();
+  pullRequests$: Observable<FSPullRequest[]> = this.prService
+    .queryPullRequests()
+    .pipe(
+      map((prs: FSPullRequest[]) => {
+        return prs;
+      }),
+    );
 
   constructor(public prService: PullRequestListService) {}
 

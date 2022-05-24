@@ -8,8 +8,8 @@ export interface FSPullRequest {
   autoMergeEnabledAt?: firestore.Timestamp;
   autoMergeEnabledBy?: string;
   createdAt: firestore.Timestamp;
-  mergedAt?: firestore.Timestamp;
-  mergedBy?: string;
+  mergedAt: firestore.Timestamp | null;
+  mergedBy: string | null;
   number: number;
   reviews?: FSPullRequestReview[];
   title: string;

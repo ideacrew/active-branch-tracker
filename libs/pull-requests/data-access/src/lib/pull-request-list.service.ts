@@ -9,8 +9,10 @@ export class PullRequestListService {
   constructor(private afs: AngularFirestore) {}
 
   queryPullRequests(): Observable<FSPullRequest[]> {
-    const pullRequestsReference =
-      this.afs.collection<FSPullRequest>('pullRequests');
+    const pullRequestsReference = this.afs.collection<FSPullRequest>(
+      'pullRequests',
+      ref => ref.orderBy('createdAt'),
+    );
 
     return pullRequestsReference.valueChanges();
   }
