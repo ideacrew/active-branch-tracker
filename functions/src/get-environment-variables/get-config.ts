@@ -8,6 +8,7 @@ import { EnvironmentVariableDict } from './environment-variable-dict';
 
 const repositoryLinks: Record<string, string> = {
   maine: 'cme_k8s',
+  dchbx: 'dchbx-k8s',
 };
 
 const pat: string =
