@@ -1,0 +1,30 @@
+/* Default Table Style */
+table {
+  margin-top: 2rem;
+  color: #333;
+  background: var(--green-020);
+  border: 1px solid grey;
+  font-size: 12pt;
+  border-collapse: collapse;
+}
+
+table thead th,
+table tfoot th {
+  color: var(--green-020);
+  background: var(--green-080);
+}
+
+table caption {
+  padding: 0.5em;
+}
+
+table th,
+table td {
+  padding: 0.5em;
+  border: 1px solid var(--green-100);
+}
+
+.constrained {
+  max-width: 150ch;
+  word-wrap: break-word;
+}

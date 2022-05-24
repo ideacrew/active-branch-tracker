@@ -1,50 +1,19 @@
 import * as functions from 'firebase-functions';
-import { Octokit, App } from 'octokit';
 
-const repositoryLinks: Record<string, string> = {
-  maine: 'cme_k8s',
-};
-
-interface EnvironmentIdentifier {
-  orgId: string;
-  envId: string;
-}
-
-interface EnvironmentVariable {
-  name: string;
-  value: string;
-}
+import { EnvironmentIdentifier } from './environment-identifier';
+import { EnvironmentVariableDict } from './environment-variable-dict';
+import { getConfigMap } from './get-config';
 
 export const getEnvironmentVariables = async (
   { orgId, envId }: EnvironmentIdentifier,
   context: functions.https.CallableContext,
-): Promise<EnvironmentVariable[]> => {
-  const pat: string = functions.config().gh.pat ?? 'no-pat';
-
+): Promise<EnvironmentVariableDict> => {
   if (context.auth?.token.email === 'yellr@ideacrew.com') {
-    const octokit = new Octokit({ auth: pat });
+    const configMap = await getConfigMap({ orgId, envId });
 
-    const baseConfigYML = await octokit.rest.repos.getContent({
-      owner: 'ideacrew',
-      repo: repositoryLinks[orgId] || 'cme_k8s',
-      path: 'base/config/env-configmap.yaml',
-      headers: { accept: 'application/vnd.github.v3.raw' },
-    });
-
-    functions.logger.info('Response from getContent', baseConfigYML);
-
-    const environmentConfigYML = await octokit.rest.repos.getContent({
-      owner: 'ideacrew',
-      repo: repositoryLinks[orgId] || 'cme_k8s',
-      path: `environments/${envId}/config/env-configmap.yaml`,
-      headers: { accept: 'application/vnd.github.v3.raw' },
-    });
-
-    functions.logger.info('Response from getContent', environmentConfigYML);
-
-    return [];
+    return configMap;
   } else {
-    return [];
+    return {} as EnvironmentVariableDict;
   }
 };
 

@@ -18,6 +18,7 @@ import {
   EnvironmentService,
   FSServiceDeployment,
   EnvironmentVariable,
+  EnvironmentVariableDict,
 } from './models';
 
 interface EnvironmentIdentifier {
@@ -81,16 +82,18 @@ export class EnvironmentsService {
   getEnvironmentVariables({
     orgId,
     envId,
-  }: EnvironmentIdentifier): Observable<EnvironmentVariable[]> {
+  }: EnvironmentIdentifier): Observable<EnvironmentVariableDict> {
     const callable = this.fns.httpsCallable<
       EnvironmentIdentifier,
-      EnvironmentVariable[]
+      EnvironmentVariableDict
     >('getEnvironmentVariables');
 
-    const environmentVariables$: Observable<EnvironmentVariable[]> = callable({
-      orgId,
-      envId,
-    });
+    const environmentVariables$: Observable<EnvironmentVariableDict> = callable(
+      {
+        orgId,
+        envId,
+      },
+    );
 
     return environmentVariables$;
   }

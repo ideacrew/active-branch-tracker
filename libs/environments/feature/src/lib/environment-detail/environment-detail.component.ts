@@ -7,7 +7,7 @@ import {
   EnvironmentsService,
   OrgEnvironment,
   EnvironmentService,
-  EnvironmentVariable,
+  EnvironmentVariableDict,
 } from '@idc/environments/data-access';
 import { UserService } from '@idc/user/data-access';
 import { filterNullish } from '@idc/util';
@@ -62,7 +62,7 @@ export class EnvironmentDetailComponent {
     ),
   );
 
-  environmentVariables$: Observable<EnvironmentVariable[]> =
+  environmentVariables$: Observable<EnvironmentVariableDict> =
     this.orgEnvIds$.pipe(
       switchMap(({ orgId, envId }) =>
         this.environmentService.getEnvironmentVariables({ orgId, envId }),
@@ -104,5 +104,9 @@ export class EnvironmentDetailComponent {
 
   trackByServiceName(index: number, service: EnvironmentService): string {
     return `${service.name}`;
+  }
+
+  trackByVarName(index: number): number {
+    return index;
   }
 }
