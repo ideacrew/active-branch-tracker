@@ -39,6 +39,7 @@ beforeAll(async () => {
 });
 
 describe('Data refresh payload v1', () => {
+  jest.setTimeout(10000);
   it('tests a started data refresh', async () => {
     const data = stringify({
       payload:

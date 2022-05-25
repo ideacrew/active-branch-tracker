@@ -40,6 +40,7 @@ beforeAll(async () => {
 });
 
 describe('DCHBX deployment payload', () => {
+  jest.setTimeout(10000);
   it('tests a new deployment', async () => {
     const data = qs.stringify({
       payload: `{"status": "started", "branch": "feature-fix", "env": "hotfix-2", "app": "enroll", "user_name": "kvootla", "org": "fake-org", "repo": "enroll", "commit_sha": "abc1234" }`,

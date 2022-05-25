@@ -27,6 +27,7 @@ beforeAll(async () => {
 });
 
 describe('Delete event tests', () => {
+  jest.setTimeout(100000);
   it('tests branch deletion', async () => {
     const { deleteBranchPayload, featureBranchName: branchName } =
       allPayloads();

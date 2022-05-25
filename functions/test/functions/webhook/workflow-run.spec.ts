@@ -28,6 +28,7 @@ beforeAll(async () => {
 });
 
 describe('Workflow run tests', () => {
+  jest.setTimeout(10000);
   describe('updating workflow results list in branch document', () => {
     it('tests a first-time requested workflow run', async () => {
       const {
@@ -54,7 +55,7 @@ describe('Workflow run tests', () => {
         await setDoc(branchReference, branchDoc);
         await mockWebhookPayload('workflow_run', requested);
         const branchSnapshot = await getDoc(branchReference);
-        const { workflowResults } = branchSnapshot.data();
+        const { workflowResults } = branchSnapshot.data() as BranchInfo;
 
         expect(workflowResults[0]).toMatchObject({
           runtime: 0,
@@ -94,7 +95,7 @@ describe('Workflow run tests', () => {
         await mockWebhookPayload('workflow_run', success);
 
         const branchSnapshot = await getDoc(branchReference);
-        const { workflowResults } = branchSnapshot.data();
+        const { workflowResults } = branchSnapshot.data() as BranchInfo;
 
         expect(workflowResults[0]).toMatchObject({
           conclusion: 'success',
@@ -133,7 +134,7 @@ describe('Workflow run tests', () => {
         await mockWebhookPayload('workflow_run', failure);
 
         const branchSnapshot = await getDoc(branchReference);
-        const { workflowResults } = branchSnapshot.data();
+        const { workflowResults } = branchSnapshot.data() as BranchInfo;
 
         expect(workflowResults[0]).toMatchObject({
           conclusion: 'failure',
@@ -176,7 +177,7 @@ describe('Workflow run tests', () => {
         await mockWebhookPayload('workflow_run', success2);
 
         const branchSnapshot = await getDoc(branchReference);
-        const { workflowResults } = branchSnapshot.data();
+        const { workflowResults } = branchSnapshot.data() as BranchInfo;
 
         expect(workflowResults).toHaveLength(2);
       });
@@ -289,10 +290,8 @@ describe('Workflow run tests', () => {
 
   describe('Recording workflow runtimes on the default branch', () => {
     it('records workflow name on a first-time successful workflow run', async () => {
-      const {
-        defaultWorkflowRun1,
-        defaultBranchName: branchName,
-      } = allPayloads();
+      const { defaultWorkflowRun1, defaultBranchName: branchName } =
+        allPayloads();
       const { success } = defaultWorkflowRun1;
       const { repository, workflow_run } = success;
       const workflowPath = `workflows/${repository.name}-${workflow_run.workflow_id}`;
