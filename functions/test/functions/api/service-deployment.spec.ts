@@ -15,6 +15,7 @@ import {
 import { faker } from '@faker-js/faker';
 
 import { ServiceDeploymentPayload } from '../../../src/api/models';
+import { EnvironmentService } from '../../../src/models';
 
 const projectId = process.env.GCLOUD_PROJECT ?? 'demo-project';
 let testEnv: RulesTestEnvironment;
@@ -79,7 +80,7 @@ describe('Service deployment payload', () => {
       );
       const serviceSnapshot = await getDoc(serviceRef);
 
-      const serviceDocument = serviceSnapshot.data();
+      const serviceDocument = serviceSnapshot.data() as EnvironmentService;
 
       expect(serviceDocument.latestDeployment).toMatchObject({
         status: data.status,
