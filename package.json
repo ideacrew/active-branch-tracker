@@ -92,7 +92,7 @@
     "eslint-plugin-jsdoc": "^39.2.3",
     "eslint-plugin-prefer-arrow": "latest",
     "eslint-plugin-unicorn": "^42.0.0",
-    "firebase-tools": "^10.7.1",
+    "firebase-tools": "^11.0.1",
     "jest": "27.5.1",
     "jest-preset-angular": "11.1.1",
     "ng-packagr": "13.3.0",
