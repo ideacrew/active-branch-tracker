@@ -84,7 +84,11 @@ export const handlePullRequestEvent = async (
         head,
       } = pull_request;
 
-      if (merged_by && merged_at && base.ref === 'trunk') {
+      if (
+        merged_by &&
+        merged_at &&
+        (base.ref === 'trunk' || base.ref === 'master')
+      ) {
         const updatedPR: Partial<FSPullRequest> = {
           mergedAt: firestoreTimestamp(new Date(merged_at)),
           mergedBy: merged_by?.login,
