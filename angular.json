@@ -157,6 +157,9 @@
             ],
             "styles": [
               {
+                "input": "node_modules/c3/c3.min.css"
+              },
+              {
                 "input": "apps/dashboard/src/styles.scss"
               }
             ],

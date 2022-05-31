@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { PullRequestsDataAccessModule } from '@idc/pull-requests/data-access';
 
 import { OpenPullRequestsComponent } from './open-pull-requests/open-pull-requests.component';
+import { PrGraphComponent } from './pr-graph/pr-graph.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { OpenPullRequestsComponent } from './open-pull-requests/open-pull-reques
     ]),
     PullRequestsDataAccessModule,
   ],
-  declarations: [OpenPullRequestsComponent],
+  declarations: [OpenPullRequestsComponent, PrGraphComponent],
 })
 export class PullRequestsFeatureModule {}

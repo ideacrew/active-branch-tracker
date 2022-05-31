@@ -1,8 +1,2 @@
 <h1>Pull Requests</h1>
-<div *ngIf="pullRequests$ | async as pullRequests">
-  <div *ngFor="let pr of pullRequests; trackBy: trackPrs">
-    <a [attr.href]="pr.url" target="__blank" rel="noopener noreferrer">{{
-      pr.number
-    }}</a>
-  </div>
-</div>
+<idc-pr-graph [prs]="pullRequests$ | async"></idc-pr-graph>
