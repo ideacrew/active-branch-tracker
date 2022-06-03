@@ -7,15 +7,17 @@ import { PullRequest, PullRequestPayload } from './interfaces';
 import { FSPullRequest } from '../../models';
 import { firestoreTimestamp } from '../../util';
 
+const defaultBranches = new Set(['master', 'trunk', 'me_carrier_boarding']);
+
 export const handlePullRequestEvent = async (
   payload: PullRequestPayload,
 ): Promise<void> => {
   const { pull_request, action, organization, repository } = payload;
 
-  // Don't save PRs from Dependabot or PRs that aren't against trunk
+  // Don't save PRs from Dependabot or PRs that aren't against the default branch
   if (
     pull_request.user.login.includes('bot') ||
-    pull_request.base.ref !== 'trunk'
+    !defaultBranches.has(pull_request.base.ref)
   ) {
     return;
   }
@@ -86,13 +88,7 @@ export const handlePullRequestEvent = async (
 
       const targetBranch = base.ref;
 
-      if (
-        merged_by &&
-        merged_at &&
-        (targetBranch === 'trunk' ||
-          targetBranch === 'master' ||
-          targetBranch === 'me_carrier_boarding')
-      ) {
+      if (merged_by && merged_at && defaultBranches.has(targetBranch)) {
         const updatedPR: Partial<FSPullRequest> = {
           mergedAt: firestoreTimestamp(new Date(merged_at)),
           mergedBy: merged_by?.login,
