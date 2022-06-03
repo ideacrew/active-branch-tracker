@@ -5,15 +5,17 @@ import { firestore } from 'firebase-admin';
 import { PullRequestReviewPayload } from './interfaces';
 import { firestoreTimestamp } from '../../util';
 
+import { defaultBranches } from '../default-branches';
+
 export const handlePullRequestReviewEvent = async (
   payload: PullRequestReviewPayload,
 ): Promise<void> => {
   const { pull_request, action, organization, repository } = payload;
 
-  // Don't save PRs from Dependabot or PRs that aren't against trunk
+  // Don't save PRs from Dependabot or PRs that aren't against the default branch
   if (
     pull_request.user.login.includes('bot') ||
-    pull_request.base.ref !== 'trunk'
+    !defaultBranches.has(pull_request.base.ref)
   ) {
     return;
   }

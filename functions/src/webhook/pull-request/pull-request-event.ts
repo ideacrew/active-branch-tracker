@@ -7,7 +7,7 @@ import { PullRequest, PullRequestPayload } from './interfaces';
 import { FSPullRequest } from '../../models';
 import { firestoreTimestamp } from '../../util';
 
-const defaultBranches = new Set(['master', 'trunk', 'me_carrier_boarding']);
+import { defaultBranches } from '../default-branches';
 
 export const handlePullRequestEvent = async (
   payload: PullRequestPayload,
