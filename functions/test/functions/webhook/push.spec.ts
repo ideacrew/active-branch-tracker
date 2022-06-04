@@ -27,6 +27,7 @@ beforeAll(async () => {
 });
 
 describe('A push payload is received', () => {
+  jest.setTimeout(10000);
   it('tests a new branch creation', async () => {
     const { pushPayload, featureBranchName: branchName } = allPayloads();
     const { head_commit } = pushPayload;
@@ -43,7 +44,7 @@ describe('A push payload is received', () => {
       await setDoc(branchRef, branchDoc);
       await mockWebhookPayload('push', pushPayload);
       const branchSnapshot = await getDoc(branchRef);
-      const branchDocument = branchSnapshot.data();
+      const branchDocument = branchSnapshot.data() as BranchInfo;
 
       expect(branchDocument.head_commit).toMatchObject({
         message: head_commit.message,
