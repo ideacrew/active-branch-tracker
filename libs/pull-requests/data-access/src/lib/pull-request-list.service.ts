@@ -8,10 +8,13 @@ import { FSPullRequest } from './models';
 export class PullRequestListService {
   constructor(private afs: AngularFirestore) {}
 
+  today = new Date();
+  last30Days = new Date(this.today.getTime() - 30 * 24 * 60 * 60 * 1000);
+
   queryPullRequests(): Observable<FSPullRequest[]> {
     const pullRequestsReference = this.afs.collection<FSPullRequest>(
       'pullRequests',
-      ref => ref.orderBy('createdAt'),
+      ref => ref.where('mergedAt', '>', this.last30Days),
     );
 
     return pullRequestsReference.valueChanges();
