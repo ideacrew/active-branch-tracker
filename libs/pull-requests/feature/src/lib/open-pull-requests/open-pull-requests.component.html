@@ -1,3 +1,5 @@
 <h1>Pull Requests</h1>
-<h2>Merged in last 30 Days by Author to default branch</h2>
-<idc-pr-graph [prs]="pullRequests$ | async"></idc-pr-graph>
+<ng-container *ngIf="pullRequests$ | async as pullRequests">
+  <idc-pr-graph [prs]="pullRequests.prsByAuthor"></idc-pr-graph>
+  <idc-repo-prs [prs]="pullRequests.prsByRepository"></idc-repo-prs>
+</ng-container>

@@ -1,43 +1,43 @@
 import {
   Component,
+  ViewEncapsulation,
   ChangeDetectionStrategy,
   Input,
   OnChanges,
   SimpleChanges,
-  ViewEncapsulation,
 } from '@angular/core';
 import * as c3 from 'c3';
 
-import { PRByAuthor } from '../models';
+import { PRByRepository } from '../models';
 
 @Component({
-  selector: 'idc-pr-graph',
-  templateUrl: './pr-graph.component.html',
-  styleUrls: ['./pr-graph.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'idc-repo-prs',
+  templateUrl: './repo-prs.component.html',
+  styleUrls: ['./repo-prs.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PrGraphComponent implements OnChanges {
-  @Input() prs!: PRByAuthor[] | null;
+export class RepoPrsComponent implements OnChanges {
+  @Input() prs!: PRByRepository[] | null;
 
   get prQuantity(): number[] {
     return this.prs?.map(pr => pr.quantity) || [];
   }
 
-  get prAuthors(): string[] {
-    return this.prs?.map(pr => pr.author) || [];
+  get prRepositories(): string[] {
+    return this.prs?.map(pr => pr.repository) || [];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.prs !== undefined) {
-      this.generateSvg1();
+      this.generateSvg();
     }
   }
 
-  generateSvg1(): void {
+  generateSvg(): void {
     // Bar chart config from C3
     const config: c3.ChartConfiguration = {
-      bindto: '#chart',
+      bindto: '#chart-2',
       data: {
         columns: [['prs', ...this.prQuantity]],
         type: 'bar',
@@ -56,7 +56,7 @@ export class PrGraphComponent implements OnChanges {
         },
         x: {
           type: 'category',
-          categories: [...this.prAuthors],
+          categories: [...this.prRepositories],
         },
       },
       legend: {

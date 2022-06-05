@@ -5,10 +5,12 @@ import {
 } from '@idc/pull-requests/data-access';
 import { map, Observable } from 'rxjs';
 
-export interface PRByAuthor {
-  author: string;
-  mergedPRs: FSPullRequest[];
-  quantity: number;
+import { PRByAuthor, PRByRepository } from '../models';
+import { getPRsByAuthor, getPRsByRepository } from '../util';
+
+interface PullRequestGraphs {
+  prsByAuthor: PRByAuthor[];
+  prsByRepository: PRByRepository[];
 }
 
 @Component({
@@ -17,44 +19,18 @@ export interface PRByAuthor {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OpenPullRequestsComponent {
-  pullRequests$: Observable<PRByAuthor[]> = this.prService
+  pullRequests$: Observable<PullRequestGraphs> = this.prService
     .queryPullRequests()
     .pipe(
       map((prs: FSPullRequest[]) => {
         const mergedPRs: FSPullRequest[] = prs.filter(pr => pr.mergedAt);
 
         const prsByAuthor: PRByAuthor[] = getPRsByAuthor(mergedPRs);
-
-        return prsByAuthor;
+        const prsByRepository: PRByRepository[] = getPRsByRepository(mergedPRs);
+        console.log(prsByRepository);
+        return { prsByAuthor, prsByRepository };
       }),
     );
 
   constructor(public prService: PullRequestListService) {}
-
-  trackPrs(index: number, pr: PRByAuthor): string {
-    return pr.author;
-  }
 }
-
-const getPRsByAuthor = (mergedPRs: FSPullRequest[]): PRByAuthor[] => {
-  const authors: string[] = mergedPRs.map(pr => pr.author);
-  const uniqueAuthors: string[] = [...new Set(authors)];
-
-  const authoredPRs = uniqueAuthors.map(author => {
-    const authorPRs: FSPullRequest[] = mergedPRs.filter(
-      pr => pr.author === author,
-    );
-
-    return {
-      author,
-      mergedPRs: authorPRs,
-      quantity: authorPRs.length,
-    };
-  });
-
-  const sorted = authoredPRs.sort((a, b) => {
-    return a.mergedPRs.length > b.mergedPRs.length ? -1 : 1;
-  });
-
-  return sorted;
-};

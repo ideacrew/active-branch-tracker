@@ -6,6 +6,7 @@ import { PullRequestsDataAccessModule } from '@idc/pull-requests/data-access';
 
 import { OpenPullRequestsComponent } from './open-pull-requests/open-pull-requests.component';
 import { PrGraphComponent } from './pr-graph/pr-graph.component';
+import { RepoPrsComponent } from './repo-prs/repo-prs.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { PrGraphComponent } from './pr-graph/pr-graph.component';
     ]),
     PullRequestsDataAccessModule,
   ],
-  declarations: [OpenPullRequestsComponent, PrGraphComponent],
+  declarations: [OpenPullRequestsComponent, PrGraphComponent, RepoPrsComponent],
 })
 export class PullRequestsFeatureModule {}
