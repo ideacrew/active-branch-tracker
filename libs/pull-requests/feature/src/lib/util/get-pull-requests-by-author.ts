@@ -6,7 +6,7 @@ export const getPRsByAuthor = (mergedPRs: FSPullRequest[]): PRByAuthor[] => {
   const authors: string[] = mergedPRs.map(pr => pr.author);
   const uniqueAuthors: string[] = [...new Set(authors)];
 
-  const authoredPRs = uniqueAuthors.map(author => {
+  const authoredPRs: PRByAuthor[] = uniqueAuthors.map(author => {
     const authorPRs: FSPullRequest[] = mergedPRs.filter(
       pr => pr.author === author,
     );

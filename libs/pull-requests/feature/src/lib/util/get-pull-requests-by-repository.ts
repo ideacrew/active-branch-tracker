@@ -15,8 +15,6 @@ export const getPRsByRepository = (
   const uniqueRepos: string[] = [...new Set(repositories)];
 
   const repositoryPRs = uniqueRepos.map(repository => {
-    console.log('Finding PRs against', repository);
-
     const repoPRs: FSPullRequest[] = mergedPRs.filter(pr => {
       const { org, repository: prRepo } = parseUrlString(pr.url);
 

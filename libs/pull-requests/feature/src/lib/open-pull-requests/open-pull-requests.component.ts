@@ -1,16 +1,27 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ViewEncapsulation,
+} from '@angular/core';
 import {
   FSPullRequest,
   PullRequestListService,
 } from '@idc/pull-requests/data-access';
 import { map, Observable } from 'rxjs';
 
-import { PRByAuthor, PRByRepository } from '../models';
-import { getPRsByAuthor, getPRsByRepository } from '../util';
+import { PRByAuthor, PRByRepository, PullRequestWithTime } from '../models';
+import {
+  getPRsByAuthor,
+  getPRsByRepository,
+  getPRsByTime,
+  groupPRsByMergeTime,
+  PullRequestsByMergeTime,
+} from '../util';
 
 interface PullRequestGraphs {
   prsByAuthor: PRByAuthor[];
   prsByRepository: PRByRepository[];
+  prsByMergeTime: PullRequestsByMergeTime[];
 }
 
 @Component({
@@ -22,13 +33,19 @@ export class OpenPullRequestsComponent {
   pullRequests$: Observable<PullRequestGraphs> = this.prService
     .queryPullRequests()
     .pipe(
-      map((prs: FSPullRequest[]) => {
+      map((prs: FSPullRequest[]): PullRequestGraphs => {
+        // Only pull in merged PRs to start
         const mergedPRs: FSPullRequest[] = prs.filter(pr => pr.mergedAt);
+        const prsWithTime: PullRequestWithTime[] = getPRsByTime(mergedPRs);
 
-        const prsByAuthor: PRByAuthor[] = getPRsByAuthor(mergedPRs);
-        const prsByRepository: PRByRepository[] = getPRsByRepository(mergedPRs);
-        console.log(prsByRepository);
-        return { prsByAuthor, prsByRepository };
+        // Split up PRs by author and repository
+        const prsByAuthor: PRByAuthor[] = getPRsByAuthor(prsWithTime);
+        const prsByRepository: PRByRepository[] =
+          getPRsByRepository(prsWithTime);
+        const prsByMergeTime: PullRequestsByMergeTime[] =
+          groupPRsByMergeTime(prsWithTime);
+
+        return { prsByAuthor, prsByRepository, prsByMergeTime };
       }),
     );
 

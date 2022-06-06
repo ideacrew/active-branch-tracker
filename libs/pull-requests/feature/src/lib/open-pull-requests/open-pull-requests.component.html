@@ -2,4 +2,5 @@
 <ng-container *ngIf="pullRequests$ | async as pullRequests">
   <idc-pr-graph [prs]="pullRequests.prsByAuthor"></idc-pr-graph>
   <idc-repo-prs [prs]="pullRequests.prsByRepository"></idc-repo-prs>
+  <idc-pr-times [prs]="pullRequests.prsByMergeTime"></idc-pr-times>
 </ng-container>

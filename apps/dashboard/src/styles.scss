@@ -81,3 +81,32 @@ button {
   white-space: nowrap;
   line-height: 1;
 }
+
+#chart,
+#chart-2,
+#chart-3 {
+  .c3-axis-y line,
+  .c3-axis-x line {
+    stroke: var(--green-050);
+  }
+
+  .c3-axis-y g text,
+  .c3-axis-x g text {
+    fill: var(--green-050);
+  }
+
+  .c3-axis-x g text {
+    font-size: 1rem;
+  }
+
+  .c3-legend-item text {
+    fill: var(--green-050);
+  }
+
+  .c3-tooltip {
+    th,
+    td {
+      color: hsl(220, 8%, 15%) !important;
+    }
+  }
+}
