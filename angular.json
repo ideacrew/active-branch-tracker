@@ -2,6 +2,7 @@
   "version": 1,
   "projects": {
     "auth": {
+      "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "library",
       "root": "libs/auth",
       "sourceRoot": "libs/auth/src",
@@ -34,6 +35,7 @@
       "tags": []
     },
     "branches-data-access": {
+      "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "library",
       "root": "libs/branches/data-access",
       "sourceRoot": "libs/branches/data-access/src",
@@ -66,6 +68,7 @@
       "tags": ["scope:dashboard", "type:data-access"]
     },
     "branches-feature": {
+      "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "library",
       "root": "libs/branches/feature",
       "sourceRoot": "libs/branches/feature/src",
@@ -98,6 +101,7 @@
       "tags": ["scope:dashboard", "type:feature"]
     },
     "branches-ui-components": {
+      "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "library",
       "root": "libs/branches/ui-components",
       "sourceRoot": "libs/branches/ui-components/src",
@@ -130,6 +134,7 @@
       "tags": ["scope:dashboard", "type:ui"]
     },
     "dashboard": {
+      "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
@@ -262,6 +267,7 @@
       "tags": []
     },
     "dashboard-e2e": {
+      "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "root": "apps/dashboard-e2e",
       "sourceRoot": "apps/dashboard-e2e/src",
       "projectType": "application",
@@ -294,6 +300,7 @@
       "implicitDependencies": ["dashboard"]
     },
     "display-config": {
+      "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "library",
       "root": "libs/display-config",
       "sourceRoot": "libs/display-config/src",
@@ -326,6 +333,7 @@
       "tags": ["scope:dashboard", "type:util"]
     },
     "environments-data-access": {
+      "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "library",
       "root": "libs/environments/data-access",
       "sourceRoot": "libs/environments/data-access/src",
@@ -358,6 +366,7 @@
       "tags": []
     },
     "environments-feature": {
+      "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "library",
       "root": "libs/environments/feature",
       "sourceRoot": "libs/environments/feature/src",
@@ -390,6 +399,7 @@
       "tags": []
     },
     "pull-requests-data-access": {
+      "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "library",
       "root": "libs/pull-requests/data-access",
       "sourceRoot": "libs/pull-requests/data-access/src",
@@ -416,6 +426,7 @@
       "tags": ["scope:dashboard", "type:data-access"]
     },
     "pull-requests-feature": {
+      "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "library",
       "root": "libs/pull-requests/feature",
       "sourceRoot": "libs/pull-requests/feature/src",
@@ -442,6 +453,7 @@
       "tags": ["scope:dashboard", "type:feature"]
     },
     "user-data-access": {
+      "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "library",
       "root": "libs/user/data-access",
       "sourceRoot": "libs/user/data-access/src",
@@ -469,6 +481,7 @@
       "tags": []
     },
     "util": {
+      "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
       "projectType": "library",
       "root": "libs/util",
       "sourceRoot": "libs/util/src",

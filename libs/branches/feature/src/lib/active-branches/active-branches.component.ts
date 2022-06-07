@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, debounceTime, tap, distinctUntilChanged } from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 import { BranchInfo } from '@idc/util';
 import { BranchListService } from '@idc/branches/data-access';
@@ -15,7 +15,7 @@ import { AuthService } from '@idc/auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ActiveBranchesComponent implements OnDestroy {
-  searchQuery = new FormControl('');
+  searchQuery = new UntypedFormControl('');
 
   loggedIn$: Observable<boolean> = this.auth.user$.pipe(
     map(user => user !== null),

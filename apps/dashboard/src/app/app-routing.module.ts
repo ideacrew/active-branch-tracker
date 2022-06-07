@@ -3,13 +3,13 @@ import {
   AngularFireAuthGuard,
   redirectUnauthorizedTo,
 } from '@angular/fire/compat/auth-guard';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '@idc/auth';
 import { AdminOnlyGuard } from '@idc/user/data-access';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
-const routes = [
+const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
@@ -44,7 +44,7 @@ const routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      initialNavigation: 'enabled',
+      initialNavigation: 'enabledBlocking',
       relativeLinkResolution: 'legacy',
     }),
   ],
