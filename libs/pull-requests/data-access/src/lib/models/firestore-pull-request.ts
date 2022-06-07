@@ -11,6 +11,7 @@ export interface FSPullRequest {
   createdAt: firebase.firestore.Timestamp;
   mergedAt?: firebase.firestore.Timestamp;
   mergedBy?: string;
+  // eslint-disable-next-line id-blacklist
   number: number;
   reviews?: FSPullRequestReview[];
   title: string;
@@ -19,6 +20,7 @@ export interface FSPullRequest {
     commits: number;
     additions: number;
     deletions: number;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     changed_files: number;
   };
   branchName: string;

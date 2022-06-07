@@ -4,7 +4,6 @@ import {
   ChangeDetectionStrategy,
   Input,
   OnChanges,
-  SimpleChanges,
 } from '@angular/core';
 import * as c3 from 'c3';
 
@@ -14,6 +13,7 @@ import { PullRequestsByMergeTime } from '../util';
   selector: 'idc-pr-times',
   templateUrl: './pr-times.component.html',
   styleUrls: ['./pr-times.component.scss'],
+  // eslint-disable-next-line @angular-eslint/use-component-view-encapsulation
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -31,7 +31,7 @@ export class PrTimesComponent implements OnChanges {
     return this.prs?.map(pr => pr.quantity) || [];
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.prs !== undefined) {
       this.generateSvg();
     }
@@ -66,6 +66,7 @@ export class PrTimesComponent implements OnChanges {
         show: false,
       },
     };
-    const chart: c3.ChartAPI = c3.generate(config);
+
+    c3.generate(config);
   }
 }

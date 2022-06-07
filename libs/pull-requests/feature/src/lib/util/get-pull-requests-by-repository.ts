@@ -28,9 +28,9 @@ export const getPRsByRepository = (
     };
   });
 
-  const sorted = repositoryPRs.sort((a, b) => {
-    return a.mergedPRs.length > b.mergedPRs.length ? -1 : 1;
-  });
+  const sorted = repositoryPRs.sort((a, b) =>
+    a.mergedPRs.length > b.mergedPRs.length ? -1 : 1,
+  );
 
   return sorted;
 };

@@ -4,7 +4,6 @@ import {
   ChangeDetectionStrategy,
   Input,
   OnChanges,
-  SimpleChanges,
 } from '@angular/core';
 import * as c3 from 'c3';
 
@@ -14,6 +13,7 @@ import { PRByRepository } from '../models';
   selector: 'idc-repo-prs',
   templateUrl: './repo-prs.component.html',
   styleUrls: ['./repo-prs.component.scss'],
+  // eslint-disable-next-line @angular-eslint/use-component-view-encapsulation
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -28,7 +28,7 @@ export class RepoPrsComponent implements OnChanges {
     return this.prs?.map(pr => pr.repository) || [];
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.prs !== undefined) {
       this.generateSvg();
     }
@@ -63,6 +63,7 @@ export class RepoPrsComponent implements OnChanges {
         show: false,
       },
     };
-    const chart: c3.ChartAPI = c3.generate(config);
+
+    c3.generate(config);
   }
 }

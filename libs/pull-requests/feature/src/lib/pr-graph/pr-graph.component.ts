@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Input,
   OnChanges,
-  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import * as c3 from 'c3';
@@ -15,6 +14,7 @@ import { PRByAuthor } from '../models';
   templateUrl: './pr-graph.component.html',
   styleUrls: ['./pr-graph.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // eslint-disable-next-line @angular-eslint/use-component-view-encapsulation
   encapsulation: ViewEncapsulation.None,
 })
 export class PrGraphComponent implements OnChanges {
@@ -28,7 +28,7 @@ export class PrGraphComponent implements OnChanges {
     return this.prs?.map(pr => pr.author) || [];
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.prs !== undefined) {
       this.generateSvg1();
     }
@@ -63,6 +63,7 @@ export class PrGraphComponent implements OnChanges {
         show: false,
       },
     };
-    const chart: c3.ChartAPI = c3.generate(config);
+
+    c3.generate(config);
   }
 }

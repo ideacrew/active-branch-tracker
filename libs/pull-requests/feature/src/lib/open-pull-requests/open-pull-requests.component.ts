@@ -1,8 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {
   FSPullRequest,
   PullRequestListService,
