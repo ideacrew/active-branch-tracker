@@ -7,6 +7,7 @@ import { map, Observable } from 'rxjs';
 
 import { PRByAuthor, PRByRepository, PullRequestWithTime } from '../models';
 import {
+  getPRsByApprover,
   getPRsByAuthor,
   getPRsByRepository,
   getPRsByTime,
@@ -18,6 +19,7 @@ interface PullRequestGraphs {
   prsByAuthor: PRByAuthor[];
   prsByRepository: PRByRepository[];
   prsByMergeTime: PullRequestsByMergeTime[];
+  prsByMerger: PRByAuthor[];
 }
 
 @Component({
@@ -40,8 +42,9 @@ export class OpenPullRequestsComponent {
           getPRsByRepository(prsWithTime);
         const prsByMergeTime: PullRequestsByMergeTime[] =
           groupPRsByMergeTime(prsWithTime);
+        const prsByMerger: PRByAuthor[] = getPRsByApprover(prsWithTime);
 
-        return { prsByAuthor, prsByRepository, prsByMergeTime };
+        return { prsByAuthor, prsByRepository, prsByMergeTime, prsByMerger };
       }),
     );
 

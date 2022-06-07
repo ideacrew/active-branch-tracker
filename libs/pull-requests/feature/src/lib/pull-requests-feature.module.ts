@@ -8,6 +8,7 @@ import { OpenPullRequestsComponent } from './open-pull-requests/open-pull-reques
 import { PrGraphComponent } from './pr-graph/pr-graph.component';
 import { RepoPrsComponent } from './repo-prs/repo-prs.component';
 import { PrTimesComponent } from './pr-times/pr-times.component';
+import { PrMergersComponent } from './pr-mergers/pr-merger.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { PrTimesComponent } from './pr-times/pr-times.component';
     PrGraphComponent,
     RepoPrsComponent,
     PrTimesComponent,
+    PrMergersComponent,
   ],
 })
 export class PullRequestsFeatureModule {}
