@@ -60,7 +60,7 @@
     "firebase": "^9.8.1",
     "rxjs": "^7.5.5",
     "tslib": "^2.0.0",
-    "zone.js": "0.11.4"
+    "zone.js": "0.11.5"
   },
   "devDependencies": {
     "@angular-devkit/architect": "0.1400.0",
