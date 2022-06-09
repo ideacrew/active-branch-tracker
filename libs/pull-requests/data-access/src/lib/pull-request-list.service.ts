@@ -19,4 +19,13 @@ export class PullRequestListService {
 
     return pullRequestsReference.valueChanges();
   }
+
+  queryPullRequestsByAuthor(author: string): Observable<FSPullRequest[]> {
+    const pullRequestsReference = this.afs.collection<FSPullRequest>(
+      `authors/${author}/pullRequests`,
+      reference => reference.where('mergedAt', '>', this.last30Days),
+    );
+
+    return pullRequestsReference.valueChanges();
+  }
 }
