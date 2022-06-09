@@ -5,10 +5,16 @@ import {
 } from '@idc/pull-requests/data-access';
 import { map, Observable } from 'rxjs';
 
-import { PRByAuthor, PRByRepository, PullRequestWithTime } from '../models';
+import {
+  PRByAuthor,
+  PRByFilesChanged,
+  PRByRepository,
+  PullRequestWithTime,
+} from '../models';
 import {
   getPRsByApprover,
   getPRsByAuthor,
+  getPRsByFilesChanged,
   getPRsByRepository,
   getPRsByTime,
   groupPRsByMergeTime,
@@ -20,6 +26,8 @@ interface PullRequestGraphs {
   prsByRepository: PRByRepository[];
   prsByMergeTime: PullRequestsByMergeTime[];
   prsByMerger: PRByAuthor[];
+  mergedPRs: FSPullRequest[];
+  prsByFilesChanged: PRByFilesChanged[];
 }
 
 @Component({
@@ -43,8 +51,17 @@ export class OpenPullRequestsComponent {
         const prsByMergeTime: PullRequestsByMergeTime[] =
           groupPRsByMergeTime(prsWithTime);
         const prsByMerger: PRByAuthor[] = getPRsByApprover(prsWithTime);
+        const prsByFilesChanged: PRByFilesChanged[] =
+          getPRsByFilesChanged(mergedPRs);
 
-        return { prsByAuthor, prsByRepository, prsByMergeTime, prsByMerger };
+        return {
+          mergedPRs,
+          prsByAuthor,
+          prsByRepository,
+          prsByMergeTime,
+          prsByMerger,
+          prsByFilesChanged,
+        };
       }),
     );
 
