@@ -2,6 +2,7 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "implicitDependencies": {
     "package.json": {
+      "scripts": "*",
       "dependencies": "*",
       "devDependencies": "*"
     },
