@@ -12,7 +12,7 @@
     "start:emulators:testing": "firebase emulators:start --project=demo-project --only=firestore,functions,auth",
     "start:functions": "cd functions && npm run watch",
     "start:app": "ng serve dashboard --configuration=emulator",
-    "test": "ng test",
+    "test": "nx run-many --target=test --all=true",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
     "affected:apps": "nx affected:apps",
