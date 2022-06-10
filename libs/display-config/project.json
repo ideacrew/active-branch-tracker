@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/display-config/src",
+  "prefix": "idc",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/display-config"],
+      "options": {
+        "jestConfig": "libs/display-config/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/display-config/**/*.ts",
+          "libs/display-config/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

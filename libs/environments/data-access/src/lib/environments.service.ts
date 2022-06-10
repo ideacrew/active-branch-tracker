@@ -17,7 +17,6 @@ import {
   EnvironmentInfo,
   EnvironmentService,
   FSServiceDeployment,
-  EnvironmentVariable,
   EnvironmentVariableDict,
 } from './models';
 

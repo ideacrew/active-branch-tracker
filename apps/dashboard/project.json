@@ -1,0 +1,125 @@
+{
+  "projectType": "application",
+  "sourceRoot": "apps/dashboard/src",
+  "prefix": "idc",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/dashboard",
+        "index": "apps/dashboard/src/index.html",
+        "main": "apps/dashboard/src/main.ts",
+        "polyfills": "apps/dashboard/src/polyfills.ts",
+        "tsConfig": "apps/dashboard/tsconfig.app.json",
+        "assets": [
+          "apps/dashboard/src/robots.txt",
+          "apps/dashboard/src/favicon-16x16.png",
+          "apps/dashboard/src/favicon-32x32.png",
+          "apps/dashboard/src/assets",
+          "apps/dashboard/src/manifest.webmanifest"
+        ],
+        "styles": [
+          {
+            "input": "node_modules/c3/c3.min.css"
+          },
+          {
+            "input": "apps/dashboard/src/styles.scss"
+          }
+        ],
+        "scripts": [],
+        "serviceWorker": true,
+        "ngswConfigPath": "apps/dashboard/ngsw-config.json",
+        "vendorChunk": true,
+        "extractLicenses": false,
+        "buildOptimizer": false,
+        "sourceMap": true,
+        "optimization": false,
+        "namedChunks": true
+      },
+      "configurations": {
+        "production": {
+          "sourceMap": false,
+          "optimization": true,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "outputHashing": "all",
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "1mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "12kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/dashboard/src/environments/environment.ts",
+              "with": "apps/dashboard/src/environments/environment.production.ts"
+            }
+          ]
+        },
+        "emulator": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/dashboard/src/environments/environment.ts",
+              "with": "apps/dashboard/src/environments/environment.emulator.ts"
+            },
+            {
+              "replace": "apps/dashboard/src/app/firebase-init.ts",
+              "with": "apps/dashboard/src/app/firebase-init.emulators.ts"
+            }
+          ]
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "dashboard:build:production"
+        },
+        "emulator": {
+          "browserTarget": "dashboard:build:emulator"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "dashboard:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/dashboard/**/*.ts",
+          "apps/dashboard/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/dashboard"],
+      "options": {
+        "jestConfig": "apps/dashboard/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/pull-requests/feature/src",
+  "prefix": "idc",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/pull-requests/feature"],
+      "options": {
+        "jestConfig": "libs/pull-requests/feature/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/pull-requests/feature/**/*.ts",
+          "libs/pull-requests/feature/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

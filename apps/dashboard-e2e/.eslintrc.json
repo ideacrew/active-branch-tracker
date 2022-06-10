@@ -4,10 +4,14 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "parserOptions": {
-        "project": "apps/dashboard-e2e/tsconfig.*?.json"
-      },
       "rules": {}
+    },
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["apps/dashboard-e2e/tsconfig.json"]
+      },
+      "plugins": ["@typescript-eslint"]
     },
     {
       "files": ["src/plugins/index.js"],
@@ -16,7 +20,5 @@
         "no-undef": "off"
       }
     }
-  ],
-  "plugins": ["@typescript-eslint"],
-  "rules": {}
+  ]
 }
