@@ -9,6 +9,7 @@ on:
       - 'libs/**'
       - 'firebase.json'
       - 'package-lock.json'
+      - 'package.json'
     branches:
       - trunk
 jobs:
