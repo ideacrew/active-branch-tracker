@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/environments/feature/src",
+  "prefix": "idc",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/environments/feature"],
+      "options": {
+        "jestConfig": "libs/environments/feature/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/environments/feature/**/*.ts",
+          "libs/environments/feature/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/branches/feature/src",
+  "prefix": "idc",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/branches/feature"],
+      "options": {
+        "jestConfig": "libs/branches/feature/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/branches/feature/**/*.ts",
+          "libs/branches/feature/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

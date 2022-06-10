@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/environments/data-access/src",
+  "prefix": "idc",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/environments/data-access"],
+      "options": {
+        "jestConfig": "libs/environments/data-access/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/environments/data-access/**/*.ts",
+          "libs/environments/data-access/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

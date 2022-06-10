@@ -1,26 +1,25 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "implicitDependencies": {
-    "angular.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
     },
-    "tslint.json": "*",
-    "nx.json": "*",
-    ".eslintrc.json": "*",
-    ".github/workflows/test-and-deploy.yml": "*"
+    ".eslintrc.json": "*"
   },
   "affected": {
     "defaultBase": "trunk"
   },
   "npmScope": "idc",
+  "cli": {
+    "packageManager": "npm"
+  },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "parallel": 1,
-        "accessToken": "NjEyZmM3NGQtN2I4Zi00NmRjLTgxY2MtZTU2YzAyODAyZjdifHJlYWQtd3JpdGU="
+        "accessToken": "YWYwYzZmZDAtZGY4NS00MzVmLWIzNDEtMTlmYTM5NzYxZjNjfHJlYWQtd3JpdGU="
       }
     }
   },
@@ -32,7 +31,6 @@
       }
     ]
   },
-  "defaultProject": "dashboard",
   "generators": {
     "@nrwl/angular:application": {
       "style": "scss",
@@ -42,12 +40,10 @@
     },
     "@nrwl/angular:library": {
       "linter": "eslint",
-      "unitTestRunner": "jest",
-      "strict": true
+      "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {
       "style": "scss"
     }
-  },
-  "$schema": "./node_modules/nx/schemas/nx-schema.json"
+  }
 }

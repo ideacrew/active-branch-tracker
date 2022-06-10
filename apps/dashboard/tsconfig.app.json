@@ -5,6 +5,11 @@
     "types": []
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
-  "include": ["../../libs/pull-requests/feature/src/index.ts"],
-  "exclude": ["jest.config.ts"]
+  "include": [
+    "src/**/*.d.ts",
+    "../../libs/branches/feature/src/index.ts",
+    "../../libs/environments/feature/src/index.ts",
+    "../../libs/pull-requests/feature/src/index.ts"
+  ],
+  "exclude": ["**/*.test.ts", "**/*.spec.ts"]
 }

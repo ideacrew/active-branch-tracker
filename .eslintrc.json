@@ -166,10 +166,6 @@
         ],
         "id-match": "error",
         "import/no-deprecated": "warn",
-        "jsdoc/check-alignment": "error",
-        "jsdoc/check-indentation": "error",
-        "jsdoc/newline-after-description": "error",
-        "jsdoc/no-types": "error",
         "max-classes-per-file": "off",
         "max-lines": ["error", 400],
         "new-parens": "error",
@@ -233,7 +229,6 @@
         ]
       },
       "plugins": [
-        "eslint-plugin-jsdoc",
         "eslint-plugin-prefer-arrow",
         "@angular-eslint/eslint-plugin",
         "eslint-plugin-import",

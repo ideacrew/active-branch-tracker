@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/branches/ui-components/src",
+  "prefix": "idc",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/branches/ui-components"],
+      "options": {
+        "jestConfig": "libs/branches/ui-components/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/branches/ui-components/**/*.ts",
+          "libs/branches/ui-components/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
