@@ -12,6 +12,10 @@
     }
   },
 
+  "containerEnv": {
+    "WDS_SOCKET_PORT": "443"
+  },
+
   // Set *default* container specific settings.json values on container create.
   "settings": {},
 

@@ -64,6 +64,14 @@
             }
           ]
         },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        },
         "emulator": {
           "buildOptimizer": false,
           "optimization": false,
@@ -91,11 +99,14 @@
         "production": {
           "browserTarget": "dashboard:build:production"
         },
+        "development": {
+          "browserTarget": "dashboard:build:development"
+        },
         "emulator": {
           "browserTarget": "dashboard:build:emulator"
         }
       },
-      "defaultConfiguration": "production"
+      "defaultConfiguration": "development"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
