@@ -44,3 +44,4 @@ Thumbs.db
 *-coverage.html
 
 .angular
+.env
