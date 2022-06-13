@@ -11,4 +11,5 @@ export interface OrgEnvironment {
   ownerRelease: firebase.firestore.Timestamp;
   lastUpdated?: firebase.firestore.Timestamp;
   enrollBranch?: string;
+  k8s?: boolean;
 }

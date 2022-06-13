@@ -50,6 +50,10 @@ export class EnvironmentCardComponent {
     return this.isAdmin;
   }
 
+  @HostBinding('class.is-k8s') get isKubernetes(): boolean {
+    return this.environment.k8s ?? false;
+  }
+
   editOwnership(): void {
     if (this.isAdmin) {
       this.currentOwner = this.environment.owner;
