@@ -50,7 +50,5 @@ export const groupPRsByMergeTime = (
     a.mergedPRs.length > b.mergedPRs.length ? -1 : 1,
   );
 
-  console.log(sorted);
-
   return sorted;
 };

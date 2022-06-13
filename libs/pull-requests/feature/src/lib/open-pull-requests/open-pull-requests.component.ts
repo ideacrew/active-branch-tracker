@@ -41,7 +41,9 @@ export class OpenPullRequestsComponent {
     .pipe(
       map((prs: FSPullRequest[]): PullRequestGraphs => {
         // Only pull in merged PRs to start
-        const mergedPRs: FSPullRequest[] = prs.filter(pr => pr.mergedAt);
+        const mergedPRs: FSPullRequest[] = prs.filter(
+          pr => pr.mergedAt && pr.createdAt,
+        );
         const prsWithTime: PullRequestWithTime[] = getPRsByTime(mergedPRs);
 
         // Split up PRs by author and repository

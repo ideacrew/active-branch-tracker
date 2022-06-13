@@ -32,7 +32,5 @@ export const getPRsByFilesChanged = (
     a.filesChanged > b.filesChanged ? 1 : -1,
   );
 
-  console.log(sorted);
-
   return sorted;
 };

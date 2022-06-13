@@ -1,4 +1,4 @@
-<h1>Pull Requests in Last 300 Days</h1>
+<h1>Pull Requests in Last 30 Days</h1>
 <ng-container *ngIf="pullRequests$ | async as pullRequests">
   <idc-pr-graph [prs]="pullRequests.prsByAuthor"></idc-pr-graph>
   <idc-repo-prs [prs]="pullRequests.prsByRepository"></idc-repo-prs>
