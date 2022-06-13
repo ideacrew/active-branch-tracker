@@ -12,7 +12,7 @@
     "start:emulators": "firebase emulators:start --project=demo-project --only=firestore,functions,auth --import=./db/exports --export-on-exit=./db/exports",
     "start:emulators:testing": "firebase emulators:start --project=demo-project --only=firestore,functions,auth",
     "start:functions": "cd functions && npm run watch",
-    "start:app": "ng serve dashboard --configuration=emulator",
+    "start:app": "ng serve dashboard --configuration=emulator --publicHost=${CODESPACE_NAME}-4200.githubpreview.dev:443",
     "test": "nx run-many --target=test --all=true",
     "lint": "nx run-many --target=lint --all=true",
     "e2e": "ng e2e",
