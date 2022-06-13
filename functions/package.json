@@ -18,7 +18,7 @@
     "seed:db": "cross-env GCLOUD_PROJECT=demo-project ts-node seed-database"
   },
   "engines": {
-    "node": "14"
+    "node": "16"
   },
   "main": "lib/index.js",
   "dependencies": {
