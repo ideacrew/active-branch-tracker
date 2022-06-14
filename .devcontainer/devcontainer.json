@@ -16,7 +16,14 @@
   "settings": {},
 
   // Add the IDs of extensions you want installed when the container is created.
-  "extensions": ["dbaeumer.vscode-eslint"],
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "streetsidesoftware.code-spell-checker",
+    "nrwl.angular-console",
+    "esbenp.prettier-vscode",
+    "PKief.material-icon-theme",
+    "Angular.ng-template"
+  ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
@@ -31,6 +38,6 @@
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   "remoteUser": "node",
   "features": {
-		"java": "17"
-	}
+    "java": "17"
+  }
 }
