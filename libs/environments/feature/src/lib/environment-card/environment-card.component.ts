@@ -31,6 +31,10 @@ export class EnvironmentCardComponent {
 
   isAdmin = this.userService.isAdmin.value;
 
+  @HostBinding('class.hidden-environment') get hidden(): boolean {
+    return this.environment.hidden ?? false;
+  }
+
   @Input() org = '';
   @Input() environment!: OrgEnvironment;
   @Output() readonly newOwner = new EventEmitter<Partial<OwnerUpdate>>();
@@ -48,10 +52,6 @@ export class EnvironmentCardComponent {
 
   @HostBinding('class.is-admin') get isAnAdmin(): boolean {
     return this.isAdmin;
-  }
-
-  @HostBinding('class.is-k8s') get isKubernetes(): boolean {
-    return this.environment.k8s ?? false;
   }
 
   editOwnership(): void {

@@ -13,16 +13,8 @@
   cursor: pointer;
 }
 
-// :host(.is-reachable) {
-//   --background-color: var(--green-040);
-// }
-
-.k8s-tag {
+:host(.hidden-environment) {
   display: none;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  height: auto;
 }
 
 :host(.is-k8s) .k8s-tag {
