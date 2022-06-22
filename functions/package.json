@@ -50,7 +50,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-unicorn": "^42.0.0",
     "firebase": "^9.8.2",
-    "firebase-functions-test": "^0.3.3",
+    "firebase-functions-test": "^2.1.0",
     "firebase-tools": "^11.0.1",
     "jest": "^27.5.1",
     "prettier": "^2.6.2",
