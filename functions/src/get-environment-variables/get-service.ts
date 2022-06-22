@@ -64,11 +64,14 @@ export const getService = async ({
     .env as EnvironmentReference[];
 
   // Filter out references to secret keys
-  const filteredVariables = environmentReferenceList.filter(
-    reference =>
-      (reference as ConfigMapEnvironmentReference).valueFrom.configMapKeyRef !==
-      undefined,
-  );
+  const filteredVariables = environmentReferenceList.filter(reference => {
+    const cfReference = reference as ConfigMapEnvironmentReference;
+
+    return (
+      cfReference.valueFrom !== undefined &&
+      cfReference.valueFrom.configMapKeyRef !== undefined
+    );
+  });
   const serviceVariables: EnvironmentVariableDict = {};
 
   // Loop over the environment variable references in the Service yaml file
