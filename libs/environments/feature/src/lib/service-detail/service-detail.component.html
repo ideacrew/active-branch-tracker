@@ -32,3 +32,18 @@
     </tbody>
   </table>
 </ng-container>
+
+<table *ngIf="environmentVariables$ | async as envVars">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="constrained">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let envVar of envVars | keyvalue; trackBy: trackByVarName">
+      <td>{{ envVar.key }}</td>
+      <td class="constrained">{{ envVar.value }}</td>
+    </tr>
+  </tbody>
+</table>

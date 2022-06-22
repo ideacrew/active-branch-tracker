@@ -97,6 +97,27 @@ export class EnvironmentsService {
     return environmentVariables$;
   }
 
+  getServiceVariables({
+    orgId,
+    envId,
+    serviceId,
+  }: ServiceInfo): Observable<EnvironmentVariableDict> {
+    const callable = this.fns.httpsCallable<
+      ServiceInfo,
+      EnvironmentVariableDict
+    >('getServiceVariables');
+
+    const environmentVariables$: Observable<EnvironmentVariableDict> = callable(
+      {
+        orgId,
+        envId,
+        serviceId,
+      },
+    );
+
+    return environmentVariables$;
+  }
+
   getService({
     orgId,
     envId,
@@ -185,7 +206,7 @@ export class EnvironmentsService {
       .collection('services')
       .doc(serviceId)
       .collection<FSServiceDeployment>('deployments', reference =>
-        reference.orderBy('completed', 'desc').limit(10),
+        reference.orderBy('completed', 'desc').limit(3),
       )
       .valueChanges({ idField: 'id' });
   }

@@ -5,13 +5,16 @@ import {
   EMPTY,
   filter,
   map,
+  Observable,
   of,
   shareReplay,
   switchMap,
+  tap,
 } from 'rxjs';
 
 import {
   EnvironmentsService,
+  EnvironmentVariableDict,
   FSServiceDeployment,
   ServiceInfo,
 } from '@idc/environments/data-access';
@@ -32,6 +35,7 @@ export class ServiceDetailComponent {
         serviceId: parameters.get('serviceId') ?? 'no-service-id',
       }),
     ),
+    tap(serviceInfo => (this.service = serviceInfo)),
     shareReplay(),
   );
 
@@ -62,6 +66,17 @@ export class ServiceDetailComponent {
       this.environmentService.getDeploymentHistory(urlParameters),
     ),
   );
+
+  environmentVariables$: Observable<EnvironmentVariableDict> =
+    this.urlParams$.pipe(
+      switchMap(({ orgId, envId, serviceId }) =>
+        this.environmentService.getServiceVariables({
+          orgId,
+          envId,
+          serviceId,
+        }),
+      ),
+    );
 
   vm$ = combineLatest({
     orgName: this.orgName$,
@@ -96,5 +111,9 @@ export class ServiceDetailComponent {
 
   trackById(index: number, deployment: FSServiceDeployment): string {
     return deployment.id;
+  }
+
+  trackByVarName(index: number): number {
+    return index;
   }
 }
