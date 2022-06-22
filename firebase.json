@@ -36,6 +36,10 @@
     ],
     "rewrites": [
       {
+        "source": "/getServiceVariables",
+        "function": "getServiceVariables"
+      },
+      {
         "source": "/getEnvironmentVariables",
         "function": "getEnvironmentVariables"
       },
