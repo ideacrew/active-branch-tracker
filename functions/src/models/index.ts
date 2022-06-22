@@ -7,3 +7,4 @@ export * from './firestore-workflow';
 export * from './latest-deployment';
 export * from './org-environment';
 export * from './user';
+export * from './services';
