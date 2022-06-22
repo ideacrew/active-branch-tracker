@@ -46,6 +46,7 @@ afterAll(async () => {
 });
 
 describe('Data refresh payload', () => {
+  jest.setTimeout(15000);
   it('tests a started data refresh', async () => {
     const fakeOrg = faker.address.state().toLowerCase();
 

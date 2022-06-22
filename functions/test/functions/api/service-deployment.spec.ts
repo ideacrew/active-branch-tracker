@@ -49,6 +49,7 @@ beforeAll(async () => {
 });
 
 describe('Service deployment payload', () => {
+  jest.setTimeout(15000);
   const branchName = faker.git.branch();
 
   it('tests a new deployment', async () => {

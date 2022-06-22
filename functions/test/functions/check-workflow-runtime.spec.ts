@@ -4,7 +4,7 @@ import {
   RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
 
-import firebaseTest = require('firebase-functions-test');
+import firebaseTest from 'firebase-functions-test';
 const functionsTest = firebaseTest({ projectId: 'demo-project' });
 
 import { checkWorkflowRuntime } from '../../src';

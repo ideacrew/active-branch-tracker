@@ -25,7 +25,7 @@ beforeAll(async () => {
 });
 
 describe('Pull Request Event Payload', () => {
-  jest.setTimeout(10000);
+  jest.setTimeout(15000);
   it('complete pr workflow', async () => {
     const {
       opened,

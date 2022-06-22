@@ -28,7 +28,7 @@ beforeAll(async () => {
 });
 
 describe('Workflow run tests', () => {
-  jest.setTimeout(10000);
+  jest.setTimeout(15000);
   describe('updating workflow results list in branch document', () => {
     it('tests a first-time requested workflow run', async () => {
       const {
