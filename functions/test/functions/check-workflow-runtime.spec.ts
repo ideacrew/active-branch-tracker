@@ -27,6 +27,7 @@ beforeAll(async () => {
 });
 
 describe('Checks workflow runtime for fastest run', () => {
+  jest.setTimeout(10000);
   it('records very first runtime', async () => {
     await testEnv.withSecurityRulesDisabled(async context => {
       const db = context.firestore();
