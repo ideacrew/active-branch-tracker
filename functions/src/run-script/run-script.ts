@@ -5,14 +5,19 @@ export const runScript = async (
   request: functions.https.Request,
   response: functions.Response<unknown>,
 ): Promise<void> => {
-  const scriptKey = request.headers.authorization ?? '';
+  const scriptKey = request.headers.authorization;
+  const functionsKey: string = functions.config().script?.key;
 
-  const functionsKey = functions.config().script?.key ?? '';
-
+  // In local development both of these will be undefined
+  // Otherwise, they will have values and need to match
   if (scriptKey === functionsKey) {
-    const [success, error] = await databaseScript();
+    const [error] = await databaseScript();
 
-    response.status(200).send('Thanks');
+    if (error !== undefined) {
+      response.status(500).send({ error });
+    } else {
+      response.status(200).send('Script ran successfully');
+    }
   } else {
     response.status(403).send('You are unauthorized');
   }
