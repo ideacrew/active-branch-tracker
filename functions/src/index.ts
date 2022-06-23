@@ -75,3 +75,11 @@ export const getServiceVariables = functions.https.onCall(
     return getServiceVariables(data, context);
   },
 );
+
+export const runScript = functions.https.onRequest(
+  async (request, response) => {
+    const { runScript } = await import('./run-script');
+
+    await runScript(request, response);
+  },
+);
