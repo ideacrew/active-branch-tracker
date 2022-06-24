@@ -11,7 +11,7 @@ export const runScript = async (
   // In local development both of these will be undefined
   // Otherwise, they will have values and need to match
   if (scriptKey === functionsKey) {
-    const [error] = await databaseScript();
+    const error = await databaseScript();
 
     if (error !== undefined) {
       response.status(500).send({ error });
