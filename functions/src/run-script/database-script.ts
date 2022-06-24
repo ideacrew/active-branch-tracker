@@ -40,6 +40,11 @@ export const databaseScript = async (): Promise<unknown | undefined> => {
 
   for (const [author, team] of Object.entries(authorTeamDictionary)) {
     const authorReference = admin.firestore().collection('authors').doc(author);
+    const teamReference = admin.firestore().collection('teams').doc(team);
+
+    batch.update(teamReference, {
+      members: admin.firestore.FieldValue.arrayUnion(author),
+    });
     batch.set(authorReference, { team }, { merge: true });
   }
 
