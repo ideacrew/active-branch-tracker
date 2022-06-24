@@ -4,11 +4,35 @@ if (admin.apps.length === 0) {
   admin.initializeApp();
 }
 
-const authorTeamDictionary: Record<string, string> = {
-  Battula: '',
-  RyanEddyIC: '',
-  TreyE: '',
-  harshaellanki: '',
+type Team =
+  | 'maintenance'
+  | 'coderush'
+  | 'ideacrew'
+  | 'inpodnito'
+  | 'integration'
+  | 'load-aim-fire'
+  | 'podigy';
+
+const authorTeamDictionary: Record<string, Team> = {
+  Battula: 'maintenance',
+  RyanEddyIC: 'podigy',
+  TreyE: 'integration',
+  harshaellanki: 'load-aim-fire',
+  ipublic: 'ideacrew',
+  j1joey: 'maintenance',
+  jacobkagon: 'maintenance',
+  jayreddy519: 'podigy',
+  kristinmerbach: 'inpodnito',
+  mdkaraman: 'inpodnito',
+  nisanthyaganti9: 'load-aim-fire',
+  polographer: 'inpodnito',
+  raghuramg: 'maintenance',
+  saikumar9: 'load-aim-fire',
+  saimekala07: 'integration',
+  scaustin34: 'inpodnito',
+  utkarsh7989: 'coderush',
+  vkghub: 'load-aim-fire',
+  ymhari: 'podigy',
 };
 
 export const databaseScript = async (): Promise<unknown | undefined> => {
