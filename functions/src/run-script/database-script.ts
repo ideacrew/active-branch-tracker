@@ -1,4 +1,6 @@
 import * as admin from 'firebase-admin';
+// eslint-disable-next-line import/no-unresolved
+import { FieldValue } from 'firebase-admin/firestore';
 
 if (admin.apps.length === 0) {
   admin.initializeApp();
@@ -42,9 +44,13 @@ export const databaseScript = async (): Promise<unknown | undefined> => {
     const authorReference = admin.firestore().collection('authors').doc(author);
     const teamReference = admin.firestore().collection('teams').doc(team);
 
-    batch.update(teamReference, {
-      members: admin.firestore.FieldValue.arrayUnion(author),
-    });
+    batch.set(
+      teamReference,
+      {
+        members: FieldValue.arrayUnion(author),
+      },
+      { merge: true },
+    );
     batch.set(authorReference, { team }, { merge: true });
   }
 
