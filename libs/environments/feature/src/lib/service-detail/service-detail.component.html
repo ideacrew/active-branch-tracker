@@ -42,8 +42,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let envVar of envVars | keyvalue; trackBy: trackByVarName">
-      <td>{{ envVar.key }}</td>
-      <td class="constrained">{{ envVar.value }}</td>
+      <ng-container *ngIf="envVar | isFeatureFlag">
+        <td>{{ envVar.key }}</td>
+        <td class="constrained">{{ envVar.value }}</td>
+      </ng-container>
     </tr>
   </tbody>
 </table>

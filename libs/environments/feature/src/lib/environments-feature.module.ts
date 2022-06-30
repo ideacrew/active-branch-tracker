@@ -16,6 +16,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { ServiceCardComponent } from './service-card/service-card.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
 import { EditServiceInfoComponent } from './edit-service-info/edit-service-info.component';
+import { IsFeatureFlagPipe } from './is-feature-flag.pipe';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { EditServiceInfoComponent } from './edit-service-info/edit-service-info.
     ServiceCardComponent,
     ServiceDetailComponent,
     EditServiceInfoComponent,
+    IsFeatureFlagPipe,
   ],
 })
 export class EnvironmentsFeatureModule {}
