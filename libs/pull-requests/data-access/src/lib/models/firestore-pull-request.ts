@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app';
 
 import { FSPullRequestReview } from './firestore-pull-request-review';
+import { Team } from './team';
 
 export interface FSPullRequest {
   approvedAt?: firebase.firestore.Timestamp;
@@ -25,4 +26,5 @@ export interface FSPullRequest {
   };
   branchName: string;
   targetBranch: string;
+  team?: Team;
 }

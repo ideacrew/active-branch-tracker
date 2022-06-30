@@ -8,6 +8,7 @@ import { FSPullRequest } from '../../models';
 import { firestoreTimestamp } from '../../util';
 
 import { defaultBranches } from '../default-branches';
+import { getTeamMembership } from '../../util/get-team-membership';
 
 export const handlePullRequestEvent = async (
   payload: PullRequestPayload,
@@ -84,11 +85,15 @@ export const handlePullRequestEvent = async (
         changed_files,
         base,
         head,
+        user,
       } = pull_request;
 
       const targetBranch = base.ref;
 
       if (merged_by && merged_at && defaultBranches.has(targetBranch)) {
+        // Get author's team
+        const team = await getTeamMembership(user.login);
+
         const updatedPR: Partial<FSPullRequest> = {
           mergedAt: firestoreTimestamp(new Date(merged_at)),
           mergedBy: merged_by?.login,
@@ -100,6 +105,7 @@ export const handlePullRequestEvent = async (
           },
           branchName: head.ref,
           targetBranch: base.ref,
+          team: team ?? 'ideacrew',
         };
 
         batch.set(pullRequestReference, updatedPR, { merge: true });

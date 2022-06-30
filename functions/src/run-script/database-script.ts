@@ -1,57 +1,24 @@
 import * as admin from 'firebase-admin';
 // eslint-disable-next-line import/no-unresolved
-import { FieldValue } from 'firebase-admin/firestore';
+import { FSPullRequest } from '../models';
+import { getTeamMembership } from '../util';
 
 if (admin.apps.length === 0) {
   admin.initializeApp();
 }
 
-type Team =
-  | 'maintenance'
-  | 'coderush'
-  | 'ideacrew'
-  | 'inpodnito'
-  | 'integration'
-  | 'load-aim-fire'
-  | 'podigy';
-
-const authorTeamDictionary: Record<string, Team> = {
-  Battula: 'maintenance',
-  RyanEddyIC: 'podigy',
-  TreyE: 'integration',
-  harshaellanki: 'load-aim-fire',
-  ipublic: 'ideacrew',
-  j1joey: 'maintenance',
-  jacobkagon: 'maintenance',
-  jayreddy519: 'podigy',
-  kristinmerbach: 'inpodnito',
-  mdkaraman: 'inpodnito',
-  nisanthyaganti9: 'load-aim-fire',
-  polographer: 'inpodnito',
-  raghuramg: 'maintenance',
-  saikumar9: 'load-aim-fire',
-  saimekala07: 'integration',
-  scaustin34: 'inpodnito',
-  utkarsh7989: 'coderush',
-  vkghub: 'load-aim-fire',
-  ymhari: 'podigy',
-};
-
 export const databaseScript = async (): Promise<unknown | undefined> => {
   const batch = admin.firestore().batch();
 
-  for (const [author, team] of Object.entries(authorTeamDictionary)) {
-    const authorReference = admin.firestore().collection('authors').doc(author);
-    const teamReference = admin.firestore().collection('teams').doc(team);
+  const pullRequestsCollection = admin.firestore().collection('pullRequests');
+  const snapshot = await pullRequestsCollection.get();
 
-    batch.set(
-      teamReference,
-      {
-        members: FieldValue.arrayUnion(author),
-      },
-      { merge: true },
-    );
-    batch.set(authorReference, { team }, { merge: true });
+  for (const document of snapshot.docs) {
+    const prDocument = document.data() as FSPullRequest;
+
+    const teamMembership = await getTeamMembership(prDocument.author);
+
+    batch.update(document.ref, { team: teamMembership });
   }
 
   try {

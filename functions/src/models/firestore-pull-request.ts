@@ -1,14 +1,16 @@
-import { firestore } from 'firebase-admin';
+// eslint-disable-next-line import/no-unresolved
+import { Timestamp } from 'firebase-admin/firestore';
 import { FSPullRequestReview } from './firestore-pull-request-review';
+import { Team } from './team';
 
 export interface FSPullRequest {
-  approvedAt?: firestore.Timestamp;
+  approvedAt?: Timestamp;
   approvedBy?: string;
   author: string;
-  autoMergeEnabledAt?: firestore.Timestamp;
+  autoMergeEnabledAt?: Timestamp;
   autoMergeEnabledBy?: string;
-  createdAt: firestore.Timestamp;
-  mergedAt: firestore.Timestamp | null;
+  createdAt: Timestamp;
+  mergedAt: Timestamp | null;
   mergedBy: string | null;
   number: number;
   reviews?: FSPullRequestReview[];
@@ -22,4 +24,5 @@ export interface FSPullRequest {
   };
   branchName: string;
   targetBranch: string;
+  team?: Team;
 }
