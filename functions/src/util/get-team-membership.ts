@@ -15,8 +15,10 @@ export const getTeamMembership = async (
     .doc(userName)
     .get();
 
-  const authorDocument = authorSnapshot.data() as FSAuthor;
+  // If the document doesn't exist return a partial document
+  const authorDocument = authorSnapshot.exists
+    ? (authorSnapshot.data() as FSAuthor)
+    : ({ team: 'ideacrew' } as Partial<FSAuthor>);
 
-  // In case this runs in CI, return a default value
-  return authorDocument.team ?? 'ideacrew';
+  return authorDocument.team;
 };
