@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 import * as functions from 'firebase-functions';
 import { firestore } from 'firebase-admin';
+// eslint-disable-next-line import/no-unresolved
+import { FieldValue } from 'firebase-admin/firestore';
 
 import { PullRequestReviewPayload } from './interfaces';
 import { firestoreTimestamp } from '../../util';
@@ -47,7 +49,7 @@ export const handlePullRequestReviewEvent = async (
       };
 
       const updatedPR = {
-        reviews: firestore.FieldValue.arrayUnion(reviewInfo),
+        reviews: FieldValue.arrayUnion(reviewInfo),
       };
 
       batch.set(pullRequestReference, updatedPR, { merge: true });

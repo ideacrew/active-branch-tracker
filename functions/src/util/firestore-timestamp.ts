@@ -1,7 +1,8 @@
-import * as admin from 'firebase-admin';
+// eslint-disable-next-line import/no-unresolved
+import { Timestamp } from 'firebase-admin/firestore';
 
 export const firestoreTimestamp = (
   date: Date = new Date(),
 ): FirebaseFirestore.Timestamp => {
-  return admin.firestore.Timestamp.fromDate(date);
+  return Timestamp.fromDate(date);
 };
