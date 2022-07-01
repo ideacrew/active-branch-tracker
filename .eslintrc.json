@@ -226,7 +226,8 @@
           {
             "checkArrowFunctions": false
           }
-        ]
+        ],
+        "unicorn/prefer-event-target": "off"
       },
       "plugins": [
         "eslint-plugin-prefer-arrow",

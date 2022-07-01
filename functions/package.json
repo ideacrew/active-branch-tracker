@@ -47,7 +47,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-unicorn": "^42.0.0",
+    "eslint-plugin-unicorn": "^43.0.0",
     "firebase": "^9.8.2",
     "firebase-functions-test": "^2.2.0",
     "firebase-tools": "^11.0.1",
