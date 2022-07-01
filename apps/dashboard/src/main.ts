@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-top-level-await */
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
@@ -8,8 +9,6 @@ if (environment.production) {
   enableProdMode();
 }
 
-try {
-  await platformBrowserDynamic().bootstrapModule(AppModule);
-} catch (error) {
-  console.error(error);
-}
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch(error => console.error(error));
