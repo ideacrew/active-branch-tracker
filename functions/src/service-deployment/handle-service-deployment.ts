@@ -1,4 +1,5 @@
 import * as admin from 'firebase-admin';
+import { logger } from 'firebase-functions';
 
 import { ImageInfo, ServiceDeploymentPayload } from '../api/models';
 import {
@@ -13,6 +14,7 @@ import { parseImage } from './utils';
 export const handleServiceDeployment = async (
   payload: ServiceDeploymentPayload,
 ): Promise<{ status: string; message: unknown }> => {
+  logger.info(`Received service deployment: ${payload.image}`);
   const imageInfo: ImageInfo = parseImage(payload.image);
 
   const { repo: repository } = imageInfo;
