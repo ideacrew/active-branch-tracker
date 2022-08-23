@@ -1,4 +1,4 @@
-import { OrgName } from "./org-name";
+import { OrgName } from './org-name';
 
 export interface RepositoryInfo {
   org: OrgName;
