@@ -11,5 +11,5 @@
     "../../libs/environments/feature/src/index.ts",
     "../../libs/pull-requests/feature/src/index.ts"
   ],
-  "exclude": ["**/*.test.ts", "**/*.spec.ts"]
+  "exclude": ["**/*.test.ts", "**/*.spec.ts", "jest.config.ts"]
 }
