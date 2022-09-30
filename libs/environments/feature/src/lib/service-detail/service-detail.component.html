@@ -33,19 +33,38 @@
   </table>
 </ng-container>
 
-<table *ngIf="environmentVariables$ | async as envVars">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th class="constrained">Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let envVar of envVars | keyvalue; trackBy: trackByVarName">
-      <ng-container *ngIf="envVar | isFeatureFlag">
-        <td>{{ envVar.key }}</td>
-        <td class="constrained">{{ envVar.value }}</td>
-      </ng-container>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="environmentVariables$ | async as envVars" class="variable-tables">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th class="constrained">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let envVar of envVars | keyvalue; trackBy: trackByVarName">
+        <ng-container *ngIf="envVar | isFeatureFlag: 'true'">
+          <td>{{ envVar.key }}</td>
+          <td class="constrained">{{ envVar.value }}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th class="constrained">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let envVar of envVars | keyvalue; trackBy: trackByVarName">
+        <ng-container *ngIf="envVar | isFeatureFlag: 'false'">
+          <td>{{ envVar.key }}</td>
+          <td class="constrained">{{ envVar.value }}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
