@@ -2,6 +2,9 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
+// eslint-disable-next-line import/no-unresolved
+import { FieldValue } from 'firebase-admin/firestore';
+
 import { BranchDeploymentPayload } from './branch-deployment.interface';
 import { ServiceDeployment } from '../service-deployment';
 
@@ -10,8 +13,6 @@ export const updateServiceWithBranchInfo = async (
 ): Promise<void> => {
   const { org, env, app, status, commit_sha, branch, user_name, repo } =
     deployment;
-
-  const FieldValue = admin.firestore.FieldValue;
 
   const serviceReference = admin
     .firestore()

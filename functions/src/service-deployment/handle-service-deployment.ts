@@ -1,6 +1,9 @@
 import * as admin from 'firebase-admin';
 import { logger } from 'firebase-functions';
 
+// eslint-disable-next-line import/no-unresolved
+import { FieldValue } from 'firebase-admin/firestore';
+
 import { ImageInfo, ServiceDeploymentPayload } from '../api/models';
 import {
   updateEnvironment,
@@ -35,8 +38,6 @@ export const handleServiceDeployment = async (
     ...imageInfo,
     app: repository,
   };
-
-  const FieldValue = admin.firestore.FieldValue;
 
   // These should probably be in a batch commit
 

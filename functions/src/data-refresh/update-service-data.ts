@@ -3,6 +3,9 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
+// eslint-disable-next-line import/no-unresolved
+import { FieldValue } from 'firebase-admin/firestore';
+
 import { checkOwnership } from '../check-ownership';
 import { sendSlackMessage } from '../slack-notifications';
 import { yellrEnvironmentLink as yellrEnvironmentLink } from '../util';
@@ -33,8 +36,6 @@ export const updateServiceData = async (
       `⚠ <!channel> <${yellrLink}|*${org}-${env.toLowerCase()}*> is having its data refreshed with _no current owner_! ⚠`,
     );
   }
-
-  const FieldValue = admin.firestore.FieldValue;
 
   try {
     await serviceReference.set(
