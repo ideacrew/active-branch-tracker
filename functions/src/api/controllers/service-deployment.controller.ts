@@ -23,6 +23,6 @@ export const serviceDeployment = async (
   } else {
     functions.logger.error('Unable to update service', { message, service });
     // response.status(500).send('Unable to update this service');
-    response.status(200).send('Unable to update this service');
+    response.status(500).send('Unable to update this service');
   }
 };

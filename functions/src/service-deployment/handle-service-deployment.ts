@@ -1,4 +1,5 @@
 import * as admin from 'firebase-admin';
+import { logger } from 'firebase-functions';
 
 import { ImageInfo, ServiceDeploymentPayload } from '../api/models';
 import {
@@ -19,6 +20,11 @@ export const handleServiceDeployment = async (
   const properImageName =
     rawImageName.at(0) === '[' ? rawImageName.slice(1, -1) : rawImageName;
 
+  if (properImageName.includes(' ')) {
+    logger.error('Image name contains two images');
+    return { status: 'error', message: 'Image name contains two images' };
+  }
+
   const imageInfo: ImageInfo = parseImage(properImageName);
 
   const { repo: repository } = imageInfo;
@@ -29,8 +35,6 @@ export const handleServiceDeployment = async (
     ...imageInfo,
     app: repository,
   };
-
-  console.log({ serviceDeployment });
 
   const FieldValue = admin.firestore.FieldValue;
 
