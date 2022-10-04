@@ -55,7 +55,7 @@ describe('Service deployment payload', () => {
   it('tests a new deployment', async () => {
     const fakeOrg = faker.address.state().toLowerCase();
     const data: ServiceDeploymentPayload = {
-      image: `public.ecr.aws/ideacrew/enroll:${branchName}-48132c8`,
+      image: `[public.ecr.aws/ideacrew/enroll:${branchName}-48132c8]`,
       status: 'completed',
       env: 'hotfix-2',
       user_name: 'kvootla',

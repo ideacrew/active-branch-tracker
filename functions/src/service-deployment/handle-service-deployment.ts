@@ -1,5 +1,4 @@
 import * as admin from 'firebase-admin';
-import { logger } from 'firebase-functions';
 
 import { ImageInfo, ServiceDeploymentPayload } from '../api/models';
 import {
@@ -14,16 +13,24 @@ import { parseImage } from './utils';
 export const handleServiceDeployment = async (
   payload: ServiceDeploymentPayload,
 ): Promise<{ status: string; message: unknown }> => {
-  logger.info(`Received service deployment: ${payload.image}`);
-  const imageInfo: ImageInfo = parseImage(payload.image);
+  // Could be [public.ecr.aws/ideacrew/enroll:trunk-48132c8]
+  const rawImageName = payload.image;
+
+  const properImageName =
+    rawImageName.at(0) === '[' ? rawImageName.slice(1, -1) : rawImageName;
+
+  const imageInfo: ImageInfo = parseImage(properImageName);
 
   const { repo: repository } = imageInfo;
 
   const serviceDeployment: ServiceDeployment = {
     ...payload,
+    image: properImageName,
     ...imageInfo,
     app: repository,
   };
+
+  console.log({ serviceDeployment });
 
   const FieldValue = admin.firestore.FieldValue;
 
