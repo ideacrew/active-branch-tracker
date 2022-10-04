@@ -25,34 +25,41 @@ export async function handleWebhook(
   const eventType = request.header('X-Github-Event');
 
   switch (eventType) {
-    case 'create':
+    case 'create': {
       await handleCreateEvent(request.body as CreateEventPayload);
       break;
+    }
 
-    case 'delete':
+    case 'delete': {
       await handleDeleteEvent(request.body as DeletePayload);
       break;
+    }
 
-    case 'push':
+    case 'push': {
       await handlePushEvent(request.body as PushEventPayload);
       break;
+    }
 
-    case 'workflow_run':
+    case 'workflow_run': {
       await handleWorkflowRunEvent(request.body as WorkflowRunPayload);
       break;
+    }
 
-    case 'pull_request':
+    case 'pull_request': {
       await handlePullRequestEvent(request.body as PullRequestPayload);
       break;
+    }
 
-    case 'pull_request_review':
+    case 'pull_request_review': {
       await handlePullRequestReviewEvent(
         request.body as PullRequestReviewPayload,
       );
       break;
+    }
 
-    default:
+    default: {
       functions.logger.info('Fallthrough case in GitHub Event', eventType);
+    }
   }
 
   response.status(200).send('Thanks');

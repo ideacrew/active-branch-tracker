@@ -72,11 +72,12 @@ export const handlePullRequestReviewEvent = async (
       break;
     }
 
-    default:
+    default: {
       functions.logger.info(
         'Fallthrough case in Pull Request Review Event',
         action,
       );
+    }
   }
 
   await batch.commit();

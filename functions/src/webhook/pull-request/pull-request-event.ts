@@ -114,9 +114,10 @@ export const handlePullRequestEvent = async (
       break;
     }
 
-    default:
+    default: {
       logger.info('Fallthrough case in Pull Request Event', action);
       break;
+    }
   }
 
   await batch.commit();
