@@ -10,6 +10,8 @@ export const serviceDeployment = async (
 ): Promise<void> => {
   const service: ServiceDeploymentPayload = request.body;
 
+  functions.logger.info('Received service deployment', { service });
+
   const { status, message } = await handleServiceDeployment(service);
 
   if (status === 'success') {
