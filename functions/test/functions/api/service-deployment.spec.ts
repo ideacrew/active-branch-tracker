@@ -64,7 +64,11 @@ describe('Service deployment payload', () => {
 
     const config = axiosConfig('service-deployment', data);
 
-    await axios(config);
+    try {
+      await axios(config);
+    } catch (error) {
+      console.log('Error while testing service deployment', error);
+    }
 
     await testEnv.withSecurityRulesDisabled(async context => {
       const db = context.firestore();

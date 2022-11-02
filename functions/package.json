@@ -1,5 +1,8 @@
 {
   "name": "functions",
+  "nx": {
+    "ignore": true
+  },
   "scripts": {
     "lint": "eslint --ext .ts .",
     "build": "tsc",
@@ -9,9 +12,9 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test": "jest --runInBand --detectOpenHandles",
+    "test:ci": "jest --runInBand --detectOpenHandles",
     "test:watch": "cross-env GCLOUD_PROJECT=demo-project FIREBASE_FIRESTORE_EMULATOR_ADDRESS=localhost:8080 FIRESTORE_EMULATOR_HOST=localhost:8080 jest --watch",
-    "test:ci": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test\"",
+    "test": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test:ci\"",
     "test:ci:rules": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test:rules\"",
     "test:ci:functions": "tsc && firebase emulators:exec --only=firestore,functions,auth --project=demo-project \"npm run test:functions\"",
     "emulators:demoproject": "cross-env GCLOUD_PROJECT=demo-project firebase emulators:start --only=firestore,functions,auth --project=demo-project",
