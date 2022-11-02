@@ -5,7 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/pull-requests/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/pull-requests/feature"],
       "options": {
         "jestConfig": "libs/pull-requests/feature/jest.config.ts",
         "passWithNoTests": true

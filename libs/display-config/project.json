@@ -5,7 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/display-config"],
+      "outputs": ["{workspaceRoot}/coverage/libs/display-config"],
       "options": {
         "jestConfig": "libs/display-config/jest.config.ts",
         "passWithNoTests": true

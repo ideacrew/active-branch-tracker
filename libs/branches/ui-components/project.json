@@ -5,7 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/branches/ui-components"],
+      "outputs": ["{workspaceRoot}/coverage/libs/branches/ui-components"],
       "options": {
         "jestConfig": "libs/branches/ui-components/jest.config.ts",
         "passWithNoTests": true
