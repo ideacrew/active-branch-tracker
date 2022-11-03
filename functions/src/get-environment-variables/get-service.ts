@@ -20,6 +20,7 @@ const needsParsing = [
   'medicaid-gateway',
   'crm-gateway',
   'b2b-gateway',
+  'fdsh-gateway',
 ] as Partial<EnrollServices>[];
 
 const pat: string =

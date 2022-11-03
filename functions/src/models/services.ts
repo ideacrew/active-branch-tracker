@@ -6,4 +6,5 @@ export type EnrollServices =
   | 'b2b-gateway'
   | 'mitc'
   | 'rabbitmq'
-  | 'crm-gateway';
+  | 'crm-gateway'
+  | 'fdsh-gateway';
