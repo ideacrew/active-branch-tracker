@@ -1,4 +1,5 @@
 {
+  "name": "branches-ui-components",
   "projectType": "library",
   "sourceRoot": "libs/branches/ui-components/src",
   "prefix": "idc",

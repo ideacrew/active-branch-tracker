@@ -1,4 +1,5 @@
 {
+  "name": "display-config",
   "projectType": "library",
   "sourceRoot": "libs/display-config/src",
   "prefix": "idc",

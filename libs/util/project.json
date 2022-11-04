@@ -1,4 +1,5 @@
 {
+  "name": "util",
   "projectType": "library",
   "sourceRoot": "libs/util/src",
   "prefix": "idc",

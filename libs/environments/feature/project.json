@@ -1,4 +1,5 @@
 {
+  "name": "environments-feature",
   "projectType": "library",
   "sourceRoot": "libs/environments/feature/src",
   "prefix": "idc",

@@ -1,4 +1,5 @@
 {
+  "name": "branches-feature",
   "projectType": "library",
   "sourceRoot": "libs/branches/feature/src",
   "prefix": "idc",

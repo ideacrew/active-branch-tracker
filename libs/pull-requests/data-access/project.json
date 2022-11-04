@@ -1,4 +1,5 @@
 {
+  "name": "pull-requests-data-access",
   "projectType": "library",
   "sourceRoot": "libs/pull-requests/data-access/src",
   "prefix": "idc",

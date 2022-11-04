@@ -1,4 +1,5 @@
 {
+  "name": "user-data-access",
   "projectType": "library",
   "sourceRoot": "libs/user/data-access/src",
   "prefix": "idc",

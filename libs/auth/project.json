@@ -1,4 +1,5 @@
 {
+  "name": "auth",
   "projectType": "library",
   "sourceRoot": "libs/auth/src",
   "prefix": "idc",

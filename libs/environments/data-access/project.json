@@ -1,4 +1,5 @@
 {
+  "name": "environments-data-access",
   "projectType": "library",
   "sourceRoot": "libs/environments/data-access/src",
   "prefix": "idc",

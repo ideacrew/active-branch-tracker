@@ -1,4 +1,5 @@
 {
+  "name": "pull-requests-feature",
   "projectType": "library",
   "sourceRoot": "libs/pull-requests/feature/src",
   "prefix": "idc",

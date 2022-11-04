@@ -1,4 +1,5 @@
 {
+  "name": "branches-data-access",
   "projectType": "library",
   "sourceRoot": "libs/branches/data-access/src",
   "prefix": "idc",
