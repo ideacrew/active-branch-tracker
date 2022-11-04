@@ -3,6 +3,8 @@
   "version": 2,
   "projects": {
     "auth": "libs/auth",
+    "authors-data-access": "libs/authors/data-access",
+    "authors-feature": "libs/authors/feature",
     "branches-data-access": "libs/branches/data-access",
     "branches-feature": "libs/branches/feature",
     "branches-ui-components": "libs/branches/ui-components",

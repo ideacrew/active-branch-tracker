@@ -1,4 +1,5 @@
 {
+  "name": "dashboard",
   "projectType": "application",
   "sourceRoot": "apps/dashboard/src",
   "prefix": "idc",

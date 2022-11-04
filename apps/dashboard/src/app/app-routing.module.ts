@@ -39,6 +39,11 @@ const routes: Routes = [
         module => module.EnvironmentsFeatureModule,
       ),
   },
+  {
+    path: 'authors',
+    loadChildren: () =>
+      import('@idc/authors/feature').then(m => m.AuthorsFeatureModule),
+  },
 ];
 
 @NgModule({

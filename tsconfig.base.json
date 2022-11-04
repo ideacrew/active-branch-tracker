@@ -16,6 +16,8 @@
     "target": "es2015",
     "paths": {
       "@idc/auth": ["libs/auth/src/index.ts"],
+      "@idc/authors/data-access": ["libs/authors/data-access/src/index.ts"],
+      "@idc/authors/feature": ["libs/authors/feature/src/index.ts"],
       "@idc/branches/data-access": ["libs/branches/data-access/src/index.ts"],
       "@idc/branches/feature": ["libs/branches/feature/src/index.ts"],
       "@idc/branches/ui-components": [
