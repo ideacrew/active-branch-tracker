@@ -50,6 +50,10 @@ service cloud.firestore {
 
     match /authors/{authorId} {
       allow read: if isAdmin();
+
+      match /pullRequests/{prId} {
+        allow read: if isAdmin();
+      }
     }
   }
 }

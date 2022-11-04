@@ -19,6 +19,7 @@ export class AuthorsService {
   getPullRequestsByAuthor(authorId: string): Observable<FSPullRequest[]> {
     const pullRequestsByAuthorReference = this.afs.collection<FSPullRequest>(
       `authors/${authorId}/pullRequests`,
+      reference => reference.orderBy('createdAt', 'desc'),
     );
 
     return pullRequestsByAuthorReference.valueChanges();
