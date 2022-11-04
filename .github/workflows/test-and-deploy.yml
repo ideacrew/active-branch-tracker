@@ -1,5 +1,9 @@
 name: test and deploy front end
 
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
   push:
