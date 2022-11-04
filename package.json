@@ -8,7 +8,7 @@
     "ng:update": "cross-env FORCE_NG_UPDATE=true ng update",
     "seed:db": "cross-env FIRESTORE_EMULATOR_HOST=localhost:8080 node db/scripts/seedDb",
     "start:live": "ng serve dashboard",
-    "start:codespaces": "ng serve dashboard --publicHost=${CODESPACE_NAME}-4200.githubpreview.dev:443",
+    "start:codespaces": "ng serve dashboard --publicHost=${CODESPACE_NAME}-4200.preview.app.github.dev:443",
     "start:emulators": "firebase emulators:start --project=demo-project --only=firestore,functions,auth --import=./db/exports --export-on-exit=./db/exports",
     "start:emulators:testing": "firebase emulators:start --project=demo-project --only=firestore,functions,auth",
     "start:functions": "cd functions && npm run watch",

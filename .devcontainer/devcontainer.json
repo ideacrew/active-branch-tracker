@@ -17,13 +17,14 @@
 
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
-    "dbaeumer.vscode-eslint",
-    "streetsidesoftware.code-spell-checker",
-    "nrwl.angular-console",
-    "esbenp.prettier-vscode",
-    "PKief.material-icon-theme",
-    "Angular.ng-template"
-  ],
+	"dbaeumer.vscode-eslint",
+	"streetsidesoftware.code-spell-checker",
+	"nrwl.angular-console",
+	"esbenp.prettier-vscode",
+	"PKief.material-icon-theme",
+	"Angular.ng-template",
+	"toba.vsfire"
+],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],

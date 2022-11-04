@@ -1,3 +1,3 @@
 export * from './lib/authors-feature.module';
 
-export * from './lib/lib.routes';
+export * from './lib/library.routes';

@@ -1,0 +1,4 @@
+<h1>Authors</h1>
+<div *ngFor="let author of authors$ | async; trackBy: trackByAuthor">
+  {{ author.userName }}
+</div>

@@ -47,5 +47,9 @@ service cloud.firestore {
     match /pullRequests/{prId} {
       allow read: if isAdmin();
     }
+
+    match /authors/{authorId} {
+      allow read: if isAdmin();
+    }
   }
 }
