@@ -2,19 +2,19 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { DISPLAYCONFIG_FEATURE_KEY, State } from './display-config.reducer';
 
 // Lookup the 'DisplayConfig' feature state managed by NgRx
-export const getDisplayConfigState = createFeatureSelector<State>(
+export const selectDisplayConfigState = createFeatureSelector<State>(
   DISPLAYCONFIG_FEATURE_KEY,
 );
 
-export const trackedBranchesDisplay = createSelector(
-  getDisplayConfigState,
+export const selectTrackedBranchesDisplay = createSelector(
+  selectDisplayConfigState,
   (state: State) => state.trackedBranches,
 );
-export const untrackedBranchesDisplay = createSelector(
-  getDisplayConfigState,
+export const selectUntrackedBranchesDisplay = createSelector(
+  selectDisplayConfigState,
   (state: State) => state.untrackedBranches,
 );
-export const deployedBranchesDisplay = createSelector(
-  getDisplayConfigState,
+export const selectDeployedBranchesDisplay = createSelector(
+  selectDisplayConfigState,
   (state: State) => state.deployedBranches,
 );

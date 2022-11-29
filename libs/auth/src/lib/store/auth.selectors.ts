@@ -2,13 +2,17 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AUTH_FEATURE_KEY, AuthState } from './auth.reducer';
 
 // Lookup the 'User' feature state managed by NgRx
-export const getAuthState = createFeatureSelector<AuthState>(AUTH_FEATURE_KEY);
+export const selectAuthState =
+  createFeatureSelector<AuthState>(AUTH_FEATURE_KEY);
 
-export const getUID = createSelector(getAuthState, userState => userState.uid);
+export const selectUID = createSelector(
+  selectAuthState,
+  userState => userState.uid,
+);
 
-export const getLoggedIn = createSelector(getUID, uid => !!uid);
+export const selectLoggedInState = createSelector(selectUID, uid => !!uid);
 
-export const getErrorMessage = createSelector(
-  getAuthState,
+export const selectErrorMessage = createSelector(
+  selectAuthState,
   state => state.error?.message,
 );

@@ -22,15 +22,21 @@ export const initialState: AuthState = {
 
 const authReducer = createReducer(
   initialState,
-  on(AuthActions.setCurrentUser, (state, { userDetails }) => ({
-    ...state,
-    ...userDetails,
-  })),
-  on(AuthActions.logout, () => initialState),
-  on(AuthActions.loginWithEmailPasswordFailure, (_state, { error }) => ({
-    ...initialState,
-    error,
-  })),
+  on(
+    AuthActions.setCurrentUser,
+    (state, { userDetails }): AuthState => ({
+      ...state,
+      ...userDetails,
+    }),
+  ),
+  on(AuthActions.logout, (): AuthState => initialState),
+  on(
+    AuthActions.loginWithEmailPasswordFailure,
+    (_state, { error }): AuthState => ({
+      ...initialState,
+      error,
+    }),
+  ),
 );
 
 export const reducer = (

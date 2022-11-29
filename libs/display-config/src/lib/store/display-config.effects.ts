@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { map, tap, switchMap } from 'rxjs/operators';
@@ -9,18 +10,18 @@ import { DisplayConfig } from '../display-config';
 
 @Injectable()
 export class DisplayConfigEffects {
-  loadDisplayConfig$ = createEffect(() =>
-    this.actions$.pipe(
+  loadDisplayConfig$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(DisplayConfigActions.loadDisplayConfigSuccess),
       map(({ displayConfig }) =>
         DisplayConfigActions.loadDisplayConfigSuccess({ displayConfig }),
       ),
-    ),
-  );
+    );
+  });
 
   setLocalStorage$ = createEffect(
-    () =>
-      this.actions$.pipe(
+    () => {
+      return this.actions$.pipe(
         ofType(
           DisplayConfigActions.collapseDeployedBranches,
           DisplayConfigActions.expandDeployedBranches,
@@ -33,7 +34,8 @@ export class DisplayConfigEffects {
         tap((config: DisplayConfig) =>
           this.localStorageService.setSavedState(config, 'config'),
         ),
-      ),
+      );
+    },
     {
       dispatch: false,
     },

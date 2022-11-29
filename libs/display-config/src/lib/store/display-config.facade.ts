@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
+import { Store, Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import * as fromDisplayConfig from './display-config.reducer';
 import * as DisplayConfigSelectors from './display-config.selectors';
 import { DisplayConfig, DisplayType } from '../display-config';
 import {
@@ -17,22 +16,20 @@ import {
 
 @Injectable()
 export class DisplayConfigFacade {
-  trackedBranchesDisplay$ = this.store.pipe(
-    select(DisplayConfigSelectors.trackedBranchesDisplay),
+  trackedBranchesDisplay$ = this.store.select(
+    DisplayConfigSelectors.selectTrackedBranchesDisplay,
   );
-  untrackedBranchesDisplay$ = this.store.pipe(
-    select(DisplayConfigSelectors.untrackedBranchesDisplay),
+  untrackedBranchesDisplay$ = this.store.select(
+    DisplayConfigSelectors.selectUntrackedBranchesDisplay,
   );
-  deployedBranchesDisplay$ = this.store.pipe(
-    select(DisplayConfigSelectors.deployedBranchesDisplay),
+  deployedBranchesDisplay$ = this.store.select(
+    DisplayConfigSelectors.selectDeployedBranchesDisplay,
   );
-  fullConfig$: Observable<DisplayConfig> = this.store.pipe(
-    select(DisplayConfigSelectors.getDisplayConfigState),
+  fullConfig$: Observable<DisplayConfig> = this.store.select(
+    DisplayConfigSelectors.selectDisplayConfigState,
   );
 
-  constructor(
-    private store: Store<fromDisplayConfig.DisplayConfigPartialState>,
-  ) {}
+  constructor(private store: Store) {}
 
   dispatch(action: Action): void {
     this.store.dispatch(action);

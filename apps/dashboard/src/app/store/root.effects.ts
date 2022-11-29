@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import { Injectable } from '@angular/core';
 import {
   createEffect,
@@ -15,8 +16,8 @@ import {
 
 @Injectable()
 export class RootEffects {
-  loadLocalStorage$ = createEffect(() =>
-    this.actions$.pipe(
+  loadLocalStorage$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(ROOT_EFFECTS_INIT),
       map(() => {
         const displayConfig: DisplayConfig =
@@ -26,8 +27,8 @@ export class RootEffects {
           displayConfig,
         });
       }),
-    ),
-  );
+    );
+  });
 
   constructor(
     private actions$: Actions,

@@ -219,8 +219,6 @@
         "radix": "error",
         "use-isnan": "error",
         "valid-typeof": "off",
-
-        // Unicorn rules
         "unicorn/consistent-function-scoping": [
           "error",
           {
@@ -262,6 +260,10 @@
         "@angular-eslint/template/eqeqeq": "error"
       },
       "plugins": ["@angular-eslint/eslint-plugin-template"]
+    },
+    {
+      "files": ["*.ts"],
+      "extends": ["plugin:@ngrx/strict"]
     }
   ]
 }

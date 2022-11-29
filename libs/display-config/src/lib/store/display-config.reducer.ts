@@ -24,38 +24,59 @@ export const initialState: State = {
 
 const displayConfigReducer = createReducer(
   initialState,
-  on(DisplayConfigActions.loadDisplayConfig, state => ({
-    ...state,
-  })),
+  on(
+    DisplayConfigActions.loadDisplayConfig,
+    (state): State => ({
+      ...state,
+    }),
+  ),
   on(
     DisplayConfigActions.loadDisplayConfigSuccess,
-    (state, { displayConfig }) => ({ ...state, ...displayConfig }),
+    (state, { displayConfig }): State => ({ ...state, ...displayConfig }),
   ),
 
-  on(DisplayConfigActions.expandDeployedBranches, state => ({
-    ...state,
-    deployedBranches: 'expanded',
-  })),
-  on(DisplayConfigActions.collapseDeployedBranches, state => ({
-    ...state,
-    deployedBranches: 'collapsed',
-  })),
-  on(DisplayConfigActions.expandTrackedBranches, state => ({
-    ...state,
-    trackedBranches: 'expanded',
-  })),
-  on(DisplayConfigActions.collapseTrackedBranches, state => ({
-    ...state,
-    trackedBranches: 'collapsed',
-  })),
-  on(DisplayConfigActions.expandUntrackedBranches, state => ({
-    ...state,
-    untrackedBranches: 'expanded',
-  })),
-  on(DisplayConfigActions.collapseUntrackedBranches, state => ({
-    ...state,
-    untrackedBranches: 'collapsed',
-  })),
+  on(
+    DisplayConfigActions.expandDeployedBranches,
+    (state): State => ({
+      ...state,
+      deployedBranches: 'expanded',
+    }),
+  ),
+  on(
+    DisplayConfigActions.collapseDeployedBranches,
+    (state): State => ({
+      ...state,
+      deployedBranches: 'collapsed',
+    }),
+  ),
+  on(
+    DisplayConfigActions.expandTrackedBranches,
+    (state): State => ({
+      ...state,
+      trackedBranches: 'expanded',
+    }),
+  ),
+  on(
+    DisplayConfigActions.collapseTrackedBranches,
+    (state): State => ({
+      ...state,
+      trackedBranches: 'collapsed',
+    }),
+  ),
+  on(
+    DisplayConfigActions.expandUntrackedBranches,
+    (state): State => ({
+      ...state,
+      untrackedBranches: 'expanded',
+    }),
+  ),
+  on(
+    DisplayConfigActions.collapseUntrackedBranches,
+    (state): State => ({
+      ...state,
+      untrackedBranches: 'collapsed',
+    }),
+  ),
 );
 
 export const reducer = (state: State | undefined, action: Action): State =>

@@ -71,6 +71,7 @@
     "@angular/cli": "~15.0.0",
     "@angular/compiler-cli": "15.0.1",
     "@angular/language-service": "15.0.1",
+    "@ngrx/eslint-plugin": "^15.0.0",
     "@ngrx/schematics": "15.0.0",
     "@ngrx/store-devtools": "15.0.0",
     "@nrwl/cli": "15.2.1",
