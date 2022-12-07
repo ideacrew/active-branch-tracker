@@ -52,7 +52,7 @@ import { AppRoutingModule } from './app-routing.module';
         router: routerReducer,
       },
       {
-        metaReducers: !environment.production ? [] : [],
+        metaReducers: environment.production ? [] : [],
         runtimeChecks: {
           strictActionImmutability: true,
           strictStateImmutability: true,
@@ -60,7 +60,7 @@ import { AppRoutingModule } from './app-routing.module';
       },
     ),
     EffectsModule.forRoot([RootEffects]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    environment.production ? [] : StoreDevtoolsModule.instrument(),
     StoreRouterConnectingModule.forRoot(),
     DisplayConfigModule,
     AngularFirestoreModule,

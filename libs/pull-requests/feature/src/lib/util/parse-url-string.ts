@@ -5,7 +5,7 @@ export const parseUrlString = (
   url: string = 'https://github.com/ideacrew/enroll/pulls/1',
 ): RepositoryInfo => {
   const domainForward = url.slice(8);
-  const [domain, org, repo] = domainForward.split('/');
+  const [, org, repo] = domainForward.split('/');
 
   return { org: org as OrgName, repository: repo ?? 'no-repo' };
 };

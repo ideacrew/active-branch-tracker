@@ -41,9 +41,9 @@ export class ServiceDetailComponent {
 
   orgName$ = this.urlParams$.pipe(
     switchMap(serviceInfo =>
-      serviceInfo !== null
-        ? this.environmentService.getOrgName(serviceInfo.orgId)
-        : of(EMPTY),
+      serviceInfo === null
+        ? of(EMPTY)
+        : this.environmentService.getOrgName(serviceInfo.orgId),
     ),
   );
 

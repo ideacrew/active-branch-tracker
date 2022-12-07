@@ -58,7 +58,7 @@ export class PrsByDiffComponent implements OnChanges {
         },
         x: {
           type: 'category',
-          categories: [...this.filesChanged.map(f => `${f}`)],
+          categories: this.filesChanged.map(f => `${f}`),
         },
       },
       legend: {

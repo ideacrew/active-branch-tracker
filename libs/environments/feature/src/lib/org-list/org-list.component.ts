@@ -13,9 +13,9 @@ import { UserService } from '@idc/user/data-access';
 export class OrgListComponent {
   orgList$: Observable<Org[]> = this.userService.user$.pipe(
     switchMap(user =>
-      user !== undefined
-        ? this.environmentService.getOrgList(user)
-        : of([] as Org[]),
+      user === undefined
+        ? of([] as Org[])
+        : this.environmentService.getOrgList(user),
     ),
   );
 
