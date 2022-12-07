@@ -62,7 +62,7 @@
         </svg>
         <span class="no-wrap"
           ><ng-container *ngIf="branch.head_commit; else createdAt">
-            {{ branch.head_commit.timestamp | date: 'MMM d, h:mm a' }}
+            {{ branch.head_commit.timestamp | date : 'MMM d, h:mm a' }}
           </ng-container>
           <ng-template #createdAt>
             {{ branch.createdAt | firestoreDate | relativeDate }}
@@ -75,7 +75,7 @@
           <use href="assets/icons.svg#git-commit"></use>
         </svg>
         <a href="{{ branch | commitLink }}">{{
-          branch.head_commit?.id | slice: 0:7
+          branch.head_commit?.id | slice : 0 : 7
         }}</a>
       </div>
 
