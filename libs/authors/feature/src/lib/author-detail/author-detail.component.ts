@@ -22,6 +22,7 @@ export class AuthorDetailComponent {
     switchMap(authorId =>
       this.authorsService.getPullRequestsByAuthor(authorId),
     ),
+    map(pullRequests => pullRequests.filter(pr => pr.createdAt && pr.mergedAt)),
   );
 
   constructor(

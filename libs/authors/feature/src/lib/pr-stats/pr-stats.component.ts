@@ -21,13 +21,59 @@ export class PrStatsComponent {
   }
 
   get largestPullRequest(): FSPullRequest {
-    const [largestPullRequest] = this.prs.sort((a, b) => {
+    const prsWithStats = this.prs.filter(pr => pr.stats);
+
+    const [largestPullRequest] = prsWithStats.sort((a, b) => {
       const aStats = a.stats || { changed_files: 0 };
       const bStats = b.stats || { changed_files: 0 };
       return bStats.changed_files - aStats.changed_files;
     });
 
     return largestPullRequest;
+  }
+
+  get smallestPullRequest(): FSPullRequest {
+    const prsWithStats = this.prs.filter(pr => pr.stats);
+    const [smallestPullRequest] = prsWithStats.sort((a, b) => {
+      const aStats = a.stats || { changed_files: 0 };
+      const bStats = b.stats || { changed_files: 0 };
+      return aStats.changed_files - bStats.changed_files;
+    });
+
+    return smallestPullRequest;
+  }
+
+  get shortestTimeBetweenCreationAndMerge(): FSPullRequest {
+    const prsWithMergedAt = this.prs.filter(pr => pr.mergedAt);
+    const [shortestTimeBetweenCreationAndMerge] = prsWithMergedAt.sort(
+      (a, b) => {
+        const aMergedAt = a.mergedAt || { seconds: 0 };
+        const bMergedAt = b.mergedAt || { seconds: 0 };
+        return (
+          aMergedAt.seconds -
+          a.createdAt.seconds -
+          (bMergedAt.seconds - b.createdAt.seconds)
+        );
+      },
+    );
+
+    return shortestTimeBetweenCreationAndMerge;
+  }
+  get longestTimeBetweenCreationAndMerge(): FSPullRequest {
+    const prsWithMergedAt = this.prs.filter(pr => pr.mergedAt);
+    const [longestTimeBetweenCreationAndMerge] = prsWithMergedAt.sort(
+      (a, b) => {
+        const aMergedAt = a.mergedAt || { seconds: 0 };
+        const bMergedAt = b.mergedAt || { seconds: 0 };
+        return (
+          bMergedAt.seconds -
+          b.createdAt.seconds -
+          (aMergedAt.seconds - a.createdAt.seconds)
+        );
+      },
+    );
+
+    return longestTimeBetweenCreationAndMerge;
   }
 
   get cumulativeLinesOfCodeChanged(): number {

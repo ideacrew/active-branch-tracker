@@ -1,12 +1,56 @@
 <h2>Cumulative Stats</h2>
 <div>Total Lines Of Code Changed: {{ cumulativeLinesOfCodeChanged }}</div>
 <div>{{ prs.length }} pull requests since {{ oldestPrDate | date }}</div>
-
 <h2>Averages</h2>
 <div>Average 1 Pull request per {{ prs | prsPerBusinessDay }} days</div>
 <div>LOC Changed Per Business Day: {{ linesOfCodeChangedPerBusinessDay }}</div>
-
-<h2>Largest Pull Request</h2>
+<h2>Individual PR Stats</h2>
+<h3>Largest PR</h3>
 <p>
-  {{ largestPullRequest.title }}
+  {{ largestPullRequest.title }} -
+  {{ largestPullRequest.stats?.additions }} lines added,
+  {{ largestPullRequest.stats?.deletions }} lines deleted,
+  {{ largestPullRequest.stats?.changed_files }} files touched
+</p>
+<h3>Smallest PR</h3>
+<p>
+  {{ smallestPullRequest.title }} -
+  {{ smallestPullRequest.stats?.additions }} lines added,
+  {{ smallestPullRequest.stats?.deletions }} lines deleted,
+  {{ smallestPullRequest.stats?.changed_files }} files touched
+</p>
+<h3>PR Merged most quickly</h3>
+<p>
+  {{ shortestTimeBetweenCreationAndMerge.title }}
+</p>
+<p>
+  Opened on:
+  {{
+    shortestTimeBetweenCreationAndMerge.createdAt
+      | firestoreDate
+      | date : 'medium'
+  }}, Merged on:
+  {{
+    shortestTimeBetweenCreationAndMerge.mergedAt!
+      | firestoreDate
+      | date : 'medium'
+  }}
+</p>
+
+<h3>PR Merged most slowly</h3>
+<p>
+  {{ longestTimeBetweenCreationAndMerge.title }}
+</p>
+<p>
+  Opened on:
+  {{
+    longestTimeBetweenCreationAndMerge.createdAt
+      | firestoreDate
+      | date : 'medium'
+  }}, Merged on:
+  {{
+    longestTimeBetweenCreationAndMerge.mergedAt!
+      | firestoreDate
+      | date : 'medium'
+  }}
 </p>
