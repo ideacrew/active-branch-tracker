@@ -1,0 +1,12 @@
+<h2>Cumulative Stats</h2>
+<div>Total Lines Of Code Changed: {{ cumulativeLinesOfCodeChanged }}</div>
+<div>{{ prs.length }} pull requests since {{ oldestPrDate | date }}</div>
+
+<h2>Averages</h2>
+<div>Average 1 Pull request per {{ prs | prsPerBusinessDay }} days</div>
+<div>LOC Changed Per Business Day: {{ linesOfCodeChangedPerBusinessDay }}</div>
+
+<h2>Largest Pull Request</h2>
+<p>
+  {{ largestPullRequest.title }}
+</p>

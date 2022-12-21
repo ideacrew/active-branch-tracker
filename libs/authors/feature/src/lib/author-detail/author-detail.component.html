@@ -1,19 +1,9 @@
 <h1>{{ authorUserName$ | async }}'s Pull Requests</h1>
 
 <ng-container *ngIf="authorPullRequests$ | async as prs">
-  <h2>High Level Details</h2>
-
-  <div>
-    <span
-      >{{ prs.length }} pull requests since
-      {{ prs[prs.length - 1].createdAt | firestoreDate | date }}</span
-    >
-  </div>
-  <div>
-    <span>Average 1 Pull request per {{ prs | prsPerBusinessDay }} days</span>
-  </div>
-
   <!-- <div *ngFor="let pr of prs; trackBy: trackPrs">
-    {{ pr.createdAt | firestoreDate }}
+    {{ pr.title }}
   </div> -->
+
+  <idc-pr-stats [prs]="prs"></idc-pr-stats>
 </ng-container>

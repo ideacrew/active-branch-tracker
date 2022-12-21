@@ -8,6 +8,7 @@ import { authorsFeatureRoutes } from './library.routes';
 import { AuthorsListComponent } from './authors-list/authors-list.component';
 import { AuthorDetailComponent } from './author-detail/author-detail.component';
 import { PrsPerBusinessDayPipe } from './prs-per-business-day.pipe';
+import { PrStatsComponent } from './pr-stats/pr-stats.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { PrsPerBusinessDayPipe } from './prs-per-business-day.pipe';
     AuthorsListComponent,
     AuthorDetailComponent,
     PrsPerBusinessDayPipe,
+    PrStatsComponent,
   ],
 })
 export class AuthorsFeatureModule {}
