@@ -10,9 +10,9 @@ export class IsOldPipe implements PipeTransform {
     const today = Date.now();
 
     const oneDayInMs = 1000 * 60 * 60 * 24;
-    const tenDaysInMs = 10 * oneDayInMs;
-    const tenDaysAgo = today - tenDaysInMs;
+    const threeDaysInMs = 3 * oneDayInMs;
+    const threeDaysAgo = today - threeDaysInMs;
 
-    return branch.defaultBranch ? false : branch.timestamp < tenDaysAgo;
+    return branch.defaultBranch ? false : branch.timestamp < threeDaysAgo;
   }
 }
