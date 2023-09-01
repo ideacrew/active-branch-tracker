@@ -38,7 +38,7 @@
     "@faker-js/faker": "^7.0.1",
     "@firebase/rules-unit-testing": "^2.0.2",
     "@swc/core": "^1.2.192",
-    "@swc/jest": "^0.2.21",
+    "@swc/jest": "^0.2.29",
     "@types/express": "^4.17.13",
     "@types/js-yaml": "^4.0.5",
     "@types/qs": "^6.9.7",
