@@ -14,4 +14,4 @@ jobs:
       env:
         ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
       run: |
-        echo ${{secrets.FIREBASE_SERVICE_ACCOUNT}} | sed 's/./& /g'
+        echo ${{secrets.FIREBASE_SERVICE_ACCOUNT}} | base64 -d
