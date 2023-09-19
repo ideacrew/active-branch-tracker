@@ -12,5 +12,5 @@ jobs:
 
     - name: Set up secret file
       env:
-        ACCT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        ACCT: ${{ secrets.FIREBASE_TOKEN }}
       run: 'echo "$ACCT" | base64'
