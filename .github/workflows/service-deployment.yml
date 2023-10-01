@@ -40,7 +40,7 @@ jobs:
       REPO: ${{ github.event.inputs.repository }}
       USER: ${{ github.actor }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         id: checkoutStep
         with:
           repository: 'ideacrew/${{ github.event.inputs.repository }}'
