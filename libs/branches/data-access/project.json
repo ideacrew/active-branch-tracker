@@ -1,25 +1,19 @@
 {
   "name": "branches-data-access",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/branches/data-access/src",
   "prefix": "idc",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/branches/data-access"],
       "options": {
-        "jestConfig": "libs/branches/data-access/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/branches/data-access/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/branches/data-access/**/*.ts",
-          "libs/branches/data-access/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []
