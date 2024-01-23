@@ -24,16 +24,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-      - uses: actions/cache@v3
-        id: npm-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node16-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node16-
+          node-version: '18'
       - name: Install dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Lint Application
         run: npm run affected:lint
@@ -44,16 +36,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-      - uses: actions/cache@v3
-        id: npm-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node16-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node16-
+          node-version: '18'
       - name: Install dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Test Application
         run: npm run test
@@ -64,16 +48,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-      - uses: actions/cache@v3
-        id: npm-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node16-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node16-
+          node-version: '18'
       - name: Install dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Build Application
         run: npm run build
@@ -91,16 +67,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-      - uses: actions/cache@v3
-        id: npm-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node16-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node16-
+          node-version: '18'
       - name: Install dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Download artifact
         id: download-artifact

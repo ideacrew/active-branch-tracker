@@ -1,25 +1,19 @@
 {
   "name": "display-config",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/display-config/src",
   "prefix": "idc",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/display-config"],
       "options": {
-        "jestConfig": "libs/display-config/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/display-config/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/display-config/**/*.ts",
-          "libs/display-config/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []

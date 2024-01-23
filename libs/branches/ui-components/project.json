@@ -1,25 +1,19 @@
 {
   "name": "branches-ui-components",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/branches/ui-components/src",
   "prefix": "idc",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/branches/ui-components"],
       "options": {
-        "jestConfig": "libs/branches/ui-components/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/branches/ui-components/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/branches/ui-components/**/*.ts",
-          "libs/branches/ui-components/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []

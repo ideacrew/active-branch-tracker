@@ -1,25 +1,19 @@
 {
   "name": "environments-feature",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/environments/feature/src",
   "prefix": "idc",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/environments/feature"],
       "options": {
-        "jestConfig": "libs/environments/feature/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/environments/feature/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/environments/feature/**/*.ts",
-          "libs/environments/feature/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []

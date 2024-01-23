@@ -60,7 +60,7 @@ import { AppRoutingModule } from './app-routing.module';
       },
     ),
     EffectsModule.forRoot([RootEffects]),
-    environment.production ? [] : StoreDevtoolsModule.instrument(),
+    environment.production ? [] : StoreDevtoolsModule.instrument({connectInZone: true}),
     StoreRouterConnectingModule.forRoot(),
     DisplayConfigModule,
     AngularFirestoreModule,

@@ -1,25 +1,19 @@
 {
   "name": "branches-feature",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/branches/feature/src",
   "prefix": "idc",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/branches/feature"],
       "options": {
-        "jestConfig": "libs/branches/feature/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/branches/feature/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/branches/feature/**/*.ts",
-          "libs/branches/feature/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []
