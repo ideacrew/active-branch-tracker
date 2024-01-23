@@ -30,6 +30,7 @@
           }
         ],
         "scripts": [],
+        "allowedCommonJsDependencies": ["c3"],
         "serviceWorker": true,
         "ngswConfigPath": "apps/dashboard/ngsw-config.json",
         "vendorChunk": true,
