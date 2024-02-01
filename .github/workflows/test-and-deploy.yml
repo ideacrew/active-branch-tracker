@@ -54,7 +54,7 @@ jobs:
       - name: Build Application
         run: npm run build
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dashboard
           path: dist/apps/dashboard
@@ -81,7 +81,7 @@ jobs:
         if: success()
         run: npm run deploy:dashboard -- --token ${{ secrets.FIREBASE_TOKEN }}
       - name: print log
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: firebase-log
